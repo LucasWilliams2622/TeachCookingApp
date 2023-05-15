@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Login from './screens/BeginTabs/Login'
 import Profile  from './screens/MainTabs/ProfileTabs/Profile';
+import BottomTabs from './screens/MainTabs/BottomTabs';
+import AddNew from './screens/MainTabs/AddNew';
+
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
@@ -21,10 +24,13 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
-        
+          <Stack.Screen name="BottomTabs" component={BottomTabs} />
+          <Stack.Screen name="AddNew" component={AddNew} />
+
+          
 
       
 
