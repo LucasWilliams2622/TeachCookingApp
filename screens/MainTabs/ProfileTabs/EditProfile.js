@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Register = () => {
+const EditProfile = () => {
   return (
     <View>
-      <Text>Register</Text>
+      <Text>EditProfile</Text>
     </View>
   )
 }
 
-export default Register
+export default EditProfile
 
 const styles = StyleSheet.create({})

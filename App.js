@@ -8,13 +8,16 @@ import Profile  from './screens/MainTabs/ProfileTabs/Profile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 
+
+
+import Test from './screens/TestTabs/Test'
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Profile" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
      
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Profile" component={Profile} />
+    
 
       
 
@@ -24,12 +27,15 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
+          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
           <Stack.Screen name="AddNew" component={AddNew} />
+          <Stack.Screen name="Test" component={Test} />
 
+          
           
 
       

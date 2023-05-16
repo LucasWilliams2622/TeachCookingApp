@@ -3,6 +3,7 @@
 export const COLOR = {
     PRIMARY: '#eb6f2a',
     SECONDARY: '#fe9633',
+    BACKGROUND:'#242424',
 
     NOT_FOCUS :'#000000',
     WHITE: '#FFFFFF',

@@ -1,4 +1,13 @@
 {
   "name": "TeachCookingApp",
-  "displayName": "TeachCookingApp"
+  "displayName": "TeachCookingApp",
+  "ios": {
+    "icon": "./assets/logo.png",
+    "bundleIdentifier": "com.yourcompany.yourappname"
+  },
+  "android": {
+    "icon": "./assets/logo.png",
+    "package": "com.yourcompany.yourappname"
+  }
+  
 }
