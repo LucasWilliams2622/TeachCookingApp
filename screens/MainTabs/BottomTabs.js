@@ -13,6 +13,40 @@ import Profile from './ProfileTabs/Profile'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const StackHome = () => {
+  return (
+    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+
+    </Stack.Navigator>
+  )
+}
+const StackProfile = () => {
+  return (
+    <Stack.Navigator initialRouteName="Profile" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Profile" component={Profile} />
+
+    </Stack.Navigator>
+  )
+}
+const StackAddNew = () => {
+  return (
+    <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AddNew" component={AddNew} />
+
+    </Stack.Navigator>
+  )
+}
+
+const StackSearch = () => {
+  return (
+    <Stack.Navigator initialRouteName="Search" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Search" component={Search} />
+
+    </Stack.Navigator>
+  )
+}
+
 const BottomTabs = () => {
   return (
     <Tab.Navigator
@@ -21,17 +55,17 @@ const BottomTabs = () => {
           tabBarIcon: ({ focused, label, size }) => {
 
             let iconName = focused
-            if (route.name === 'Home') {
+            if (route.name === 'StackHome') {
               iconName = focused ? ICON.Home : ICON.Home
               label = 'Home'
-            } else if (route.name === 'Search') {
+            } else if (route.name === 'StackSearch') {
               iconName = focused ? ICON.Search : ICON.Search;
               label = 'Search'
-            } else if (route.name === 'AddNew') {
+            } else if (route.name === 'StackAddNew') {
               iconName = focused ? ICON.AddNew : ICON.AddNew;
               label = 'AddNew'
             }
-            else if (route.name === 'Profile') {
+            else if (route.name === 'StackProfile') {
               iconName = focused ? ICON.Profile : ICON.Profile;
               label = 'Profile'
             }
@@ -45,10 +79,14 @@ const BottomTabs = () => {
             }}>
               <Image source={iconName}
                 style={{
-                  width: 30, height: 30, resizeMode: 'stretch',
+                  width: focused ? 40 : 27,
+                  height: focused ? 40 : 27,
+                  resizeMode: 'stretch',
                   tintColor: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS
                 }} />
               <Text style={{
+                fontSize: 10,
+                marginTop: 4,
                 color: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS,
 
               }}>{label}</Text>
@@ -84,10 +122,10 @@ const BottomTabs = () => {
       }}
 
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="AddNew" component={AddNew} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="StackHome" component={StackHome} />
+      <Tab.Screen name="StackSearch" component={StackSearch} />
+      <Tab.Screen name="StackAddNew" component={StackAddNew} />
+      <Tab.Screen name="StackProfile" component={StackProfile} />
 
     </Tab.Navigator>
   )

@@ -8,7 +8,7 @@ const Login = () => {
       <View style={styles.main}>
         <View style={styles.center}>
           <Text style={styles.title}>Chào mừng đến</Text>
-          <View  style={styles.boxLogo} >
+          <View style={styles.boxLogo} >
             <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
             <Text style={styles.title}>Cookly</Text>
           </View>
@@ -16,7 +16,7 @@ const Login = () => {
 
         <View>
           <Text>
-          Đăng nhập với Email
+            Đăng nhập với Email
           </Text>
         </View>
       </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     fontWeight: '700',
     fontSize: 20,
-    fontStyle:'italic'
+    fontStyle: 'italic'
 
   },
   center: {
@@ -51,15 +51,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: COLOR.WHITE,
-    marginTop:100
+    marginTop: 100
   },
   logo: {
     width: 90,
     height: 90,
     marginTop: 10,
   },
-  boxLogo:{
-    flexDirection:'row',
+  boxLogo: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   }

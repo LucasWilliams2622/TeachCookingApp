@@ -4,6 +4,10 @@ export const COLOR = {
     PRIMARY: '#eb6f2a',
     SECONDARY: '#fe9633',
     BACKGROUND:'#242424',
+    BACKGROUND2:'#2e2e2e',
+    BACKGROUND3:'#737373',
+    
+    
 
     NOT_FOCUS :'#000000',
     WHITE: '#FFFFFF',
@@ -13,6 +17,7 @@ export const COLOR = {
     GREEN:'	#00ff00',
     CYAN:'#00ffff',
     BLUE :'#0000ff',
+    GRAY:'#3A3B3C'
 }
 
 export const SIZES = {
