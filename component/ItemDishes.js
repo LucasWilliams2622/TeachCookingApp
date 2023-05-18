@@ -9,7 +9,7 @@ const ItemCategories = (props) => {
     // const { name, image, backGround } = category
     // const { onPress } = props
     return (
-        <SafeAreaView >
+        
 
             <View style={styles.boxItem}>
                 <ImageBackground style={styles.image} resizeMode='cover' source={require('../asset/image/food1.jpg')} >
@@ -38,7 +38,7 @@ const ItemCategories = (props) => {
             </View>
 
 
-        </SafeAreaView>
+       
 
     )
 }
@@ -49,9 +49,11 @@ const styles = StyleSheet.create({
     boxItem: {
         marginHorizontal: 10,
         width: windowWIdth - 70,
+        
+     
         borderRadius: 10,
-        borderWidth: 2,
-        borderColor: COLOR.BLACK,
+        borderWidth: 1,
+        borderColor: COLOR.WHITE,
         backgroundColor:COLOR.BACKGROUND2
 
     },
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     nameUser: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: COLOR.BLACK
+        color: COLOR.WHITE,
     },
     bottomItem: {
         flexDirection: 'row',

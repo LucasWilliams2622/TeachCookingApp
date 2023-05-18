@@ -50,6 +50,29 @@ const StackSearch = () => {
 const BottomTabs = () => {
   return (
     <Tab.Navigator
+      initialRouteName="StackHome"
+      tabBarOptions={{
+
+        style: {
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          backgroundColor: '#FFFFFF',
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
+        },
+        labelStyle: {
+          fontSize: 14,
+          fontWeight: 'bold',
+        },
+        activeTintColor: '#FF6347',
+        inactiveTintColor: '#A9A9A9',
+      }}
       screenOptions={
         ({ route }) => ({
           tabBarIcon: ({ focused, label, size }) => {
@@ -99,27 +122,7 @@ const BottomTabs = () => {
             height: 70,
           },
         })}
-      tabBarOptions={{
-        style: {
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          backgroundColor: '#FFFFFF',
-          shadowColor: '#000000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
-        },
-        labelStyle: {
-          fontSize: 14,
-          fontWeight: 'bold',
-        },
-        activeTintColor: '#FF6347',
-        inactiveTintColor: '#A9A9A9',
-      }}
+
 
     >
       <Tab.Screen name="StackHome" component={StackHome} />

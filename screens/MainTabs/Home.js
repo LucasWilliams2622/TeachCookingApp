@@ -4,6 +4,8 @@ import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Swiper from 'react-native-swiper';
 import ItemCategories from '../../component/ItemCategories'
+import ItemDishes from '../../component/ItemDishes'
+
 
 const Home = ({ navigation }) => {
   const [category, setCategory] = useState([
@@ -77,10 +79,12 @@ const Home = ({ navigation }) => {
         <View
           style={{
             marginTop: 10,
-            marginBottom: 350
+            marginBottom: 350,
+
+
           }}>
           <FlatList
-            style={{}}
+            style={{ marginBottom: 10, borderWidth: 2, borderColor: 'red' }}
             showsHorizontalScrollIndicator={false}
             horizontal
             data={category}
@@ -91,8 +95,9 @@ const Home = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
-
-
+          {/* <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
+            <ItemDishes />
+          </View> */}
         </View>
       </View>
     </SafeAreaView>
