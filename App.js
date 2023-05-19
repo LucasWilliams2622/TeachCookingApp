@@ -9,8 +9,6 @@ import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
 import ItemDishes from './component/ItemDishes';
-import ItemUser from './component/ItemUser';
-
 
 
 
@@ -33,7 +31,8 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+          
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
@@ -42,7 +41,13 @@ const App = () => {
 
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
-          <Stack.Screen name="ItemUser" component={ItemUser} />
+
+
+          
+          
+
+      
+
         </Stack.Navigator>
       </NavigationContainer>
   )
