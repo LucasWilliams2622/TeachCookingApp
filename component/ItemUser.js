@@ -5,7 +5,7 @@ import { ICON, COLOR } from '../constants/Themes'
 
 const ItemUser = () => {
   return (
-   
+
     <View style={styles.boxInfo}>
       <Image style={styles.avatar} source={require('../asset/image/logo.png')} />
       <View style={styles.boxContent}>
@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft:10,
-  marginTop:40
     
+    marginTop: 40
+
 
   },
   boxContent: {
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     fontSize: 16,
   },
-  title:{
-    fontSize:20,
-    color:COLOR.WHITE,
-    fontWeight:'bold',
+  title: {
+    fontSize: 20,
+    color: COLOR.WHITE,
+    fontWeight: 'bold',
   }
 })

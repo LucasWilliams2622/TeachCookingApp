@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions, Image, ImageBackground } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemUser from '../component/ItemUser'
@@ -9,6 +9,7 @@ const ItemCategories = (props) => {
     // const { category } = props
     // const { name, image, backGround } = category
     // const { onPress } = props
+    const [isSaved, setIsSaved] = useState(false)
     return (
         <View style={styles.boxItem}>
             <ImageBackground style={styles.image} resizeMode='cover' source={require('../asset/image/food1.jpg')} >
@@ -29,10 +30,25 @@ const ItemCategories = (props) => {
                         <Text style={styles.textEmotion}>1</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.boxEmotion}>
-                    <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_save.png')} />
+                <View style={styles.boxEmotion}>
+                    {
+                        !isSaved
+                            ?
+                            (
+                                <TouchableOpacity onPress={() => setIsSaved(true)}>
+                                    <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_save.png')} />
+                                </TouchableOpacity>
+                            )
+                            :
+                            (
+                                <TouchableOpacity onPress={() => setIsSaved(false)}>
+                                    <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_saved.png')} />
+                                </TouchableOpacity>
+                            )
+                    }
+
                     <Text style={styles.textEmotion}>Lưu</Text>
-                </TouchableOpacity>
+                </View>
             </View>
         </View>
 
@@ -66,7 +82,7 @@ const styles = StyleSheet.create({
     },
     infoUser: {
         marginTop: 100,
-
+        marginLeft: 10,
     },
     nameUser: {
         fontWeight: 'bold',

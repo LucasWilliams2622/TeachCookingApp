@@ -83,13 +83,11 @@ const Home = ({ navigation }) => {
 
         <View
           style={{
-            marginTop: 10,
-            marginBottom: 350,
-
-
+            marginTop: 10,  borderWidth:2,
+            borderColor:'red'
           }}>
           <FlatList
-            style={{ marginBottom: 10, borderWidth: 2, borderColor: 'red' }}
+            style={{ marginBottom: 10, }}
             showsHorizontalScrollIndicator={false}
             horizontal
             data={category}
@@ -100,9 +98,20 @@ const Home = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
-          <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
+          <View style={{ height: 270,  }}>
             <ItemDishes />
           </View>
+          <TouchableOpacity style={styles.buttonSuggest}>
+            <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
+            <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
+          </TouchableOpacity>
+        </View>
+
+
+        <View style={styles.spaceLine}>
+        </View>
+        <View style={styles.newDishes}>
+          <Text style={styles.title}>Món mới nhất</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -176,4 +185,41 @@ const styles = StyleSheet.create({
     borderRadius: 20,
 
   },
+  buttonSuggest: {
+    flexDirection: 'row',
+    backgroundColor: COLOR.BACKGROUND3,
+    borderRadius: 10,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 16,
+    color: COLOR.WHITE,
+
+  },
+  iconSearch2: {
+    tintColor: COLOR.WHITE,
+    width: 20,
+    height: 20,
+
+  },
+  spaceLine: {
+    marginVertical:20,
+    height: 3,
+    width: '100%',
+    backgroundColor: COLOR.BACKGROUND_ORIGIN,
+  },
+  newDishes: {
+    marginBottom:300,
+    borderWidth:2,
+    borderColor:'red'
+
+  },
+  title:{
+    fontSize:20,
+    color:COLOR.WHITE,
+    fontWeight:'bold',
+
+  }
 })
