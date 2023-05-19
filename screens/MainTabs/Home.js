@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity>
@@ -66,25 +66,24 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         {/* Slide show */}
-        <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} showsPagination={false}>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
-          </View>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
-          </View>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
-          </View>
-        </Swiper>
-
-        <View
-          style={{
-            marginTop: 10,
-            marginBottom: 350,
+        <View style={styles.wrapper}>
+          <Swiper showsButtons={false} autoplay={true} showsPagination={false}>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
+            </View>
+          </Swiper>
+        </View>
 
 
-          }}>
+        <View style={{
+          marginTop: 10,
+        }}>
           <FlatList
             style={{ marginBottom: 10, borderWidth: 2, borderColor: 'red' }}
             showsHorizontalScrollIndicator={false}
@@ -97,11 +96,17 @@ const Home = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
-          {/* <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
+          <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
             <ItemDishes />
-          </View> */}
+          </View>
+          <View>
+            <TouchableOpacity style={styles.buttonSuggest}>
+              <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
+              <Text style={[styles.text,{marginLeft:10}]}>Gợi ý khác</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -117,7 +122,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: COLOR.BACKGROUND,
-    marginHorizontal: 15,
+    paddingHorizontal: 15,
     marginTop: 15
   },
   header: {
@@ -131,11 +136,10 @@ const styles = StyleSheet.create({
     height: 45,
   },
   iconSearch: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     tintColor: '#cdced3',
     marginLeft: 10,
-
   },
   boxSearch: {
     backgroundColor: COLOR.GRAY,
@@ -173,4 +177,23 @@ const styles = StyleSheet.create({
     borderRadius: 20,
 
   },
+  buttonSuggest:{
+    flexDirection:'row',
+    backgroundColor:COLOR.BACKGROUND3,
+    borderRadius:10,
+    height:40,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  text:{
+    fontSize:16,
+    color:COLOR.WHITE,
+
+  },
+  iconSearch2:{
+    tintColor:COLOR.WHITE,
+    width:20,
+    height:20,
+
+  }
 })

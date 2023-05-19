@@ -17,9 +17,9 @@ const Profile = () => {
             <Text style={styles.idUser}>@PaulWalker</Text>
           </View>
         </View>
-
-        <Image style={styles.iconSetting} source={require('../../../asset/icon/icon_setting.png')} />
-
+        <TouchableOpacity>
+          <Image style={styles.iconSetting} source={require('../../../asset/icon/icon_setting.png')} />
+        </TouchableOpacity>
       </View>
       <View style={styles.main}>
         {/* Header */}
