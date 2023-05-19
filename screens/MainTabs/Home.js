@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity>
@@ -66,17 +66,20 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         {/* Slide show */}
-        <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} showsPagination={false}>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
-          </View>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
-          </View>
-          <View style={styles.slide}>
-            <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
-          </View>
-        </Swiper>
+        <View style={styles.wrapper} >
+
+          <Swiper showsButtons={false} autoplay={true} showsPagination={false}>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
+            </View>
+            <View style={styles.slide}>
+              <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
+            </View>
+          </Swiper>
+        </View>
 
         <View
           style={{
@@ -97,11 +100,11 @@ const Home = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
-          {/* <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
+          <View style={{ height: 270, borderWidth: 2, borderColor: 'red' }}>
             <ItemDishes />
-          </View> */}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }

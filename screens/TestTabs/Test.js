@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
 const Test = () => {
@@ -11,7 +11,7 @@ const Test = () => {
             <Text style={styles.headline}>It should appear in front of the Background Image</Text>
             <Image style={styles.logo} source={require('../../asset/image/food2.jpg')} />
           </View>
-{/* AHAHAHAHAHAAH */}
+          {/* AHAHAHAHAHAAH */}
         </Image>
       </View>
     </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 52
   },
   backdrop: {
-    flex:1,
+    flex: 1,
     flexDirection: 'column'
   },
   headline: {
