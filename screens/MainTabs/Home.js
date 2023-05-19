@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -54,7 +54,9 @@ const Home = ({ navigation }) => {
       <View style={styles.main}>
         {/* Header */}
         <View style={styles.header}>
-          <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
+          <TouchableOpacity>
+            <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
+          </TouchableOpacity>
           <View style={styles.boxSearch}>
             <Image style={styles.iconSearch} source={require('../../asset/icon/icon_search.png')} />
             <TextInput

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import React, { useEffect, useRef } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ICON, COLOR } from '../../constants/Themes'
@@ -7,7 +7,7 @@ import Search from './Search';
 import Home from './Home'
 import AddNew from './AddNew'
 import Profile from './ProfileTabs/Profile'
-
+import * as Animatable from 'react-native-animatable';
 
 
 const Tab = createBottomTabNavigator();
@@ -48,31 +48,32 @@ const StackSearch = () => {
 }
 
 const BottomTabs = () => {
+
   return (
     <Tab.Navigator
       initialRouteName="StackHome"
-      tabBarOptions={{
-
-        style: {
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          backgroundColor: '#FFFFFF',
-          shadowColor: '#000000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
-        },
-        labelStyle: {
-          fontSize: 14,
-          fontWeight: 'bold',
-        },
-        activeTintColor: '#FF6347',
-        inactiveTintColor: '#A9A9A9',
-      }}
+      // tabBarOptions={{
+      //   tabBarShowLabel: false,
+      //   style: {
+      //     borderTopLeftRadius: 20,
+      //     borderTopRightRadius: 20,
+      //     backgroundColor: '#FFFFFF',
+      //     shadowColor: '#000000',
+      //     shadowOffset: {
+      //       width: 0,
+      //       height: 2,
+      //     },
+      //     shadowOpacity: 0.25,
+      //     shadowRadius: 3.84,
+      //     elevation: 5,
+      //   },
+      //   labelStyle: {
+      //     fontSize: 14,
+      //     fontWeight: 'bold',
+      //   },
+      //   activeTintColor: '#FF6347',
+      //   inactiveTintColor: '#A9A9A9',
+      // }}
       screenOptions={
         ({ route }) => ({
           tabBarIcon: ({ focused, label, size }) => {
@@ -86,7 +87,7 @@ const BottomTabs = () => {
               label = 'Search'
             } else if (route.name === 'StackAddNew') {
               iconName = focused ? ICON.AddNew : ICON.AddNew;
-              label = 'AddNew'
+              label = 'New'
             }
             else if (route.name === 'StackProfile') {
               iconName = focused ? ICON.Profile : ICON.Profile;
@@ -100,26 +101,43 @@ const BottomTabs = () => {
               justifyContent: 'center',
               width: 60
             }}>
-              <Image source={iconName}
-                style={{
-                  width: focused ? 40 : 27,
-                  height: focused ? 40 : 27,
-                  resizeMode: 'stretch',
-                  tintColor: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS
-                }} />
-              <Text style={{
+
+              <Animatable.View
+                animation="zoomIn"
+                duration={2000}>
+                <Image source={iconName}
+                  style={{
+                    width: focused ? 37 : 27,
+                    height: focused ? 37 : 27,
+
+                    resizeMode: 'stretch',
+                    tintColor: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS
+                  }} />
+              </Animatable.View>
+
+
+
+
+              {/* <Text style={{
                 fontSize: 10,
                 marginTop: 4,
                 color: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS,
 
-              }}>{label}</Text>
+              }}>{label}</Text> */}
             </View>;
           },
 
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            height: 70,
+            height: 60,
+            position: 'absolute',
+            bottom: 10,
+            right: 10,
+            left: 10,
+            borderRadius: 20,
+            backgroundColor: COLOR.BACKGROUND2,
+            
           },
         })}
 

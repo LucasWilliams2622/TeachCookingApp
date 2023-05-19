@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, COLOR } from '../../../constants/Themes'
@@ -9,7 +9,9 @@ const Profile = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={{ flexDirection: 'row' }}>
-          <Image style={styles.avatar} source={require('../../../asset/image/AdventureTime.jpg')} />
+          <TouchableOpacity>
+            <Image style={styles.avatar} source={require('../../../asset/image/AdventureTime.jpg')} />
+          </TouchableOpacity>
           <View style={styles.infoUser}>
             <Text style={styles.nameUser}>Paul Walker</Text>
             <Text style={styles.idUser}>@PaulWalker</Text>
@@ -70,11 +72,11 @@ const styles = StyleSheet.create({
   },
   infoUser: {
     flexDirection: 'column',
-    marginLeft:15,
+    marginLeft: 15,
 
 
   },
-  iconSetting:{
+  iconSetting: {
     height: 30,
     width: 30,
   }

@@ -6,10 +6,10 @@ export const COLOR = {
     BACKGROUND:'#242424',
     BACKGROUND2:'#2e2e2e',
     BACKGROUND3:'#737373',
-    
+    BACKGROUND4:'#cececc',
     
 
-    NOT_FOCUS :'#000000',
+    NOT_FOCUS :'#cececc',
     WHITE: '#FFFFFF',
     BLACK: '#000000',
     RED:'ff0000',
