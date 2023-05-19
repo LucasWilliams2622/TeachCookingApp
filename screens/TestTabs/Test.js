@@ -11,7 +11,7 @@ const Test = () => {
             <Text style={styles.headline}>It should appear in front of the Background Image</Text>
             <Image style={styles.logo} source={require('../../asset/image/food2.jpg')} />
           </View>
-
+{/* AHAHAHAHAHAAH */}
         </Image>
       </View>
     </View>
