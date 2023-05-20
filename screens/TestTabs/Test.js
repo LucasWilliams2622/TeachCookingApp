@@ -1,48 +1,32 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import React, { useState, useCallback, useRef } from "react";
+import { Button, View, Alert } from "react-native";
+import YoutubeIframe from "react-native-youtube-iframe";
+import YoutubePlayer from "react-native-youtube-iframe";
 
-const Test = () => {
+export default function App() {
+  const [playing, setPlaying] = useState(false);
+
+  const onStateChange = useCallback((state) => {
+    if (state === "ended") {
+      setPlaying(false);
+      Alert.alert("video has finished playing!");
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
   return (
     <View>
-      <View style={styles.container}>
-        <Image source={require('../../asset/image/food3.jpg')}
-          resizeMode='cover' style={styles.backdrop}>
-          <View style={styles.overlay}>
-            <Text style={styles.headline}>It should appear in front of the Background Image</Text>
-            <Image style={styles.logo} source={require('../../asset/image/food2.jpg')} />
-          </View>
-          {/* AHAHAHAHAHAAH */}
-        </Image>
-      </View>
+   
+      <YoutubeIframe
+        height={300}
+        play={playing}
+        videoId={"JXp4eZ8XRFg"}
+        //onChangeState={onStateChange}
+      />
+      <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
     </View>
-  )
+  );
 }
-
-export default Test
-
-const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  overlay: {
-    opacity: 0.5,
-    backgroundColor: '#000000'
-  },
-  logo: {
-    backgroundColor: 'rgba(0,0,0,0)',
-    width: 160,
-    height: 52
-  },
-  backdrop: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  headline: {
-    fontSize: 18,
-    textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white'
-  }
-})
