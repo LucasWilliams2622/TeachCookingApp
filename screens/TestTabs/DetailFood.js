@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image, PixelRatio } from 'react-native'
 import React from 'react'
 
 const DetailFood = () => {
@@ -15,26 +15,92 @@ const DetailFood = () => {
                 </View>
                 <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Đà nẵng vào mùa tép tươi,tép xào bắp su ngon voãi lò</Text>
                 <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
-                <View style={{ marginTop: 20, flexDirection: 'row',alignSelf:'center' }}>
-                    <Image style={styles.logo} source={require('../../asset/icon/icon_clock.png')} />
+                <View style={{ marginTop: 20, flexDirection: 'row', alignSelf: 'center' }}>
+                    <Image style={styles.logo} source={require('../../asset/icon/icon_clock2.png')} />
 
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 10 }} >30 phút</Text>
 
                 </View>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Nguyên liệu</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Cách làm</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Bình luận</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
-                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Món mới của Quỳnh </Text>
+                <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15, fontWeight: 'bold' }} >Nguyên liệu</Text>
+                <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                    <Image style={styles.logo} source={require('../../asset/icon/icon_user.png')} />
 
-            </View>  
+                    <Text style={{ color: '#FFFDFD', fontSize: 15, marginLeft: 10, marginTop: 5 }} >2 người</Text>
 
+                </View>
+                <View>
+                    <View style={{ padding: 10 }}>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >200 gram tép biển</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >500 gram bắp</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >200 gram tép biển</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >100 gram đậu cove</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >2 quả cà chua</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Hành tím</Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Hành ngò</Text>
+                    </View>
+                    <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
+
+                    <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15, fontWeight: 'bold' }} >Cách làm</Text>
+                    <View style={{ padding: 10 }}>
+
+                        <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                            <Image style={styles.logo} source={require('../../asset/icon/icon_one.png')} />
+
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10 }} >Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra</Text>
+
+
+                        </View>
+                        <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                            <Image style={styles.logo} source={require('../../asset/icon/icon_two.png')} />
+
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10 }} >Cho chảo lên bếp, phi hành với dầu sôi,  cho tép vào xào</Text>
+
+
+                        </View>
+                        <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                            <Image style={styles.logo} source={require('../../asset/icon/icon_three.png')} />
+
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10 }} >Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra</Text>
+
+
+                        </View>
+                    </View>
+
+                    <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
+                    <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                        <Image style={styles.logo} source={require('../../asset/icon/icon_coment.png')} />
+
+                        <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 5, fontWeight: 'bold' }} >Bình luận</Text>
+
+
+                    </View>
+                    <Text style={{ color: '#FFFDFD', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Xem tất cả bình luận</Text>
+
+
+                    <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
+                    <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Món mới của Quỳnh </Text>
+
+                </View>
+            </View>
         </ScrollView>
     )
 }
 
 export default DetailFood
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    circle: {
+        height: 30,
+        width: 30,
+        borderRadius: 30
+        ,
+        backgroundColor: 'white'
+            / PixelRatio.get(),
+    }
+})
