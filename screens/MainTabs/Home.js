@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Swiper from 'react-native-swiper';
 import ItemCategories from '../../component/ItemCategories'
 import ItemDishes from '../../component/ItemDishes'
+import ItemDishesVertical from '../../component/ItemDishesVertical'
+
 
 
 const Home = ({ navigation }) => {
@@ -47,6 +49,20 @@ const Home = ({ navigation }) => {
       backGround: '#FBC1BD'
     },
   ])
+  const [dishes, setDishes] = useState([
+    {
+      nameUser: "Tom",
+      avatar: '../../asset/image/logo.png',
+      image: '../../asset/image/logo.png',
+      nameDish: "Pikachu"
+    },
+    {
+      nameUser: "Toma",
+      avatar: '../../asset/image/logo.png',
+      image: '../../asset/image/logo.png',
+      nameDish: "Pikachu AAAAA"
+    }
+  ])
 
 
   return (
@@ -83,8 +99,8 @@ const Home = ({ navigation }) => {
 
         <View
           style={{
-            marginTop: 10,  borderWidth:2,
-            borderColor:'red'
+            marginTop: 10, borderWidth: 2,
+            borderColor: 'red'
           }}>
           <FlatList
             style={{ marginBottom: 10, }}
@@ -98,8 +114,20 @@ const Home = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
-          <View style={{ height: 270,  }}>
-            <ItemDishes />
+          <View style={{ height: 270, }}>
+
+            <FlatList
+              style={{ marginBottom: 10, }}
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              data={category}
+              renderItem={({ item }) => <ItemDishes category={item}
+                onPress={() => {
+
+                }}
+              />}
+              keyExtractor={eachCategory => eachCategory.name}
+            />
           </View>
           <TouchableOpacity style={styles.buttonSuggest}>
             <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
@@ -112,6 +140,21 @@ const Home = ({ navigation }) => {
         </View>
         <View style={styles.newDishes}>
           <Text style={styles.title}>Món mới nhất</Text>
+          <FlatList
+          
+              style={{ marginBottom: 10, }}
+              showsHorizontalScrollIndicator={false}
+              numColumns={2}
+              vertical
+              data={category}
+              renderItem={({ item }) => <ItemDishesVertical category={item}
+                onPress={() => {
+
+                }}
+              />}
+              keyExtractor={eachCategory => eachCategory.name}
+            />
+         
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -129,7 +172,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: COLOR.BACKGROUND,
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginTop: 15
   },
   header: {
@@ -205,21 +248,22 @@ const styles = StyleSheet.create({
 
   },
   spaceLine: {
-    marginVertical:20,
+    marginVertical: 20,
     height: 3,
     width: '100%',
     backgroundColor: COLOR.BACKGROUND_ORIGIN,
   },
   newDishes: {
-    marginBottom:300,
-    borderWidth:2,
-    borderColor:'red'
+    marginBottom: 300,
+    borderWidth: 2,
+    borderColor: 'red'
 
   },
-  title:{
-    fontSize:20,
-    color:COLOR.WHITE,
-    fontWeight:'bold',
+  title: {
+    fontSize: 20,
+    color: COLOR.WHITE,
+    fontWeight: 'bold',
+    marginBottom: 10
 
   }
 })
