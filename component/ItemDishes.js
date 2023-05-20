@@ -17,7 +17,6 @@ const ItemCategories = (props) => {
             </ImageBackground>
             <View style={styles.infoUser}>
                 <ItemUser />
-
             </View>
             <View style={styles.bottomItem}>
                 <View style={{ flexDirection: 'row' }}>

@@ -33,7 +33,7 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="ItemDishesVertical" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="Profile" component={Profile} />
@@ -45,13 +45,9 @@ const App = () => {
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
           <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
 
-          
+
 
           
-          
-
-      
-
         </Stack.Navigator>
       </NavigationContainer>
   )
