@@ -17,6 +17,7 @@ import ItemDishesVertical from './component/ItemDishesVertical';
 
 
 import Test from './screens/TestTabs/Test'
+import DetailFood from './screens/TestTabs/DetailFood';
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
@@ -32,18 +33,18 @@ const StackBegin = () => {
 }
 const App = () => {
   return (
-    <NavigationContainer>
-        <Stack.Navigator initialRouteName="ItemDishesVertical" screenOptions={{ headerShown: false }}>
+    // <NavigationContainer>
+    //     <Stack.Navigator initialRouteName="ItemDishesVertical" screenOptions={{ headerShown: false }}>
           
-          <Stack.Screen name="StackBegin" component={StackBegin} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="BottomTabs" component={BottomTabs} />
-          <Stack.Screen name="AddNew" component={AddNew} />
-          <Stack.Screen name="Home" component={Home} />
+    //       <Stack.Screen name="StackBegin" component={StackBegin} />
+    //       <Stack.Screen name="Profile" component={Profile} />
+    //       <Stack.Screen name="BottomTabs" component={BottomTabs} />
+    //       <Stack.Screen name="AddNew" component={AddNew} />
+    //       <Stack.Screen name="Home" component={Home} />
 
-          <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen name="ItemDishes" component={ItemDishes} />
-          <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
+    //       <Stack.Screen name="Test" component={Test} />
+    //       <Stack.Screen name="ItemDishes" component={ItemDishes} />
+    //       <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
 
           
 
@@ -52,8 +53,9 @@ const App = () => {
 
       
 
-        </Stack.Navigator>
-      </NavigationContainer>
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+    <DetailFood/>
   )
 }
 
