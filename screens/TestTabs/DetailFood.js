@@ -1,5 +1,6 @@
-import { ScrollView, StyleSheet, Text, View, Image, PixelRatio } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image, PixelRatio, TextInput } from 'react-native'
 import React from 'react'
+
 
 const DetailFood = () => {
     return (
@@ -79,12 +80,52 @@ const DetailFood = () => {
                         <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 5, fontWeight: 'bold' }} >Bình luận</Text>
 
 
+
                     </View>
                     <Text style={{ color: '#FFFDFD', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Xem tất cả bình luận</Text>
+
+                    <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                        <Image style={{ width: 30, height: 30 }} source={require('../../asset/icon/icon_people.png')} />
+
+                        <View style={{ marginTop: 5, flexDirection: 'row' }} >
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, fontWeight: 'bold' }} >Tom</Text>
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10 }} >món rất cười tôi đã hài</Text>
+                        </View>
+
+
+                    </View>
+
+                    <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                        <Image style={{ width: 30, height: 30 }} source={require('../../asset/icon/icon_people.png')} />
+
+                        <TextInput
+                            style={{ backgroundColor: 'grey', marginLeft: 20, height: 40, width: 250 }}>
+                            <Text style={{ fontSize: 14 }} >Thêm bình luận</Text>
+                        </TextInput>
+
+
+                    </View>
 
 
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</Text>
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Món mới của Quỳnh </Text>
+
+                    <View style={{ flexDirection: 'row' , marginTop:20, justifyContent:'space-between'}}>
+                        <View>
+                            <Image source={require('../../asset/image/pikachu.png')} />
+
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Pikachu nướng muối ớt </Text>
+
+                        </View>
+                        <View>
+                            <Image source={require('../../asset/image/pikachu.png')} />
+
+                            <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Pikachu nướng muối ớt </Text>
+
+                        </View>
+
+
+                    </View>
 
                 </View>
             </View>
