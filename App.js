@@ -10,13 +10,9 @@ import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
 import ItemDishes from './component/ItemDishes';
 import ItemDishesVertical from './component/ItemDishesVertical';
-
-
-
-
-
-
 import Test from './screens/TestTabs/Test'
+
+
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
