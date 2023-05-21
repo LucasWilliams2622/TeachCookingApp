@@ -6,6 +6,7 @@ export const COLOR = {
     BACKGROUND:'#242424',
     BACKGROUND2:'#2e2e2e',
     BACKGROUND3:'#737373',
+    HEADER:'#5B5959',
     
     
 
@@ -17,7 +18,9 @@ export const COLOR = {
     GREEN:'	#00ff00',
     CYAN:'#00ffff',
     BLUE :'#0000ff',
-    GRAY:'#3A3B3C'
+    GRAY:'#3A3B3C',
+    GRAY1:'#C4C5C4',
+    
 }
 
 export const SIZES = {
@@ -35,10 +38,12 @@ export const ICON = {
     Home: require('../asset/icon/icon_home.png'),
     Profile: require('../asset/icon/icon_profile.png'),
     Search: require('../asset/icon/icon_search.png'),
+    Goback: require('../asset/icon/icon_back.png'),
     
 }
 
 export const IMAGES = {
+    Avatar: require('../asset/icon/img_profile.png'),
 
 }
 
