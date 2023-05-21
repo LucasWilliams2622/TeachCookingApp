@@ -12,21 +12,13 @@ import Home from './screens/MainTabs/Home';
 import ItemDishes from './component/ItemDishes';
 import ItemDishesVertical from './component/ItemDishesVertical';
 import Test from './screens/TestTabs/Test'
-
-
-
-
-import DetailFood from './screens/TestTabs/DetailFood';
+import DetailFood from './screens/MainTabs/DetailFood';
 
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
     <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-
       <Stack.Screen name="Login" component={Login} />
-
-
-
 
     </Stack.Navigator>
   )
@@ -34,7 +26,7 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Test" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="DetailFood" screenOptions={{ headerShown: false }}>
 
         <Stack.Screen name="StackBegin" component={StackBegin} />
         <Stack.Screen name="Profile" component={Profile} />
@@ -42,12 +34,11 @@ const App = () => {
         <Stack.Screen name="AddNew" component={AddNew} />
         <Stack.Screen name="Home" component={Home} />
 
-        <Stack.Screen name="Test" component={SlideGuide} />
+        <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="ItemDishes" component={ItemDishes} />
+        <Stack.Screen name="DetailFood" component={DetailFood} />
+
         <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
-
-
-
 
       </Stack.Navigator>
     </NavigationContainer>

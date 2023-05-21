@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -6,7 +6,8 @@ import Swiper from 'react-native-swiper';
 import ItemCategories from '../../component/ItemCategories'
 import ItemDishes from '../../component/ItemDishes'
 import ItemDishesVertical from '../../component/ItemDishesVertical'
-
+const windowWIdth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 
 const Home = ({ navigation }) => {
@@ -141,20 +142,22 @@ const Home = ({ navigation }) => {
         <View style={styles.newDishes}>
           <Text style={styles.title}>Món mới nhất</Text>
           <FlatList
-          
-              style={{ marginBottom: 10, }}
-              showsHorizontalScrollIndicator={false}
-              numColumns={2}
-              vertical
-              data={category}
-              renderItem={({ item }) => <ItemDishesVertical category={item}
-                onPress={() => {
 
-                }}
-              />}
-              keyExtractor={eachCategory => eachCategory.name}
-            />
-         
+            style={{ marginBottom: 10, }}
+            showsHorizontalScrollIndicator={false}
+            numColumns={2}
+            vertical
+            data={category}
+            renderItem={({ item }) => <ItemDishesVertical category={item}
+              onPress={() => {
+
+              }}
+            />}
+            keyExtractor={eachCategory => eachCategory.name}
+          />
+        </View>
+        <View style={styles.step}>
+          <Text style={styles.stepText}>1</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -265,5 +268,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10
 
+  },
+  step:{
+    backgroundColor:COLOR.WHITE,
+    borderRadius:10000,
+    borderWidth:2,
+    borderColor:COLOR.WHITE,
+    height:23,
+    marginBottom:900,
+    width:23,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  stepText:{
+    color:COLOR.BLACK,fontSize:10
   }
 })
