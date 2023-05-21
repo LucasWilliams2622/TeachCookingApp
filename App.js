@@ -3,6 +3,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+import SlideGuide from './screens/Guide/Guide1';
 import Login from './screens/BeginTabs/Login'
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
