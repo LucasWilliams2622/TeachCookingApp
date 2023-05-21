@@ -7,6 +7,7 @@ export const COLOR = {
     BACKGROUND2:'#2e2e2e',
     BACKGROUND3:'#737373',
     BACKGROUND4:'#cececc',
+    TextAdd:'#B0ABAB',
     
 
     NOT_FOCUS :'#cececc',

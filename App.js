@@ -9,6 +9,7 @@ import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
 import ItemDishes from './component/ItemDishes';
+import ItemIngredient from './component/ItemIngredient';
 
 
 
@@ -41,13 +42,6 @@ const App = () => {
 
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
-
-
-          
-          
-
-      
-
         </Stack.Navigator>
       </NavigationContainer>
   )
