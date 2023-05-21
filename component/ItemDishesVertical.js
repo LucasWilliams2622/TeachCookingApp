@@ -36,7 +36,7 @@ const ItemDishesVertical = () => {
         </View>
         <Text style={styles.nameDishes}>Pikachu sốt Thái</Text>
         <View style={styles.boxTime}>
-          <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} />
+          {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
           <Text style={styles.textTime}>2 giờ</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>

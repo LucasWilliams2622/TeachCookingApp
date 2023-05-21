@@ -42,7 +42,7 @@ const App = () => {
         <Stack.Screen name="AddNew" component={AddNew} />
         <Stack.Screen name="Home" component={Home} />
 
-        <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="Test" component={SlideGuide} />
         <Stack.Screen name="ItemDishes" component={ItemDishes} />
         <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
 
