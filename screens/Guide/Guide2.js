@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity  } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-
-const Guide2 = () => {
+const Guide2 = (props) => {
+  const { navigation } = props
+  const Next = () => {
+    navigation.navigate("Guide3")
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
@@ -12,8 +15,9 @@ const Guide2 = () => {
           <Text style={styles.title}>Bạn muốn nấu ăn cho bạn bè, người thân, người yêu nhưng lại không biết nấu ăn?</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonStyle}>
-            <Text style={{color: 'black', fontSize: 22, fontWeight: 'bold', fontFamily: 'Poppins'}}>Tiếp tục</Text>
+          <TouchableOpacity style={styles.buttonStyle}
+            onPress={Next}>
+            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', fontFamily: 'Poppins' }}>Tiếp tục</Text>
           </TouchableOpacity>
         </View>
       </View>

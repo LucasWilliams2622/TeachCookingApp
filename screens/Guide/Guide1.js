@@ -3,7 +3,11 @@ import React from 'react'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Guide1 = () => {
+const Guide1 = (props) => {
+  const { navigation } = props
+  const Next = () => {
+    navigation.navigate("Guide2")
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
@@ -12,8 +16,9 @@ const Guide1 = () => {
           <Text style={styles.title}>Bạn đã phát ngán với các bữa ăn không chút mới mẻ hàng ngày mà không biết nên nấu món nào mới?</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonStyle}>
-            <Text style={{color: 'black', fontSize: 22, fontWeight: 'bold', fontFamily: 'Poppins'}}>Tiếp tục</Text>
+          <TouchableOpacity style={styles.buttonStyle}
+            onPress={Next}>
+            <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold', fontFamily: 'Poppins' }}>Tiếp tục</Text>
           </TouchableOpacity>
         </View>
       </View>
