@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Image, Dimensions, PixelRatio, TextInput } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native'
 import React from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
