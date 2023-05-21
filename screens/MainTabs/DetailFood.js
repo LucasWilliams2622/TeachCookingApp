@@ -14,9 +14,9 @@ const DetailFood = () => {
                     <Text style={{ color: '#FFFDFD', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Bếp của Quỳnh</Text>
                 </View>
                 <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Đà nẵng vào mùa tép tươi,tép xào bắp su ngon voãi lò</Text>
-                <View style={{ backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15 }}></View>
+                <View style={styles.line}></View>
                 <View style={{ marginTop: 20, flexDirection: 'row', alignSelf: 'center' }}>
-                    <Image style={{tintColor:'white'}} source={require('../../asset/icon/icon_clock.png')} />
+                    <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_clock.png')} />
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 10 }} >30 phút</Text>
                 </View>
 
@@ -26,7 +26,6 @@ const DetailFood = () => {
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_human.png')} />
                     <Text style={{ color: '#FFFDFD', fontSize: 15, marginLeft: 10 }} >2 người</Text>
                 </View>
-
                 <View style={{ padding: 10 }}>
                     <Text style={styles.makeStep} >200 gram tép biển</Text>
                     <Text style={styles.makeStep} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
@@ -42,7 +41,7 @@ const DetailFood = () => {
                     <Text style={styles.makeStep} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
                     <Text style={styles.makeStep}>Hành ngò</Text>
                 </View>
-                <View style={{ backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15 }}></View>
+                <View style={styles.line}></View>
 
 
                 {/* Cach lam` */}
@@ -50,28 +49,30 @@ const DetailFood = () => {
                 <View style={{ padding: 10 }}>
 
                     <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: 'white', height: 34, width: 34, borderRadius: 17, alignItems: 'center' }}>
+                        <View style={styles.circle}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>1</Text>
                         </View>
                         <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, paddingRight: 20 }} >Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra</Text>
                     </View>
                     <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: 'white', height: 34, width: 34, borderRadius: 17, alignItems: 'center' }}>
+                        <View style={styles.circle}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>2</Text>
                         </View>
                         <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, paddingRight: 20 }} >Cho chảo lên bếp, phi hành với dầu sôi,  cho tép vào xào</Text>
                     </View>
                     <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                        <View style={{ backgroundColor: 'white', height: 34, width: 34, borderRadius: 17, alignItems: 'center' }}>
+                        <View style={styles.circle}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>3</Text>
                         </View>
                         <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, paddingRight: 20 }} >Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra</Text>
                     </View>
                 </View>
-                <View style={{ backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15 }}>
+                <View style={styles.line}> </View>
+
+
+
 
                 {/* Binh` luan */}
-                </View>
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_coment.png')} />
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, fontWeight: 'bold' }} >Bình luận</Text>
@@ -86,25 +87,19 @@ const DetailFood = () => {
                 </View>
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ width: 30, height: 30 }} source={require('../../asset/icon/icon_people.png')} />
-
                     <TextInput
                         style={{ backgroundColor: '#3c3c3c', marginLeft: 20, height: 40, width: 250, borderRadius: 20, paddingLeft: 10, borderWidth: 1, borderColor: 'white' }}>
                         <Text style={{ fontSize: 14, color: 'white' }} >Thêm bình luận</Text>
                     </TextInput>
-
-
                 </View>
 
-
-                <View style={{ backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15 }}></View>
+                <View style={styles.line}></View>
 
                 {/* Mon moi cua Quynh */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
                     <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, fontWeight: 'bold' }} >Món mới của Quỳnh</Text>
                 </View>
-
-
                 <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'space-between' }}>
                     <View>
                         <Image source={require('../../asset/image/pikachu.png')} />
@@ -114,7 +109,6 @@ const DetailFood = () => {
                         <Image source={require('../../asset/image/pikachu.png')} />
                         <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Pikachu nướng muối ớt </Text>
                     </View>
-
                 </View>
 
             </View>
@@ -126,16 +120,16 @@ const DetailFood = () => {
 export default DetailFood
 
 const styles = StyleSheet.create({
-    circle: {
-        height: 30,
-        width: 30,
-        borderRadius: 30
-        ,
-        backgroundColor: 'white'
-            / PixelRatio.get(),
-    }
-    ,
+
+
     makeStep: {
         color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15
+    }
+    , line: {
+        backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15
+    }
+    ,
+    circle:{
+        backgroundColor: 'white', height: 34, width: 34, borderRadius: 17, alignItems: 'center'
     }
 })
