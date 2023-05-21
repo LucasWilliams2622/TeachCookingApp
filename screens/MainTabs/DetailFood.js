@@ -1,6 +1,7 @@
-import { ScrollView, StyleSheet, Text, View, Image, PixelRatio, TextInput } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image,Dimensions, PixelRatio, TextInput } from 'react-native'
 import React from 'react'
-
+const windowWIdth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const DetailFood = () => {
     return (
@@ -67,17 +68,12 @@ const DetailFood = () => {
                             </View>
 
                             <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10,paddingRight:20 }} >Cho chảo lên bếp, phi hành với dầu sôi,  cho tép vào xào</Text>
-
-
                         </View>
                         <View style={{ marginTop: 20, flexDirection: 'row' }}>
                             <View style={{ backgroundColor: 'white', height: 34, width: 34, borderRadius: 17, alignItems: 'center' }}>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>3</Text>
                             </View>
-
                             <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10,paddingRight:20 }} >Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra</Text>
-
-
                         </View>
                     </View>
 
@@ -137,7 +133,7 @@ const DetailFood = () => {
 
                         </View>
                         <View>
-                            <Image source={require('../../asset/image/pikachu.png')} />
+                            <Image  source={require('../../asset/image/pikachu.png')} />
 
                             <Text style={{ color: '#FFFFFF', fontSize: 15, marginLeft: 10, marginTop: 15 }} >Pikachu nướng muối ớt </Text>
 

@@ -1,7 +1,8 @@
-import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, Dimensions,View, Image } from 'react-native'
 import React from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
-
+const windowWIdth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const Login = () => {
   return (
     <SafeAreaView style={styles.container}>
