@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     }
     ,
     text: {
-        fontSize: 15, marginLeft: 10, marginTop: 12
+        fontSize: 15, marginLeft: 10, marginTop: 10
     },
     time: {
         color: COLOR.WHITE, fontSize: 15, marginLeft: 10, marginTop: 10

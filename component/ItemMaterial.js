@@ -7,7 +7,7 @@ const ItemMaterial = (props) => {
     return (
         <TouchableOpacity
             style={{ backgroundColor: COLOR.BACKGROUND }}>
-            <View style={{ padding: 10 }}>
+            <View>
                 <Text style={styles.makeStep} >{dulieu.content}</Text>
                 <Text style={styles.makeStep} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </Text>
             </View>
