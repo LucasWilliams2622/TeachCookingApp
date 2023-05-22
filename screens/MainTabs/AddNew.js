@@ -73,9 +73,9 @@ const AddNew = () => {
 
 
           </View>
-          {/* <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}>
+          <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}>
           </View>
-          */}
+         
           <View>
             <Text style={{ color: '#FFFDFD', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>Nguyên Liệu</Text>
             {
