@@ -10,7 +10,11 @@ import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
 import ItemDishes from './component/ItemDishes';
-import ItemDishesVertical from './component/ItemDishesVertical';
+
+
+
+
+
 import Test from './screens/TestTabs/Test'
 import Guide from './screens/Guide/Guide1'
 import Guide2 from './screens/Guide/Guide2'
@@ -43,19 +47,17 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
 
-        <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="ItemDishes" component={ItemDishes} />
-        <Stack.Screen name="DetailFood" component={DetailFood} />
-        <Stack.Screen name="Guide" component={Guide} />
-        <Stack.Screen name="Guide2" component={Guide2} />
-        <Stack.Screen name="Guide3" component={Guide3} />
+          <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="ItemDishes" component={ItemDishes} />
 
 
+          
+          
 
-        <Stack.Screen name="ItemDishesVertical" component={ItemDishesVertical} />
+      
 
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
   )
 }
 
