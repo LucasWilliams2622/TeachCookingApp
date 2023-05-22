@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
-import ItemSteps from '../../component/ItemSteps'
+import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 
 
 const AddNew = () => {
@@ -113,7 +113,7 @@ const AddNew = () => {
 
            
             {
-              cachlam.map((item) => <ItemSteps dulieu={item} key={item._id} />)
+              cachlam.map((item) => <ItemAddnewSteps dulieu={item} key={item._id} />)
             }
         
             
