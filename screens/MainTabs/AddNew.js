@@ -59,10 +59,10 @@ const AddNew = () => {
             <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 14 }}>Thời gian nấu</Text>
             <TextInput placeholderTextColor={'white'} placeholder='1 tiếng 30 phút' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
           </View>
-
           <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}>
-          </View>
 
+          </View>
+          */}
           <View>
             <Text style={{ color: '#FFFDFD', fontSize: 20, marginTop: 10, fontFamilyn: 'lucida grande' }}>Nguyên liệu</Text>
             <View style={[styles.header, { marginTop: 10 }]}>
@@ -76,35 +76,26 @@ const AddNew = () => {
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={addElement}>
+
                 <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20 }}>+ Khẩu phần</Text>
               </TouchableOpacity>
               <TouchableOpacity>
                 <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20 }}>+ Nguyên liệu</Text>
               </TouchableOpacity>
             </View>
-
           </View>
           <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}></View>
-          <View>
-            <Text style={{ color: '#FFFDFD', fontSize: 20, marginTop: 10, fontFamilyn: 'lucida grande' }}>Cách làm</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-              <View style={{ flexDirection: 'column' }}>
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/1.png')} />
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/list2.png')} />
-              </View>
-              <TextInput placeholderTextColor={'white'} placeholder='250g đường' style={[styles.textinput, { marginLeft: 55, borderRadius: 5, width: 300, height: 70, textAlign: 'auto' }]}></TextInput>
-
+          <View >
+            <Text style={{ color: '#FFFDFD', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>Cách Làm</Text>
+          
 
            
             {
               cachlam.map((item) => <ItemSteps dulieu={item} key={item._id} />)
             }
-        
-            
             <TouchableOpacity>
               <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20, textAlign: "center" }}>+ Nguyên liệu</Text>
-
             </TouchableOpacity>
           </View>
         </View>
