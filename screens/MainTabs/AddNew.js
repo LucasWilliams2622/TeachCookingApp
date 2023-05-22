@@ -94,36 +94,23 @@ const AddNew = () => {
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
               <TouchableOpacity onPress={addElement}>
-
                 <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20 }}>+ Khẩu phần</Text>
-
               </TouchableOpacity>
               <TouchableOpacity>
                 <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20 }}>+ Nguyên liệu</Text>
-
               </TouchableOpacity>
             </View>
-
           </View>
-
           <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}></View>
           <View >
             <Text style={{ color: '#FFFDFD', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>Cách Làm</Text>
-          
-
-           
             {
               cachlam.map((item) => <ItemAddnewSteps dulieu={item} key={item._id} />)
             }
-        
-            
             <TouchableOpacity>
               <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20, textAlign: "center" }}>+ Nguyên liệu</Text>
-
             </TouchableOpacity>
           </View>
-
-
         </View>
       </View>
       {/* </View> */}
