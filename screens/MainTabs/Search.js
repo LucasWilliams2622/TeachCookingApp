@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     container: {
         height: 50,
         borderColor: COLOR.PRIMARY,
-        borderWidth: 1,
+        borderWidth: 0.5,
         backgroundColor : COLOR.GRAY,
         marginStart: 20,
         marginEnd: 25,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     input: {
-        
+        tintColor: COLOR.WHITE,
         placeholderTextColor: COLOR.WHITE,
         backgroundColor : COLOR.GRAY,
         height: 30,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     imageSearch: {
-        
+        tintColor: COLOR.WHITE,
         placeholderTextColor: COLOR.WHITE,
         marginTop: 1,
         marginLeft: 10,
