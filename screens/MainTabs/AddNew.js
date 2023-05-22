@@ -19,7 +19,6 @@ const AddNew = () => {
       <View style={styles.container}>
         {/* <View style={styles.main}> */}
         {/** Header*/}
-
         <View style={styles.header}>
           <Image style={[styles.icon, { marginTop: 20 }]} source={require('../../asset/icon/icon_back.png')} />
 
