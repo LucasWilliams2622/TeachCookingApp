@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
     color: COLOR.HEADER,
     fontSize: 15,
   },
+
+  /*Body*/
   body: {
     height: '100%',
   },

@@ -39,7 +39,9 @@ export const ICON = {
     Profile: require('../asset/icon/icon_profile.png'),
     Search: require('../asset/icon/icon_search.png'),
     Goback: require('../asset/icon/icon_back.png'),
-    
+    Setting: require('../asset/icon/icon_setting.png'),
+    Save: require('../asset/icon/icon_save.png'),
+
 }
 
 export const IMAGES = {
