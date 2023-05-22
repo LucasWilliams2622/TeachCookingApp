@@ -2,6 +2,9 @@ import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView,
 import React from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ItemIngredient from '../../component/ItemIngredient'
+import ItemSteps from '../../component/ItemSteps'
+
 
 const AddNew = () => {
   const [nguyenlieu, setnguyenlieu] = useState(datane);
@@ -93,24 +96,12 @@ const AddNew = () => {
               <TextInput placeholderTextColor={'white'} placeholder='250g đường' style={[styles.textinput, { marginLeft: 55, borderRadius: 5, width: 300, height: 70, textAlign: 'auto' }]}></TextInput>
 
 
-
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-              <View style={{ flexDirection: 'column' }}>
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/2.png')} />
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/list2.png')} />
-              </View>
-              <TextInput placeholderTextColor={'white'} placeholder='250g đường' style={[styles.textinput, { marginLeft: 55, borderRadius: 5, width: 300, height: 70, textAlign: 'auto' }]}></TextInput>
-
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-              <View style={{ flexDirection: 'column' }}>
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/3.png')} />
-                <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/list2.png')} />
-              </View>
-              <TextInput placeholderTextColor={'white'} placeholder='250g đường' style={[styles.textinput, { marginLeft: 55, borderRadius: 5, width: 300, height: 70, textAlign: 'auto' }]}></TextInput>
-
-            </View>
+           
+            {
+              cachlam.map((item) => <ItemSteps dulieu={item} key={item._id} />)
+            }
+        
+            
             <TouchableOpacity>
               <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20, textAlign: "center" }}>+ Nguyên liệu</Text>
 
