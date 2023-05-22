@@ -7,7 +7,7 @@ const ItemIngredient = (props) => {
     return (
 
         <View style={[styles.header, { marginTop: 10, marginStart: 10, marginEnd: 10 }]}>
-            <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 5 }]} source={require('../asset/icon/list2.png')} />
+            <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 5 }]} source={require('../asset/icon/icon_menu.png')} />
             <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='1kg ớt' style={[styles.textinput, { borderRadius: 5, width: 320, height: 37, marginRight: 15 }]} ></TextInput>
         </View>
 
