@@ -7,8 +7,8 @@ const ItemIngredient = (props) => {
     return (
 
         <View style={[styles.header, { marginTop: 10, marginStart: 10, marginEnd: 10 }]}>
-            <Image style={[styles.image,{width:20,height:20,marginTop:15,marginLeft:5}]} source={require('../asset/icon/icon_menu.png')}/>
-            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='1kg ớt' style={[styles.textinput, { borderRadius: 5, width: 320, height: 37, marginRight: 15 }]} ></TextInput>
+            <Image style={[styles.image]} source={require('../asset/icon/icon_menu.png')}/>
+            <TextInput placeholderTextColor={COLOR.GRAY1} placeholder='  1kg ớt' style={[styles.textinput]} ></TextInput>
         </View>
     )
 }
@@ -17,25 +17,26 @@ export default ItemIngredient
 
 const styles = StyleSheet.create({
     header: {
-
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     image: {
-        width: 74,
-        height: 72,
-
-
+        width:20,
+        height:20,
+        marginTop:15,
+        marginLeft:5
     },
     textinput: {
-        width: 390,
-        height: 80,
-        backgroundColor: "#6C6969",
+        width: 300,
+        height: 40,
+        backgroundColor: COLOR.Head,
         marginTop: 10,
-        borderRadius: 10,
+        borderRadius: 6,
         fontSize: 15,
-        fontStyle: 'normal',
-        color: COLOR.TextAdd
+        color: COLOR.WHITE,
+        marginRight: 15,
+        borderWidth: 0.7, 
+        borderColor: COLOR.GRAY1,
     }
 
 })
