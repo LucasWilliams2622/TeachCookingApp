@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { Button, View, Alert } from "react-native";
 import YoutubeIframe from "react-native-youtube-iframe";
-import YoutubePlayer from "react-native-youtube-iframe";
+
 
 export default function App() {
   const [playing, setPlaying] = useState(false);
@@ -16,19 +16,16 @@ export default function App() {
   const togglePlaying = useCallback(() => {
     setPlaying((prev) => !prev);
   }, []);
-
+  
   return (
     <View>
-      <View style={styles.container}>
-        <Image source={require('../../asset/image/food3.jpg')}
-          resizeMode='cover' style={styles.backdrop}>
-          <View style={styles.overlay}>
-            <Text style={styles.headline}>It should appear in front of the Background Image</Text>
-            <Image style={styles.logo} source={require('../../asset/image/food2.jpg')} />
-          </View>
-
-        </Image>
-      </View>
+      <YoutubeIframe
+        height={300}
+        play={playing}
+        videoId={"JXp4eZ8XRFg"}
+        onChangeState={onStateChange}
+      />
+      <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
     </View>
   );
 }

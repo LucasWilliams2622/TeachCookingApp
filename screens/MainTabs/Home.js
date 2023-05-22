@@ -10,7 +10,7 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const Home = ({ navigation }) => {
+const DetailFoodHome = ({ navigation }) => {
   const [category, setCategory] = useState([
     {
       name: 'Tất cả',
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BACKGROUND_ORIGIN,
   },
   newDishes: {
-    marginBottom: 300,
+    marginBottom: 30,
     borderWidth: 2,
     borderColor: 'red'
 
@@ -269,18 +269,18 @@ const styles = StyleSheet.create({
     marginBottom: 10
 
   },
-  step:{
-    backgroundColor:COLOR.WHITE,
-    borderRadius:10000,
-    borderWidth:2,
-    borderColor:COLOR.WHITE,
-    height:23,
-    marginBottom:900,
-    width:23,
-    justifyContent:'center',
-    alignItems:'center'
+  step: {
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 10000,
+    borderWidth: 2,
+    borderColor: COLOR.WHITE,
+    height: 23,
+    marginBottom: 900,
+    width: 23,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  stepText:{
-    color:COLOR.BLACK,fontSize:10
+  stepText: {
+    color: COLOR.BLACK, fontSize: 10
   }
 })

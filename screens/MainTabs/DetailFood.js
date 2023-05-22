@@ -13,7 +13,6 @@ const DetailFood = ({ navigation }) => {
     const [step, setStep] = useState([
         {
             content: "Tom",
-
         },
         {
             content: "Toma",
@@ -21,15 +20,14 @@ const DetailFood = ({ navigation }) => {
     ])
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
-            <Image style={{width:"100%",height:400}} source={require('../../asset/image/bapxaotep.jpg')} />
+            <Image style={{ width: "100%", height: 400 }} source={require('../../asset/image/bapxaotep.jpg')} />
             <View style={{ padding: 20 }}>
                 <Text style={styles.bapxaotep}>Bắp xào tép</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={styles.logo} source={require('../../asset/icon/icon_people.png')} />
                     <View>
-                        <Text style={[styles.text, { color: COLOR.WHITE2,fontWeight:'bold' }]} >Bếp của Quỳnh</Text>
-                        <Text style={[styles.text, { color: COLOR.WHITE2,marginTop:2 }]} >@QuynhAlee</Text>
-
+                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >Bếp của Quỳnh</Text>
+                        <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >@QuynhAlee</Text>
                     </View>
 
                 </View>
@@ -67,9 +65,6 @@ const DetailFood = ({ navigation }) => {
                 </View>
                 <View style={styles.line}></View>
 
-
-
-
                 {/* Binh` luan */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />
@@ -89,7 +84,6 @@ const DetailFood = ({ navigation }) => {
                         <Text style={{ fontSize: 14, color: 'white' }} >Thêm bình luận</Text>
                     </TextInput>
                 </View>
-
                 <View style={styles.line}></View>
 
 
@@ -99,17 +93,14 @@ const DetailFood = ({ navigation }) => {
                     <Text style={styles.newFoodof} >Món mới của Quỳnh</Text>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'space-between' }}>
-                    
-                <FlatList horizontal
-                    data={anotherFood}
-                    renderItem={({ item }) => <ItemAnotherFood dulieu={item} />}
-                    keyExtractor={item => item._id}
-                    showsVerticalScrollIndicator={false}
-                />
+                    <FlatList horizontal
+                        data={anotherFood}
+                        renderItem={({ item }) => <ItemAnotherFood dulieu={item} />}
+                        keyExtractor={item => item._id}
+                        showsVerticalScrollIndicator={false}
+                    />
                 </View>
-
             </View>
-
         </ScrollView>
     )
 }
@@ -117,39 +108,65 @@ const DetailFood = ({ navigation }) => {
 export default DetailFood
 
 const styles = StyleSheet.create({
-
-
     line: {
-        backgroundColor: 'white', height: 1, marginLeft: 10, marginTop: 15
+        backgroundColor: 'white', 
+        height: 1, 
+        marginLeft: 10, 
+        marginTop: 15
     }
     ,
     title: {
-        color: COLOR.WHITE, fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: 'bold'
+        color: COLOR.WHITE, 
+        fontSize: 15,
+         marginLeft: 10, 
+         marginTop: 10,
+          fontWeight: 'bold'
     },
     addComent: {
-        backgroundColor: COLOR.BACKGROUND2, marginLeft: 20, height: 40, width: 250, borderRadius: 20, paddingLeft: 10, borderWidth: 1, borderColor: 'white'
+        backgroundColor: COLOR.BACKGROUND2,
+         marginLeft: 20,
+          height: 40, 
+          width: 250, 
+          borderRadius: 20, 
+          paddingLeft: 10, 
+          borderWidth: 1, 
+          borderColor: 'white'
     }
     ,
     text: {
-        fontSize: 15, marginLeft: 10, marginTop: 10
+        fontSize: 15, 
+        marginLeft: 10,
+         marginTop: 10
     },
     time: {
-        color: COLOR.WHITE, fontSize: 15, marginLeft: 10, marginTop: 10
+        color: COLOR.WHITE,
+         fontSize: 15,
+          marginLeft: 10, 
+          marginTop: 10
     },
     allComent: {
-        color: COLOR.WHITE2, fontSize: 15, marginTop: 15
+        color: COLOR.WHITE2,
+         fontSize: 15,
+          marginTop: 15
     }
     ,
     newFoodof: {
-        color: COLOR.WHITE, fontSize: 15, marginLeft: 10, fontWeight: 'bold'
+        color: COLOR.WHITE,
+         fontSize: 15, 
+         marginLeft: 10, 
+         fontWeight: 'bold'
     }
     ,
     bapxaotep: {
-        color: COLOR.WHITE2, fontWeight: 'bold', fontSize: 24
+        color: COLOR.WHITE2, 
+        fontWeight: 'bold', 
+        fontSize: 24
     }
     ,
     people: {
-        color: COLOR.WHITE2, fontSize: 15, marginLeft: 10
+        color: COLOR.WHITE2, 
+        fontSize: 15, 
+        marginLeft: 10
     }
 
 })
@@ -229,17 +246,14 @@ const dataComent = [
 const anotherFood = [
     {
         "_id": "1",
-        "content": "Pikachu nướng muối ớt",
+        "content": "Pikachu nướng muối tỏi",
     },
     {
         "_id": "2",
-        "content": "Pikachu nướng muối ớt",
-
+        "content": "Pikachu nướng sốt Thái",
     },
-
     {
         "_id": "3",
         "content": "Pikachu nướng muối ớt",
-
     }
 ]
