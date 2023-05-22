@@ -34,7 +34,7 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="EditProfile" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="ListMenu" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="Profile" component={Profile} />
@@ -45,7 +45,8 @@ const App = () => {
           <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="Test" component={Test} />
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
-          <Stack.Screen name="ListMenu" component={ListMenu} />
+          <Stack.Screen name="Search
+          Menu" component={ListMenu} />
           <Stack.Screen name="Search" component={Search} />
 
           

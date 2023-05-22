@@ -6,11 +6,13 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import React from 'react';
 import {ICON, IMAGES, COLOR} from '../../../constants/Themes';
 import {Icon} from '@rneui/themed';
 import Search from '../Search';
+import BottomTabs from '../BottomTabs';
 
 const EditProfile = () => {
   return (
@@ -39,7 +41,11 @@ const EditProfile = () => {
               <Image style={styles.save} source={ICON.Save}></Image>
               <Text style={styles.textButton}>Món đã lưu</Text>
             </TouchableOpacity>
-        <Search />    
+        <Search />
+        <FlatList>
+          <View style={styles.body}></View>
+        </FlatList>
+        
       </ScrollView>
     </SafeAreaView>
   );
@@ -134,5 +140,12 @@ const styles = StyleSheet.create({
     height: 30,
     width: 35,
     borderColor: COLOR.WHITE,
-  }
+  },
+  BottomTabs: {
+ 
+    
+  },
+  body: {
+  
+  },
 });
