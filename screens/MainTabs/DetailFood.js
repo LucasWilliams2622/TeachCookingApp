@@ -21,7 +21,7 @@ const DetailFood = ({ navigation }) => {
     ])
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
-            <Image style={styles.logo} source={require('../../asset/image/green_background.png')} />
+            <Image style={{width:"100%",height:400}} source={require('../../asset/image/bapxaotep.jpg')} />
             <View style={{ padding: 20 }}>
                 <Text style={styles.bapxaotep}>Bắp xào tép</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
