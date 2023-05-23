@@ -6,12 +6,13 @@ import { COLOR } from '../constants/Themes'
 const ItemAddnewSteps = (props) => {
     const { dulieu } = props;
     return (
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginBottom: 10 }}>
+        <View style={styles.container}>
             <View style={{ flexDirection: 'column' }}>
                 <Text style={styles.textNumber}>{dulieu.text}</Text>
-               <Image style={[styles.image,{width:20,height:20,marginTop:10}]} source={require('../asset/icon/icon_menu.png')}></Image>
+               <Image style={styles.image} source={require('../asset/icon/icon_menu.png')}></Image>
             </View>
-            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='250g đường' style={[styles.textinput, { marginLeft: 15, borderRadius: 10, width: 325, height: 52, textAlign: 'auto' }]}></TextInput>
+            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='250g đường' style={styles.textinput}></TextInput>
+            {/* [styles.textinput, { marginLeft: 15, borderRadius: 10, width: 325, height: 52, textAlign: 'auto' }] */}
         </View>
 
     )
@@ -20,37 +21,33 @@ const ItemAddnewSteps = (props) => {
 export default ItemAddnewSteps
 
 const styles = StyleSheet.create({
-
-  circle: {
-    backgroundColor: COLOR.WHITE, height: 34, width: 34, borderRadius: 17, alignItems: 'center'
-  },
-
     textNumber: {
         backgroundColor: COLOR.WHITE,
         borderRadius: 1000,
-        height: 25,
-        width: 25,
+        height: 22,
+        width: 22,
         textAlign: 'center',
         marginTop: 10,
-        fontWeight: 'bold',
         color: COLOR.BLACK,
-        fontSize: 15
+        fontSize: 14
       },
       image: {
-        width: 74,
-        height: 72,
+        width:20,
+        height:20,
+        marginTop:7
     
     
       },
       textinput: {
-        width: 390,
-        height: 80,
-        backgroundColor: "#6C6969",
+        width: 310 ,
+        height: 52,
+        backgroundColor: COLOR.GRAY2,
         marginTop: 10,
-        borderRadius: 10,
+        borderRadius: 6,
         fontSize: 15,
-        fontStyle: 'normal',
-        color: COLOR.TextAdd
+      
+        
+        marginLeft:15
       },
 
 

@@ -35,29 +35,18 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+          
+          <Stack.Screen name="StackBegin" component={StackBegin} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="BottomTabs" component={BottomTabs} />
+          <Stack.Screen name="AddNew" component={AddNew} />
+          <Stack.Screen name="Home" component={Home} />
 
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="AddNew" component={AddNew} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="SavedDishes" component={SavedDishes} />
-        <Stack.Screen name="MyDishes" component={MyDishes} />
-
-        <Stack.Screen name="StackBegin" component={StackBegin} />
-        <Stack.Screen name="BottomTabs" component={BottomTabs} />
-        <Stack.Screen name="EditProfile" component={EditProfile} />
-        <Stack.Screen name="DetailFood" component={DetailFood} />
-        
-        <Stack.Screen name="Guide1" component={Guide1} />
-        <Stack.Screen name="Guide2" component={Guide2} />
-        <Stack.Screen name="Guide3" component={Guide3} />
-        <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="ItemDishes" component={ItemDishes} />
-
-
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="ItemDishes" component={ItemDishes} />
+        </Stack.Navigator>
+      </NavigationContainer>
   )
 }
 
