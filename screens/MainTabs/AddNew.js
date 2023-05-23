@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginStart: 10,
     marginEnd: 10,
-    flexDirection: 'column'
+    flexDirection: 'column',
+
   },
   main: {
     backgroundColor: '#373737',

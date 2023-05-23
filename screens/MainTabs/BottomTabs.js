@@ -14,8 +14,6 @@ import EditProfile from './ProfileTabs/EditProfile'
 import Profile from './ProfileTabs/Profile'
 
 import * as Animatable from 'react-native-animatable';
-
-
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -30,9 +28,6 @@ const StackHome = () => {
       <Stack.Screen name="MyDishes" component={MyDishes} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Profile" component={Profile} />
-
-
-
 
     </Stack.Navigator>
   )
@@ -89,28 +84,7 @@ const BottomTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="StackHome"
-      // tabBarOptions={{
-      //   tabBarShowLabel: false,
-      //   style: {
-      //     borderTopLeftRadius: 20,
-      //     borderTopRightRadius: 20,
-      //     backgroundColor: '#FFFFFF',
-      //     shadowColor: '#000000',
-      //     shadowOffset: {
-      //       width: 0,
-      //       height: 2,
-      //     },
-      //     shadowOpacity: 0.25,
-      //     shadowRadius: 3.84,
-      //     elevation: 5,
-      //   },
-      //   labelStyle: {
-      //     fontSize: 14,
-      //     fontWeight: 'bold',
-      //   },
-      //   activeTintColor: '#FF6347',
-      //   inactiveTintColor: '#A9A9A9',
-      // }}
+
       screenOptions={
         ({ route }) => ({
           tabBarIcon: ({ focused, label, size }) => {
@@ -151,10 +125,6 @@ const BottomTabs = () => {
                     tintColor: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS
                   }} />
               </Animatable.View>
-
-
-
-
               {/* <Text style={{
                 fontSize: 10,
                 marginTop: 4,

@@ -20,7 +20,9 @@ export const COLOR = {
     GREEN:'	#00ff00',
     CYAN:'#00ffff',
     BLUE :'#0000ff',
-    GRAY:'#3A3B3C'
+    GRAY:'#3A3B3C',
+    GRAY1:'#C4C5C4',
+    WHITE2: '#FFFDFD',
 }
 
 export const SIZES = {
