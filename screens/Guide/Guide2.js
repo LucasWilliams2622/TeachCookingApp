@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'Poppins',
     textAlign: 'center',
-    marginTop: 20
-
+    marginTop: 20,
+    height:90,
+   
   },
   buttonStyle: {
     height: 45,

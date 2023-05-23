@@ -1,12 +1,13 @@
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, ToastAndroid } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, ToastAndroid, FlatList } from 'react-native'
+import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
-import ItemSteps from '../../component/ItemSteps'
+import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 
+const AddNew = (props) => {
+  const { navigation } = props;
 
-const AddNew = () => {
   const [nguyenlieu, setnguyenlieu] = useState(datane);
   const [cachlam, setcachlam] = useState(cachlam1)
   const [idx, incr] = useState(2);
@@ -18,12 +19,16 @@ const AddNew = () => {
 
   }
   return (
-    <ScrollView style={{ backgroundColor: COLOR.BLACK }}>
+    <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
       <View style={styles.container}>
         {/* <View style={styles.main}> */}
         {/** Header*/}
+
         <View style={styles.header}>
-          <Image style={[styles.icon, { marginTop: 20 }]} source={require('../../asset/icon/icon_back.png')} />
+          <TouchableOpacity onPress={navigation.goBack()}>
+            <Image style={[styles.icon, { marginTop: 20 }]} source={require('../../asset/icon/icon_back.png')} />
+
+          </TouchableOpacity>
 
           <TouchableOpacity style={[styles.buttonAdd, { marginLeft: 150, backgroundColor: '#202020', borderWidth: 1, borderColor: COLOR.WHITE }]}>
             <Text style={[styles.textButton, { color: "#FCF0F0", width: 50 }]}>Lưu</Text>
@@ -39,45 +44,57 @@ const AddNew = () => {
             <Text style={{ color: COLOR.WHITE, marginTop: 20 }}><Image source={require('../../asset/icon/icon_camera.png')} ></Image>  Đăng hình đại diện món ăn</Text>
 
           </TouchableOpacity>
+
         </View>
         <View>
           <TextInput style={[styles.textinput, { fontSize: 20, fontWeight: 'bold', height: 70 }]} placeholder='Tên món:Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd}></TextInput>
 
         </View>
         <View>
-          <TextInput numberOfLines={4} editable
+          <TextInput
+            numberOfLines={4}
+            editable
             multiline
-            style={[styles.textinput, { height: 200, textAlign: 'auto' }]} placeholder='Share the story behind your recipe and what makes it special.' placeholderTextColor={'white'}></TextInput>
+            style={[styles.textinput, { height: 110, textAlign: 'auto', fontWeight: 'normal', fontSize: 18 }]} placeholder='Hãy chia sẽ với mọi người về món này của
+            bạn nhé.Ai hay điều gì đã truyền cảm hứng cho bạn nấu nó? Tại sao nó đặc biệt?Bạn thích thưởng thức nó theo cách nào? ' placeholderTextColor={COLOR.TextAdd}></TextInput>
+          <View style={{ marginTop: -10 }}>
+            <Text style={{ color: COLOR.WHITE }}>--------------------------------------------------------------------------------------</Text>
+          </View>
+          <TextInput style={[styles.textinput, { marginTop: -8, height: 40, fontSize: 16 }]} placeholderTextColor={COLOR.TextAdd} placeholder='Thêm xuất xứ của món                                                     >' >
+
+          </TextInput>
         </View>
         <View>
           <View style={[styles.header, { marginTop: 15 }]}>
             <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 14 }}>Khẩu phần</Text>
-            <TextInput placeholderTextColor={'white'} placeholder='2 người' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
-          </View>
+            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 2 người' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
 
+          </View>
           <View style={[styles.header, { marginTop: 15 }]}>
             <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 14 }}>Thời gian nấu</Text>
-            <TextInput placeholderTextColor={'white'} placeholder='1 tiếng 30 phút' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
+            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
+
           </View>
           <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}>
-
           </View>
-          */}
-          <View>
-            <Text style={{ color: '#FFFDFD', fontSize: 20, marginTop: 10, fontFamilyn: 'lucida grande' }}>Nguyên liệu</Text>
-            <View style={[styles.header, { marginTop: 10 }]}>
-              <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/list2.png')} />
-              <TextInput placeholderTextColor={'white'} placeholder='1kg ớt' style={[styles.textinput, { borderRadius: 5, width: 300, height: 37 }]}></TextInput>
-            </View>
 
-            <View style={[styles.header, { marginTop: 10 }]}>
-              <Image style={[styles.image, { width: 20, height: 20, marginTop: 15, marginLeft: 10 }]} source={require('../../asset/icon/list2.png')} />
-              <TextInput placeholderTextColor={'white'} placeholder='250g đường' style={[styles.textinput, { borderRadius: 5, width: 300, height: 37 }]}></TextInput>
-            </View>
+          <View>
+            <Text style={{ color: '#FFFDFD', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>Nguyên Liệu</Text>
+            {
+              <View style={[, { marginTop: 10 }]}>
+                {
+                  nguyenlieu.map((item) => <ItemIngredient dulieu={item} key={item._id} />)
+                }
+                {/* <FlatList
+                  data={nguyenlieu}
+                  scrollEnabled={false}
+                  renderItem={({ item }) => <ItemIngredient dulieu={item} />}
+                  keyExtractor={item => item._id} /> */}
+              </View>
+            }
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
               <TouchableOpacity onPress={addElement}>
-
                 <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20 }}>+ Khẩu phần</Text>
               </TouchableOpacity>
               <TouchableOpacity>
@@ -88,11 +105,8 @@ const AddNew = () => {
           <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}></View>
           <View >
             <Text style={{ color: '#FFFDFD', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>Cách Làm</Text>
-          
-
-           
             {
-              cachlam.map((item) => <ItemSteps dulieu={item} key={item._id} />)
+              cachlam.map((item) => <ItemAddnewSteps dulieu={item} key={item._id} />)
             }
             <TouchableOpacity>
               <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 20, textAlign: "center" }}>+ Nguyên liệu</Text>
@@ -100,6 +114,7 @@ const AddNew = () => {
           </View>
         </View>
       </View>
+      {/* </View> */}
     </ScrollView>
   )
 }
@@ -120,20 +135,21 @@ var cachlam1 = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     marginStart: 10,
     marginEnd: 10,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: COLOR.BACKGROUND,
   },
   main: {
-    backgroundColor: '#373737',
-
+    backgroundColor: COLOR.BACKGROUND,
     width: 400,
     borderWidth: 2,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: COLOR.BACKGROUND,
+
   },
   icon: {
     width: 30,
@@ -146,6 +162,7 @@ const styles = StyleSheet.create({
 
   },
   buttonAdd: {
+
     padding: 15,
     marginTop: 10,
     borderRadius: 10,

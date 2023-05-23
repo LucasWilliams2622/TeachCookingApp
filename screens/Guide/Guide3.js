@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const Guide3 = (props) => {
   const { navigation } = props
   const Next = () => {
-    navigation.navigate("Login")}
+    navigation.navigate("BottomTabs")}
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'Poppins',
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 20,
+    height:90,
+
 
   },
   buttonStyle: {

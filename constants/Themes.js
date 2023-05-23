@@ -40,6 +40,10 @@ export const ICON = {
     Home: require('../asset/icon/icon_home.png'),
     Profile: require('../asset/icon/icon_profile.png'),
     Search: require('../asset/icon/icon_search.png'),
+    Setting: require('../asset/icon/icon_setting.png'),
+    Save: require('../asset/icon/icon_save.png'),
+    Saved: require('../asset/icon/icon_saved.png'),
+
     
 }
 

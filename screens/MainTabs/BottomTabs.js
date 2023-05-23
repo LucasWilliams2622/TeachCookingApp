@@ -6,7 +6,13 @@ import { ICON, COLOR } from '../../constants/Themes'
 import Search from './Search';
 import Home from './Home'
 import AddNew from './AddNew'
+import DetailFood from './DetailFood'
+
+import MyDishes from './MyDishes'
+import SavedDishes from './SavedDishes'
+import EditProfile from './ProfileTabs/EditProfile'
 import Profile from './ProfileTabs/Profile'
+
 import * as Animatable from 'react-native-animatable';
 
 
@@ -17,6 +23,16 @@ const StackHome = () => {
   return (
     <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="AddNew" component={AddNew} />
+      <Stack.Screen name="DetailFood" component={DetailFood} />
+      <Stack.Screen name="SavedDishes" component={SavedDishes} />
+      <Stack.Screen name="MyDishes" component={MyDishes} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="Profile" component={Profile} />
+
+
+
 
     </Stack.Navigator>
   )
@@ -24,6 +40,13 @@ const StackHome = () => {
 const StackProfile = () => {
   return (
     <Stack.Navigator initialRouteName="Profile" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="AddNew" component={AddNew} />
+      <Stack.Screen name="DetailFood" component={DetailFood} />
+      <Stack.Screen name="SavedDishes" component={SavedDishes} />
+      <Stack.Screen name="MyDishes" component={MyDishes} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Profile" component={Profile} />
 
     </Stack.Navigator>
@@ -32,7 +55,14 @@ const StackProfile = () => {
 const StackAddNew = () => {
   return (
     <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="AddNew" component={AddNew} />
+      <Stack.Screen name="DetailFood" component={DetailFood} />
+      <Stack.Screen name="SavedDishes" component={SavedDishes} />
+      <Stack.Screen name="MyDishes" component={MyDishes} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="Profile" component={Profile} />
 
     </Stack.Navigator>
   )
@@ -41,7 +71,14 @@ const StackAddNew = () => {
 const StackSearch = () => {
   return (
     <Stack.Navigator initialRouteName="Search" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="AddNew" component={AddNew} />
+      <Stack.Screen name="DetailFood" component={DetailFood} />
+      <Stack.Screen name="SavedDishes" component={SavedDishes} />
+      <Stack.Screen name="MyDishes" component={MyDishes} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="Profile" component={Profile} />
 
     </Stack.Navigator>
   )
@@ -137,7 +174,7 @@ const BottomTabs = () => {
             left: 10,
             borderRadius: 20,
             backgroundColor: COLOR.BACKGROUND2,
-            
+
           },
         })}
 

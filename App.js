@@ -3,29 +3,31 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import SlideGuide from './screens/Guide/Guide1';
 import Login from './screens/BeginTabs/Login'
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
+import EditProfile from './screens/MainTabs/ProfileTabs/EditProfile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
+import Search from './screens/MainTabs/Search';
+import SavedDishes from './screens/MainTabs/SavedDishes';
+import MyDishes from './screens/MainTabs/MyDishes';
+import Guide1 from './screens/Guide/Guide1';
+import Guide2 from './screens/Guide/Guide2';
+import Guide3 from './screens/Guide/Guide3';
 import DetailFood from './screens/MainTabs/DetailFood';
-
-import ItemDishes from './component/ItemDishes';
-
-
-
-
-
+import ItemDishes from './component/ItemSearch';
 import Test from './screens/TestTabs/Test'
+
+
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Guide1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Guide" component={Guide} />
-        <Stack.Screen name="Guide2" component={Guide2} />
-        <Stack.Screen name="Guide3" component={Guide3} />
+      <Stack.Screen name="Guide1" component={Guide1} />
+      <Stack.Screen name="Guide2" component={Guide2} />
+      <Stack.Screen name="Guide3" component={Guide3} />
 
     </Stack.Navigator>
   )
@@ -33,27 +35,29 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="DetailFood" screenOptions={{ headerShown: false }}>
-          
-          <Stack.Screen name="StackBegin" component={StackBegin} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="BottomTabs" component={BottomTabs} />
-          <Stack.Screen name="AddNew" component={AddNew} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="DetailFood" component={DetailFood} />
+      <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
 
-          
-          <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen name="ItemDishes" component={ItemDishes} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="AddNew" component={AddNew} />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="SavedDishes" component={SavedDishes} />
+        <Stack.Screen name="MyDishes" component={MyDishes} />
+
+        <Stack.Screen name="StackBegin" component={StackBegin} />
+        <Stack.Screen name="BottomTabs" component={BottomTabs} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="DetailFood" component={DetailFood} />
+        
+        <Stack.Screen name="Guide1" component={Guide1} />
+        <Stack.Screen name="Guide2" component={Guide2} />
+        <Stack.Screen name="Guide3" component={Guide3} />
+        <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="ItemDishes" component={ItemDishes} />
 
 
-          
-          
-
-      
-
-        </Stack.Navigator>
-      </NavigationContainer>
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 

@@ -10,7 +10,7 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const DetailFoodHome = ({ navigation }) => {
+const Home = ({ navigation }) => {
   const [category, setCategory] = useState([
     {
       name: 'Tất cả',
@@ -100,8 +100,9 @@ const DetailFoodHome = ({ navigation }) => {
 
         <View
           style={{
-            marginTop: 10, borderWidth: 2,
-            borderColor: 'red'
+            marginTop: 10,
+            //  borderWidth: 2,
+            // borderColor: 'red'
           }}>
           <FlatList
             style={{ marginBottom: 10, }}
@@ -115,6 +116,13 @@ const DetailFoodHome = ({ navigation }) => {
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
+          {/* <View >
+            {
+              
+              category.map((item) => <ItemCategories  horizontal category={item} />)
+            }
+          </View> */}
+
           <View style={{ height: 270, }}>
 
             <FlatList
@@ -156,9 +164,9 @@ const DetailFoodHome = ({ navigation }) => {
             keyExtractor={eachCategory => eachCategory.name}
           />
         </View>
-        <View style={styles.step}>
+        {/* <View style={styles.step}>
           <Text style={styles.stepText}>1</Text>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   )
@@ -257,9 +265,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BACKGROUND_ORIGIN,
   },
   newDishes: {
-    marginBottom: 30,
-    borderWidth: 2,
-    borderColor: 'red'
+   marginBottom:80,
+    // borderWidth: 2,
+    // borderColor: 'red'
 
   },
   title: {

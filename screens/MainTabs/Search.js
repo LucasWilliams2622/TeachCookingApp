@@ -1,84 +1,59 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity,Dimensions, Image } from 'react-native'
 import React from 'react'
 import { TextInput } from 'react-native-paper'
 import { COLOR, ICON } from '../../constants/Themes'
-
+const windowWIdth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const Search = () => {
-  return (
-    <View style={styles.container}>
-        <TouchableOpacity >
-            <Image source={ICON.Search} style={styles.imageSearch}></Image>
-        </TouchableOpacity>
-        <TextInput placeholder='Tìm kiếm' style={styles.input}></TextInput>
-
-        
-{/* 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <Text style={[styles.text, { color: 'black' }]}>News</Text>
-            <Text style={styles.text}>Topics</Text>
-            <Text style={styles.text}>Author</Text>
-        </View> */}
-
-        {/* <Image source={require('./image/line.png')} style={{ marginLeft: 45, width: 40, height: 3, marginBottom: 20 }}></Image> */}
-
-        {/* {
-            isLoanding == true ?
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size='large' color='#33FF33' />
-                </View>
-
-                :
-
-                <FlatList style={styles.box}
-                    data={data}
-                    renderItem={({ item }) => <ItemListNews data={item} navigation={navigation} />}
-                    keyExtractor={item => item._id}
-                    showsVerticalScrollIndicator={false}
-                />
-        } */}
-
-    </View>
-)
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <TouchableOpacity >
+                    <Image source={ICON.Search} style={styles.imageSearch}></Image>
+                </TouchableOpacity>
+                <TextInput 
+                placeholder='Gõ vào tên món ăn ...' 
+                placeholderTextColor={COLOR.WHITE}
+                style={styles.input}></TextInput>
+            </View>
+        </SafeAreaView>
+    )
 }
 
 export default Search
 
 const styles = StyleSheet.create({
     container: {
-        height: 50,
-        borderColor: COLOR.PRIMARY,
-        borderWidth: 0.5,
-        backgroundColor : COLOR.GRAY,
-        marginStart: 20,
-        marginEnd: 25,
-        marginTop: 15,
-        borderRadius: 30,
-        flexDirection: 'row'
+        flex: 1,
+        backgroundColor: COLOR.BACKGROUND
+    },
+    header: {   
+        flexDirection: 'row',
+        height:'10%',
+        backgroundColor: COLOR.BACKGROUND3,
+        justifyContent:'flex-start',
+        alignItems:'center',
+
     },
     input: {
         tintColor: COLOR.WHITE,
         placeholderTextColor: COLOR.WHITE,
-        backgroundColor : COLOR.GRAY,
+        backgroundColor: COLOR.BACKGROUND3,
         height: 30,
-        width: '60%',
+        width: '80%',
         borderRadius: 6,
-        marginTop:10,
+        color: COLOR.WHITE,
+        marginTop: 10,
         paddingLeft: 10
     },
     imageSearch: {
         tintColor: COLOR.WHITE,
-        placeholderTextColor: COLOR.WHITE,
+        // borderWidth: 2, borderColor: COLOR.WHITE,
         marginTop: 1,
         marginLeft: 10,
         marginTop: 10,
         height: 30,
         width: 30,
     },
-    text: {
-        fontFamily: 'Poppins',
-        fontSize: 16,
-        fontWeight: '400',
-        fontStyle: 'normal',
-        marginRight: 10
-    }
+
 })
