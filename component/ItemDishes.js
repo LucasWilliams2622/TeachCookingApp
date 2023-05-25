@@ -1,22 +1,30 @@
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions, Image, ImageBackground } from 'react-native'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemUser from '../component/ItemUser'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const ItemCategories = (props) => {
-    // const { category } = props
-    // const { name, image, backGround } = category
-    // const { onPress } = props
+    const { dishes } = props
+    const { nameUser, avatar, image, nameDish } = dishes
+    const { onPress } = props
     const [isSaved, setIsSaved] = useState(false)
     return (
-        <View style={styles.boxItem}>
+        <TouchableOpacity
+        onPress={onPress}
+         style={styles.boxItem}>
             <ImageBackground style={styles.image} resizeMode='cover' source={require('../asset/image/food1.jpg')} >
 
             </ImageBackground>
             <View style={styles.infoUser}>
-                <ItemUser />
+                <View style={styles.boxInfo}>
+                    <Image style={styles.avatar} source={require('../asset/image/logo.png')} />
+                    <View style={styles.boxContent}>
+                        <Text style={styles.nameUser}>{nameUser}</Text>
+                        <Text style={styles.title}>{nameDish}</Text>
+                    </View>
+                </View>
             </View>
             <View style={styles.bottomItem}>
                 <View style={{ flexDirection: 'row' }}>
@@ -49,10 +57,7 @@ const ItemCategories = (props) => {
                     <Text style={styles.textEmotion}>Lưu</Text>
                 </View>
             </View>
-        </View>
-
-
-
+        </TouchableOpacity>
 
     )
 }
@@ -117,5 +122,34 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginLeft: 7,
         color: COLOR.WHITE
+    },
+    avatar: {
+        borderRadius: 1000,
+        borderWidth: 1,
+        borderColor: COLOR.BLACK,
+        width: 30,
+        height: 30,
+    },
+    boxInfo: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+
+        marginTop: 40
+
+
+    },
+    boxContent: {
+        flexDirection: 'column',
+        marginLeft: 14,
+    },
+    nameUser: {
+        color: COLOR.WHITE,
+        fontSize: 16,
+    },
+    title: {
+        fontSize: 20,
+        color: COLOR.WHITE,
+        fontWeight: 'bold',
     }
 })

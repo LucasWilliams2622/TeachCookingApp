@@ -10,7 +10,8 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const Home = ({ navigation }) => {
+const Home = (props) => {
+  const { navigation } = props;
   const [category, setCategory] = useState([
     {
       name: 'Tất cả',
@@ -44,27 +45,30 @@ const Home = ({ navigation }) => {
       name: 'Hấm',
       backGround: '#FBC1BD'
     },
-
-    {
-      name: 'Ăn sống',
-      backGround: '#FBC1BD'
-    },
   ])
   const [dishes, setDishes] = useState([
     {
       nameUser: "Tom",
-      avatar: '../../asset/image/logo.png',
-      image: '../../asset/image/logo.png',
-      nameDish: "Pikachu"
+      avatar: require('../../asset/image/AdventureTime.jpg'),
+      image:  require('../../asset/image/logo.png'),
+      nameDish: "Pikachu BBQ"
     },
     {
-      nameUser: "Toma",
-      avatar: '../../asset/image/logo.png',
-      image: '../../asset/image/logo.png',
-      nameDish: "Pikachu AAAAA"
+      nameUser: "Jack",
+      avatar: require('../../asset/image/AdventureTime.jpg'),
+      image:  require('../../asset/image/logo.png'),
+      nameDish: "Pikachu Sốt Thái"
+    },
+    {
+      nameUser: "Jason",
+      avatar: require('../../asset/image/AdventureTime.jpg'),
+      image:  require('../../asset/image/logo.png'),
+      nameDish: "Pikachu Hấp Xả"
     }
   ])
-
+  const goDetail = () => {
+    navigation.navigate('DetailFood')
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -118,7 +122,6 @@ const Home = ({ navigation }) => {
           />
           {/* <View >
             {
-              
               category.map((item) => <ItemCategories  horizontal category={item} />)
             }
           </View> */}
@@ -129,13 +132,15 @@ const Home = ({ navigation }) => {
               style={{ marginBottom: 10, }}
               showsHorizontalScrollIndicator={false}
               horizontal
-              data={category}
-              renderItem={({ item }) => <ItemDishes category={item}
+              data={dishes}
+              renderItem={({ item }) => <ItemDishes dishes={item}
                 onPress={() => {
+
+                  goDetail()
 
                 }}
               />}
-              keyExtractor={eachCategory => eachCategory.name}
+              keyExtractor={eachDishes => eachDishes.name}
             />
           </View>
           <TouchableOpacity style={styles.buttonSuggest}>
@@ -265,7 +270,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BACKGROUND_ORIGIN,
   },
   newDishes: {
-   marginBottom:80,
+    marginBottom: 80,
     // borderWidth: 2,
     // borderColor: 'red'
 

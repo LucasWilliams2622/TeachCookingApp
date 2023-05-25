@@ -23,7 +23,7 @@ const DetailFood = ({ navigation }) => {
             <Image style={{ width: "100%", height: 400 }} source={require('../../asset/image/bapxaotep.jpg')} />
             <View style={{ padding: 20 }}>
                 <Text style={styles.bapxaotep}>Bắp xào tép</Text>
-                <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                <View style={{ marginTop: 20, flexDirection: 'row', }}>
                     <Image style={styles.logo} source={require('../../asset/icon/icon_people.png')} />
                     <View>
                         <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >Bếp của Quỳnh</Text>
@@ -33,8 +33,8 @@ const DetailFood = ({ navigation }) => {
                 </View>
                 <Text style={[styles.text, { color: COLOR.WHITE }]}>Đà nẵng vào mùa tép tươi,tép xào bắp su ngon voãi lò</Text>
                 <View style={styles.line}></View>
-                <View style={{ marginTop: 20, flexDirection: 'row', alignSelf: 'center' }}>
-                    <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
+                <View style={styles.boxTime}>
+                    <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
                     <Text style={styles.time} >30 phút</Text>
                 </View>
 
@@ -92,7 +92,7 @@ const DetailFood = ({ navigation }) => {
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
                     <Text style={styles.newFoodof} >Món mới của Quỳnh</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', marginTop: 20, marginBottom:70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
                         data={anotherFood}
                         renderItem={({ item }) => <ItemAnotherFood dulieu={item} />}
@@ -109,64 +109,70 @@ export default DetailFood
 
 const styles = StyleSheet.create({
     line: {
-        backgroundColor: 'white', 
-        height: 1, 
-        marginLeft: 10, 
+        backgroundColor: 'white',
+        height: 1,
+        marginLeft: 10,
         marginTop: 15
     }
     ,
     title: {
-        color: COLOR.WHITE, 
+        color: COLOR.WHITE,
         fontSize: 15,
-         marginLeft: 10, 
-         marginTop: 10,
-          fontWeight: 'bold'
+        marginLeft: 10,
+        marginTop: 10,
+        fontWeight: 'bold'
     },
     addComent: {
         backgroundColor: COLOR.BACKGROUND2,
-         marginLeft: 20,
-          height: 40, 
-          width: 250, 
-          borderRadius: 20, 
-          paddingLeft: 10, 
-          borderWidth: 1, 
-          borderColor: 'white'
+        marginLeft: 20,
+        height: 40,
+        width: 250,
+        borderRadius: 20,
+        paddingLeft: 10,
+        borderWidth: 1,
+        borderColor: 'white'
     }
     ,
     text: {
-        fontSize: 15, 
+        fontSize: 15,
         marginLeft: 10,
-         marginTop: 10
+        marginTop: 10
     },
     time: {
         color: COLOR.WHITE,
-         fontSize: 15,
-          marginLeft: 10, 
-          marginTop: 10
+        fontSize: 15,
+        marginLeft: 10,
+
     },
     allComent: {
         color: COLOR.WHITE2,
-         fontSize: 15,
-          marginTop: 15
+        fontSize: 15,
+        marginTop: 15
     }
     ,
     newFoodof: {
         color: COLOR.WHITE,
-         fontSize: 15, 
-         marginLeft: 10, 
-         fontWeight: 'bold'
+        fontSize: 15,
+        marginLeft: 10,
+        fontWeight: 'bold'
     }
     ,
     bapxaotep: {
-        color: COLOR.WHITE2, 
-        fontWeight: 'bold', 
+        color: COLOR.WHITE2,
+        fontWeight: 'bold',
         fontSize: 24
     }
     ,
     people: {
-        color: COLOR.WHITE2, 
-        fontSize: 15, 
+        color: COLOR.WHITE2,
+        fontSize: 15,
         marginLeft: 10
+    },
+    boxTime: {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 })
