@@ -29,7 +29,7 @@ const Profile = (props) => {
       {/** Header*/}
       <View style={styles.header}>
         <View style={styles.infor}>
-          <TouchableOpacity >
+          <TouchableOpacity onPress={()=>{navigation.navigate('EditProfile')}} >
             <Image style={styles.avatar} source={IMAGES.Avatar} />
           </TouchableOpacity>
           <View style={styles.infor1}>

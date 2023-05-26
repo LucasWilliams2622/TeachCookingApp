@@ -72,7 +72,10 @@ const Home = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.main}>
+      <FlatList
+    style={styles.main}
+    ListHeaderComponent={
+      <>
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity>
@@ -172,7 +175,26 @@ const Home = (props) => {
         {/* <View style={styles.step}>
           <Text style={styles.stepText}>1</Text>
         </View> */}
-      </ScrollView>
+       </>
+    }
+    data={category}
+    renderItem={({ item }) => (
+      <FlatList
+        style={{ marginBottom: 10, }}
+        showsHorizontalScrollIndicator={false}
+        numColumns={2}
+        vertical
+        data={category}
+        renderItem={({ item }) => <ItemDishesVertical category={item}
+          onPress={() => {
+
+          }}
+        />}
+        keyExtractor={eachCategory => eachCategory.name}
+      />
+    )}
+    keyExtractor={eachCategory => eachCategory.name}
+  />
     </SafeAreaView>
   )
 }

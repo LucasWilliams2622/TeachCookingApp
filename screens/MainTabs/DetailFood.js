@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { ICON, COLOR } from '../../constants/Themes'
@@ -8,8 +8,22 @@ import { ScrollView } from 'react-native-virtualized-view'
 import ItemMaterial from '../../component/ItemMaterial';
 import ItemComent from '../../component/ItemComent';
 import ItemAnotherFood from '../../component/ItemAnotherFood';
+import YoutubeIframe from "react-native-youtube-iframe";
 
 const DetailFood = ({ navigation }) => {
+    const [playing, setPlaying] = useState(false);
+
+    const onStateChange = useCallback((state) => {
+        if (state === "ended") {
+            setPlaying(false);
+            Alert.alert("video has finished playing!");
+        }
+    }, []);
+
+    const togglePlaying = useCallback(() => {
+        setPlaying((prev) => !prev);
+    }, []);
+
     const [step, setStep] = useState([
         {
             content: "Tom",
@@ -63,6 +77,15 @@ const DetailFood = ({ navigation }) => {
                         showsVerticalScrollIndicator={false}
                     />
                 </View>
+                <View style={styles.videoYoutube}>
+                    <YoutubeIframe
+                        height={350}
+                        play={playing}
+                        videoId={"JXp4eZ8XRFg"}
+                        onChangeState={onStateChange}
+                    />
+                    {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+                </View>
                 <View style={styles.line}></View>
 
                 {/* Binh` luan */}
@@ -92,7 +115,7 @@ const DetailFood = ({ navigation }) => {
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
                     <Text style={styles.newFoodof} >Món mới của Quỳnh</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 20, marginBottom:70, justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
                         data={anotherFood}
                         renderItem={({ item }) => <ItemAnotherFood dulieu={item} />}
@@ -173,6 +196,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    videoYoutube:{
+        marginTop:30,
+        borderRadius:20,
     }
 
 })
