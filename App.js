@@ -4,6 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Login from './screens/BeginTabs/Login'
+import LoginGoogle from './screens/BeginTabs/LoginGoogle'
+
+
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
 import EditProfile from './screens/MainTabs/ProfileTabs/EditProfile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
@@ -23,8 +26,11 @@ import Test from './screens/TestTabs/Test'
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Guide1" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
+      <Stack.Screen name="BottomTabs" component={BottomTabs} />
+
       <Stack.Screen name="Guide1" component={Guide1} />
       <Stack.Screen name="Guide2" component={Guide2} />
       <Stack.Screen name="Guide3" component={Guide3} />
@@ -35,17 +41,18 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
-          
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="StackBegin" component={StackBegin} />
-          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
+
+{/* 
+          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="AddNew" component={AddNew} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="DetailFood" component={DetailFood} />
 
           <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen name="ItemDishes" component={ItemDishes} />
+          <Stack.Screen name="ItemDishes" component={ItemDishes} /> */}
         </Stack.Navigator>
       </NavigationContainer>
   )

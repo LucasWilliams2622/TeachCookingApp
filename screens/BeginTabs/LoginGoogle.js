@@ -6,42 +6,48 @@ import {
     KeyboardAvoidingView,
     Pressable
 } from 'react-native'
-export default class Login extends Component {
-    render() {
-        return (
-            <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                    <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-                        <View style={styles.logoContainer}>
-                            <View style={styles.logoContainer}>
-                                <View>
-                                    <Text style={styles.title}>Chào mừng quay trở lại </Text>
-                                </View>
-                                <Image style={styles.logo} source={require('../../asset/image/logogenius2.png')} />
 
-                            </View>
-                            <TouchableOpacity
-                                style={[styles.button, { backgroundColor: '#4A4A4A' }]}>
-                                <Image
-                                    style={styles.tinyLogo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png', }}
-                                />
-                                <Text style={styles.buttonText}>Đăng nhập bằng Google </Text>
-                            </TouchableOpacity>                        
-                        </View>
-                    </TouchableWithoutFeedback>
-                    <TouchableOpacity style={styles.createAccountButton}>
-                        <Text style={styles.createAccountButtonText}>Đăng nhập bằng gmail </Text>
-                    </TouchableOpacity>
-                    <View>
-                        <Text style={{ textAlign: 'center', top: 190, color: 'white', width: 319, fontSize: 15, left: 40 }}>
-                          Khi đăng ký, tức là bạn đã đồng ý với <Text style={{ color: '#00BEFA',textDecorationLine: 'underline' }}>Điều khoản dịch vụ</Text> và <Text style={{ color: '#00BEFA',textDecorationLine: 'underline' }}>Chính sách bảo mật</Text> của Genius Cooking</Text>
-                    </View>
-                </KeyboardAvoidingView>
-            </SafeAreaView>
-        )
+export default LoginGoogleLogin = (props) => {
+    const { navigation } = props;
+    const goLogin = () => {
+        navigation.navigate('Login')
     }
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" />
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+                    <View style={styles.logoContainer}>
+                        <View style={styles.logoContainer}>
+                            <View>
+                                <Text style={styles.title}>Chào mừng quay trở lại </Text>
+                            </View>
+                            <Image style={styles.logo} source={require('../../asset/image/logogenius2.png')} />
+
+                        </View>
+                        <TouchableOpacity
+                           
+                            style={[styles.button, { backgroundColor: '#4A4A4A' }]}>
+                            <Image
+                                style={styles.tinyLogo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png', }}
+                            />
+                            <Text style={styles.buttonText}>Đăng nhập bằng Google </Text>
+                        </TouchableOpacity>
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableOpacity style={styles.createAccountButton}  onPress={goLogin}>
+                    <Text style={styles.createAccountButtonText}>Đăng nhập bằng gmail </Text>
+                </TouchableOpacity>
+                <View>
+                    <Text style={{ textAlign: 'center', top: 190, color: 'white', width: 319, fontSize: 15, left: 40 }}>
+                        Khi đăng ký, tức là bạn đã đồng ý với <Text style={{ color: '#00BEFA', textDecorationLine: 'underline' }}>Điều khoản dịch vụ</Text> và <Text style={{ color: '#00BEFA', textDecorationLine: 'underline' }}>Chính sách bảo mật</Text> của Genius Cooking</Text>
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
+    )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
