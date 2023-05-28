@@ -11,6 +11,7 @@ export const COLOR = {
     
     BACKGROUND4:'#cececc',
     BACKGROUND5:'#0e0e0e',
+    BACKGROUND6:'#4a4a4a',
     HEADER:'#5B5959',
     NOT_FOCUS: '#cececc',
     WHITE: '#FFFFFF',
