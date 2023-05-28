@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     textinput: {
         width: 300,
         height: 40,
-        backgroundColor: COLOR.Head,
+        backgroundColor: COLOR.GRAY2,
         marginTop: 10,
         borderRadius: 6,
         fontSize: 15,

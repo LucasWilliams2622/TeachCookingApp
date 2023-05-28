@@ -5,9 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
 import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 
-const AddNew = (props) => {
-  const { navigation } = props;
-
+const AddNew = () => {
   const [nguyenlieu, setnguyenlieu] = useState(datane);
   const [cachlam, setcachlam] = useState(cachlam1)
   const [idx, incr] = useState(2);
@@ -25,9 +23,8 @@ const AddNew = (props) => {
         {/** Header*/}
         <View style={styles.header}>
           <Image style={[styles.icon, { marginTop: 20 }]} source={require('../../asset/icon/icon_back.png')} />
-
-          <TouchableOpacity style={[styles.buttonAdd, { marginLeft: 150, backgroundColor: '#202020', borderWidth: 1, borderColor: COLOR.WHITE }]}>
-            <Text style={[styles.textButton, { color: "#FCF0F0", width: 50 }]}>Lưu</Text>
+          <TouchableOpacity style={styles.btnLuu}>
+            <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]}>Lưu</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]}>
             <Text style={[styles.textButton]}>Đăng món</Text>
@@ -50,27 +47,22 @@ const AddNew = (props) => {
             style={[styles.textinput, { height: 110, textAlign: 'auto', fontWeight: 'normal', fontSize: 17, marginTop: 5 }]} placeholder='Hãy chia sẽ với mọi người về món này của
             bạn nhé.Ai hay điều gì đã truyền cảm hứng cho bạn nấu nó? Tại sao nó đặc biệt?Bạn thích thưởng thức nó theo cách nào? ' placeholderTextColor={COLOR.TextAdd}></TextInput>
           <View style={{ marginTop: -10 }}>
-            <Text style={{ color: COLOR.WHITE }}>------------------------------------------------------------------------------------------------------</Text>
+            <Text style={{ color: COLOR.WHITE }}>--------------------------------------------------------------------------------------------</Text>
           </View>
           <TextInput style={[styles.textinput, { marginTop: -8, height: 40, fontSize: 16 }]} placeholderTextColor={COLOR.TextAdd} placeholder='Thêm xuất xứ của món                                           >' >
           </TextInput>
         </View>
         <View>
           <View style={[styles.header, { marginTop: 15 }]}>
-            <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 14 }}>Khẩu phần</Text>
-            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 2 người' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
-
-
+            <Text style={styles.text}>Khẩu phần</Text>
+            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 2 người' style={styles.textinput2}></TextInput>
           </View>
           <View style={[styles.header, { marginTop: 15 }]}>
-            <Text style={{ color: '#FFFDFD', fontSize: 17, marginTop: 14 }}>Thời gian nấu</Text>
-            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={[styles.textinput, { borderRadius: 5, width: 200, height: 37 }]}></TextInput>
-
-
+            <Text style={styles.text}>Thời gian nấu</Text>
+            <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={styles.textinput2}></TextInput>
           </View>
-          {/* <View style={{ height: 5, backgroundColor: '#6C6969', marginTop: 20, marginStart: 0, marginEnd: 0 }}>
+          <View style={styles.text1}>
           </View>
-          */}
           <View>
             <Text style={styles.text3}>Nguyên Liệu</Text>
             {
@@ -130,19 +122,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginStart: 10,
     marginEnd: 10,
-    flexDirection: 'column',
-
   },
   main: {
     backgroundColor: '#373737',
-
     width: 400,
     borderWidth: 2,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: COLOR.BACKGROUND,
+
 
   },
   icon: {
@@ -153,8 +142,6 @@ const styles = StyleSheet.create({
   image: {
     width: 74,
     height: 72,
-
-
   },
   buttonAdd: {
     padding: 15,
@@ -166,7 +153,7 @@ const styles = StyleSheet.create({
     marginLeft: 150,
     backgroundColor: COLOR.BACKGROUND,
     borderWidth: 1,
-    borderColor: COLOR.WHITE,
+    borderColor: COLOR.PRIMARY,
     padding: 15,
     marginTop: 10,
     borderRadius: 10,
@@ -176,8 +163,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   textButton: {
-    fontWeight: '600',
-    textAlign: 'center'
+    fontWeight:'600',
+    textAlign: 'center',
   },
   anh: {
     marginTop: 2,

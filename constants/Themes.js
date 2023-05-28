@@ -23,7 +23,9 @@ export const COLOR = {
     BLUE :'#0000ff',
     GRAY:'#3A3B3C',
     GRAY1:'#C4C5C4',
+    GRAY2:'#505455',
     WHITE2: '#FFFDFD',
+    TextAdd:'#989399'
 
 
 }
