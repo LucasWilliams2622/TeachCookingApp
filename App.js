@@ -41,7 +41,7 @@ const StackBegin = () => {
 const App = () => {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
