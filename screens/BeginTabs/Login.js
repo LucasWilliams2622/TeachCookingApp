@@ -53,7 +53,7 @@ const Login = (props) => {
                 <TextInput style={styles.input}
                     placeholder="***************"
                     placeholderTextColor='white'
-                    returnKeyType='go'
+                    returnKeyType='done'
                     secureTextEntry
                     autoCorrect={false}
                     value={password}
