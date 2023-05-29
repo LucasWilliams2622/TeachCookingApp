@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   textinput: {
     width: 310,
     height: 52,
-    backgroundColor: COLOR.GRAY2,
+    backgroundColor: COLOR.BACKGROUND6,
     marginTop: 10,
     borderRadius: 6,
     fontSize: 15,

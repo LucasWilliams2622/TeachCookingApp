@@ -1,12 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Login from './screens/BeginTabs/Login'
 import LoginGoogle from './screens/BeginTabs/LoginGoogle'
-
-
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
 import EditProfile from './screens/MainTabs/ProfileTabs/EditProfile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
@@ -21,7 +19,10 @@ import Guide3 from './screens/Guide/Guide3';
 import DetailFood from './screens/MainTabs/DetailFood';
 import ItemDishes from './component/ItemSearch';
 import Test from './screens/TestTabs/Test'
+import TestNotification from './screens/TestTabs/TestNotification'
 
+import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
+import messaging from '@react-native-firebase/messaging';
 
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
@@ -39,10 +40,18 @@ const StackBegin = () => {
   )
 }
 const App = () => {
+  useEffect(() => {
+    getDeviceToken();
+  }, []);
+  const getDeviceToken = async () => {
+    let token = await messaging().getToken();
+    console.log(token);
+  };
+  //https://testfcm.com/
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="EditProfile" screenOptions={{ headerShown: false }}>
-          
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
+
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
@@ -55,6 +64,7 @@ const App = () => {
           <Stack.Screen name="ItemDishes" component={ItemDishes} /> */}
         </Stack.Navigator>
       </NavigationContainer>
+  
   )
 }
 
