@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState, useCallback } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -35,7 +35,7 @@ const DetailFood = ({ navigation }) => {
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
             <Image style={{ width: "100%", height: 400 }} source={require('../../asset/image/bapxaotep.jpg')} />
-            <View style={{ padding: 20 }}>
+            <View style={{ padding: 16 }}>
                 <Text style={styles.bapxaotep}>Bắp xào tép</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row', }}>
                     <Image style={styles.logo} source={require('../../asset/icon/icon_people.png')} />
@@ -45,7 +45,17 @@ const DetailFood = ({ navigation }) => {
                     </View>
 
                 </View>
-                <Text style={[styles.text, { color: COLOR.WHITE }]}>Đà nẵng vào mùa tép tươi,tép xào bắp su ngon voãi lò</Text>
+                <Text style={[styles.text, { color: COLOR.WHITE }]}>
+                    Nhà mình lúc trước chưng trứng không nên ăn khá đặc
+                    và nhanh ngán. Lúc mình ra nhà dì ăn trứng chưng này
+                    thì lại thấy trứng mền nhẹ ăn ngon lắm...
+                </Text>
+                <TouchableOpacity>
+                    <Text style={[styles.text, { color: COLOR.WHITE, textAlign: 'right' }]}>
+                        Xem thêm
+                    </Text>
+                </TouchableOpacity>
+
                 <View style={styles.line}></View>
                 <View style={styles.boxTime}>
                     <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
@@ -54,9 +64,9 @@ const DetailFood = ({ navigation }) => {
 
                 {/* Nguyen lieu */}
                 <Text style={styles.title} >Nguyên liệu</Text>
-                <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
                     <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
-                    <Text style={styles.people}>2 người</Text>
+                    <Text style={styles.people}>2-3 người</Text>
                 </View>
                 <FlatList
                     data={dataNguyenLieu}
@@ -91,7 +101,7 @@ const DetailFood = ({ navigation }) => {
                 {/* Binh` luan */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />
-                    <Text style={styles.title} >Bình luận</Text>
+                    <Text style={[styles.title, { marginTop: -5 }]} >Bình luận</Text>
                 </View>
                 <Text style={styles.allComent} >Xem tất cả bình luận</Text>
                 <FlatList
@@ -140,20 +150,21 @@ const styles = StyleSheet.create({
     ,
     title: {
         color: COLOR.WHITE,
-        fontSize: 15,
+        fontSize: 20,
         marginLeft: 10,
         marginTop: 10,
         fontWeight: 'bold'
     },
     addComent: {
         backgroundColor: COLOR.BACKGROUND2,
-        marginLeft: 20,
+        marginLeft: 10,
         height: 40,
-        width: 250,
+        width: 310,
         borderRadius: 20,
-        paddingLeft: 10,
+        paddingLeft: 20,
         borderWidth: 1,
-        borderColor: 'white'
+        borderColor: 'white',
+        marginTop: -5
     }
     ,
     text: {
@@ -197,9 +208,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    videoYoutube:{
-        marginTop:30,
-        borderRadius:20,
+    videoYoutube: {
+        marginTop: 30,
+        borderRadius: 20,
     }
 
 })
