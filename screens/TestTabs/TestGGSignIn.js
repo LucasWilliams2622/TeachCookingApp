@@ -24,16 +24,24 @@ const TestGGSignIn = () => {
     useEffect(() => {
         GoogleSignin.configure();
     }, [])
-
+    const signOut = async () => {
+        try {
+            await GoogleSignin.signOut();
+            console.log("Logout");
+            //setState({ user: null }); // Remember to remove the user from your app's state as well
+        } catch (error) {
+            console.error(error);
+        }
+    };
     const signIn = async () => {
         try {
             await GoogleSignin.hasPlayServices();
-            await GoogleSignin.signOut();
+            // await GoogleSignin.signOut();
             const userInfo = await GoogleSignin.signIn();
             console.log(userInfo)
-            console.log("email",userInfo.user.email);
-            console.log("Name",userInfo.user.givenName);
-            console.log("Ho",userInfo.user.familyName);
+            console.log("email", userInfo.user.email);
+            console.log("Name", userInfo.user.givenName);
+            console.log("Ho", userInfo.user.familyName);
 
             //setState({ userInfo });
         } catch (error) {
@@ -51,9 +59,14 @@ const TestGGSignIn = () => {
     return (
         <SafeAreaView>
             <Text>TestGGSignIn</Text>
-            <TouchableOpacity style={styles.GoogleSigninButton} onPress={() => { signIn() }}>
+            <TouchableOpacity style={styles.GoogleSigninButton} onPress={() => { signOut() }}>
                 <Text>GG Login</Text>
             </TouchableOpacity>
+            <GoogleSigninButton
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={() => { signIn() }}
+            />
         </SafeAreaView>
     )
 }
