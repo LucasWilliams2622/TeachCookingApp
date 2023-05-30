@@ -12,7 +12,28 @@
           "package_name": "com.teachcookingapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "126757548766-a11ampi6n80muqsqabc2npnug8mk0qd2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teachcookingapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "126757548766-l0h3dpsjis9nk4hnh7avdkej251144d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teachcookingapp",
+            "certificate_hash": "963bf66dc2d3b6e90b4e1cf13ab9e505ff21bbc5"
+          }
+        },
+        {
+          "client_id": "126757548766-jv1h85hgibqv69pdkfb0k2be5bl9c99t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBfPd7q0tRa1V1BTQJ4cvnH4aKMPW6MkPo"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126757548766-jv1h85hgibqv69pdkfb0k2be5bl9c99t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
