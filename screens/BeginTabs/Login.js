@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ToastAndroid, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput } from 'react-native-paper'
 import { COLOR } from '../../constants/Themes'
+import { checkPassNew } from'../../constants/Validate'
+import { checkEmail } from'../../constants/Validate'
 import AxiosInstance from '../../constants/AxiosIntance'
 const Login = (props) => {
     const { navigation } = props;
+    const [check, setCheck] = useState(false);
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('');
     //Login
@@ -22,10 +25,23 @@ const Login = (props) => {
 
             } else {
                 ToastAndroid.show("Login Failed !!! \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+             
             }
         } catch (error) {
             ToastAndroid.show("Login Failed \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
         }
+    }
+    const checkValidate=()=>
+    {
+        if(check==true)
+        {
+            console.log("connect");
+            
+        }else
+        {
+            Alert.alert('Error','Please check your emai and password');
+        }
+
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -46,6 +62,14 @@ const Login = (props) => {
                     value={email}
                     onChangeText={text => {
                         setEmail(text)
+                        // setValidatePass2(text);
+                        if (checkEmail(text) === false) {
+                           setCheck(false);
+                           console.log('loi email');
+                        } else {
+                          setCheck(true);
+                          console.log("dung r r")
+                        }
                     }}
                 // onSubmitEditing={() => this.refs.txtPassword.focus()}
                 />
@@ -60,18 +84,20 @@ const Login = (props) => {
                     onChangeText={text => {
                         setPassword(text)
                         // setValidatePass2(text);
-                        // if (isValidEmpty(text) == false) {
-                        //   setErrorPass2('Please fill it out completely');
-                        // } else {
-                        //   setErrorPass2('');
-                        // }
+                        if (checkPassNew(text) === false) {
+                           setCheck(false);
+                           console.log('loi mat khau');
+                        } else {
+                          setCheck(true);
+                          console.log("dung r r")
+                        }
                     }}
                 />
                 <TouchableOpacity style={styles.createAccountButton}>
                     <Text style={styles.createAccountButtonText}>Forgot Password? </Text>
                 </TouchableOpacity>
                 <View style={styles.boxCenter} >
-                    <TouchableOpacity onPress={() => { onLogin() }} style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={() => { onLogin(),checkValidate() }} style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>Login </Text>
                     </TouchableOpacity>
                 </View>
