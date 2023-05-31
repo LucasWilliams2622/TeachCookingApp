@@ -1,7 +1,6 @@
 export const isValidEmpty = (stringUsername)  => {
-    return (
-        stringUsername.length > 0
-    )
+   if(stringUsername.length>0)
+   return true;
 }
 export const checkEmail=(text)=>{
     let reg =/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
