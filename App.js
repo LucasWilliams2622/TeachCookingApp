@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-
 import Login from './screens/BeginTabs/Login'
 import LoginGoogle from './screens/BeginTabs/LoginGoogle'
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
@@ -20,7 +19,6 @@ import DetailFood from './screens/MainTabs/DetailFood';
 import ItemDishes from './component/ItemSearch';
 import Test from './screens/TestTabs/Test'
 import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
-
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
 import messaging from '@react-native-firebase/messaging';
 
@@ -51,7 +49,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
-
         <Stack.Screen name="StackBegin" component={StackBegin} />
         <Stack.Screen name="BottomTabs" component={BottomTabs} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
@@ -67,6 +64,5 @@ const App = () => {
 
   )
 }
-
 export default App
 
