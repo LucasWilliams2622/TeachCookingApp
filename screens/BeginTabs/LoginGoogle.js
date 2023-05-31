@@ -3,8 +3,7 @@ import {
     StyleSheet, Text, View, Image,
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
-    KeyboardAvoidingView,
-    Pressable
+    KeyboardAvoidingView,ToastAndroid
 } from 'react-native'
 import {
     GoogleSignin,
@@ -42,19 +41,17 @@ export default LoginGoogleLogin = (props) => {
     const signIn = async () => {
         try {
             await GoogleSignin.hasPlayServices();
-            //await GoogleSignin.signOut();
+            await GoogleSignin.signOut();
             const userInfo = await GoogleSignin.signIn();
             console.log(userInfo)
             console.log("email", userInfo.user.email);
-            console.log("Name", userInfo.user.givenName);
-            console.log("Ho", userInfo.user.familyName);
             const response = await AxiosIntance()
                 .post("/user/api/register", { email: userInfo.user.email, password: "*******", name: userInfo.user.name, avatar: userInfo.user.photo });
-            if (response.error === false) {
+            console.log(response);
+            if (response.result===true) {
                 ToastAndroid.show("Đăng kí thành công", ToastAndroid.SHORT);
-                console.log("aaaaaaaaaaaaaa");
+                navigation.navigate("BottomTabs");
                 //navigation.navigate("Login");
-
             } else {
                 ToastAndroid.show("Đăng kí thất bại", ToastAndroid.SHORT);
             }
