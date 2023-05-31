@@ -13,6 +13,7 @@ const AddNew = () => {
   const [ingredient, setIngredient] = useState(dataSteps);
   const [step, setStep] = useState(dataStep2)
   const [idx, incr] = useState(2);
+  const [name, setName] = useState('');
   const addElement = () => {
     var newArray = [...dataSteps, { _id: toString(idx), text: "teen " + (idx + 1) }];
     dataSteps.push({ _id: toString(idx), text: "teen " + (idx + 1) });
@@ -83,15 +84,22 @@ const AddNew = () => {
     //   ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
     // }
   }
+
+  const handleCheckInput = () => {
+    if (name.trim() === '') {
+      Alert.alert('Error','Vui lòng nhập tiêu đề');
+    } 
+  };
+
   return (
     <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Image style={[styles.icon, {}]} source={require('../../asset/icon/icon_back.png')} />
           <TouchableOpacity style={styles.btnLuu}>
-            <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]}>Lưu</Text>
+            <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]} onPress={handleCheckInput}>Lưu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]}>
+          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={handleCheckInput}>
             <Text style={[styles.textButton]}>Đăng món</Text>
           </TouchableOpacity>
         </View>
@@ -120,7 +128,7 @@ const AddNew = () => {
           <View>
             <TextInput
               style={[styles.textInput, { marginTop: 20, fontSize: 20, fontWeight: 'bold', height: 70 }]}
-              placeholder='Tên món:Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
+              value={name} onChangeText={setName} placeholder='Tên món:Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
           </View>
           <View>
             <TextInput
