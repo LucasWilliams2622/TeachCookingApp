@@ -19,7 +19,7 @@ import Guide3 from './screens/Guide/Guide3';
 import DetailFood from './screens/MainTabs/DetailFood';
 import ItemDishes from './component/ItemSearch';
 import Test from './screens/TestTabs/Test'
-import TestNotification from './screens/TestTabs/TestNotification'
+import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
 
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
 import messaging from '@react-native-firebase/messaging';
@@ -56,6 +56,7 @@ const App = () => {
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
 
+
           <Stack.Screen name="AddNew" component={AddNew} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="DetailFood" component={DetailFood} />
@@ -64,7 +65,16 @@ const App = () => {
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
         </Stack.Navigator>
       </NavigationContainer>
-      
+    //       {/* <Stack.Screen name="AddNew" component={AddNew} />
+    //       <Stack.Screen name="Home" component={Home} />
+    //       <Stack.Screen name="DetailFood" component={DetailFood} />
+
+    //       <Stack.Screen name="Test" component={Test} />
+    //       <Stack.Screen name="ItemDishes" component={ItemDishes} /> */}
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+  // <TestGGSignIn/>
+
   )
 }
 
