@@ -29,7 +29,7 @@ const Profile = (props) => {
       {/** Header*/}
       <View style={styles.header}>
         <View style={styles.infor}>
-          <TouchableOpacity onPress={()=>{navigation.navigate('EditProfile')}} >
+          <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} >
             <Image style={styles.avatar} source={IMAGES.Avatar} />
           </TouchableOpacity>
           <View style={styles.infor1}>
@@ -53,13 +53,9 @@ const Profile = (props) => {
           tabBarItemStyle: { width: windowWIdth / 2 },
           tabBarStyle: { backgroundColor: COLOR.BACKGROUND2 },
           swipeEnabled: true,
-
-        }}
-
-        tabBarOptions={{
-          activeTintColor: COLOR.WHITE,
-          inactiveTintColor: COLOR.BACKGROUND3,
-          indicatorStyle: {
+          tabBarActiveTintColor:  COLOR.WHITE,
+          tabBarInactiveTintColor: COLOR.BACKGROUND3,
+          tabBarIndicatorStyle: {
             backgroundColor: COLOR.SECONDARY,
           },
         }}

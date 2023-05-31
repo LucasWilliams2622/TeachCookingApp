@@ -9,6 +9,9 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 const Profile = (props) => {
   const { navigation } = props;
   const [avatar, setAvatar] = useState(null)
+  const goBack=()=>{
+    navigation.goBack()
+  }
   const dialogImageChoose = () => {
     return Alert.alert(
       "Thông báo",
@@ -77,7 +80,7 @@ const Profile = (props) => {
       <ScrollView style={styles.scrollView}>
         {/** Header*/}
         <View style={styles.header}>
-          <TouchableOpacity onPress={navigation.goBack()}>
+          <TouchableOpacity onPress={()=>{goBack()}}>
             <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonAdd}>

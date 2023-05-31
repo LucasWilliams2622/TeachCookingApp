@@ -6,10 +6,10 @@ import Swiper from 'react-native-swiper';
 import ItemCategories from '../../component/ItemCategories'
 import ItemDishes from '../../component/ItemDishes'
 import ItemDishesVertical from '../../component/ItemDishesVertical'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
-
 const Home = (props) => {
   const { navigation } = props;
   const [category, setCategory] = useState([
@@ -48,154 +48,139 @@ const Home = (props) => {
   ])
   const [dishes, setDishes] = useState([
     {
+      id: "1",
       nameUser: "Tom",
       avatar: require('../../asset/image/AdventureTime.jpg'),
-      image:  require('../../asset/image/logo.png'),
+      image: require('../../asset/image/logo.png'),
       nameDish: "Pikachu BBQ"
     },
     {
+      id: "2",
       nameUser: "Jack",
       avatar: require('../../asset/image/AdventureTime.jpg'),
-      image:  require('../../asset/image/logo.png'),
+      image: require('../../asset/image/logo.png'),
       nameDish: "Pikachu Sốt Thái"
     },
     {
+      id: "3",
       nameUser: "Jason",
       avatar: require('../../asset/image/AdventureTime.jpg'),
-      image:  require('../../asset/image/logo.png'),
+      image: require('../../asset/image/logo.png'),
       nameDish: "Pikachu Hấp Xả"
     }
   ])
   const goDetail = () => {
     navigation.navigate('DetailFood')
   }
-
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-    style={styles.main}
-    ListHeaderComponent={
-      <>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity>
-            <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
-          </TouchableOpacity>
-          <View style={styles.boxSearch}>
-            <Image style={styles.iconSearch} source={require('../../asset/icon/icon_search.png')} />
-            <TextInput
-              style={styles.input}
-              placeholder='Tìm kiếm tên món ăn ...'
-              placeholderTextColor="#A8A8A8" />
-          </View>
-        </View>
-        {/* Slide show */}
-        <View style={styles.wrapper} >
+    <KeyboardAwareScrollView>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          style={styles.main}
+          ListHeaderComponent={
+            <>
+              {/* Header */}
+              <View style={styles.header}>
+                <TouchableOpacity>
+                  <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
+                </TouchableOpacity>
+                <View style={styles.boxSearch}>
+                  <Image style={styles.iconSearch} source={require('../../asset/icon/icon_search.png')} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder='Tìm kiếm tên món ăn ...'
+                    placeholderTextColor="#A8A8A8" />
+                </View>
+              </View>
+              {/* Slide show */}
+              <View style={styles.wrapper} >
 
-          <Swiper showsButtons={false} autoplay={true} showsPagination={false}>
-            <View style={styles.slide}>
-              <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
-            </View>
-            <View style={styles.slide}>
-              <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
-            </View>
-            <View style={styles.slide}>
-              <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
-            </View>
-          </Swiper>
-        </View>
+                <Swiper showsButtons={false} autoplay={true} showsPagination={false}>
+                  <View style={styles.slide}>
+                    <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
+                  </View>
+                  <View style={styles.slide}>
+                    <Image style={styles.image} source={require('../../asset/image/food2.jpg')} />
+                  </View>
+                  <View style={styles.slide}>
+                    <Image style={styles.image} source={require('../../asset/image/food3.jpg')} />
+                  </View>
+                </Swiper>
+              </View>
 
-        <View
-          style={{
-            marginTop: 10,
-            //  borderWidth: 2,
-            // borderColor: 'red'
-          }}>
-          <FlatList
-            style={{ marginBottom: 10, }}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            data={category}
-            renderItem={({ item }) => <ItemCategories category={item}
-              onPress={() => {
+              <View
+                style={{
+                  marginTop: 10,
+                  //  borderWidth: 2,
+                  // borderColor: 'red'
+                }}>
+                <FlatList
+                  style={{ marginBottom: 10, }}
+                  showsHorizontalScrollIndicator={false}
+                  horizontal
+                  data={category}
+                  renderItem={({ item }) => <ItemCategories category={item}
+                    onPress={() => {
 
-              }}
-            />}
-            keyExtractor={eachCategory => eachCategory.name}
-          />
-          {/* <View >
+                    }}
+                  />}
+                  keyExtractor={eachCategory => eachCategory.name}
+                />
+                {/* <View >
             {
               category.map((item) => <ItemCategories  horizontal category={item} />)
             }
           </View> */}
+                <View style={{ height: 270, }}>
 
-          <View style={{ height: 270, }}>
+                  <FlatList
+                    style={{ marginBottom: 10, }}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={dishes}
+                    renderItem={({ item }) => (<ItemDishes
+                      dishes={item}
+                      key={item.id}
+                      onPress={() => {
+                        goDetail()
+                      }}
+                    />)}
+                    keyExtractor={eachDishes => eachDishes.name}
+                  />
+                </View>
+                <TouchableOpacity style={styles.buttonSuggest}>
+                  <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
+                  <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
+                </TouchableOpacity>
+              </View>
 
-            <FlatList
-              style={{ marginBottom: 10, }}
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              data={dishes}
-              renderItem={({ item }) => <ItemDishes dishes={item}
-                onPress={() => {
-
-                  goDetail()
-
-                }}
-              />}
-              keyExtractor={eachDishes => eachDishes.name}
-            />
-          </View>
-          <TouchableOpacity style={styles.buttonSuggest}>
-            <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
-            <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
-          </TouchableOpacity>
-        </View>
-
-
-        <View style={styles.spaceLine}>
-        </View>
-        <View style={styles.newDishes}>
-          <Text style={styles.title}>Món mới nhất</Text>
-          <FlatList
-
-            style={{ marginBottom: 10, }}
-            showsHorizontalScrollIndicator={false}
-            numColumns={2}
-            vertical
-            data={category}
-            renderItem={({ item }) => <ItemDishesVertical category={item}
-              onPress={() => {
-
-              }}
-            />}
-            keyExtractor={eachCategory => eachCategory.name}
-          />
-        </View>
-        {/* <View style={styles.step}>
-          <Text style={styles.stepText}>1</Text>
-        </View> */}
-       </>
-    }
-    data={category}
-    renderItem={({ item }) => (
-      <FlatList
-        style={{ marginBottom: 10, }}
-        showsHorizontalScrollIndicator={false}
-        numColumns={2}
-        vertical
-        data={category}
-        renderItem={({ item }) => <ItemDishesVertical category={item}
-          onPress={() => {
-
-          }}
-        />}
-        keyExtractor={eachCategory => eachCategory.name}
-      />
-    )}
-    keyExtractor={eachCategory => eachCategory.name}
-  />
-    </SafeAreaView>
+              <View style={styles.spaceLine}>
+              </View>
+              <View style={styles.newDishes}>
+                <Text style={styles.title}>Món mới nhất</Text>
+                <FlatList
+                  style={{ marginBottom: 10, }}
+                  showsHorizontalScrollIndicator={false}
+                  numColumns={2}
+                  vertical
+                  data={category}
+                  renderItem={({ item }) => (
+                    <ItemDishesVertical
+                      category={item}
+                      onPress={() => { }}
+                    />
+                  )}
+                  keyExtractor={eachCategory => eachCategory.name}
+                  // contentContainerStyle={{ marginHorizontal: 10 }}
+                  ItemSeparatorComponent={() => <View style={{ height: 20 }} />
+                  }
+                />
+              </View>
+            </>
+          }
+        />
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   )
 }
 
