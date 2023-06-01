@@ -5,21 +5,44 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
 import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
-
+import AxiosIntance from '../../constants/AxiosIntance';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const AddNew = () => {
-  const [image, setImage] = useState(null)
-  const [ingredient, setIngredient] = useState(dataSteps);
-  const [step, setStep] = useState(dataStep2)
+  // title, description, image, ingredients, steps, time, difficulty, mealType, author
+
   const [idx, incr] = useState(2);
-  const [name, setName] = useState('');
+
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('')
+  const [ingredients, setIngredients] = useState('');
+  const [steps, setSteps] = useState('');
+  const [time, setTime] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  const [mealType, setmealType] = useState('');
+  const [author, setAuthor] = useState('aaa');
+
+  const addNewRecipe = async () => {
+    const response = await AxiosIntance().post("/recipe/api/new", {
+      title: title, description: description, ingredients: ingredients, time: time,
+      steps: steps, image: image, difficulty: difficulty, mealType: mealType, author: author
+    });
+    console.log(response);
+    if (response.error == false) {
+      ToastAndroid.show("Đăng bài thành công", ToastAndroid.SHORT);
+    } else {
+      ToastAndroid.show("Đăng bài thất bại", ToastAndroid.SHORT);
+
+    }
+  }
+
   const addElement = () => {
     var newArray = [...dataSteps, { _id: toString(idx), text: "teen " + (idx + 1) }];
     dataSteps.push({ _id: toString(idx), text: "teen " + (idx + 1) });
     incr(idx + 1);
     setIngredient(newArray);
-
   }
   const dialogImageChoose = () => {
     return Alert.alert(
@@ -65,6 +88,7 @@ const AddNew = () => {
     //   ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
     // }
   }
+
   const getImageLibrary = async () => {
     const result = await launchImageLibrary();
     console.log(result.assets[0].uri);
@@ -87,9 +111,11 @@ const AddNew = () => {
 
   const handleCheckInput = () => {
     if (name.trim() === '') {
-      Alert.alert('Error','Vui lòng nhập tiêu đề');
-    } 
+      Alert.alert('Error', 'Vui lòng nhập tiêu đề');
+    }
   };
+
+
 
   return (
     <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
@@ -99,7 +125,7 @@ const AddNew = () => {
           <TouchableOpacity style={styles.btnLuu}>
             <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]} onPress={handleCheckInput}>Lưu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={handleCheckInput}>
+          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={addNewRecipe}>
             <Text style={[styles.textButton]}>Đăng món</Text>
           </TouchableOpacity>
         </View>
@@ -128,7 +154,7 @@ const AddNew = () => {
           <View>
             <TextInput
               style={[styles.textInput, { marginTop: 20, fontSize: 20, fontWeight: 'bold', height: 70 }]}
-              value={name} onChangeText={setName} placeholder='Tên món:Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
+              value={title} onChangeText={setTitle} placeholder='Tiêu đề: Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
           </View>
           <View>
             <TextInput
@@ -137,12 +163,12 @@ const AddNew = () => {
               multiline
               style={[styles.textInput, { height: 110, textAlign: 'left', fontWeight: 'normal', fontSize: 17, marginTop: 5 }]}
               placeholder='Hãy chia sẽ với mọi người về món này của bạn nhé.Ai hay điều gì đã truyền cảm hứng cho bạn nấu nó? Tại sao nó đặc
-             biệt?Bạn thích thưởng thức nó theo cách nào? ' placeholderTextColor={COLOR.TextAdd} />
+             biệt?Bạn thích thưởng thức nó theo cách nào? ' placeholderTextColor={COLOR.TextAdd} onChangeText={setDescription} value={description} />
             <View style={{ marginTop: -10 }}>
               <Text style={{ color: COLOR.WHITE, textAlign: 'center' }}>------------------------------------------------------------------------------------------</Text>
             </View>
             <TextInput style={[styles.textInput, { marginTop: -8, height: 40, fontSize: 16 }]}
-              placeholderTextColor={COLOR.TextAdd} placeholder='Thêm xuất xứ của món                                           >' />
+              placeholderTextColor={COLOR.TextAdd} placeholder='Thêm loại món                                           >' onChangeText={setmealType} value={mealType} />
           </View>
 
           <View style={styles.boxTimeAndRation} >
@@ -152,7 +178,7 @@ const AddNew = () => {
             </View>
             <View style={[styles.rowItem, { marginTop: 15 }]}>
               <Text style={styles.text}>Thời gian nấu</Text>
-              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={styles.textInput2}></TextInput>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={styles.textInput2} onChangeText={setTime} value={time}></TextInput>
             </View>
           </View>
 
@@ -162,7 +188,7 @@ const AddNew = () => {
             <View style={styles.Ingredient}>
               {
                 <View >
-                  {
+                  {/* {
                     ingredient.map((item) => <ItemIngredient dulieu={item} key={item._id} />)
                   }
                   {/* <FlatList
@@ -184,10 +210,10 @@ const AddNew = () => {
           </View>
           <View style={styles.line} />
           <View style={styles.newStep}>
-            <Text style={styles.text3}>Cách Làm</Text>
+            {/* <Text style={styles.text3}>Cách Làm</Text>
             {
               step.map((item) => <ItemAddnewSteps dulieu={item} key={item._id} />)
-            }
+            } */}
             <TouchableOpacity>
               <Text style={[styles.text, { textAlign: 'center' }]}>+ Thêm Bước</Text>
             </TouchableOpacity>

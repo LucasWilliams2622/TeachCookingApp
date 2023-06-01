@@ -12,8 +12,9 @@ const ItemCategories = (props) => {
     const [isSaved, setIsSaved] = useState(false)
     return (
         <TouchableOpacity
-        onPress={onPress}
-         style={styles.boxItem}>
+            key={dishes.id}
+            onPress={onPress}
+            style={styles.boxItem}>
             <ImageBackground style={styles.image} resizeMode='cover' source={require('../asset/image/food1.jpg')} >
 
             </ImageBackground>

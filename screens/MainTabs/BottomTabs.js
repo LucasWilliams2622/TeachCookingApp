@@ -82,6 +82,7 @@ const StackSearch = () => {
 const BottomTabs = () => {
 
   return (
+    
     <Tab.Navigator
       initialRouteName="StackHome"
 

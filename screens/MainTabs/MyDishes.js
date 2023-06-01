@@ -1,13 +1,19 @@
 import { StyleSheet, Text, TouchableOpacity, Image, Dimensions, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, IMAGES, COLOR } from '../../constants/Themes';
-import React from 'react'
+import React, { useEffect } from 'react'
 import ItemSearch from '../../component/ItemSearch'
 const windowWIdth = Dimensions.get('window').width;
 
 const MyDishes = (props) => {
   const { navigation } = props;
+  const goAddNew = () => {
+    navigation.navigate('AddNew')
+  }
+  useEffect(() => {
+    // Thực hiện các tác vụ khởi tạo ở đây
 
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.main}>
@@ -19,9 +25,9 @@ const MyDishes = (props) => {
           <Text style={styles.title}>Chưa có món nafo</Text>
           <Text style={styles.text}>Bạn vẫn chưa đăng món nào. Hãy chia sẻ món bạn </Text>
           <Text style={styles.text}>yêu thích và bạn sẽ thầy những món ấy ở đây </Text>
-          <TouchableOpacity 
-          onPress={navigation.navigate('AddNew')}
-          style={styles.buttonGoNew}>
+          <TouchableOpacity
+            onPress={() => { goAddNew() }}
+            style={styles.buttonGoNew}>
             <Text style={styles.textButton}>Viết món mới</Text>
           </TouchableOpacity>
         </View>
@@ -65,18 +71,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 5
   },
-  buttonGoNew:{
-    backgroundColor:COLOR.WHITE2,
-    justifyContent:'center',
-    alignItems:'center',
-    height:40,
-    
-    marginVertical:30,
-    borderRadius:10,
+  buttonGoNew: {
+    backgroundColor: COLOR.WHITE2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+
+    marginVertical: 30,
+    borderRadius: 10,
   },
-  textButton:{
-    color:COLOR.BLACK,
-    fontWeight:'500',
-    marginHorizontal:23,
+  textButton: {
+    color: COLOR.BLACK,
+    fontWeight: '500',
+    marginHorizontal: 23,
   }
 })

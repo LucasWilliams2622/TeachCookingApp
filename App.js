@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-
 import Login from './screens/BeginTabs/Login'
 import LoginGoogle from './screens/BeginTabs/LoginGoogle'
 import Profile from './screens/MainTabs/ProfileTabs/Profile';
@@ -20,7 +19,6 @@ import DetailFood from './screens/MainTabs/DetailFood';
 import ItemDishes from './component/ItemSearch';
 import Test from './screens/TestTabs/Test'
 import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
-
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
 import messaging from '@react-native-firebase/messaging';
 
@@ -65,19 +63,8 @@ const App = () => {
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
         </Stack.Navigator>
       </NavigationContainer>
-    //       {/* <Stack.Screen name="AddNew" component={AddNew} />
-    //       <Stack.Screen name="Home" component={Home} />
-    //       <Stack.Screen name="DetailFood" component={DetailFood} />
-
-    //       <Stack.Screen name="Test" component={Test} />
-    //       <Stack.Screen name="ItemDishes" component={ItemDishes} /> */}
-    //     </Stack.Navigator>
-    //   </NavigationContainer>
   // <TestGGSignIn/>
-  
-
   )
 }
-
 export default App
 

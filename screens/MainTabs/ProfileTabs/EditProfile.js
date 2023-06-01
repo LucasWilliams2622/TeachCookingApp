@@ -36,6 +36,9 @@ const Profile = (props) => {
     {
       Alert.alert('Error','Vui lòng nhập số điện thoại');
     }
+
+  const goBack=()=>{
+    navigation.goBack()
   }
   const dialogImageChoose = () => {
     return Alert.alert(
@@ -105,7 +108,7 @@ const Profile = (props) => {
       <ScrollView style={styles.scrollView}>
         {/** Header*/}
         <View style={styles.header}>
-          <TouchableOpacity /*onPress={navigation.goBack()}*/>
+          <TouchableOpacity onPress={()=>{goBack()}}>
             <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonAdd} onPress={check}>
