@@ -40,9 +40,8 @@ const Home = (props) => {
   const getAllCategory = async () => {
     try {
       const response = await AxiosInstance().get("category/api/get-all");
-      console.log(response)
+      // console.log(response)
       if (response.result) {
-        console.log("=====>",response.category._id);
         setCategory(response.category)
       } else {
         console.log("Failed to get all category");
@@ -51,10 +50,28 @@ const Home = (props) => {
       console.log("Failed to get all category !!!");
     }
   }
-  useEffect(() => {
-    
 
-    getAllCategory()
+  const getAllRecipe = async () => {
+    try {
+      const response = await AxiosInstance().get("recipe/api/get-all");
+      console.log(response.recipe)
+      if (response.result) {
+        response.recipe.forEach(recipe => {
+          console.log(recipe.ingredients.quantity);
+          console.log(recipe.title);
+          console.log(recipe);
+        });
+      } else {
+        console.log("Failed to get all RECIPE");
+      }
+    } catch (error) {
+      console.log("=========>", error);
+    }
+  }
+  useEffect(() => {
+
+    getAllRecipe();
+    getAllCategory();
     return () => {
 
     }
@@ -62,6 +79,9 @@ const Home = (props) => {
 
   const goDetail = () => {
     navigation.navigate('DetailFood')
+  }
+  const goSearch = () => {
+    navigation.navigate('Search')
   }
   return (
     <KeyboardAwareScrollView>
@@ -75,13 +95,13 @@ const Home = (props) => {
                 <TouchableOpacity>
                   <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
                 </TouchableOpacity>
-                <View style={styles.boxSearch}>
+                <TouchableOpacity style={styles.boxSearch} onPress={()=>{goSearch()}}>
                   <Image style={styles.iconSearch} source={require('../../asset/icon/icon_search.png')} />
                   <TextInput
                     style={styles.input}
                     placeholder='Tìm kiếm tên món ăn ...'
                     placeholderTextColor="#A8A8A8" />
-                </View>
+                </TouchableOpacity>
               </View>
               {/* Slide show */}
               <View style={styles.wrapper} >
@@ -139,7 +159,7 @@ const Home = (props) => {
                     keyExtractor={eachDishes => eachDishes.name}
                   />
                 </View>
-                <TouchableOpacity style={styles.buttonSuggest} onPress={()=>{}}>
+                <TouchableOpacity style={styles.buttonSuggest} onPress={() => { }}>
                   <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
                   <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
                 </TouchableOpacity>
