@@ -25,7 +25,7 @@ import messaging from '@react-native-firebase/messaging';
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Guide1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
       <Stack.Screen name="BottomTabs" component={BottomTabs} />
@@ -52,9 +52,9 @@ const App = () => {
 
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
+
+
           <Stack.Screen name="EditProfile" component={EditProfile} />
-
-
           <Stack.Screen name="AddNew" component={AddNew} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="DetailFood" component={DetailFood} />

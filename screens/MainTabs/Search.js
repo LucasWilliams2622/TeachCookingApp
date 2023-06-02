@@ -32,8 +32,6 @@ const Search = () => {
         } catch (error) {
 
         }
-
-
     }
 
     return (
