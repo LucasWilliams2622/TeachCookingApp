@@ -5,10 +5,38 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, IMAGES, COLOR } from '../../../constants/Themes'
 import { Icon } from 'react-native-vector-icons/icon'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
-
+import { isValidEmpty } from '../../../constants/Validate'
 const Profile = (props) => {
   const { navigation } = props;
+  const [userName, setuserName] = useState('');
+
+  const [checkUserName, setcheckUserName] = useState(false);
+  const [id, setId] = useState('');
+  const [checkId, setcheckId] = useState(false);
+  const [email, setEmail] = useState('');
+  const [checkEmail, setcheckEmail] = useState(false);
+  const [number, setNumber] = useState('');
+  const [checkNumber, setcheckNumber] = useState(false);
   const [avatar, setAvatar] = useState(null)
+
+  const check=()=>{
+    if(checkUserName==false)
+    {
+      Alert.alert('Error','Vui lòng nhập Tên');
+    }
+    else if(checkId==false)
+    {
+      Alert.alert('Error','Vui lòng nhập Id');
+    }
+    else if(checkEmail==false)
+    {
+      Alert.alert('Error','Vui lòng nhập Email');
+    }
+    else if(checkNumber==false)
+    {
+      Alert.alert('Error','Vui lòng nhập số điện thoại');
+    }
+
   const goBack=()=>{
     navigation.goBack()
   }
@@ -83,7 +111,7 @@ const Profile = (props) => {
           <TouchableOpacity onPress={()=>{goBack()}}>
             <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonAdd}>
+          <TouchableOpacity style={styles.buttonAdd} onPress={check}>
             <Text style={styles.textButton}>cập nhật</Text>
           </TouchableOpacity>
         </View>
@@ -115,9 +143,21 @@ const Profile = (props) => {
           <View style={styles.line}>
             <Text style={styles.textField}>Full Name</Text>
             <TextInput style={styles.textHint}
-               returnKeyType='next'
-               placeholder="Martias Duarte"
-               placeholderTextColor="gray"
+              returnKeyType='next'
+              placeholder="Martias Duarte"
+              placeholderTextColor="gray"
+              value={userName}
+              onChangeText={text => {
+                setuserName(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckUserName(false);
+                  console.log('loi name ');
+                } else {
+                  setcheckUserName(true);
+                  console.log("dung r");
+                }
+              }}
             ></TextInput>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
@@ -130,7 +170,20 @@ const Profile = (props) => {
               returnKeyType='next'
               placeholder="@LearnCook"
               placeholderTextColor="gray"
-              style={styles.textHint}></TextInput>
+              style={styles.textHint}
+              value={id}
+              onChangeText={text => {
+                setId(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckId(false);
+                  console.log('loi id');
+                } else {
+                  setcheckId(true);
+                  console.log("dung r");
+                }
+              }}
+            ></TextInput>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
             </View>
@@ -143,7 +196,18 @@ const Profile = (props) => {
               returnKeyType='next'
               placeholder="paulwalker@gmail.com"
               placeholderTextColor="gray"
-
+              value={email}
+              onChangeText={text => {
+                setEmail(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckEmail(false);
+                  console.log('loi email ');
+                } else {
+                  setcheckEmail(true);
+                  console.log("dung r");
+                }
+              }}
             ></TextInput>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
@@ -158,7 +222,20 @@ const Profile = (props) => {
               placeholder="Đến từ:.."
               placeholderTextColor="gray"
               returnKeyType='next'
-              keyboardType="numeric" />
+              keyboardType="numeric" 
+              value={number}
+              onChangeText={text => {
+                setNumber(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckNumber(false);
+                  console.log('loi number');
+                } else {
+                  setcheckNumber(true);
+                  console.log("dung r");
+                }
+              }}
+              />
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
             </View>
@@ -204,7 +281,7 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     tintColor: COLOR.WHITE,
-    
+
 
   },
   buttonAdd: {
@@ -213,7 +290,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: COLOR.GRAY1,
     borderRadius: 10,
-paddingHorizontal:20,
+    paddingHorizontal: 20,
 
   },
   textButton: {
@@ -264,7 +341,7 @@ paddingHorizontal:20,
     fontSize: 18,
     lineHeight: 30,
     color: COLOR.WHITE,
-    fontWeight:'bold'
+    fontWeight: 'bold'
   },
   keyname: {
     marginVertical: -25,
