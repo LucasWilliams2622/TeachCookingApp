@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TextInput, FlatList, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Swiper from 'react-native-swiper';
@@ -7,45 +7,13 @@ import ItemCategories from '../../component/ItemCategories'
 import ItemDishes from '../../component/ItemDishes'
 import ItemDishesVertical from '../../component/ItemDishesVertical'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AxiosInstance from '../../constants/AxiosIntance'
 
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
-  const [category, setCategory] = useState([
-    {
-      name: 'Tất cả',
-      backGround: '#EDD0FF'
-    },
-    {
-      name: 'Nướng',
-      backGround: '#FFD9BA'
-    },
-    {
-      name: 'Lẩu',
-      backGround: '#FACCCC'
-    },
-    {
-      name: 'Rán',
-      backGround: '#FBC1BD'
-    },
-    {
-      name: 'Luộc',
-      backGround: '#FBC1BD'
-    },
-    {
-      name: 'Xào',
-      backGround: '#FBC1BD'
-    },
-    {
-      name: 'Chiên',
-      backGround: '#FBC1BD'
-    },
-    {
-      name: 'Hấm',
-      backGround: '#FBC1BD'
-    },
-  ])
+  const [category, setCategory] = useState("")
   const [dishes, setDishes] = useState([
     {
       id: "1",
@@ -69,6 +37,29 @@ const Home = (props) => {
       nameDish: "Pikachu Hấp Xả"
     }
   ])
+  const getAllCategory = async () => {
+    try {
+      const response = await AxiosInstance().get("category/api/get-all");
+      console.log(response)
+      if (response.result) {
+        console.log("=====>",response.category._id);
+        setCategory(response.category)
+      } else {
+        console.log("Failed to get all category");
+      }
+    } catch (error) {
+      console.log("Failed to get all category !!!");
+    }
+  }
+  useEffect(() => {
+    
+
+    getAllCategory()
+    return () => {
+
+    }
+  }, [])
+
   const goDetail = () => {
     navigation.navigate('DetailFood')
   }
@@ -148,7 +139,7 @@ const Home = (props) => {
                     keyExtractor={eachDishes => eachDishes.name}
                   />
                 </View>
-                <TouchableOpacity style={styles.buttonSuggest}>
+                <TouchableOpacity style={styles.buttonSuggest} onPress={()=>{}}>
                   <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
                   <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
                 </TouchableOpacity>
