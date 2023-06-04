@@ -10,7 +10,7 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
-import AxiosIntance from '../../constants/AxiosIntance';
+import AxiosInstance from '../../constants/AxiosInstance';
 GoogleSignin.configure({
     scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
     webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -45,7 +45,7 @@ export default LoginGoogleLogin = (props) => {
             const userInfo = await GoogleSignin.signIn();
             console.log(userInfo)
             console.log("email", userInfo.user.email);
-            const response = await AxiosIntance()
+            const response = await AxiosInstance()
                 .post("/user/api/register", { email: userInfo.user.email, password: "*******", name: userInfo.user.name, avatar: userInfo.user.photo });
             console.log(response);
             if (response.result===true) {

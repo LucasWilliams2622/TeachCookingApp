@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-paper'
 import { COLOR, ICON } from '../../constants/Themes'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import AxiosIntance from '../../constants/AxiosIntance';
+import AxiosInstance from '../../constants/AxiosInstance';
 const Search = () => {
     let timeOut = null;
     const countdownSearch = (searchText) => {
@@ -20,7 +20,7 @@ const Search = () => {
         //setisLoading(true);
         try {
             console.log(searchText);
-            const response = await AxiosIntance().post("/recipe/api/search-by-title", { title: searchText });
+            const response = await AxiosInstance().post("/recipe/api/search-by-title", { title: searchText });
             console.log(response);
             // if (response.error === false) {
             //     setdataNe(response.products);

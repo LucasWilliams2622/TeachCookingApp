@@ -7,7 +7,7 @@ import ItemCategories from '../../component/ItemCategories'
 import ItemDishes from '../../component/ItemDishes'
 import ItemDishesVertical from '../../component/ItemDishesVertical'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import AxiosInstance from '../../constants/AxiosIntance'
+import AxiosInstance from '../../constants/AxiosInstance'
 
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

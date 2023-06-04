@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
 import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
-import AxiosIntance from '../../constants/AxiosIntance';
+import AxiosInstance from '../../constants/AxiosInstance';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const AddNew = () => {
@@ -25,7 +25,7 @@ const AddNew = () => {
   const [author, setAuthor] = useState('aaa');
 
   const addNewRecipe = async () => {
-    const response = await AxiosIntance().post("/recipe/api/new", {
+    const response = await AxiosInstance().post("/recipe/api/new", {
       title: title, description: description, ingredients: ingredients, time: time,
       steps: steps, image: image, difficulty: difficulty, mealType: mealType, author: author
     });

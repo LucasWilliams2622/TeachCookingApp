@@ -5,7 +5,7 @@ import { TextInput } from 'react-native-paper'
 import { COLOR } from '../../constants/Themes'
 import { checkPassNew } from'../../constants/Validate'
 import { checkEmail } from'../../constants/Validate'
-import AxiosInstance from '../../constants/AxiosIntance'
+import AxiosInstance from '../../constants/AxiosInstance'
 const Login = (props) => {
     const { navigation } = props;
     const [check, setCheck] = useState(false);
