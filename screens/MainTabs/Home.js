@@ -13,6 +13,7 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
+  const [dataRecipe, setdataRecipe] = useState({});
   const [category, setCategory] = useState("")
   const [dishes, setDishes] = useState([
     {
@@ -54,8 +55,10 @@ const Home = (props) => {
   const getAllRecipe = async () => {
     try {
       const response = await AxiosInstance().get("recipe/api/get-all");
+      setdataRecipe(response.recipe);
       console.log(response.recipe)
       if (response.result) {
+        console.log("data recipe:  ", dataRecipe);
         response.recipe.forEach(recipe => {
           console.log(recipe.ingredients.quantity);
           console.log(recipe.title);
@@ -95,7 +98,7 @@ const Home = (props) => {
                 <TouchableOpacity>
                   <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.boxSearch} onPress={()=>{goSearch()}}>
+                <TouchableOpacity style={styles.boxSearch} onPress={() => { goSearch() }}>
                   <Image style={styles.iconSearch} source={require('../../asset/icon/icon_search.png')} />
                   <TextInput
                     style={styles.input}
@@ -174,14 +177,15 @@ const Home = (props) => {
                   showsHorizontalScrollIndicator={false}
                   numColumns={2}
                   vertical
-                  data={category}
+                  data={dataRecipe}
+
                   renderItem={({ item }) => (
                     <ItemDishesVertical
                       category={item}
                       onPress={() => { }}
                     />
                   )}
-                  keyExtractor={eachCategory => eachCategory.name}
+                  keyExtractor={item => item._id}
                   // contentContainerStyle={{ marginHorizontal: 10 }}
                   ItemSeparatorComponent={() => <View style={{ height: 20 }} />
                   }

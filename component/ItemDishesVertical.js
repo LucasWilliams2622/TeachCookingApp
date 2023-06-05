@@ -5,7 +5,8 @@ import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const ItemDishesVertical = () => {
+const ItemDishesVertical = (props) => {
+  const { category, navigation } = props;
   const [isSaved, setIsSaved] = useState(false)
 
   return (
@@ -32,12 +33,12 @@ const ItemDishesVertical = () => {
       <View style={styles.content}>
         <View style={styles.boxInfo}>
           <Image style={styles.avatar} source={require('../asset/image/food1.jpg')} />
-          <Text style={styles.nameUser}>Lucas</Text>
+          <Text style={styles.nameUser}>{category.author.name}</Text>
         </View>
-        <Text style={styles.nameDishes}>Pikachu sốt Thái</Text>
+        <Text style={styles.nameDishes}>{category.title}</Text>
         <View style={styles.boxTime}>
           {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-          <Text style={styles.textTime}>2 giờ</Text>
+          <Text style={styles.textTime}>Thời gian: {category.time} hours</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <TouchableOpacity style={styles.boxEmotion}>

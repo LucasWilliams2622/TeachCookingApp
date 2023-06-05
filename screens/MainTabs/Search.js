@@ -1,12 +1,15 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native'
-import React, { useState } from 'react'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, FlatList,ActivityIndicator } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { TextInput } from 'react-native-paper'
 import { COLOR, ICON } from '../../constants/Themes'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 import AxiosInstance from '../../constants/AxiosInstance';
 const Search = () => {
     let timeOut = null;
+    const [searchRecipe, setsearchRecipe] = useState({});
+    const [isLoading, setisLoading] = useState(true);
     const countdownSearch = (searchText) => {
         if (timeOut) {
             clearTimeout(timeOut);
@@ -15,20 +18,43 @@ const Search = () => {
             search(searchText);
         }, 3000);
     }
+
+    const getAllRecipe = async () => {
+        try {
+            const response = await AxiosIntance().get("recipe/api/get-all");
+            setsearchRecipe(response.recipe);
+            console.log(response.recipe)
+            if (response.result) {
+                console.log("data recipe:  ", dataRecipe);
+                response.recipe.forEach(recipe => {
+                });
+            } else {
+                console.log("Failed to get all RECIPE");
+            }
+        } catch (error) {
+            console.log("=========>", error);
+        }
+    }
+    // useEffect(() => {
+
+    //     //getAllRecipe();
+    //     return () => {
+
+    //     }
+    // }, [])
+
     const search = async (searchText) => {
         //http://localhost:3001
-        //setisLoading(true);
+        setisLoading(true);
         try {
             console.log(searchText);
             const response = await AxiosInstance().post("/recipe/api/search-by-title", { title: searchText });
             console.log(response);
-            // if (response.error === false) {
-            //     setdataNe(response.products);
-            //     setisLoading(false);
-            // }
-            // else {
-            //     ToastAndroid.show("Thất bại", ToastAndroid.SHORT);
-            // }
+            setsearchRecipe(response.recipe);
+            console.log(searchRecipe);
+            getAllRecipe();
+            setisLoading(false);
+
         } catch (error) {
 
         }
@@ -45,7 +71,34 @@ const Search = () => {
                     placeholder='Gõ vào tên món ăn ...'
                     placeholderTextColor={COLOR.WHITE}
                     style={styles.input}></TextInput>
+
             </View>
+            {
+                isLoading == true ? (
+                    <View>
+                        <ActivityIndicator size={'large'} color='#fff00' />
+                        <Text >Loading...</Text>
+                    </View>
+                ) : (
+
+                    <View style={styles.newDishes}>
+                        <FlatList
+                            style={{ marginBottom: 10, }}
+                            showsHorizontalScrollIndicator={false}
+                            numColumns={2}
+                            vertical
+                            data={searchRecipe}
+                            renderItem={({ item }) => (
+                                <ItemDishesVertical
+                                    category={item}
+                                    onPress={() => { }}
+                                />
+                            )}
+                        />
+                    </View>
+                )
+            }
+
         </SafeAreaView>
     )
 }
