@@ -1,31 +1,34 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, FlatList,ActivityIndicator } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, FlatList, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { TextInput } from 'react-native-paper'
 import { COLOR, ICON } from '../../constants/Themes'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
+import ItemDishesVertical from '../../component/ItemDishesVertical'
 import AxiosInstance from '../../constants/AxiosInstance';
 const Search = () => {
     let timeOut = null;
-    const [searchRecipe, setsearchRecipe] = useState({});
-    const [isLoading, setisLoading] = useState(true);
+    const [searchRecipe, setSearchRecipe] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const countdownSearch = (searchText) => {
+
         if (timeOut) {
             clearTimeout(timeOut);
         }
         timeOut = setTimeout(() => {
+            console.log("======>", searchText);
+
             search(searchText);
         }, 3000);
     }
 
     const getAllRecipe = async () => {
         try {
-            const response = await AxiosIntance().get("recipe/api/get-all");
-            setsearchRecipe(response.recipe);
-            console.log(response.recipe)
+            const response = await AxiosInstance().get("recipe/api/get-all");
+            console.log("DÂT", response.recipe)
             if (response.result) {
-                console.log("data recipe:  ", dataRecipe);
+                setSearchRecipe(response.recipe);
+
                 response.recipe.forEach(recipe => {
                 });
             } else {
@@ -35,28 +38,28 @@ const Search = () => {
             console.log("=========>", error);
         }
     }
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     //getAllRecipe();
-    //     return () => {
+        getAllRecipe();
+        return () => {
 
-    //     }
-    // }, [])
+        }
+    }, [])
 
     const search = async (searchText) => {
-        //http://localhost:3001
-        setisLoading(true);
         try {
             console.log(searchText);
-            const response = await AxiosInstance().post("/recipe/api/search-by-title", { title: searchText });
-            console.log(response);
-            setsearchRecipe(response.recipe);
-            console.log(searchRecipe);
-            getAllRecipe();
-            setisLoading(false);
 
+            const response = await AxiosInstance().get("/recipe/api/search-by-title?title="+searchText);
+            if (response.result) {
+                console.log(response.recipe);
+                setSearchRecipe(response.recipe);
+                setIsLoading(false);
+            } else {
+                setIsLoading(true);
+            }
         } catch (error) {
-
+            console.log("ERROR", error);
         }
     }
 

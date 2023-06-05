@@ -48,7 +48,7 @@ const App = () => {
   //https://testfcm.com/
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Profile" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={{ headerShown: false }}>
 
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
