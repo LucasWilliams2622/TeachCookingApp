@@ -37,7 +37,6 @@ const AddNew = () => {
       ToastAndroid.show("Đăng bài thành công", ToastAndroid.SHORT);
     } else {
       ToastAndroid.show("Đăng bài thất bại", ToastAndroid.SHORT);
-
     }
   }
   const handleAddInput = () => {
