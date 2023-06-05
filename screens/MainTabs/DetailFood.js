@@ -70,7 +70,7 @@ const DetailFood = ({ navigation }) => {
                 </View>
                 <FlatList
                     data={dataNguyenLieu}
-                    renderItem={({ item }) => <ItemMaterial dulieu={item} />}
+                    renderItem={({ item }) => <ItemMaterial data={item} />}
                     keyExtractor={item => item._id}
                     showsVerticalScrollIndicator={false}
                 />
@@ -82,7 +82,7 @@ const DetailFood = ({ navigation }) => {
                 <View style={{ padding: 10 }}>
                     <FlatList
                         data={dataNe}
-                        renderItem={({ item }) => <ItemSteps dulieu={item} />}
+                        renderItem={({ item }) => <ItemSteps data={item} />}
                         keyExtractor={item => item._id}
                         showsVerticalScrollIndicator={false}
                     />
@@ -106,7 +106,7 @@ const DetailFood = ({ navigation }) => {
                 <Text style={styles.allComent} >Xem tất cả bình luận</Text>
                 <FlatList
                     data={dataComent}
-                    renderItem={({ item }) => <ItemComent dulieu={item} />}
+                    renderItem={({ item }) => <ItemComent data={item} />}
                     keyExtractor={item => item._id}
                     showsVerticalScrollIndicator={false}
                 />
@@ -128,7 +128,7 @@ const DetailFood = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
                         data={anotherFood}
-                        renderItem={({ item }) => <ItemAnotherFood dulieu={item} />}
+                        renderItem={({ item }) => <ItemAnotherFood data={item} />}
                         keyExtractor={item => item._id}
                         showsVerticalScrollIndicator={false}
                     />

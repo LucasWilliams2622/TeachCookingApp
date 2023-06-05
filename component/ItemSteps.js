@@ -4,7 +4,7 @@ import React from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 
 const ItemSteps = (props) => {
-  const { dulieu } = props;
+  const { data } = props;
 
 
   return (
@@ -13,9 +13,9 @@ const ItemSteps = (props) => {
       style={{ backgroundColor: COLOR.BACKGROUND }}>
       <View style={{ marginTop: 20, flexDirection: 'row' }}>
         <View style={styles.circle}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{dulieu._id}</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{data._id}</Text>
         </View>
-        <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10, paddingRight: 20 }} >{dulieu.content}</Text>
+        <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10, paddingRight: 20 }} >{data.content}</Text>
       </View>
 
     </TouchableOpacity>

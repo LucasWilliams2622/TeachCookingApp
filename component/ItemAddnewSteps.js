@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLOR } from '../constants/Themes'
 
 const ItemAddnewSteps = (props) => {
-  const { dulieu } = props;
+  const { data } = props;
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'column' }}>
-        <Text style={styles.textNumber}>{dulieu.text}</Text>
+        <Text style={styles.textNumber}>{data?.text}</Text>
         <Image style={styles.image} source={require('../asset/icon/icon_menu.png')}></Image>
       </View>
       <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='250g đường' style={styles.textinput}></TextInput>
@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: 15,
     paddingLeft:10,
+    color:COLOR.WHITE
   },
 })

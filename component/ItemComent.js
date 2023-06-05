@@ -3,7 +3,7 @@ import React from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 
 const ItemComent = (props) => {
-    const { dulieu } = props;
+    const { data } = props;
 
     return (
         <TouchableOpacity
@@ -11,8 +11,8 @@ const ItemComent = (props) => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
                 <Image style={{ width: 30, height: 30 }} source={require('../asset/icon/icon_people.png')} />
                 <View style={{ marginTop: 5, flexDirection: 'row' }} >
-                    <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10, fontWeight: 'bold' }} >{dulieu.name}</Text>
-                    <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10 }} >{dulieu.content}</Text>
+                    <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10, fontWeight: 'bold' }} >{data.name}</Text>
+                    <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10 }} >{data.content}</Text>
                 </View>
             </View>
 
