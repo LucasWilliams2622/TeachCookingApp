@@ -6,14 +6,17 @@ import ItemIngredient from '../../component/ItemIngredient'
 import ItemAddnewSteps from '../../component/ItemAddnewSteps'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import AxiosInstance from '../../constants/AxiosInstance';
+import { Children } from 'react/cjs/react.production.min'
+import { Button } from 'react-native-paper'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const AddNew = () => {
   // title, description, image, ingredients, steps, time, difficulty, mealType, author
 
-  const [idx, incr] = useState(2);
+  const [idx, incr] = useState(0);
 
-
+  const [ingredient, setIngredient] = useState([]);
+  const [step, setStep] = useState(dataStep2)
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('')
@@ -22,28 +25,27 @@ const AddNew = () => {
   const [time, setTime] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [mealType, setmealType] = useState('');
-  const [author, setAuthor] = useState('aaa');
-
+  const [author, setAuthor] = useState('');
+  const [message, setMessage] = useState([])
   const addNewRecipe = async () => {
-    const response = await AxiosInstance().post("/recipe/api/new", {
+    const response = await AxiosIntance().post("/recipe/api/new", {
       title: title, description: description, ingredients: ingredients, time: time,
       steps: steps, image: image, difficulty: difficulty, mealType: mealType, author: author
     });
     console.log(response);
-    if (response.error == false) {
+    if (response.result) {
       ToastAndroid.show("Đăng bài thành công", ToastAndroid.SHORT);
     } else {
       ToastAndroid.show("Đăng bài thất bại", ToastAndroid.SHORT);
-
     }
   }
-
-  const addElement = () => {
-    var newArray = [...dataSteps, { _id: toString(idx), text: "teen " + (idx + 1) }];
-    dataSteps.push({ _id: toString(idx), text: "teen " + (idx + 1) });
+  const handleAddInput = () => {
+    var newArray = [...ingredient, { _id: idx+1, text: 'teen' + (idx + 1)}];
+    ingredient.push({ _id: idx+1, text: "teen " + (idx + 1) });
     incr(idx + 1);
     setIngredient(newArray);
-  }
+    console.log(JSON.stringify(ingredient));
+  };
   const dialogImageChoose = () => {
     return Alert.alert(
       "Thông báo",
@@ -71,42 +73,42 @@ const AddNew = () => {
   const capture = async () => {
     const result = await launchCamera();
     console.log(result.assets[0].uri);
-    // const formdata = new FormData();
-    // formdata.append('image', {
-    //   uri: result.assets[0].uri,
-    //   type: 'icon/icon_jpeg',
-    //   name: 'image.jpg',
-    // });
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'icon/icon_jpeg',
+      name: 'image.jpg',
+    });
 
-    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-    // console.log(response.link);
-    // if (response.result == true) {
-    //   setAvatar(response.link);
-    //   ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
-    // }
-    // else {
-    //   ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
-    // }
+    const response = await AxiosIntance("multipart/form-data").post('/recipe/api/upload-image', formdata);
+    console.log(response.link);
+    if (response.result == true) {
+      setImage(response.link);
+      ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
+    }
   }
 
   const getImageLibrary = async () => {
     const result = await launchImageLibrary();
     console.log(result.assets[0].uri);
-    // const formdata = new FormData();
-    // formdata.append('image', {
-    //   uri: result.assets[0].uri,
-    //   type: 'icon/icon_jpeg',
-    //   name: 'image.jpg',
-    // });
-    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-    // console.log(response.link);
-    // if (response.result == true) {
-    //   setAvatar(response.link);
-    //   ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
-    // }
-    // else {
-    //   ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
-    // }
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'icon/icon_jpeg',
+      name: 'image.jpg',
+    });
+    const response = await AxiosIntance("multipart/form-data").post('/recipe/api/upload-image', formdata);
+    console.log(response.link);
+    if (response.result == true) {
+      setImage(response.link);
+      ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+    }
   }
 
   const handleCheckInput = () => {
@@ -115,7 +117,10 @@ const AddNew = () => {
     }
   };
 
-
+  const callbackFunction = (text) => {
+    setMessage(text);
+    console.log(message)
+  }
 
   return (
     <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
@@ -143,7 +148,7 @@ const AddNew = () => {
                 </>)
                 :
                 (
-                  <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
+                  <Image style={styles.image} source={{ uri: image }} />
                 )
             }
 
@@ -189,17 +194,19 @@ const AddNew = () => {
               {
                 <View >
                   {/* {
-                    ingredient.map((item) => <ItemIngredient dulieu={item} key={item._id} />)
-                  }
+                    ingredient.map((item) => <ItemIngredient data={item} key={item._id} callbackFunction={callbackFunction}  name={message} setName={setMessage}/>)
+
+                  } */}
+                  {ingredient.map((value,key) => <ItemIngredient setData={value} key={key} callbackFunction={callbackFunction}  name={message} setName={setMessage}/>)}
                   {/* <FlatList
                     data={ingredient}
                     scrollEnabled={false}
-                    renderItem={({ item }) => <ItemIngredient dulieu={item} />}
+                    renderItem={({ item }) => <ItemIngredient data={item} />}
                     keyExtractor={item => item._id} /> */}
                 </View>
               }
               <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                <TouchableOpacity onPress={addElement}>
+                <TouchableOpacity onPress={handleAddInput}>
                   <Text style={styles.text2}>+ Nguyên liệu</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -210,10 +217,10 @@ const AddNew = () => {
           </View>
           <View style={styles.line} />
           <View style={styles.newStep}>
-            {/* <Text style={styles.text3}>Cách Làm</Text>
+            <Text style={styles.text3}>Cách Làm</Text>
             {
-              step.map((item) => <ItemAddnewSteps dulieu={item} key={item._id} />)
-            } */}
+              step.map((item) => <ItemAddnewSteps data={item} key={item._id} />)
+            }
             <TouchableOpacity>
               <Text style={[styles.text, { textAlign: 'center' }]}>+ Thêm Bước</Text>
             </TouchableOpacity>

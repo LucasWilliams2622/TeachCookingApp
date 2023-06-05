@@ -1,15 +1,26 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import React,{useState} from 'react'
 import { COLOR } from '../constants/Themes'
 const windowWIdth = Dimensions.get('window').width;
 const ItemIngredient = (props) => {
-    const { dulieu } = props;
+    const { data } = props;
+    const sendData = () => {
+     
+            props.callbackFunction(props.name);
+        
+      }
+    
     return (
 
         <View style={[styles.item, {}]}>
             <Image style={[styles.icon]} source={require('../asset/icon/icon_menu.png')} />
-            <TextInput placeholderTextColor={COLOR.GRAY1} placeholder='  1kg ớt' style={[styles.textinput]} ></TextInput>
+            <TextInput placeholderTextColor={COLOR.GRAY1} placeholder='  1kg ớt' style={[styles.textinput]}
+             value={props.name} onChangeText={(text)=>props.setName(text)}></TextInput>
+            <TouchableOpacity onPress={sendData}>
+                <Text style={{color:'white'}}>teeee</Text>
+            </TouchableOpacity>
         </View>
+        
     )
 }
 
@@ -43,6 +54,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.4,
         borderColor: COLOR.GRAY1,
         paddingHorizontal: 10,
+        
     }
 
 })
