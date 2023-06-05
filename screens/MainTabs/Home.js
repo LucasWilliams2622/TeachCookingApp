@@ -13,7 +13,7 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
-  const [dataRecipe, setdataRecipe] = useState({});
+  const [dataRecipe, setDataRecipe] = useState({});
   const [category, setCategory] = useState("")
   const [dishes, setDishes] = useState([
     {
@@ -55,14 +55,15 @@ const Home = (props) => {
   const getAllRecipe = async () => {
     try {
       const response = await AxiosInstance().get("recipe/api/get-all");
-      setdataRecipe(response.recipe);
-      console.log(response.recipe)
+      // console.log(response.recipe)
       if (response.result) {
-        console.log("data recipe:  ", dataRecipe);
+      setDataRecipe(response.recipe);
+
+        // console.log("data recipe:  ", dataRecipe);
         response.recipe.forEach(recipe => {
-          console.log(recipe.ingredients.quantity);
+          console.log(recipe.ingredients);
           console.log(recipe.title);
-          console.log(recipe);
+          console.log("=========>",recipe.image);
         });
       } else {
         console.log("Failed to get all RECIPE");
@@ -108,7 +109,6 @@ const Home = (props) => {
               </View>
               {/* Slide show */}
               <View style={styles.wrapper} >
-
                 <Swiper showsButtons={false} autoplay={true} showsPagination={false}>
                   <View style={styles.slide}>
                     <Image style={styles.image} source={require('../../asset/image/food1.jpg')} />
@@ -134,9 +134,6 @@ const Home = (props) => {
                   horizontal
                   data={category}
                   renderItem={({ item }) => <ItemCategories category={item}
-                    onPress={() => {
-
-                    }}
                   />}
                   keyExtractor={eachCategory => eachCategory.name}
                 />
@@ -181,14 +178,14 @@ const Home = (props) => {
 
                   renderItem={({ item }) => (
                     <ItemDishesVertical
-                      category={item}
-                      onPress={() => { }}
+                      recipe={item}
+                      navigation={navigation}
                     />
                   )}
                   keyExtractor={item => item._id}
                   // contentContainerStyle={{ marginHorizontal: 10 }}
-                  ItemSeparatorComponent={() => <View style={{ height: 20 }} />
-                  }
+                  // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
+                  // }
                 />
               </View>
             </>
@@ -210,7 +207,6 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: COLOR.BACKGROUND,
-    marginHorizontal: 10,
     marginTop: 15
   },
   header: {
@@ -273,6 +269,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal:10,
   },
   text: {
     fontSize: 16,
@@ -295,13 +292,13 @@ const styles = StyleSheet.create({
     marginBottom: 80,
     // borderWidth: 2,
     // borderColor: 'red'
-
   },
   title: {
     fontSize: 20,
     color: COLOR.WHITE,
     fontWeight: 'bold',
-    marginBottom: 10
+    marginBottom: 10,
+    marginHorizontal:12,
 
   },
   step: {
