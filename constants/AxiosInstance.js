@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AxiosIntance = (contentType = 'application/json') => {
+const AxiosInstance = (contentType = 'application/json') => {
     const axiosInstance = axios.create({
         baseURL: 'http://10.0.2.2:3000'
     });
@@ -24,4 +24,4 @@ const AxiosIntance = (contentType = 'application/json') => {
     return axiosInstance;
 }
 
-export default AxiosIntance;
+export default AxiosInstance;

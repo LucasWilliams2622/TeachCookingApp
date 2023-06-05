@@ -16,7 +16,7 @@ import Guide1 from './screens/Guide/Guide1';
 import Guide2 from './screens/Guide/Guide2';
 import Guide3 from './screens/Guide/Guide3';
 import DetailFood from './screens/MainTabs/DetailFood';
-import ItemDishes from './component/ItemSearch';
+import ItemDishes from './component/ItemSavedRecipe';
 import Test from './screens/TestTabs/Test'
 import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
@@ -54,7 +54,7 @@ const App = () => {
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
 
 
-          <Stack.Screen name="EditProfile" component={EditProfile} /> */}
+          <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="AddNew" component={AddNew} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="DetailFood" component={DetailFood} />
@@ -63,7 +63,7 @@ const App = () => {
           <Stack.Screen name="ItemDishes" component={ItemDishes} />
         </Stack.Navigator>
       </NavigationContainer>
-  // <TestGGSignIn/>
+
   )
 }
 export default App

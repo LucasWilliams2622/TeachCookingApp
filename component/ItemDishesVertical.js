@@ -5,13 +5,17 @@ import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const ItemDishesVertical = () => {
+const ItemDishesVertical = (props) => {
+  const { recipe, navigation } = props;
   const [isSaved, setIsSaved] = useState(false)
-
+  const goDetail = () => {
+    navigation.navigate("DetailFood", { recipe })
+  }
   return (
-    <SafeAreaView style={styles.itemDishes}>
-
-      <ImageBackground style={styles.image} resizeMode='cover' imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={require('../asset/image/food1.jpg')} >
+    <TouchableOpacity style={styles.itemDishes}>
+      <ImageBackground style={styles.image} resizeMode='cover' 
+      imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} 
+      source={{uri:recipe.image}} >
         <View style={styles.boxSave}>
           {!isSaved
             ?
@@ -32,12 +36,12 @@ const ItemDishesVertical = () => {
       <View style={styles.content}>
         <View style={styles.boxInfo}>
           <Image style={styles.avatar} source={require('../asset/image/food1.jpg')} />
-          <Text style={styles.nameUser}>Lucas</Text>
+          <Text style={styles.nameUser}>{recipe.author.name}</Text>
         </View>
-        <Text style={styles.nameDishes}>Pikachu sốt Thái</Text>
+        <Text style={styles.nameDishes}>{recipe.title}</Text>
         <View style={styles.boxTime}>
           {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-          <Text style={styles.textTime}>2 giờ</Text>
+          <Text style={styles.textTime}>Thời gian: {recipe.time} hours</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <TouchableOpacity style={styles.boxEmotion}>
@@ -50,7 +54,7 @@ const ItemDishesVertical = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </TouchableOpacity>
   )
 }
 
@@ -63,7 +67,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: COLOR.BACKGROUND4,
-    backgroundColor: COLOR.BACKGROUND2
+    backgroundColor: COLOR.BACKGROUND2,
+    marginLeft: 13,
+    marginBottom: 14,
   },
   image: {
     height: 140,
