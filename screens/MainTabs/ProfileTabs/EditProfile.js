@@ -1,23 +1,43 @@
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
-import React, { useState } from 'react'
-
+import React, { useState, useContext, useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, IMAGES, COLOR } from '../../../constants/Themes'
 import { Icon } from 'react-native-vector-icons/icon'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { isValidEmpty } from '../../../constants/Validate'
+import { AppContext } from '../../../utils/AppContext'
+import AxiosInstance from '../../../constants/AxiosInstance'
+
 const EditProfile = (props) => {
   const { navigation } = props;
   const [userName, setuserName] = useState('');
+  const [dataUser, setDataUser] = useState([])
+  const { idUser } = useContext(AppContext);
 
   const [checkUserName, setcheckUserName] = useState(false);
   const [id, setId] = useState('');
   const [checkId, setcheckId] = useState(false);
   const [email, setEmail] = useState('');
   const [checkEmail, setcheckEmail] = useState(false);
+
   const [number, setNumber] = useState('');
   const [checkNumber, setcheckNumber] = useState(false);
   const [avatar, setAvatar] = useState(null)
+  const getInfoUser = async () => {
+    try {
+      const response = await AxiosInstance().get("user/api/get-by-id?id=" + idUser);
+      if (response.result) {
+        setDataUser(response.user)
+      } else {
+        console.log("Failed to get info User");
+      }
+    } catch (error) {
+      console.log("=========>", error);
+    }
+  }
+  useEffect(() => {
+    getInfoUser()
+  }, [])
 
   const check = () => {
     if (checkUserName == false) {
@@ -33,360 +53,325 @@ const EditProfile = (props) => {
       Alert.alert('Error', 'Vui lòng nhập số điện thoại');
     }
   }
-    const goBack = () => {
-      navigation.goBack()
-    }
-    const dialogImageChoose = () => {
-      return Alert.alert(
-        "Thông báo",
-        "Chọn phương thức lấy ảnh",
-        [
-          {
-            text: "Chụp ảnh ",
-            onPress: () => {
-              capture()
-            },
-          },
+  const goBack = () => {
+    navigation.goBack()
+  }
+  const dialogImageChoose = () => {
+    return Alert.alert(
+      "Thông báo",
+      "Chọn phương thức lấy ảnh",
+      [{
+        text: "Chụp ảnh ",
+        onPress: () => {
+          capture()
+        }
+      },
+      {
+        text: "Tải ảnh lên",
+        onPress: () => {
+          getImageLibrary()
+        }
+      },
+      {
+        text: "Hủy",
+      }])
+  }
+  const capture = async () => {
+    const result = await launchCamera();
+    console.log(result.assets[0].uri);
+    // const formdata = new FormData();
+    // formdata.append('image', {
+    //   uri: result.assets[0].uri,
+    //   type: 'icon/icon_jpeg',
+    //   name: 'image.jpg',
+    // });
 
-          {
-            text: "Tải ảnh lên",
-            onPress: () => {
-              getImageLibrary()
-            },
-          },
-          {
-            text: "Hủy",
-          },
-        ]
-      );
-    };
-    const capture = async () => {
-      const result = await launchCamera();
-      console.log(result.assets[0].uri);
-      // const formdata = new FormData();
-      // formdata.append('image', {
-      //   uri: result.assets[0].uri,
-      //   type: 'icon/icon_jpeg',
-      //   name: 'image.jpg',
-      // });
+    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
+    // console.log(response.link);
+    // if (response.result == true) {
+    //   setAvatar(response.link);
+    //   ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
+    // }
+    // else {
+    //   ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
+    // }
+  }
+  const getImageLibrary = async () => {
+    const result = await launchImageLibrary();
+    console.log(result.assets[0].uri);
+    // const formdata = new FormData();
+    // formdata.append('image', {
+    //   uri: result.assets[0].uri,
+    //   type: 'icon/icon_jpeg',
+    //   name: 'image.jpg',
+    // });
+    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
+    // console.log(response.link);
+    // if (response.result == true) {
+    //   setAvatar(response.link);
+    //   ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+    // }
+    // else {
+    //   ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+    // }
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {/** Header*/}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => { goBack() }}>
+            <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonAdd} onPress={check}>
+            <Text style={styles.textButton}>cập nhật</Text>
+          </TouchableOpacity>
+        </View>
 
-      // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-      // console.log(response.link);
-      // if (response.result == true) {
-      //   setAvatar(response.link);
-      //   ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
-      // }
-      // else {
-      //   ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
-      // }
-    }
-    const getImageLibrary = async () => {
-      const result = await launchImageLibrary();
-      console.log(result.assets[0].uri);
-      // const formdata = new FormData();
-      // formdata.append('image', {
-      //   uri: result.assets[0].uri,
-      //   type: 'icon/icon_jpeg',
-      //   name: 'image.jpg',
-      // });
-      // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-      // console.log(response.link);
-      // if (response.result == true) {
-      //   setAvatar(response.link);
-      //   ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
-      // }
-      // else {
-      //   ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
-      // }
-    }
-    return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          {/** Header*/}
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => { goBack() }}>
-              <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
+        {/** Body*/}
+        <View style={styles.body}>
+          <View style={styles.head}>
+            <TouchableOpacity onPress={() => { dialogImageChoose() }}>
+              {
+                dataUser.avatar ?
+                  (<Image style={styles.avatar} source={{ uri: dataUser.avatar }} />)
+                  :
+                  (<Image style={styles.avatar} source={IMAGES.Avatar} />)}
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonAdd} onPress={check}>
-              <Text style={styles.textButton}>cập nhật</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/** Body*/}
-          <View style={styles.body}>
-            <View style={styles.head}>
-              <TouchableOpacity onPress={() => { dialogImageChoose() }}>
-                {
-                  !avatar ?
-                    (
-                      <Image style={styles.avatar} source={IMAGES.Avatar} />
-                    )
-                    :
-                    (
-                      <Image style={styles.avatar} source={IMAGES.Avatar} />
-                    )
-                }
+            <View style={styles.info}>
+              <Text style={styles.name}>{dataUser.name}</Text>
+              <Text style={styles.keyname}>@LearnCook</Text>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.textButton2}>Xem trang bếp</Text>
               </TouchableOpacity>
-              <View style={styles.info}>
-                <Text style={styles.name}>PAUL WALKER</Text>
-                <Text style={styles.keyname}>@LearnCook</Text>
-                <TouchableOpacity style={styles.button}>
-                  <Text style={styles.textButton2}>xem trang bếp</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.line}>
-              <Text style={styles.textField}>Full Name</Text>
-              <TextInput style={styles.textHint}
-                returnKeyType='next'
-                placeholder="Martias Duarte"
-                placeholderTextColor="gray"
-                value={userName}
-                onChangeText={text => {
-                  setuserName(text)
-                  // setValidatePass2(text);
-                  if (isValidEmpty(text) === false) {
-                    setcheckUserName(false);
-                    console.log('loi name ');
-                  } else {
-                    setcheckUserName(true);
-                    console.log("dung r");
-                  }
-                }}
-              ></TextInput>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
-              </View>
-            </View>
-
-            <View style={styles.line}>
-              <Text style={styles.textField}>ID Cookpad</Text>
-              <TextInput
-                returnKeyType='next'
-                placeholder="@LearnCook"
-                placeholderTextColor="gray"
-                style={styles.textHint}
-                value={id}
-                onChangeText={text => {
-                  setId(text)
-                  // setValidatePass2(text);
-                  if (isValidEmpty(text) === false) {
-                    setcheckId(false);
-                    console.log('loi id');
-                  } else {
-                    setcheckId(true);
-                    console.log("dung r");
-                  }
-                }}
-              ></TextInput>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
-              </View>
-            </View>
-
-            <View style={styles.line}>
-              <Text style={styles.textField}>Email</Text>
-              <TextInput
-                style={styles.textHint}
-                returnKeyType='next'
-                placeholder="paulwalker@gmail.com"
-                placeholderTextColor="gray"
-                value={email}
-                onChangeText={text => {
-                  setEmail(text)
-                  // setValidatePass2(text);
-                  if (isValidEmpty(text) === false) {
-                    setcheckEmail(false);
-                    console.log('loi email ');
-                  } else {
-                    setcheckEmail(true);
-                    console.log("dung r");
-                  }
-                }}
-              ></TextInput>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
-              </View>
-            </View>
-
-            <View style={styles.linebox1}>
-              <TextInput
-                style={styles.input}
-                // onChangeText={onChangeNumber}
-                // value={number}
-                placeholder="Đến từ:.."
-                placeholderTextColor="gray"
-                returnKeyType='next'
-                keyboardType="numeric"
-                value={number}
-                onChangeText={text => {
-                  setNumber(text)
-                  // setValidatePass2(text);
-                  if (isValidEmpty(text) === false) {
-                    setcheckNumber(false);
-                    console.log('loi number');
-                  } else {
-                    setcheckNumber(true);
-                    console.log("dung r");
-                  }
-                }}
-              />
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
-              </View>
-            </View>
-            <View style={styles.linebox2}>
-              <TextInput
-                style={styles.input}
-                // onChangeText={onChangeNumber}
-                // value={number}
-                placeholder="Vài dòng về đam mê nấu nướng "
-                placeholderTextColor="gray"
-                returnKeyType='done'
-                keyboardType="numeric" />
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
-              </View>
             </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    )
-  
+
+          <View style={styles.line}>
+            <Text style={styles.textField}>Full Name</Text>
+            <TextInput style={styles.textHint}
+              returnKeyType='next'
+              placeholder="Martias Duarte"
+              placeholderTextColor="gray"
+              value={dataUser.name}
+              onChangeText={text => {
+                setuserName(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckUserName(false);
+                  console.log('loi name ');
+                } else {
+                  setcheckUserName(true);
+                  console.log("dung r");
+                }
+              }}
+            ></TextInput>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
+            </View>
+          </View>
+
+          <View style={styles.line}>
+            <Text style={styles.textField}>Email</Text>
+            <TextInput
+              style={styles.textHint}
+              returnKeyType='next'
+              placeholder="paulwalker@gmail.com"
+              placeholderTextColor="gray"
+              editable={false}
+              value={dataUser.email}
+              onChangeText={text => {
+                setEmail(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckEmail(false);
+                  console.log('loi email ');
+                } else {
+                  setcheckEmail(true);
+                  console.log("dung r");
+                }
+              }}
+            ></TextInput>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
+            </View>
+          </View>
+
+          <View style={styles.linebox1}>
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={number}
+              placeholder="Đến từ:.."
+              placeholderTextColor="gray"
+              returnKeyType='next'
+              keyboardType="default"
+              value={number}
+              onChangeText={text => {
+                setNumber(text)
+                // setValidatePass2(text);
+                if (isValidEmpty(text) === false) {
+                  setcheckNumber(false);
+                  console.log('loi number');
+                } else {
+                  setcheckNumber(true);
+                  console.log("dung r");
+                }
+              }}
+            />
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
+            </View>
+          </View>
+          <View style={styles.linebox2}>
+            <TextInput
+              style={styles.input}
+              placeholder="Vài dòng về đam mê nấu nướng "
+              placeholderTextColor="gray"
+              returnKeyType='done'
+              keyboardType="numeric" />
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  )
+
 }
-  export default EditProfile
+export default EditProfile
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: COLOR.BACKGROUND,
-    },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLOR.BACKGROUND,
+  },
 
-    header: {
-      backgroundColor: COLOR.HEADER,
-      height: 60,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingHorizontal: 10
-    },
-    icon: {
-      marginHorizontal: 10,
-      marginVertical: 23,
-      height: 25,
-      width: 25,
-      tintColor: COLOR.WHITE,
+  header: {
+    backgroundColor: COLOR.HEADER,
+    height: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10
+  },
+  icon: {
+    marginHorizontal: 10,
+    marginVertical: 23,
+    height: 25,
+    width: 25,
+    tintColor: COLOR.WHITE,
 
 
-    },
-    buttonAdd: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 10,
-      backgroundColor: COLOR.GRAY1,
-      borderRadius: 10,
-      paddingHorizontal: 20,
+  },
+  buttonAdd: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: COLOR.GRAY1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
 
-    },
-    textButton: {
-      color: COLOR.HEADER,
-      fontSize: 15,
-    },
+  },
+  textButton: {
+    color: COLOR.HEADER,
+    fontSize: 15,
+  },
 
-    /*Body*/
-    body: {
-      height: '100%',
-    },
-    head: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      height: '21%',
-      // borderWidth: 2, borderColor: 'white',
-      marginHorizontal: 10,
-    },
-    info: {
-      flexDirection: 'column',
-      marginLeft: 20,
-    },
-    avatar: {
+  /*Body*/
+  body: {
+    height: '100%',
+  },
+  head: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: '21%',
+    // borderWidth: 2, borderColor: 'white',
+    marginHorizontal: 10,
+  },
+  info: {
+    flexDirection: 'column',
+    marginLeft: 20,
+  },
+  avatar: {
 
-      height: 100,
-      width: 100,
-      borderRadius: 100,
-      flexDirection: 'row',
+    height: 100,
+    width: 100,
+    borderRadius: 100,
+    flexDirection: 'row',
 
-    },
-    line: {
-      width: '80%',
-      marginHorizontal: 32,
-    },
-    linebox1: {
-      marginVertical: 30,
-      width: '80%',
-      marginHorizontal: 32,
-    },
-    linebox2: {
-      marginVertical: 3,
-      width: '80%',
-      marginHorizontal: 32,
-    },
-    name: {
-      marginVertical: 31,
-      fontSize: 18,
-      lineHeight: 30,
-      color: COLOR.WHITE,
-      fontWeight: 'bold'
-    },
-    keyname: {
-      marginVertical: -25,
-      color: COLOR.WHITE,
-    },
-    button: {
-      marginVertical: 39,
-      borderWidth: 1,
-      borderRadius: 10,
-      letterSpacing: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 40,
-      width: 127,
-      borderColor: COLOR.WHITE,
+  },
+  line: {
+    width: '80%',
+    marginHorizontal: 32,
+  },
+  linebox1: {
+    marginVertical: 30,
+    width: '80%',
+    marginHorizontal: 32,
+  },
+  linebox2: {
+    marginVertical: 3,
+    width: '80%',
+    marginHorizontal: 32,
+  },
+  name: {
+    marginVertical: 31,
+    fontSize: 18,
+    lineHeight: 30,
+    color: COLOR.WHITE,
+    fontWeight: 'bold'
+  },
+  keyname: {
+    marginVertical: -25,
+    color: COLOR.WHITE,
+  },
+  button: {
+    marginVertical: 39,
+    borderWidth: 1,
+    borderRadius: 10,
+    letterSpacing: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: 127,
+    borderColor: COLOR.WHITE,
 
-    },
-    textButton2: {
-      color: COLOR.WHITE,
-      fontSize: 15,
-    },
-    textField: {
-      marginVertical: 9,
-      marginHorizontal: 0,
-      color: COLOR.BACKGROUND3,
-      fontSize: 14,
-      lineHeight: 20,
-      letterSpacing: 1,
-    },
-    textHint: {
-      marginVertical: 0,
-      marginHorizontal: 0,
-      color: COLOR.WHITE,
-      fontSize: 20,
-      lineHeight: 20,
-    },
-    textInput: {
-      marginVertical: 0,
-      marginHorizontal: 26,
-      fontSize: 20,
-    },
+  },
+  textButton2: {
+    color: COLOR.WHITE,
+    fontSize: 15,
+  },
+  textField: {
+    marginVertical: 9,
+    marginHorizontal: 0,
+    color: COLOR.BACKGROUND3,
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 1,
+  },
+  textHint: {
+    marginVertical: 0,
+    marginHorizontal: 0,
+    color: COLOR.WHITE,
+    fontSize: 16,
+    lineHeight: 20,
+  },
+  textInput: {
+    marginVertical: 0,
+    marginHorizontal: 26,
+    fontSize: 20,
+  },
 
-    input: {
-      height: 50,
-      marginHorizontal: 10,
-      justifyContent: 'flex-end',
-      paddingBottom: 16,
-      padding: 12,
-      fontSize: 17,
-      paddingBottom: 0,
-    },
-  })
+  input: {
+    height: 50,
+    marginHorizontal: 10,
+    justifyContent: 'flex-end',
+    paddingBottom: 16,
+    padding: 12,
+    fontSize: 17,
+    paddingBottom: 0,
+  },
+})

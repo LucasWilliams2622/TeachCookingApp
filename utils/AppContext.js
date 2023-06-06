@@ -1,17 +1,18 @@
-import { createContext, useState } from "react";
-
+import { createContext, useState,useMemo } from "react";
 export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
     const { children } = props;
-    //data use chung
     const [isLogin, setIsLogin] = useState(false)
     const [infoUser, setInfoUser] = useState({})
+    const [idUser, setIdUser] = useState("")
+    const contextValue = useMemo(() => {
+        return { isLogin, setIsLogin, infoUser, setInfoUser, idUser, setIdUser };
+    }, [isLogin, setIsLogin, infoUser, setInfoUser, idUser, setIdUser]);
 
     return (
-        // bỏ isLogin vào kho để reuse
         <AppContext.Provider
-         value={{ isLogin, setIsLogin, infoUser, setInfoUser }}>
+            value={contextValue}>
             {children}
         </AppContext.Provider>
     )

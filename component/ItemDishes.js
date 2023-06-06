@@ -15,9 +15,9 @@ const ItemCategories = (props) => {
     const addToFavorite = async (idUser,idRecipe) => {
         try {
             const response = await AxiosInstance().post("favorite/api/new-to-favorite", { idUser:idUser, idRecipe: idRecipe });
-            console.log(response.recipe)
+            // console.log(response.recipe)
             if (response.result) {
-                console.log(response.result);
+                // console.log(response.result);
                 ToastAndroid.show("Đã thêm vào món đã lưu  !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
 
                 // console.log("data recipe:  ", dataRecipe);
@@ -34,7 +34,7 @@ const ItemCategories = (props) => {
         }
     }
     useEffect(() => {
-        console.log(isSaved);
+        // console.log(isSaved);
 
         if (isSaved) {
             const idRecipe =recipe._id;

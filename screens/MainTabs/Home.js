@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, StatusBar, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -15,7 +15,6 @@ const Home = (props) => {
   const { navigation } = props;
   const [dataRecipe, setDataRecipe] = useState([]);
   const [category, setCategory] = useState("")
-  const [dishes, setDishes] = useState([])
   const getAllCategory = async () => {
     try {
       const response = await AxiosInstance().get("category/api/get-all");
@@ -33,15 +32,11 @@ const Home = (props) => {
   const getAllRecipe = async () => {
     try {
       const response = await AxiosInstance().get("recipe/api/get-all");
-      // console.log(response.recipe)
       if (response.result) {
         setDataRecipe(response.recipe);
-        setDishes(response.recipe)
-        // console.log("data recipe:  ", dataRecipe);
         response.recipe.forEach(recipe => {
-          console.log(recipe._id);
-          // console.log(recipe.title);
-          // console.log("=========>",recipe.image);
+          // console.log(recipe._id);
+
         });
       } else {
         console.log("Failed to get all RECIPE");
@@ -168,6 +163,7 @@ const Home = (props) => {
           }
         />
       </SafeAreaView>
+      <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND} />
     </KeyboardAwareScrollView>
   )
 }
@@ -188,6 +184,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: 45,
+    marginHorizontal: 10,
     // borderWidth:2,
     // borderColor:'white',
   },

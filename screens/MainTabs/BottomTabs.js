@@ -166,13 +166,10 @@ const Main = () => {
   )
 }
 
-
-
 const BottomTabs = () => {
-  const { isLogin,infoUser } = useContext(AppContext);
-  console.log("=========================>", isLogin);
-  console.log("=========>", infoUser);
-
+  const { isLogin, infoUser } = useContext(AppContext);
+  // console.log("isLogin Bottom Tabs=================>", isLogin);
+  // console.log("infoUser Bottom Tabs=========>", infoUser);
   return (
     <>
       {

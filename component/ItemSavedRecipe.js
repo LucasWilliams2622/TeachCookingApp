@@ -6,7 +6,7 @@ import AxiosInstance from '../constants/AxiosInstance'
 const windowWIdth = Dimensions.get('window').width;
 
 const ItemSavedRecipe = (props) => {
-  const { navigation } = props;
+  const {recipe, navigation } = props;
   const [idRecipe, setIdRecipe] = useState('')
   const [isSaved, setIsSaved] = useState(true)
   const goDetail = () => {
@@ -52,7 +52,7 @@ const ItemSavedRecipe = (props) => {
       <TouchableOpacity onPress={() => { goDetail() }}>
         <ImageBackground style={styles.image} resizeMode='cover'
           imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
-          source={require('../asset/image/food1.jpg')} >
+          source={{uri:recipe.idRecipe.image}} >
           <View style={styles.boxSave}>
             {!isSaved
               ?
@@ -67,13 +67,15 @@ const ItemSavedRecipe = (props) => {
         </ImageBackground>
         <View style={styles.content}>
           <View style={styles.boxInfo}>
-            <Image style={styles.avatar} source={require('../asset/image/food1.jpg')} />
-            <Text style={styles.nameUser}>Lucas</Text>
+            <Image style={styles.avatar} 
+            // source={{uri:recipe.author.avatar}}
+             />
+            {/* <Text style={styles.nameUser}>{recipe.author.name}</Text> */}
           </View>
-          <Text style={styles.nameDishes}>Pikachu sốt Thái</Text>
+          <Text style={styles.nameDishes}>{recipe.idRecipe.title}</Text>
           <View style={styles.boxTime}>
             {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-            <Text style={styles.textTime}>2 giờ</Text>
+            <Text style={styles.textTime}>{recipe.idRecipe.time} giờ</Text>
           </View>
         </View>
       </TouchableOpacity>

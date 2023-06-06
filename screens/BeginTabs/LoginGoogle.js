@@ -27,7 +27,7 @@ GoogleSignin.configure({
 });
 
 export default LoginGoogleLogin = (props) => {
-    const {isLogin, setIsLogin, setInfoUser } = useContext(AppContext);
+    const {isLogin, setIsLogin, setInfoUser,setIdUser } = useContext(AppContext);
 
     const { navigation } = props;
     const goLogin = () => {
@@ -54,19 +54,21 @@ export default LoginGoogleLogin = (props) => {
           const email = userInfo.user.email;
           const name = userInfo.user.name;
           const avatar = userInfo.user.photo;
-          console.log('Id: ', userInfo.user.id);
-          console.log('Email: ', userInfo.user.email);
-          console.log('Name: ', userInfo.user.name);
-          console.log('FamilyName: ', userInfo.user.familyName);
-          console.log('GivenName: ', userInfo.user.givenName);
-          console.log('Photo: ', userInfo.user.photo);
+        //   console.log('Id: ', userInfo.user.id);
+        //   console.log('Email: ', userInfo.user.email);
+        //   console.log('Name: ', userInfo.user.name);
+        //   console.log('FamilyName: ', userInfo.user.familyName);
+        //   console.log('GivenName: ', userInfo.user.givenName);
+        //   console.log('Photo: ', userInfo.user.photo);
           try {
             const response = await AxiosInstance().post("user/api/loginGoogle",
               { email: email, name: name, avatar: avatar });
             if (response.result) {
+              console.log(" SIGN IN GOOGLE========>",response.user._id);
               console.log("SIGN UP & SIGN IN GOOGLE SUCCESS!");
+              setIdUser(response.user._id)
               setIsLogin(true)
-              setInfoUser(userInfo)
+              setInfoUser(response)
             //   navigation.navigate("BottomTabs")
             } else {
               console.log("SIGN UP & SIGN IN GOOGLE FAILED!");

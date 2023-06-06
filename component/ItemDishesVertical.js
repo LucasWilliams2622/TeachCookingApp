@@ -43,7 +43,7 @@ const ItemDishesVertical = (props) => {
         <Text style={styles.nameDishes}>{recipe.title}</Text>
         <View style={styles.boxTime}>
           {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-          <Text style={styles.textTime}>Thời gian: {recipe.time}</Text>
+          <Text style={styles.textTime}>Thời gian: {recipe.time} giờ</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <TouchableOpacity style={styles.boxEmotion}>
