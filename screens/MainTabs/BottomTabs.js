@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ICON, COLOR } from '../../constants/Themes'
@@ -7,16 +7,34 @@ import Search from './Search';
 import Home from './Home'
 import AddNew from './AddNew'
 import DetailFood from './DetailFood'
-
-import MyDishes from './MyDishes'
-import SavedDishes from './SavedDishes'
-import EditProfile from './ProfileTabs/EditProfile'
-import Profile from './ProfileTabs/Profile'
+import Login from '../BeginTabs/Login'
+import LoginGoogle from '../BeginTabs/LoginGoogle'
+import Profile from '../MainTabs/ProfileTabs/Profile';
+import EditProfile from '../MainTabs/ProfileTabs/EditProfile';
+import SavedDishes from './SavedDishes';
+import MyDishes from './MyDishes';
+import Guide1 from '../Guide/Guide1';
+import Guide2 from '../Guide/Guide2';
+import Guide3 from '../Guide/Guide3';
+import { AppContext } from '../../utils/AppContext'
 
 import * as Animatable from 'react-native-animatable';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const StackBegin = () => {
+  return (
+    <Stack.Navigator initialRouteName="LoginGoogle" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
 
+      <Stack.Screen name="Guide1" component={Guide1} />
+      <Stack.Screen name="Guide2" component={Guide2} />
+      <Stack.Screen name="Guide3" component={Guide3} />
+
+    </Stack.Navigator>
+
+  )
+}
 const StackHome = () => {
   return (
     <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
@@ -62,7 +80,6 @@ const StackAddNew = () => {
     </Stack.Navigator>
   )
 }
-
 const StackSearch = () => {
   return (
     <Stack.Navigator initialRouteName="Search" screenOptions={{ headerShown: false }}>
@@ -78,14 +95,10 @@ const StackSearch = () => {
     </Stack.Navigator>
   )
 }
-
-const BottomTabs = () => {
-
+const Main = () => {
   return (
-    
     <Tab.Navigator
       initialRouteName="StackHome"
-
       screenOptions={
         ({ route }) => ({
           tabBarIcon: ({ focused, label, size }) => {
@@ -113,7 +126,6 @@ const BottomTabs = () => {
               justifyContent: 'center',
               width: 60
             }}>
-
               <Animatable.View
                 animation="zoomIn"
                 duration={2000}>
@@ -130,7 +142,6 @@ const BottomTabs = () => {
                 fontSize: 10,
                 marginTop: 4,
                 color: focused ? COLOR.PRIMARY : COLOR.NOT_FOCUS,
-
               }}>{label}</Text> */}
             </View>;
           },
@@ -145,19 +156,29 @@ const BottomTabs = () => {
             left: 10,
             borderRadius: 20,
             backgroundColor: COLOR.BACKGROUND2,
-
           },
-        })}
-
-
-    >
+        })} >
       <Tab.Screen name="StackHome" component={StackHome} />
       <Tab.Screen name="StackSearch" component={StackSearch} />
       <Tab.Screen name="StackAddNew" component={StackAddNew} />
       <Tab.Screen name="StackProfile" component={StackProfile} />
-
     </Tab.Navigator>
   )
+}
+
+
+
+const BottomTabs = () => {
+  const { isLogin,infoUser } = useContext(AppContext);
+  console.log("=========================>", isLogin);
+  console.log("=========>", infoUser);
+
+  return (
+    <>
+      {
+        isLogin == false ? <StackBegin /> : <Main />
+      }
+    </>)
 }
 
 export default BottomTabs

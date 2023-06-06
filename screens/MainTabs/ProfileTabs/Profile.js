@@ -23,13 +23,14 @@ const windowHeight = Dimensions.get('window').height;
 const Tab = createMaterialTopTabNavigator();
 const Profile = (props) => {
   const { navigation } = props
+  const goEditProfile = () => { navigation.navigate('EditProfile') }
   return (
     <SafeAreaView style={styles.container}>
 
       {/** Header*/}
       <View style={styles.header}>
         <View style={styles.infor}>
-          <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} >
+          <TouchableOpacity  onPress={() => { goEditProfile() }} >
             <Image style={styles.avatar} source={IMAGES.Avatar} />
           </TouchableOpacity>
           <View style={styles.infor1}>

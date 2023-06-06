@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './screens/BeginTabs/Login'
@@ -21,20 +21,24 @@ import Test from './screens/TestTabs/Test'
 import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
 import messaging from '@react-native-firebase/messaging';
+import { AppContext, AppContextProvider } from './utils/AppContext'
 
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Guide1" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
-      <Stack.Screen name="BottomTabs" component={BottomTabs} />
+    <AppContextProvider>
 
-      <Stack.Screen name="Guide1" component={Guide1} />
-      <Stack.Screen name="Guide2" component={Guide2} />
-      <Stack.Screen name="Guide3" component={Guide3} />
+      <Stack.Navigator initialRouteName="LoginGoogle" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
 
-    </Stack.Navigator>
+        <Stack.Screen name="Guide1" component={Guide1} />
+        <Stack.Screen name="Guide2" component={Guide2} />
+        <Stack.Screen name="Guide3" component={Guide3} />
+
+      </Stack.Navigator>
+    </AppContextProvider>
+
   )
 }
 const App = () => {
@@ -47,22 +51,11 @@ const App = () => {
   };
   //https://testfcm.com/
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
-
-        <Stack.Screen name="StackBegin" component={StackBegin} />
-        <Stack.Screen name="BottomTabs" component={BottomTabs} />
-
-
-        <Stack.Screen name="EditProfile" component={EditProfile} />
-        <Stack.Screen name="AddNew" component={AddNew} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="DetailFood" component={DetailFood} />
-
-        <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="ItemDishes" component={ItemDishes} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppContextProvider>
+      <NavigationContainer>
+         <BottomTabs/>
+      </NavigationContainer>
+    </AppContextProvider>
 
   )
 }

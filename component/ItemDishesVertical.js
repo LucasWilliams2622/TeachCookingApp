@@ -13,9 +13,9 @@ const ItemDishesVertical = (props) => {
   }
   return (
     <TouchableOpacity style={styles.itemDishes}>
-      <ImageBackground style={styles.image} resizeMode='cover' 
-      imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} 
-      source={{uri:recipe.image}} >
+      <ImageBackground style={styles.image} resizeMode='cover'
+        imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
+        source={{ uri: recipe.image }} >
         <View style={styles.boxSave}>
           {!isSaved
             ?
@@ -35,13 +35,15 @@ const ItemDishesVertical = (props) => {
 
       <View style={styles.content}>
         <View style={styles.boxInfo}>
-          <Image style={styles.avatar} source={require('../asset/image/food1.jpg')} />
+          <Image style={styles.avatar} source={recipe.author.avatar == "" ?
+            (require('../asset/image/logo.png')) :
+            ({ uri: recipe.author.avatar })} />
           <Text style={styles.nameUser}>{recipe.author.name}</Text>
         </View>
         <Text style={styles.nameDishes}>{recipe.title}</Text>
         <View style={styles.boxTime}>
           {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-          <Text style={styles.textTime}>Thời gian: {recipe.time} hours</Text>
+          <Text style={styles.textTime}>Thời gian: {recipe.time}</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <TouchableOpacity style={styles.boxEmotion}>

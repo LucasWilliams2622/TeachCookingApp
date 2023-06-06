@@ -3,18 +3,21 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput } from 'react-native-paper'
 import { COLOR } from '../../constants/Themes'
-import { checkPassNew } from'../../constants/Validate'
-import { checkEmail } from'../../constants/Validate'
+import { checkPassNew } from '../../constants/Validate'
+import { checkEmail } from '../../constants/Validate'
 import AxiosInstance from '../../constants/AxiosInstance'
 const Login = (props) => {
     const { navigation } = props;
     const [check, setCheck] = useState(false);
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('');
-    //Login
+    const goLoginGoogle = () => {
+        navigation.navigate("LoginGoogle")
+
+    }
     const onLogin = async () => {
         try {
-            console.log(password,email)
+            console.log(password, email)
             const response = await AxiosInstance().post("user/api/login",
                 { email: email, password: password });
             console.log(response)
@@ -25,21 +28,18 @@ const Login = (props) => {
 
             } else {
                 ToastAndroid.show("Login Failed !!! \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
-             
+
             }
         } catch (error) {
             ToastAndroid.show("Login Failed \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
         }
     }
-    const checkValidate=()=>
-    {
-        if(check==true)
-        {
+    const checkValidate = () => {
+        if (check == true) {
             console.log("connect");
-            
-        }else
-        {
-            Alert.alert('Error','Please check your emai and password');
+
+        } else {
+            Alert.alert('Error', 'Please check your emai and password');
         }
 
     }
@@ -64,16 +64,16 @@ const Login = (props) => {
                         setEmail(text)
                         // setValidatePass2(text);
                         if (checkEmail(text) === false) {
-                           setCheck(false);
-                           console.log('loi email');
+                            setCheck(false);
+                            console.log('loi email');
                         } else {
-                          setCheck(true);
-                          console.log("dung r r")
+                            setCheck(true);
+                            console.log("dung r r")
                         }
                     }}
                 // onSubmitEditing={() => this.refs.txtPassword.focus()}
                 />
-                <Text style={styles.label}>Password</Text>
+                <Text style={[styles.label,{marginTop:20}]}>Password</Text>
                 <TextInput style={styles.input}
                     placeholder="***************"
                     placeholderTextColor='white'
@@ -85,11 +85,11 @@ const Login = (props) => {
                         setPassword(text)
                         // setValidatePass2(text);
                         if (checkPassNew(text) === false) {
-                           setCheck(false);
-                           console.log('loi mat khau');
+                            setCheck(false);
+                            console.log('loi mat khau');
                         } else {
-                          setCheck(true);
-                          console.log("dung r r")
+                            setCheck(true);
+                            console.log("dung r r")
                         }
                     }}
                 />
@@ -97,10 +97,15 @@ const Login = (props) => {
                     <Text style={styles.createAccountButtonText}>Forgot Password? </Text>
                 </TouchableOpacity>
                 <View style={styles.boxCenter} >
-                    <TouchableOpacity onPress={() => { onLogin(),checkValidate() }} style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={() => { onLogin(), checkValidate() }} 
+                    style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>Login </Text>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={[styles.boxCenter, { marginTop: 30, }]} 
+                onPress={()=>{goLoginGoogle()}}>
+                    <Text style={[styles.createAccountButtonText, { fontSize: 20 }]}>Login With Google</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         backgroundColor: '#FF5C00',
         paddingVertical: 15,
-        width: '50%',
+        width: '75%',
         height: 49,
         marginTop: 20,
         borderRadius: 30,
@@ -172,7 +177,8 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         color: '#FAF8F8',
-        padding: 7
+        padding: 7,
+        marginBottom:2
     },
     boxCenter: {
         justifyContent: 'center',
