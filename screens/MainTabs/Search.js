@@ -64,14 +64,15 @@ const Search = () => {
     const search = async (searchText) => {
         try {
             console.log("searchText", searchText);
-            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
+            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" +searchText);
+            console.log(response);
             if (response.result) {
                 // console.log(response.recipe);
                 setSearchRecipe(response.recipe);
                 setIsLoading(false);
             } else {
-                setIsLoading(true);
                 ToastAndroid.show("Không tìm thấy món ăn", ToastAndroid.SHORT);
+                getAllRecipe();
             }
         } catch (error) {
             console.log("ERROR", error);
@@ -99,11 +100,8 @@ const Search = () => {
                         <Text >Loading...</Text>
                     </View>)
                     :
-                    (<View style={{}}>
-                        <View>
-                            <Text style={styles.textNew}>Các món mới</Text>
-                            <View style={styles.line} />
-                        </View>
+                    (<View style={{marginTop:20}}>
+                       
                         <FlatList
                             style={{ marginBottom: 50, }}
                             showsHorizontalScrollIndicator={false}
