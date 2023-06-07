@@ -1,26 +1,43 @@
 import { StyleSheet, Text, TouchableOpacity, Image, Dimensions, View, FlatList, RefreshControl } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React, { useState, useEffect ,useContext} from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ICON, IMAGES, COLOR } from '../../constants/Themes';
-import ItemSearch from '../../component/ItemSearch'
-import ItemSavedRecipe from '../../component/ItemSavedRecipe'
-import AxiosInstance from '../../constants/AxiosInstance'
+import ItemSearch from '../../component/ItemSearch';
+import ItemSavedRecipe from '../../component/ItemSavedRecipe';
+import AxiosInstance from '../../constants/AxiosInstance';
+import { AppContext } from '../../utils/AppContext';
 
 const windowWIdth = Dimensions.get('window').width;
 
 const SavedDishes = (props) => {
   const { navigation } = props;
-  const [isLoading, setIsLoading] = useState(false)
-  const [data, setData] = useState([])
-  const [stateList, setStateList] = useState(0)
-  const [refreshControl, setRefreshControl] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [recipe, setRecipe] = useState([]);
+  const [stateList, setStateList] = useState(0);
+  const [refreshControl, setRefreshControl] = useState(false);
+  const { infoUser, idUser } = useContext(AppContext);
 
   const getSavedRecipe = async () => {
     try { 
-      const response = await AxiosInstance().get("favorite/api/get-all");
-      console.log(response.favorite)
+      const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser="+idUser);
+      console.log("SAVED===========>",response.favorite)
       if (response.result) {
-        setData(response.favorite)
+        setRecipe(response.favorite)
+
+
+        
+        response.favorite.forEach(recipe => {
+          // console.log(recipe._id);
+          console.log(recipe.idUser);
+          console.log(recipe.idRecipe.image);
+          console.log(recipe.idRecipe.title);
+          console.log(recipe.idRecipe.description);
+          console.log(recipe.idRecipe.author);
+
+
+          
+
+        });
         setIsLoading(true)
       } else {
         console.log("Failed");
@@ -55,8 +72,8 @@ const SavedDishes = (props) => {
                 vertical
                 numColumns={2}
                 horizontal={false}
-                data={data}
-                renderItem={({ item }) => <ItemSavedRecipe data={item} />}
+                data={recipe}
+                renderItem={({ item }) => <ItemSavedRecipe recipe={item} />}
                 keyExtractor={eachCategory => eachCategory.name}
 
                 refreshControl={

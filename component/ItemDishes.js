@@ -1,29 +1,67 @@
 import { StyleSheet, Text, TouchableOpacity, View, Dimensions, Image, ImageBackground } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemUser from '../component/ItemUser'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import AxiosInstance from '../constants/AxiosInstance'
+
 const ItemCategories = (props) => {
-    const { dishes } = props
-    const { nameUser, avatar, image, nameDish } = dishes
+    const { recipe, navigation } = props;
     const { onPress } = props
     const [isSaved, setIsSaved] = useState(false)
+
+    const addToFavorite = async (idUser,idRecipe) => {
+        try {
+            const response = await AxiosInstance().post("favorite/api/new-to-favorite", { idUser:idUser, idRecipe: idRecipe });
+            // console.log(response.recipe)
+            if (response.result) {
+                // console.log(response.result);
+                ToastAndroid.show("Đã thêm vào món đã lưu  !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+
+                // console.log("data recipe:  ", dataRecipe);
+                response.recipe.forEach(recipe => {
+                    // console.log(recipe.ingredients);
+                    // console.log(recipe.title);
+                    // console.log("=========>",recipe.image);
+                });
+            } else {
+                console.log("Failed to get all RECIPE");
+            }
+        } catch (error) {
+            console.log("=========>", error);
+        }
+    }
+    useEffect(() => {
+        // console.log(isSaved);
+
+        if (isSaved) {
+            const idRecipe =recipe._id;
+            const idUser = "647dc518dded9d94be4b27cc"
+            addToFavorite(idUser,idRecipe)
+
+        }
+
+    }, [isSaved])
+
     return (
         <TouchableOpacity
-            key={dishes.id}
+            key={recipe.id}
             onPress={onPress}
             style={styles.boxItem}>
-            <ImageBackground style={styles.image} resizeMode='cover' source={require('../asset/image/food1.jpg')} >
-
+            <ImageBackground style={styles.image} resizeMode='cover'
+                source={{ uri: recipe.image }} >
             </ImageBackground>
             <View style={styles.infoUser}>
                 <View style={styles.boxInfo}>
-                    <Image style={styles.avatar} source={require('../asset/image/logo.png')} />
+                    <Image style={styles.avatar}
+                        source={recipe.author.avatar == "" ?
+                            (require('../asset/image/logo.png')) :
+                            ({ uri: recipe.author.avatar })} />
                     <View style={styles.boxContent}>
-                        <Text style={styles.nameUser}>{nameUser}</Text>
-                        <Text style={styles.title}>{nameDish}</Text>
+                        <Text style={styles.nameUser}>{recipe.author.name}</Text>
+                        <Text style={styles.title}>{recipe.title}</Text>
                     </View>
                 </View>
             </View>

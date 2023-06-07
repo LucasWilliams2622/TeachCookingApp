@@ -3,13 +3,13 @@ import {
   Text,
   View,
   ScrollView,
-  Dimensions,
+  Dimensions, StatusBar,
   SafeAreaView,
   Image,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ICON, IMAGES, COLOR } from '../../../constants/Themes';
 import { Icon } from '@rneui/themed';
 import ItemSearch from '../../../component/ItemSearch'
@@ -17,24 +17,49 @@ import BottomTabs from '../BottomTabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MyDishes from '../MyDishes'
 import SavedDishes from '../SavedDishes'
+import AxiosInstance from '../../../constants/AxiosInstance'
 import TopTab from '../../../component/TopTab'
+import { AppContext } from '../../../utils/AppContext'
+
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Tab = createMaterialTopTabNavigator();
 const Profile = (props) => {
   const { navigation } = props
+  const { idUser, infoUser } = useContext(AppContext);
+  const [dataUser, setDataUser] = useState([])
+  const getInfoUser = async () => {
+    try {
+      const response = await AxiosInstance().get("user/api/get-by-id?id=" + idUser);
+      if (response.result) {
+        setDataUser(response.user)
+      } else {
+        console.log("Failed to get info User");
+      }
+    } catch (error) {
+      console.log("=========>", error);
+    }
+  }
+  useEffect(() => {
+    getInfoUser()
+  }, [])
+
+  const goEditProfile = () => {
+    console.log("=========>", dataUser);
+    navigation.navigate('EditProfile')
+  }
   return (
     <SafeAreaView style={styles.container}>
 
       {/** Header*/}
       <View style={styles.header}>
         <View style={styles.infor}>
-          <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} >
-            <Image style={styles.avatar} source={IMAGES.Avatar} />
+          <TouchableOpacity onPress={() => { goEditProfile() }} >
+            <Image style={styles.avatar} source={{ uri: dataUser.avatar }} />
           </TouchableOpacity>
           <View style={styles.infor1}>
-            <Text style={styles.name}>PAUL WALKER</Text>
-            <Text style={styles.keyname}>@LearnsssCook</Text>
+            <Text style={styles.name}>{dataUser.name}</Text>
+            <Text style={styles.keyname}>{dataUser.email}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.buttonAdd}>
@@ -53,7 +78,7 @@ const Profile = (props) => {
           tabBarItemStyle: { width: windowWIdth / 2 },
           tabBarStyle: { backgroundColor: COLOR.BACKGROUND2 },
           swipeEnabled: true,
-          tabBarActiveTintColor:  COLOR.WHITE,
+          tabBarActiveTintColor: COLOR.WHITE,
           tabBarInactiveTintColor: COLOR.BACKGROUND3,
           tabBarIndicatorStyle: {
             backgroundColor: COLOR.SECONDARY,
@@ -63,6 +88,7 @@ const Profile = (props) => {
         <Tab.Screen name="Món đã lưu" component={SavedDishes} />
         <Tab.Screen name="Món của tôi" component={MyDishes} />
       </Tab.Navigator>
+      <StatusBar barStyle="light-content" backgroundColor={COLOR.HEADER} />
 
     </SafeAreaView>
   );
@@ -126,6 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   keyname: {
+    fontSize: 14,
     color: COLOR.WHITE,
   },
   nav: {

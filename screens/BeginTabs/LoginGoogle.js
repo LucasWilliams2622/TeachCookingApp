@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useContext} from 'react'
 import {
     StyleSheet, Text, View, Image,
     TouchableWithoutFeedback, StatusBar,
@@ -11,6 +11,8 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin';
 import AxiosInstance from '../../constants/AxiosInstance';
+import { AppContext } from '../../utils/AppContext';
+
 GoogleSignin.configure({
     scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
     webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -25,6 +27,12 @@ GoogleSignin.configure({
 });
 
 export default LoginGoogleLogin = (props) => {
+    const {isLogin, setIsLogin, setInfoUser,setIdUser } = useContext(AppContext);
+
+    const { navigation } = props;
+    const goLogin = () => {
+        navigation.navigate('Login')
+    }
     useEffect(() => {
         GoogleSignin.configure();
     }, [])
@@ -38,40 +46,49 @@ export default LoginGoogleLogin = (props) => {
         }
     };
 
-    const signIn = async () => {
+    const signInGoogle = async () => {
         try {
-            await GoogleSignin.hasPlayServices();
-            await GoogleSignin.signOut();
-            const userInfo = await GoogleSignin.signIn();
-            console.log(userInfo)
-            console.log("email", userInfo.user.email);
-            const response = await AxiosInstance()
-                .post("/user/api/register", { email: userInfo.user.email, password: "*******", name: userInfo.user.name, avatar: userInfo.user.photo });
-            console.log(response);
-            if (response.result===true) {
-                ToastAndroid.show("Đăng kí thành công", ToastAndroid.SHORT);
-                navigation.navigate("BottomTabs");
-                //navigation.navigate("Login");
+          await GoogleSignin.hasPlayServices();
+          const userInfo = await GoogleSignin.signIn();
+    
+          const email = userInfo.user.email;
+          const name = userInfo.user.name;
+          const avatar = userInfo.user.photo;
+        //   console.log('Id: ', userInfo.user.id);
+        //   console.log('Email: ', userInfo.user.email);
+        //   console.log('Name: ', userInfo.user.name);
+        //   console.log('FamilyName: ', userInfo.user.familyName);
+        //   console.log('GivenName: ', userInfo.user.givenName);
+        //   console.log('Photo: ', userInfo.user.photo);
+          try {
+            const response = await AxiosInstance().post("user/api/loginGoogle",
+              { email: email, name: name, avatar: avatar });
+            if (response.result) {
+              console.log(" SIGN IN GOOGLE========>",response.user._id);
+              console.log("SIGN UP & SIGN IN GOOGLE SUCCESS!");
+              setIdUser(response.user._id)
+              setIsLogin(true)
+              setInfoUser(response)
+            //   navigation.navigate("BottomTabs")
             } else {
-                ToastAndroid.show("Đăng kí thất bại", ToastAndroid.SHORT);
+              console.log("SIGN UP & SIGN IN GOOGLE FAILED!");
             }
-            //setState({ userInfo });
+          } catch (error) {
+            console.log(error);
+          }
         } catch (error) {
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                // user cancelled the login flow
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                // operation (e.g. sign in) is in progress already
-            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                // play services not available or outdated
-            } else {
-                // some other error happened
-            }
+          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            // user cancelled the login flow
+          } else if (error.code === statusCodes.IN_PROGRESS) {
+            // operation (e.g. sign in) is in progress already
+          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            // play services not available or outdated
+          } else {
+            // some other error happened
+          }
         }
-    };
-    const { navigation } = props;
-    const goLogin = () => {
-        navigation.navigate('Login')
-    }
+      };
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -87,7 +104,7 @@ export default LoginGoogleLogin = (props) => {
 
                         </View>
                         <TouchableOpacity
-                            onPress={() => { signIn() }}
+                            onPress={() => { signInGoogle() }}
                             style={[styles.button, { backgroundColor: '#4A4A4A' }]}>
                             <Image
                                 style={styles.tinyLogo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png', }}
@@ -162,7 +179,7 @@ const styles = StyleSheet.create({
         height: 30,
         textAlign: 'center',
         color: 'white',
-        left: 50,
+        marginLeft:50,
         bottom: 5,
         fontSize: 18
     },
@@ -174,7 +191,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 40,
         width: 350,
-        height: 42
+        height: 42,
+      
     },
     tinyLogo: {
         width: 22,
@@ -188,6 +206,7 @@ const styles = StyleSheet.create({
         color: '#C9520F',
         fontSize: 17,
         textAlign: 'center',
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        
     },
 })

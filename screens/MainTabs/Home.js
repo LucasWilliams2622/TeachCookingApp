@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, StatusBar, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -13,31 +13,8 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
-  const [dataRecipe, setDataRecipe] = useState({});
+  const [dataRecipe, setDataRecipe] = useState([]);
   const [category, setCategory] = useState("")
-  const [dishes, setDishes] = useState([
-    {
-      id: "1",
-      nameUser: "Tom",
-      avatar: require('../../asset/image/AdventureTime.jpg'),
-      image: require('../../asset/image/logo.png'),
-      nameDish: "Pikachu BBQ"
-    },
-    {
-      id: "2",
-      nameUser: "Jack",
-      avatar: require('../../asset/image/AdventureTime.jpg'),
-      image: require('../../asset/image/logo.png'),
-      nameDish: "Pikachu Sốt Thái"
-    },
-    {
-      id: "3",
-      nameUser: "Jason",
-      avatar: require('../../asset/image/AdventureTime.jpg'),
-      image: require('../../asset/image/logo.png'),
-      nameDish: "Pikachu Hấp Xả"
-    }
-  ])
   const getAllCategory = async () => {
     try {
       const response = await AxiosInstance().get("category/api/get-all");
@@ -55,15 +32,11 @@ const Home = (props) => {
   const getAllRecipe = async () => {
     try {
       const response = await AxiosInstance().get("recipe/api/get-all");
-      // console.log(response.recipe)
       if (response.result) {
-      setDataRecipe(response.recipe);
-
-        // console.log("data recipe:  ", dataRecipe);
+        setDataRecipe(response.recipe);
         response.recipe.forEach(recipe => {
-          console.log(recipe.ingredients);
-          console.log(recipe.title);
-          console.log("=========>",recipe.image);
+          // console.log(recipe._id);
+
         });
       } else {
         console.log("Failed to get all RECIPE");
@@ -122,21 +95,19 @@ const Home = (props) => {
                 </Swiper>
               </View>
 
-              <View
-                style={{
-                  marginTop: 10,
-                  //  borderWidth: 2,
-                  // borderColor: 'red'
-                }}>
-                <FlatList
-                  style={{ marginBottom: 10, }}
-                  showsHorizontalScrollIndicator={false}
-                  horizontal
-                  data={category}
-                  renderItem={({ item }) => <ItemCategories category={item}
-                  />}
-                  keyExtractor={eachCategory => eachCategory.name}
-                />
+              <View style={{ marginTop: 10, }}>
+                <ScrollView>
+                  <FlatList
+                    style={{ marginBottom: 10, }}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={category}
+                    renderItem={({ item }) => <ItemCategories category={item}
+                    />}
+                    keyExtractor={eachCategory => eachCategory.name}
+                  />
+                </ScrollView>
+
                 {/* <View >
             {
               category.map((item) => <ItemCategories  horizontal category={item} />)
@@ -148,9 +119,9 @@ const Home = (props) => {
                     style={{ marginBottom: 10, }}
                     showsHorizontalScrollIndicator={false}
                     horizontal
-                    data={dishes}
+                    data={dataRecipe}
                     renderItem={({ item }) => (<ItemDishes
-                      dishes={item}
+                      recipe={item}
                       key={item.id}
                       onPress={() => {
                         goDetail()
@@ -183,15 +154,16 @@ const Home = (props) => {
                     />
                   )}
                   keyExtractor={item => item._id}
-                  // contentContainerStyle={{ marginHorizontal: 10 }}
-                  // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
-                  // }
+                // contentContainerStyle={{ marginHorizontal: 10 }}
+                // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
+                // }
                 />
               </View>
             </>
           }
         />
       </SafeAreaView>
+      <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND} />
     </KeyboardAwareScrollView>
   )
 }
@@ -212,6 +184,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: 45,
+    marginHorizontal: 10,
     // borderWidth:2,
     // borderColor:'white',
   },
@@ -269,7 +242,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal:10,
+    marginHorizontal: 10,
   },
   text: {
     fontSize: 16,
@@ -298,7 +271,7 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginHorizontal:12,
+    marginHorizontal: 12,
 
   },
   step: {

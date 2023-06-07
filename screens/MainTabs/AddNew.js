@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, Dimensions, View, Image, TouchableOpacity, ScrollView, ToastAndroid, FlatList, Alert } from 'react-native'
+import { StyleSheet, Text, TextInput, Dimensions, View,StatusBar, Image, TouchableOpacity, ScrollView, ToastAndroid, FlatList, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -227,6 +227,8 @@ const AddNew = () => {
           </View>
         </View>
       </View>
+      <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND2} />
+
     </ScrollView>
   )
 }

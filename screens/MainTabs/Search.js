@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, FlatList, ActivityIndicator, ToastAndroid } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, StatusBar, FlatList, ActivityIndicator, ToastAndroid } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { TextInput } from 'react-native-paper'
 import { COLOR, ICON } from '../../constants/Themes'
@@ -11,7 +11,7 @@ const Search = () => {
     const [searchRecipe, setSearchRecipe] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const countdownSearch = (searchText) => {
-       
+
         if (timeOut) {
             clearTimeout(timeOut);
         }
@@ -63,7 +63,7 @@ const Search = () => {
     }
     const search = async (searchText) => {
         try {
-            console.log("searchText",searchText);
+            console.log("searchText", searchText);
             const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
             if (response.result) {
                 // console.log(response.recipe);
@@ -90,31 +90,37 @@ const Search = () => {
                     placeholderTextColor={COLOR.WHITE}
                     style={styles.input}></TextInput>
             </View>
-            <View>
-                <Text style={styles.textNew}>Các món mới</Text>
-                <View style={styles.line} />
+
+            <View style={styles.listRecipe}>
+
+                {isLoading ?
+                    (<View>
+                        <ActivityIndicator size={'large'} color='#fff00' />
+                        <Text >Loading...</Text>
+                    </View>)
+                    :
+                    (<View style={{}}>
+                        <View>
+                            <Text style={styles.textNew}>Các món mới</Text>
+                            <View style={styles.line} />
+                        </View>
+                        <FlatList
+                            style={{ marginBottom: 50, }}
+                            showsHorizontalScrollIndicator={false}
+                            numColumns={2}
+                            vertical
+                            data={searchRecipe}
+                            renderItem={({ item }) => (
+                                <ItemDishesVertical
+                                    recipe={item}
+                                    onPress={() => { }}
+                                />
+                            )} />
+                    </View>)}
             </View>
 
-            {isLoading ?
-                (<View>
-                    <ActivityIndicator size={'large'} color='#fff00' />
-                    <Text >Loading...</Text>
-                </View>)
-                :
-                (<View style={styles.newDishes}>
-                    <FlatList
-                        style={{ marginBottom: 10, }}
-                        showsHorizontalScrollIndicator={false}
-                        numColumns={2}
-                        vertical
-                        data={searchRecipe}
-                        renderItem={({ item }) => (
-                            <ItemDishesVertical
-                                recipe={item}
-                                onPress={() => { }}
-                            />
-                        )} />
-                </View>)}
+            <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND3} />
+
         </SafeAreaView>
     )
 }
@@ -168,6 +174,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: COLOR.WHITE,
         backgroundColor: COLOR.WHITE,
+
+    },
+    listRecipe: {
+        height: '100%', marginBottom: 80,
+
 
     }
 
