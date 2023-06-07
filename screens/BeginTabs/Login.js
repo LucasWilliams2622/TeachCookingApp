@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ToastAndroid, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput } from 'react-native-paper'
 import { COLOR } from '../../constants/Themes'
 import { checkPassNew } from '../../constants/Validate'
 import { checkEmail } from '../../constants/Validate'
 import AxiosInstance from '../../constants/AxiosInstance'
+import { AppContext } from '../../utils/AppContext'
 const Login = (props) => {
     const { navigation } = props;
+    const { isLogin, infoUser } = useContext(AppContext);
     const [check, setCheck] = useState(false);
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('');
@@ -24,8 +26,8 @@ const Login = (props) => {
             if (response.result) {
                 // await AsyncStorage.setItem("token", response.token);
                 ToastAndroid.show("Login Success", ToastAndroid.SHORT);
-                navigation.navigate("BottomTabs")
-
+                navigation.navigate("BottomTabs");
+                
             } else {
                 ToastAndroid.show("Login Failed !!! \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
 
@@ -97,7 +99,7 @@ const Login = (props) => {
                     <Text style={styles.createAccountButtonText}>Forgot Password? </Text>
                 </TouchableOpacity>
                 <View style={styles.boxCenter} >
-                    <TouchableOpacity onPress={() => { onLogin(), checkValidate() }} 
+                    <TouchableOpacity onPress={() => { onLogin()}} 
                     style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>Login </Text>
                     </TouchableOpacity>

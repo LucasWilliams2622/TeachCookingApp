@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity } from 'react-native'
-import React, { useState, useCallback } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ToastAndroid } from 'react-native'
+import React, { useState, useCallback, useContext, useEffect } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { ICON, COLOR } from '../../constants/Themes'
@@ -9,10 +9,41 @@ import ItemMaterial from '../../component/ItemMaterial';
 import ItemComent from '../../component/ItemComent';
 import ItemAnotherFood from '../../component/ItemAnotherFood';
 import YoutubeIframe from "react-native-youtube-iframe";
+import { AppContext } from '../../utils/AppContext';
+import AxiosInstance from '../../constants/AxiosInstance';
 
 const DetailFood = ({ navigation }) => {
     const [playing, setPlaying] = useState(false);
+    const { setInfoUser, infoUser } = useContext(AppContext);
+    const [content, setContent] = useState('');
+    const [comment, setcomMent] = useState([]);
+    const getAllCommnet = async () => {
+        try {
+            const response = await AxiosInstance().get("/comment/api/get-all");
+            // console.log(response)
+            if (response.result) {
+                setcomMent(response.comment);
+                console.log(comment);
+                console.log("Get all comment");
+            } else {
+                console.log("Failed to get all comment");
+            }
+        } catch (error) {
+            console.log("Failed to get all comment !!!");
+        }
+    }
+    const addComment = async () => {
+        const response = await AxiosInstance().post("/comment/api/add-new", { name: infoUser.user.name, content: content, image: infoUser.user.avatar });
+        if (response.result) {
+            ToastAndroid.show("Cập nhật thành công", ToastAndroid.SHORT);
+            setContent('');
+            getAllCommnet();
+        }
+        else {
+            ToastAndroid.show("Cập nhật không thành công", ToastAndroid.SHORT);
 
+        }
+    }
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
             setPlaying(false);
@@ -32,6 +63,13 @@ const DetailFood = ({ navigation }) => {
             content: "Toma",
         }
     ])
+    useEffect(() => {
+        getAllCommnet();
+        return () => {
+
+        }
+    }, [])
+
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
             <Image style={{ width: "100%", height: 400 }} source={require('../../asset/image/bapxaotep.jpg')} />
@@ -105,17 +143,17 @@ const DetailFood = ({ navigation }) => {
                 </View>
                 <Text style={styles.allComent} >Xem tất cả bình luận</Text>
                 <FlatList
-                    data={dataComent}
+                    data={comment}
                     renderItem={({ item }) => <ItemComent data={item} />}
                     keyExtractor={item => item._id}
                     showsVerticalScrollIndicator={false}
                 />
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                    <Image style={{ width: 30, height: 30 }} source={require('../../asset/icon/icon_people.png')} />
-                    <TextInput
-                        style={styles.addComent}>
-                        <Text style={{ fontSize: 14, color: 'white' }} >Thêm bình luận</Text>
-                    </TextInput>
+                    <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} />
+                    <TextInput value={content} onChangeText={text => setContent(text)} style={styles.addComent}></TextInput>
+                    <TouchableOpacity onPress={addComment}>
+                        <Image style={styles.imagePost} source={require('../../asset/icon/icon_post.png')}></Image>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.line}></View>
 
@@ -164,7 +202,8 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         borderWidth: 1,
         borderColor: 'white',
-        marginTop: -5
+        marginTop: -5,
+        color: COLOR.WHITE
     }
     ,
     text: {
@@ -211,6 +250,13 @@ const styles = StyleSheet.create({
     videoYoutube: {
         marginTop: 30,
         borderRadius: 20,
+    },
+    imagePost: {
+        marginTop: 10,
+        marginLeft: 7,
+        height: 20,
+        width: 20
+
     }
 
 })

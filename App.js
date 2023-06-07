@@ -51,22 +51,6 @@ const App = () => {
   };
   //https://testfcm.com/
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="AddNew" screenOptions={{ headerShown: false }}>
-
-        <Stack.Screen name="StackBegin" component={StackBegin} />
-        <Stack.Screen name="BottomTabs" component={BottomTabs} />
-
-
-          <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="AddNew" component={AddNew} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="DetailFood" component={DetailFood} />
-
-        <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="ItemDishes" component={ItemDishes} />
-      </Stack.Navigator>
-    </NavigationContainer>
     <AppContextProvider>
       <NavigationContainer>
          <BottomTabs/>
