@@ -9,7 +9,7 @@ import AxiosInstance from '../../constants/AxiosInstance'
 import { AppContext } from '../../utils/AppContext'
 const Login = (props) => {
     const { navigation } = props;
-    const { isLogin, infoUser } = useContext(AppContext);
+    const {setIsLogin } = useContext(AppContext);
     const [check, setCheck] = useState(false);
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('');
@@ -26,8 +26,7 @@ const Login = (props) => {
             if (response.result) {
                 // await AsyncStorage.setItem("token", response.token);
                 ToastAndroid.show("Login Success", ToastAndroid.SHORT);
-                navigation.navigate("BottomTabs");
-                
+                setIsLogin(true);
             } else {
                 ToastAndroid.show("Login Failed !!! \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
 
@@ -70,7 +69,7 @@ const Login = (props) => {
                             console.log('loi email');
                         } else {
                             setCheck(true);
-                            console.log("dung r r")
+                            console.log("dung email")
                         }
                     }}
                 // onSubmitEditing={() => this.refs.txtPassword.focus()}
@@ -91,7 +90,7 @@ const Login = (props) => {
                             console.log('loi mat khau');
                         } else {
                             setCheck(true);
-                            console.log("dung r r")
+                            console.log("dung mk")
                         }
                     }}
                 />
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
     input: {
         borderRadius: 10,
         height: 40,
-        backgroundColor: COLOR.BACKGROUND6,
+        backgroundColor: COLOR.BACKGROUND3,
         color: COLOR.WHITE,
         marginBottom: 5,
         paddingHorizontal: 10,
