@@ -15,8 +15,6 @@ const MyDishes = (props) => {
   const [refreshControl, setRefreshControl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("infoUser My Dish", infoUser);
-  console.log("idUser My Dish", idUser);
   const goAddNew = () => {
     navigation.navigate('AddNew')
   }
@@ -24,7 +22,7 @@ const MyDishes = (props) => {
     try {
       const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idUser);
       if (response.result) {
-        console.log("========>",response.recipe);
+        // console.log("========>",response.recipe);
         setRecipe(response.recipe)
         setIsLoading(true)
       } else {
@@ -34,6 +32,7 @@ const MyDishes = (props) => {
       console.log("Failed to get user recipe !!!");
     }
   }
+
   useEffect(() => {
     getRecipeOfUser();
   }, [stateList]);
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
   main: {
   },
   header: {
-    marginTop: 20,marginHorizontal:20,
+    marginTop: 20, marginHorizontal: 20,
   },
   content: {
     justifyContent: 'center',

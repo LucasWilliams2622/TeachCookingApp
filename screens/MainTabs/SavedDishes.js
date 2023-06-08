@@ -52,16 +52,16 @@ const SavedDishes = (props) => {
   const getSavedRecipe = async () => {
     try {
       const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" + "647dc518dded9d94be4b27cc");
-      console.log("SAVED===========>", response.favorite)
+      // console.log("SAVED===========>", response.favorite)
       if (response.result) {
         setRecipe(response.favorite)
         response.favorite.forEach(recipe => {
           // console.log(recipe._id);
-          console.log(recipe.idUser);
-          console.log(recipe.idRecipe.image);
-          console.log(recipe.idRecipe.title);
-          console.log(recipe.idRecipe.description);
-          console.log(recipe.idRecipe.author);
+          // console.log(recipe.idUser);
+          // console.log(recipe.idRecipe.image);
+          // console.log(recipe.idRecipe.title);
+          // console.log(recipe.idRecipe.description);
+          // console.log(recipe.idRecipe.author);
 
         });
         setIsLoading(true)
@@ -80,7 +80,7 @@ const SavedDishes = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.main}>
+      <View style={styles.main}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.buttonChose} >
             <Image style={styles.save} source={ICON.Saved}></Image>
@@ -98,7 +98,6 @@ const SavedDishes = (props) => {
         {isLoading ?
           (
             <View style={styles.boxList}>
-
               <FlatList
                 style={{ marginVertical: 15, width: '100%' }}
                 showsHorizontalScrollIndicator={false}
@@ -106,20 +105,19 @@ const SavedDishes = (props) => {
                 numColumns={2}
                 horizontal={false}
                 data={recipe}
-                renderItem={({ item }) => <ItemSavedRecipe recipe={item} />}
+                renderItem={({ item }) => <ItemSavedRecipe recipe={item} SavedDishes={SavedDishes}/>}
                 keyExtractor={eachCategory => eachCategory.name}
                 refreshControl={
                   <RefreshControl refreshing={refreshControl} onRefresh={() => {
                     setRefreshControl(true)
                     console.log("Refresh")
                     setStateList(stateList + 1)
-                    console.log(stateList)
+                    // console.log(stateList)
                     setRefreshControl(false)
                   }} colors={['green']} />
                 }
               />
             </View>
-
           )
           :
           (<View style={styles.content}>
@@ -129,10 +127,8 @@ const SavedDishes = (props) => {
             <Text style={styles.text}>thích và lưu món đó để nấu và tìm thầy những món đó ở đây </Text>
             <Text style={styles.text}> nhé!</Text>
           </View>)
-
         }
-
-      </ScrollView>
+      </View>
     </SafeAreaView >
   )
 }

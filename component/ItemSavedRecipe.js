@@ -14,13 +14,15 @@ const ItemSavedRecipe = (props) => {
   const goDetail = () => {
     navigation.navigate("DetailFood", { recipe })
   }
-  const deleteSaved = async () => {
+
+  const handleDeleteSavedItem = async () => {
     try {
       const response = await AxiosInstance()
         .delete(`/favorite/api/delete-by-id?idUser=${idUser}&idRecipe=${recipe._id}`);
       console.log(response.recipe)
       if (response.result) {
         ToastAndroid.show("Đã xóa ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+        props.SavedDishes();
       } else {
         console.log("Failed to delete RECIPE");
       }
@@ -36,7 +38,7 @@ const ItemSavedRecipe = (props) => {
         text: "Đồng ý",
         onPress: () => {
           setIsSaved(false)
-          deleteSaved()
+          handleDeleteSavedItem()
         }
       },
       {

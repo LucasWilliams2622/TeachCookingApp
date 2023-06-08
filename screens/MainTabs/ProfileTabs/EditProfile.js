@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ToastAndroid,ScrollView, Alert } from 'react-native'
 import React, { useState, useContext, useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, IMAGES, COLOR } from '../../../constants/Themes'
@@ -12,7 +12,7 @@ const EditProfile = (props) => {
   const { navigation } = props;
   const [userName, setuserName] = useState('');
   const [dataUser, setDataUser] = useState([])
-  const { idUser,infoUser,setInfoUser } = useContext(AppContext);
+  const { idUser, infoUser, setInfoUser } = useContext(AppContext);
 
   const [checkUserName, setcheckUserName] = useState(false);
   const [id, setId] = useState('');
@@ -35,21 +35,16 @@ const EditProfile = (props) => {
       console.log("=========>", error);
     }
   }
-  const updateProfile= async ()=>
-    {
-
-        const response=await AxiosInstance().put("user/api/update",{email:infoUser.user.email,password:infoUser.user.password,name:infoUser.user.name,description:description});
-        if(response.result)
-        {
-          setInfoUser({...infoUser,description:description});
-            ToastAndroid.show("Cập nhật thành công",ToastAndroid.SHORT);
-        }
-        else
-        {
-            ToastAndroid.show("Cập nhật không thành công",ToastAndroid.SHORT);
-
-        }
+  const updateProfile = async () => {
+    const response = await AxiosInstance().put("user/api/update", { email: infoUser.user.email, password: infoUser.user.password, name: infoUser.user.name, description: description });
+    if (response.result) {
+      setInfoUser({ ...infoUser, description: description });
+      ToastAndroid.show("Cập nhật thành công", ToastAndroid.SHORT);
     }
+    else {
+      ToastAndroid.show("Cập nhật không thành công", ToastAndroid.SHORT);
+    }
+  }
   useEffect(() => {
     getInfoUser()
   }, [])
@@ -151,7 +146,7 @@ const EditProfile = (props) => {
                 !avatar ?
                   (<Image style={styles.avatar} source={{ uri: dataUser.avatar }} />)
                   :
-                  (<Image style={styles.avatar} source={{uri:avatar}} />)}
+                  (<Image style={styles.avatar} source={{ uri: avatar }} />)}
             </TouchableOpacity>
             <View style={styles.info}>
               <Text style={styles.name}>{dataUser.name}</Text>
@@ -170,7 +165,7 @@ const EditProfile = (props) => {
               placeholderTextColor="gray"
               value={infoUser.user.name}
               onChangeText={(text) => {
-                setInfoUser({...infoUser,name: text})
+                setInfoUser({ ...infoUser, name: text })
                 // // setValidatePass2(text);
                 // if (isValidEmpty(text) === false) {
                 //   setcheckUserName(false);
@@ -195,7 +190,7 @@ const EditProfile = (props) => {
               editable={false}
               value={infoUser.user.email}
               onChangeText={(text) => {
-                setInfoUser({...infoUser,email: text})
+                setInfoUser({ ...infoUser, email: text })
                 // setValidatePass2(text);
                 // if (isValidEmpty(text) === false) {
                 //   setcheckEmail(false);
@@ -216,7 +211,7 @@ const EditProfile = (props) => {
               style={styles.input}
               // onChangeText={onChangeNumber}
               // value={number}
-              placeholder="Đến từ:.."
+              placeholder="Mô tả:   ...."
               placeholderTextColor="gray"
               returnKeyType='next'
               keyboardType="default"
@@ -231,7 +226,7 @@ const EditProfile = (props) => {
                 // } else {
                 //   setcheckNumber(true);
                 //   console.log("dung r");
-                }
+              }
               }
             />
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -244,7 +239,7 @@ const EditProfile = (props) => {
               placeholder=""
               placeholderTextColor="gray"
               returnKeyType='done'
-              />
+            />
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
             </View>
@@ -385,9 +380,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: 'flex-end',
     paddingBottom: 16,
-    padding: 12,
     fontSize: 17,
-    paddingBottom: 0,
-    color:COLOR.WHITE
+    color: COLOR.WHITE
   },
 })

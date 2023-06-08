@@ -1,31 +1,29 @@
-import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground,ToastAndroid, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground, ToastAndroid, TouchableOpacity } from 'react-native'
+import React, { useState,useContext } from 'react'
 import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AxiosInstance from '../constants/AxiosInstance'
 const windowWIdth = Dimensions.get('window').width;
+import { AppContext } from '../utils/AppContext'
+
 
 const ItemSavedRecipe = (props) => {
     const { recipe, navigation } = props;
-    const [idRecipe, setIdRecipe] = useState('')
     const [isSaved, setIsSaved] = useState(false)
+    const { idUser, infoUser } = useContext(AppContext);
+
     const goDetail = () => {
-        navigation.navigate("DetailFood")
+        navigation.navigate("DetailFood",{recipe})
     }
+    const goEditRecipe = async () => {
+        navigation.navigate("AddNew",{recipe})
+          }
     const deleteMyRecipe = async () => {
         try {
-
-            console.log("AAAAAAAAAAAA",recipe._id);
-            const response = await AxiosInstance().delete("/recipe/api/delete-by-id?id="+ recipe._id );
-            console.log(response.recipe)
+            const response = await AxiosInstance().delete(`/recipe/api/delete-by-id?_id=${recipe._id}&idUser=${idUser}`);
+            // console.log(response.recipe)
             if (response.result) {
-                ToastAndroid.show("Xoá thành công \n Hãy refresh danh sách ", ToastAndroid.SHORT);
-
-                response.recipe.forEach(recipe => {
-                    console.log(recipe.ingredients.quantity);
-                    console.log(recipe.title);
-                    console.log(recipe);
-                });
+                ToastAndroid.show("Xoá thành công!", ToastAndroid.SHORT);
             } else {
                 console.log("Failed to delete RECIPE");
             }
@@ -67,7 +65,7 @@ const ItemSavedRecipe = (props) => {
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_save.png')} />
                             </TouchableOpacity>)
                             :
-                            (<TouchableOpacity onPress={() =>{}}>
+                            (<TouchableOpacity onPress={() => { goEditRecipe()}}>
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_saved.png')} />
                             </TouchableOpacity>)}
                     </View>
@@ -85,12 +83,12 @@ const ItemSavedRecipe = (props) => {
                         {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
                         <Text style={styles.textTime}>{recipe.time} giờ</Text>
                         <View style={styles.boxIcon}>
-                        <TouchableOpacity style={styles.boxEmotion} onPress={()=>{dialogConfirm()}}>
-                            <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.boxEmotion,{marginLeft:10, width:34}]} onPress={()=>{dialogConfirm()}}>
-                            <Image style={[styles.icon2,{tintColor:COLOR.BLACK}]} source={require('../asset/icon/icon_note.png')} />
-                        </TouchableOpacity>
+                            <TouchableOpacity style={styles.boxEmotion} onPress={() => { dialogConfirm() }}>
+                                <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.boxEmotion, { marginLeft: 10, width: 34 }]} onPress={() => { dialogConfirm() }}>
+                                <Image style={[styles.icon2, { tintColor: COLOR.BLACK }]} source={require('../asset/icon/icon_note.png')} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -197,9 +195,9 @@ const styles = StyleSheet.create({
     icon2: {
         width: 15,
         height: 15,
-        tintColor:COLOR.WHITE
+        tintColor: COLOR.WHITE
     },
-    boxIcon:{
-        flexDirection:'row',
+    boxIcon: {
+        flexDirection: 'row',
     }
 })

@@ -89,6 +89,17 @@ const AddNew = () => {
       console.log(error);
     }
   }
+  const clearInput = () => {
+    setQuantity(''); setUnit(''); setName('');
+    setQuantity2(''); setUnit2(''); setName2('')
+    setQuantity3(''); setUnit3(''); setName3('');
+    setStep(''); setStep2('');setStep3('');
+
+    setTitle(''); setDescription('');
+    setImage('');  setMealType('');  setTime('');  
+    setIdVideo('');  
+    setIngredients('');  setSteps(''); 
+  }
   useEffect(() => {
 
     return () => {
@@ -318,7 +329,7 @@ const AddNew = () => {
                 keyboardType='numbers-and-punctuation' style={styles.textInput2} onChangeText={setTime} value={time}></TextInput>
             </View>
             <View style={[styles.rowItem, { marginTop: 15 }]}>
-              <Text style={styles.text}>Id video Youtube</Text>
+              <Text style={styles.text}>Link video Youtube</Text>
               <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='ABC-XYZ'
                 keyboardType='numbers-and-punctuation' style={styles.textInput2} onChangeText={setIdVideo} value={idVideo}></TextInput>
             </View>
