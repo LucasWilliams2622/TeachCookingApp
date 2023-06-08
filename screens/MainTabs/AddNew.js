@@ -47,14 +47,15 @@ const AddNew = () => {
   const [message, setMessage] = useState([])
   const checkStepsAndIngredients = async () => {
     await handleAddIngredient()
-    await handleAddStep()
-    if ((ingredients != null) && (steps != null)) {
-      console.log("AAAAAA");
-      addNewRecipe()
+    console.log(ingredients);
+    // await handleAddStep()
+    // if ((ingredients != null) && (steps != null)) {
+    //   console.log("AAAAAA");
+    //   addNewRecipe()
 
-    } else {
-      console.log("NO DATA");
-    }
+    // } else {
+    //   console.log("NO DATA");
+    // }
   }
   const addNewRecipe = async () => {
     try {
@@ -72,8 +73,8 @@ const AddNew = () => {
 
       const response = await AxiosInstance().post("/recipe/api/new", {
         title: title, description: description,
-        ingredients: ingredients, time: time,
-        steps: steps, image: image,
+        ingredients: [[name,quantity,unit],[name2,quantity2,unit2],[name3,quantity3,unit3]], time: time,
+        steps: [step,step2,step3], image: image,
         mealType: mealType,
         author: idUser, idVideo: idVideo,
       });
@@ -261,7 +262,7 @@ const AddNew = () => {
           <TouchableOpacity style={styles.btnLuu}>
             <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]} onPress={handleCheckInput}>Lưu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={checkStepsAndIngredients}>
+          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={addNewRecipe}>
             <Text style={[styles.textButton]}>Đăng món</Text>
           </TouchableOpacity>
         </View>
