@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList, StatusBar, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, StatusBar, Dimensions, TouchableOpacity, ScrollView, ToastAndroid } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,13 +8,16 @@ import ItemDishes from '../../component/ItemDishes'
 import ItemDishesVertical from '../../component/ItemDishesVertical'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AxiosInstance from '../../constants/AxiosInstance'
+import { ActivityIndicator } from 'react-native-paper';
 
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
   const [dataRecipe, setDataRecipe] = useState([]);
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
+  const [isLoading, setisLoading] = useState(true);
+  let timeOut = null;
   const getAllCategory = async () => {
     try {
       const response = await AxiosInstance().get("category/api/get-all");
@@ -47,6 +50,30 @@ const Home = (props) => {
       console.log("=========>", error);
     }
   }
+  const countDownSearch = (searchText) => {
+    if (timeOut) {
+      clearTimeout(timeOut);
+    }
+    timeOut = setTimeout(() => {
+      search(searchText);
+    }, 3000);
+  }
+  const search = async (searchText) => {
+    try {
+      setisLoading(true);
+    const response = await AxiosInstance().get("recipe/api/search-by-title?title=" + searchText);
+    if (response.result) {
+      setDataRecipe(response.recipe);
+      setisLoading(false);
+    } else {
+      ToastAndroid.show('lay du lieu that bai', ToastAndroid.SHORT);
+      getAllRecipe();
+    }
+    } catch (error) {
+        console.log(error,"Error")
+    }
+  }
+
   useEffect(() => {
 
     getAllRecipe();
@@ -76,7 +103,7 @@ const Home = (props) => {
                   <TextInput
                     style={styles.input}
                     placeholder='Tìm kiếm tên món ăn ...'
-                    placeholderTextColor="#A8A8A8" />
+                    placeholderTextColor="#A8A8A8" onChangeText={(text) => countDownSearch(text)} />
                 </TouchableOpacity>
               </View>
               {/* Slide show */}
@@ -137,24 +164,37 @@ const Home = (props) => {
               </View>
               <View style={styles.newDishes}>
                 <Text style={styles.title}>Món mới nhất</Text>
-                <FlatList
-                  style={{ marginBottom: 10, }}
-                  showsHorizontalScrollIndicator={false}
-                  numColumns={2}
-                  vertical
-                  data={dataRecipe}
+                {
+                  isLoading == true ?
+                    (
+                      <View >
+                        <ActivityIndicator size='large' color='#f0fff' />
+                        <Text>Loading...</Text>
+                      </View>
+                    )
+                    : (
+                      <FlatList
+                        style={{ marginBottom: 10, }}
+                        showsHorizontalScrollIndicator={false}
+                        numColumns={2}
+                        vertical
+                        data={dataRecipe}
 
-                  renderItem={({ item }) => (
-                    <ItemDishesVertical
-                      recipe={item}
-                      navigation={navigation}
-                    />
-                  )}
-                  keyExtractor={item => item._id}
-                // contentContainerStyle={{ marginHorizontal: 10 }}
-                // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
-                // }
-                />
+                        renderItem={({ item }) => (
+                          <ItemDishesVertical
+                            recipe={item}
+                            navigation={navigation}
+                          />
+                        )}
+                        keyExtractor={item => item._id}
+                      // contentContainerStyle={{ marginHorizontal: 10 }}
+                      // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
+                      // }
+                      />
+
+                    )
+                }
+
               </View>
             </>
           }
