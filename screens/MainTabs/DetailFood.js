@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
 import React, { useState, useCallback } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -10,66 +10,58 @@ import ItemComent from '../../component/ItemComent';
 import ItemAnotherFood from '../../component/ItemAnotherFood';
 import YoutubeIframe from "react-native-youtube-iframe";
 
-const DetailFood = ({ navigation }) => {
+const DetailFood = (props) => {
+    const { route, navigation } = props;
+    const { params } = route;
+    const { recipe } = params;
     const [playing, setPlaying] = useState(false);
-
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
             setPlaying(false);
             Alert.alert("video has finished playing!");
         }
     }, []);
-
     const togglePlaying = useCallback(() => {
         setPlaying((prev) => !prev);
     }, []);
-
-    const [step, setStep] = useState([
-        {
-            content: "Tom",
-        },
-        {
-            content: "Toma",
-        }
-    ])
+    const goBack = () => {
+        navigation.goBack()
+    }
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
-            <Image style={{ width: "100%", height: 400 }} source={require('../../asset/image/bapxaotep.jpg')} />
+            <ImageBackground style={{ width: "100%", height: 400 }}
+                source={{ uri: recipe.image }}>
+                <TouchableOpacity onPress={() => { goBack() }}>
+                    <Image style={styles.icon} source={require('../../asset/icon/icon_back.png')} />
+                </TouchableOpacity></ImageBackground>
             <View style={{ padding: 16 }}>
-                <Text style={styles.bapxaotep}>Bắp xào tép</Text>
+                <Text style={styles.bapxaotep}>{recipe.title}</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row', }}>
-                    <Image style={styles.logo} source={require('../../asset/icon/icon_people.png')} />
+                    <Image style={styles.logo}
+                        source={!recipe.author.avatar ? { uri: recipe.author.avatar } : require('../../asset/icon/icon_people.png')} />
                     <View>
-                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >Bếp của Quỳnh</Text>
-                        <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >@QuynhAlee</Text>
+                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{recipe.author.name}</Text>
+                        <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{recipe.author.email}</Text>
                     </View>
 
                 </View>
                 <Text style={[styles.text, { color: COLOR.WHITE }]}>
-                    Nhà mình lúc trước chưng trứng không nên ăn khá đặc
-                    và nhanh ngán. Lúc mình ra nhà dì ăn trứng chưng này
-                    thì lại thấy trứng mền nhẹ ăn ngon lắm...
+                    {recipe.description}
                 </Text>
-                <TouchableOpacity>
-                    <Text style={[styles.text, { color: COLOR.WHITE, textAlign: 'right' }]}>
-                        Xem thêm
-                    </Text>
-                </TouchableOpacity>
-
                 <View style={styles.line}></View>
                 <View style={styles.boxTime}>
                     <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
-                    <Text style={styles.time} >30 phút</Text>
+                    <Text style={styles.time} >{recipe.time} giờ</Text>
                 </View>
-
-                {/* Nguyen lieu */}
-                <Text style={styles.title} >Nguyên liệu</Text>
                 <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
                     <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
-                    <Text style={styles.people}>2-3 người</Text>
+                    <Text style={styles.people}>{recipe.mealType}</Text>
                 </View>
+                {/* Nguyen lieu */}
+                <Text style={styles.title} >Nguyên liệu</Text>
+               
                 <FlatList
-                    data={dataNguyenLieu}
+                    data={recipe.ingredients}
                     renderItem={({ item }) => <ItemMaterial data={item} />}
                     keyExtractor={item => item._id}
                     showsVerticalScrollIndicator={false}
@@ -83,7 +75,8 @@ const DetailFood = ({ navigation }) => {
                     <FlatList
                         data={dataNe}
                         renderItem={({ item }) => <ItemSteps data={item} />}
-                        keyExtractor={item => item._id}
+                        keyExtractor={(subItem) => subItem.id}
+                        listKey={(subItem) => 'subList-' + subItem.id}
                         showsVerticalScrollIndicator={false}
                     />
                 </View>
@@ -91,7 +84,7 @@ const DetailFood = ({ navigation }) => {
                     <YoutubeIframe
                         height={350}
                         play={playing}
-                        videoId={"JXp4eZ8XRFg"}
+                        videoId={recipe.idVideo}
                         onChangeState={onStateChange}
                     />
                     {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
@@ -107,7 +100,8 @@ const DetailFood = ({ navigation }) => {
                 <FlatList
                     data={dataComent}
                     renderItem={({ item }) => <ItemComent data={item} />}
-                    keyExtractor={item => item._id}
+                    keyExtractor={(subItem) => subItem.id}
+                    listKey={(subItem) => 'subList-' + subItem.id}
                     showsVerticalScrollIndicator={false}
                 />
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
@@ -123,13 +117,14 @@ const DetailFood = ({ navigation }) => {
                 {/* Mon moi cua Quynh */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
-                    <Text style={styles.newFoodof} >Món mới của Quỳnh</Text>
+                    <Text style={styles.newFoodof} >Món mới của {recipe.author.name}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
                         data={anotherFood}
                         renderItem={({ item }) => <ItemAnotherFood data={item} />}
-                        keyExtractor={item => item._id}
+                        keyExtractor={(subItem) => subItem.id}
+                        listKey={(subItem) => 'subList-' + subItem.id}
                         showsVerticalScrollIndicator={false}
                     />
                 </View>
@@ -211,7 +206,16 @@ const styles = StyleSheet.create({
     videoYoutube: {
         marginTop: 30,
         borderRadius: 20,
-    }
+    },
+    icon: {
+        marginHorizontal: 10,
+        marginVertical: 23,
+        height: 25,
+        width: 25,
+        tintColor: COLOR.WHITE,
+
+
+    },
 
 })
 

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TextInput, Dimensions, View,StatusBar, Image, TouchableOpacity, ScrollView, ToastAndroid, FlatList, Alert } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, Dimensions, View, StatusBar, Image, TouchableOpacity, ScrollView, ToastAndroid, FlatList, Alert } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
 import { ICON, COLOR } from '../../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemIngredient from '../../component/ItemIngredient'
@@ -8,79 +8,223 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import AxiosInstance from '../../constants/AxiosInstance';
 import { Children } from 'react/cjs/react.production.min'
 import { Button } from 'react-native-paper'
+import { AppContext } from '../../utils/AppContext'
+
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const AddNew = () => {
-  // title, description, image, ingredients, steps, time, difficulty, mealType, author
-
-  const [idx, incr] = useState(0);
-
-  const [ingredient, setIngredient] = useState([]);
-  const [step, setStep] = useState(dataStep2)
+  // title, description, image, ingredient, steps, time, difficulty, mealType, author
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('')
-  const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState('');
+  const [mealType, setMealType] = useState('');
+
   const [time, setTime] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-  const [mealType, setmealType] = useState('');
+  const [idVideo, setIdVideo] = useState('')
+  const [steps, setSteps] = useState([]);
+
+  const [ingredients, setIngredients] = useState([]);
   const [author, setAuthor] = useState('');
+
+  const [idex, setIndex] = useState(0);
+  const [quantity, setQuantity] = useState('')
+  const [unit, setUnit] = useState('')
+  const [name, setName] = useState('')
+
+  const [quantity2, setQuantity2] = useState('')
+  const [unit2, setUnit2] = useState('')
+  const [name2, setName2] = useState('')
+
+  const [quantity3, setQuantity3] = useState('')
+  const [unit3, setUnit3] = useState('')
+  const [name3, setName3] = useState('')
+
+  const [step, setStep] = useState('')
+  const [step2, setStep2] = useState('')
+  const [step3, setStep3] = useState('')
+
+  const { idUser, infoUser } = useContext(AppContext);
   const [message, setMessage] = useState([])
-  const addNewRecipe = async () => {
-    const response = await AxiosIntance().post("/recipe/api/new", {
-      title: title, description: description, ingredients: ingredients, time: time,
-      steps: steps, image: image, difficulty: difficulty, mealType: mealType, author: author
-    });
-    console.log(response);
-    if (response.result) {
-      ToastAndroid.show("Đăng bài thành công", ToastAndroid.SHORT);
+  const checkStepsAndIngredients = async () => {
+    await handleAddIngredient()
+    await handleAddStep()
+    if ((ingredients != null) && (steps != null)) {
+      console.log("AAAAAA");
+      addNewRecipe()
+
     } else {
-      ToastAndroid.show("Đăng bài thất bại", ToastAndroid.SHORT);
+      console.log("NO DATA");
     }
   }
-  const handleAddInput = () => {
-    var newArray = [...ingredient, { _id: idx+1, text: 'teen' + (idx + 1)}];
-    ingredient.push({ _id: idx+1, text: "teen " + (idx + 1) });
-    incr(idx + 1);
-    setIngredient(newArray);
-    console.log(JSON.stringify(ingredient));
+  const addNewRecipe = async () => {
+    try {
+      await handleAddIngredient()
+      await handleAddStep()
+      console.log("title", title);
+      console.log("description", description);
+      console.log("image", image);
+      console.log("mealType", mealType);
+
+      console.log("time", time);
+      console.log("idVideo", idVideo);
+      console.log("ingredients====>", ingredients);
+      console.log("steps=======>", steps);
+
+      const response = await AxiosInstance().post("/recipe/api/new", {
+        title: title, description: description,
+        ingredients: ingredients, time: time,
+        steps: steps, image: image,
+        mealType: mealType,
+        author: idUser, idVideo: idVideo,
+      });
+      console.log(response);
+      if (response.result) {
+        ToastAndroid.show("Đăng món thành công", ToastAndroid.SHORT);
+        clearInput()
+
+      } else {
+        ToastAndroid.show("Đăng món thất bại", ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const clearInput = () => {
+    // setQuantity(''); setUnit(''); setName('');
+    // setQuantity2(''); setUnit2(''); setName2('')
+    // setQuantity3(''); setUnit3(''); setName3('');
+    // setStep(''); setStep2('');setStep3('');
+
+    // setTitle(''); setDescription('');
+    // setImage('');  setMealType('');  setTime('');  
+    // setIdVideo('');  
+    // setIngredients('');  setSteps(''); 
+  }
+  useEffect(() => {
+
+    return () => {
+
+    }
+  }, [])
+
+  const handleAddIngredient = () => {
+    const newIngredient = {
+      quantity: quantity,
+      unit: unit,
+      name: name
+    };
+    const newIngredient2 = {
+      quantity: quantity2,
+      unit: unit2,
+      name: name2
+    };
+    const newIngredient3 = {
+      quantity: quantity3,
+      unit: unit3,
+      name: name3
+    };
+    setIngredients([...ingredients, newIngredient, newIngredient2, newIngredient3]);
+    // setIngredients([...ingredients, newIngredient]);
+
+    console.log("ingredients=========>", ingredients);
+
   };
+  const handleAddStep = () => {
+    const newStep = {
+      // order: 1,
+      description: step
+    };
+    const newStep2 = {
+      // order: 2,
+      description: step2  
+    };
+    const newStep3 = {
+      // order: 3,
+      description: step3
+    };
+    setSteps([...steps, newStep, newStep2, newStep3]);
+    console.log("STEP=========>", steps);
+
+  };
+  const handleQuantityChange = (text) => {
+    setQuantity(text);
+  };
+  const handleUnitChange = (text) => {
+    setUnit(text);
+  };
+  const handleNameChange = (text) => {
+    setName(text);
+  };
+
+  const handleQuantityChange2 = (text) => {
+    setQuantity2(text);
+  };
+  const handleUnitChange2 = (text) => {
+    setUnit2(text);
+  };
+  const handleNameChange2 = (text) => {
+    setName2(text);
+  };
+
+  const handleQuantityChange3 = (text) => {
+    setQuantity3(text);
+  };
+  const handleUnitChange3 = (text) => {
+    setUnit3(text);
+  };
+  const handleNameChange3 = (text) => {
+    setName3(text);
+  };
+
+
+  const handleAddInput = () => {
+    let newIngredient = {
+      id: idex + 1,
+      quantity: quantity,
+      unit: unit,
+      name: name,
+    };
+
+    let newIngredients = [...ingredients, newIngredient];
+
+    setIndex(idex + 1);
+    setIngredients(newIngredients);
+    console.log(ingredients);
+  };
+  // const handleAddIngredient = (newIngredient) => {
+  //   setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+  // };
   const dialogImageChoose = () => {
     return Alert.alert(
       "Thông báo",
       "Chọn phương thức lấy ảnh",
-      [
-        {
-          text: "Chụp ảnh ",
-          onPress: () => {
-            capture()
-          },
-        },
-
-        {
-          text: "Tải ảnh lên",
-          onPress: () => {
-            getImageLibrary()
-          },
-        },
-        {
-          text: "Hủy",
-        },
-      ]
-    );
-  };
+      [{
+        text: "Chụp ảnh ",
+        onPress: () => {
+          capture()
+        }
+      },
+      {
+        text: "Tải ảnh lên",
+        onPress: () => {
+          getImageLibrary()
+        }
+      },
+      {
+        text: "Hủy",
+      }])
+  }
   const capture = async () => {
     const result = await launchCamera();
     console.log(result.assets[0].uri);
-    const formdata = new FormData();
-    formdata.append('image', {
+    const formData = new FormData();
+    formData.append('image', {
       uri: result.assets[0].uri,
       type: 'icon/icon_jpeg',
       name: 'image.jpg',
     });
 
-    const response = await AxiosIntance("multipart/form-data").post('/recipe/api/upload-image', formdata);
+    const response = await AxiosInstance("multipart/form-data").post('/recipe/api/upload-image', formData);
     console.log(response.link);
     if (response.result == true) {
       setImage(response.link);
@@ -90,17 +234,16 @@ const AddNew = () => {
       ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
     }
   }
-
   const getImageLibrary = async () => {
     const result = await launchImageLibrary();
     console.log(result.assets[0].uri);
-    const formdata = new FormData();
-    formdata.append('image', {
+    const formData = new FormData();
+    formData.append('image', {
       uri: result.assets[0].uri,
       type: 'icon/icon_jpeg',
       name: 'image.jpg',
     });
-    const response = await AxiosIntance("multipart/form-data").post('/recipe/api/upload-image', formdata);
+    const response = await AxiosInstance("multipart/form-data").post('/recipe/api/upload-image', formData);
     console.log(response.link);
     if (response.result == true) {
       setImage(response.link);
@@ -121,7 +264,6 @@ const AddNew = () => {
     setMessage(text);
     console.log(message)
   }
-
   return (
     <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
       <View style={styles.container}>
@@ -130,7 +272,7 @@ const AddNew = () => {
           <TouchableOpacity style={styles.btnLuu}>
             <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]} onPress={handleCheckInput}>Lưu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={addNewRecipe}>
+          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={checkStepsAndIngredients}>
             <Text style={[styles.textButton]}>Đăng món</Text>
           </TouchableOpacity>
         </View>
@@ -151,7 +293,6 @@ const AddNew = () => {
                   <Image style={styles.image} source={{ uri: image }} />
                 )
             }
-
           </TouchableOpacity>
         </View>
 
@@ -159,7 +300,7 @@ const AddNew = () => {
           <View>
             <TextInput
               style={[styles.textInput, { marginTop: 20, fontSize: 20, fontWeight: 'bold', height: 70 }]}
-              value={title} onChangeText={setTitle} placeholder='Tiêu đề: Món canh ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
+              value={title} onChangeText={setTitle} placeholder='Tiêu đề: Món ăn ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
           </View>
           <View>
             <TextInput
@@ -173,54 +314,164 @@ const AddNew = () => {
               <Text style={{ color: COLOR.WHITE, textAlign: 'center' }}>------------------------------------------------------------------------------------------</Text>
             </View>
             <TextInput style={[styles.textInput, { marginTop: -8, height: 40, fontSize: 16 }]}
-              placeholderTextColor={COLOR.TextAdd} placeholder='Thêm loại món                                           >' onChangeText={setmealType} value={mealType} />
+              placeholderTextColor={COLOR.TextAdd} placeholder='Thêm loại món' />
           </View>
 
           <View style={styles.boxTimeAndRation} >
             <View style={[styles.rowItem, { marginTop: 15 }]}>
               <Text style={styles.text}>Khẩu phần</Text>
-              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 2 người' style={styles.textInput2}></TextInput>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 2 người' keyboardType='numeric'
+                onChangeText={setMealType} style={styles.textInput2} value={mealType}></TextInput>
             </View>
             <View style={[styles.rowItem, { marginTop: 15 }]}>
               <Text style={styles.text}>Thời gian nấu</Text>
-              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút' style={styles.textInput2} onChangeText={setTime} value={time}></TextInput>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder=' 1 tiếng 30 phút'
+                keyboardType='numbers-and-punctuation' style={styles.textInput2} onChangeText={setTime} value={time}></TextInput>
+            </View>
+            <View style={[styles.rowItem, { marginTop: 15 }]}>
+              <Text style={styles.text}>Id video Youtube</Text>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='ABC-XYZ'
+                keyboardType='numbers-and-punctuation' style={styles.textInput2} onChangeText={setIdVideo} value={idVideo}></TextInput>
             </View>
           </View>
 
           <View style={styles.line} />
-          <View style={styles.boxIngredient}>
-            <Text style={[styles.text3, {}]}>Nguyên Liệu</Text>
-            <View style={styles.Ingredient}>
-              {
-                <View >
-                  {/* {
-                    ingredient.map((item) => <ItemIngredient data={item} key={item._id} callbackFunction={callbackFunction}  name={message} setName={setMessage}/>)
+          <Text style={[styles.text3, { left: -120 }]}>Nguyên Liệu</Text>
 
-                  } */}
-                  {ingredient.map((value,key) => <ItemIngredient setData={value} key={key} callbackFunction={callbackFunction}  name={message} setName={setMessage}/>)}
-                  {/* <FlatList
-                    data={ingredient}
-                    scrollEnabled={false}
-                    renderItem={({ item }) => <ItemIngredient data={item} />}
-                    keyExtractor={item => item._id} /> */}
-                </View>
-              }
-              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <View style={styles.boxIngredient}>
+            <View style={styles.Ingredient}>
+
+
+
+              {/* {ingredients.map((value, key) => <ItemIngredient setData={value}
+                    key={key} callbackFunction={callbackFunction} name={message}
+                    setName={setMessage} />)} */}
+
+              <View style={[styles.item, {}]}>
+                <Image style={[styles.icon]} source={require('../../asset/icon/icon_menu.png')} />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='1'
+                  style={[styles.textinput]}
+                  value={quantity}
+                  onChangeText={handleQuantityChange}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='kg'
+                  style={[styles.textinput]}
+                  value={unit}
+                  onChangeText={handleUnitChange}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='Chanh'
+                  style={[styles.textinput]}
+                  value={name}
+                  onChangeText={handleNameChange}
+                />
+                <TouchableOpacity onPress={{}}>
+                  <Text style={{ color: 'white' }}>X</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={[styles.item, {}]}>
+                <Image style={[styles.icon]} source={require('../../asset/icon/icon_menu.png')} />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='1'
+                  style={[styles.textinput]}
+                  value={quantity2}
+                  onChangeText={handleQuantityChange2}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='kg'
+                  style={[styles.textinput]}
+                  value={unit2}
+                  onChangeText={handleUnitChange2}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='Chanh'
+                  style={[styles.textinput]}
+                  value={name2}
+                  onChangeText={handleNameChange2}
+                />
+                <TouchableOpacity onPress={{}}>
+                  <Text style={{ color: 'white' }}>X</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={[styles.item, {}]}>
+                <Image style={[styles.icon]} source={require('../../asset/icon/icon_menu.png')} />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='1'
+                  style={[styles.textinput]}
+                  value={quantity3}
+                  onChangeText={handleQuantityChange3}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='kg'
+                  style={[styles.textinput]}
+                  value={unit3}
+                  onChangeText={handleUnitChange3}
+                />
+                <TextInput
+                  placeholderTextColor={COLOR.GRAY1}
+                  placeholder='Chanh'
+                  style={[styles.textinput]}
+                  value={name3}
+                  onChangeText={handleNameChange3}
+                />
+                <TouchableOpacity onPress={{}}>
+                  <Text style={{ color: 'white' }}>X</Text>
+                </TouchableOpacity>
+              </View>
+
+
+              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: 20 }}>
                 <TouchableOpacity onPress={handleAddInput}>
                   <Text style={styles.text2}>+ Nguyên liệu</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={styles.text2}>+ Phần</Text>
-                </TouchableOpacity>
+
               </View>
             </View>
           </View>
           <View style={styles.line} />
           <View style={styles.newStep}>
             <Text style={styles.text3}>Cách Làm</Text>
-            {
-              step.map((item) => <ItemAddnewSteps data={item} key={item._id} />)
-            }
+            {/* {
+              steps.map((item) => <ItemAddnewSteps data={item} key={item._id} />)
+            } */}
+
+            <View style={styles.container2}>
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={styles.textNumber2}>1</Text>
+                <Image style={styles.icon2} source={require('../../asset/icon/icon_menu.png')}></Image>
+              </View>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='Sơ chế nguyên liệu'
+                style={styles.TextInput} onChangeText={(text) => setStep(text)}></TextInput>
+            </View>
+            <View style={styles.container2}>
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={styles.textNumber2}>2</Text>
+                <Image style={styles.icon2} source={require('../../asset/icon/icon_menu.png')}></Image>
+              </View>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='Sơ chế nguyên liệu'
+                style={styles.TextInput} onChangeText={(text) => setStep2(text)}></TextInput>
+            </View>
+            <View style={styles.container2}>
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={styles.textNumber2}>3</Text>
+                <Image style={styles.icon2} source={require('../../asset/icon/icon_menu.png')}></Image>
+              </View>
+              <TextInput placeholderTextColor={COLOR.TextAdd} placeholder='Sơ chế nguyên liệu'
+                style={styles.TextInput} onChangeText={(text) => setStep3(text)}></TextInput>
+            </View>
+
             <TouchableOpacity>
               <Text style={[styles.text, { textAlign: 'center' }]}>+ Thêm Bước</Text>
             </TouchableOpacity>
@@ -228,24 +479,23 @@ const AddNew = () => {
         </View>
       </View>
       <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND2} />
-
     </ScrollView>
   )
 }
 
 export default AddNew
 
-var dataSteps = [
-  { _id: "0", text: "Object1 1" },
-  { _id: "1", text: "Object 2" },
-]
-var dataStep2 = [
+// var dataSteps = [
+//   { _id: "0", text: "Object1 1" },
+//   { _id: "1", text: "Object 2" },
+// ]
+// var dataStep2 = [
 
-  { _id: "0", text: "1" },
-  { _id: "1", text: "2" },
-  { _id: "2", text: "3" }
+//   { _id: "0", text: "1" },
+//   { _id: "1", text: "2" },
+//   { _id: "2", text: "3" }
 
-]
+// ]
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -388,16 +638,80 @@ const styles = StyleSheet.create({
     height: 6,
     width: windowWIdth,
     backgroundColor: COLOR.BACKGROUND6,
-    marginVertical: 30,
+    marginTop: 20,
+    marginBottom: 15,
     // borderWidth:2,borderColor:'white',
 
   },
   Ingredient: {
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '100%'
   },
   boxIngredient: {
     justifyContent: 'flex-start',
     marginHorizontal: 20,
 
-  }
+  },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    width: windowWIdth - 20,
+    alignItems: 'center',
+    // borderWidth: 2, borderColor: 'white',
+    marginBottom: 25,
+
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+
+  },
+  textinput: {
+    width: '26%',
+    height: 40,
+    backgroundColor: COLOR.BACKGROUND6,
+    marginTop: 10,
+    borderRadius: 7,
+    fontSize: 15,
+    color: COLOR.WHITE,
+    marginRight: 15,
+    borderWidth: 0.4,
+    borderColor: COLOR.GRAY1,
+    paddingHorizontal: 10,
+
+  },
+  container2: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 10
+  },
+  textNumber2: {
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 1000,
+    height: 22,
+    width: 22,
+    textAlign: 'center',
+    marginTop: 10,
+    color: COLOR.BLACK,
+    fontSize: 14
+  },
+  icon2: {
+    width: 20,
+    height: 20,
+    marginTop: 7
+  },
+  TextInput: {
+    width: 310,
+    height: 52,
+    backgroundColor: COLOR.BACKGROUND6,
+    marginTop: 10,
+    borderRadius: 6,
+    fontSize: 15,
+    marginLeft: 15,
+    paddingLeft: 10,
+    color: COLOR.WHITE
+  },
 })

@@ -12,7 +12,7 @@ const ItemDishesVertical = (props) => {
     navigation.navigate("DetailFood", { recipe })
   }
   return (
-    <TouchableOpacity style={styles.itemDishes}>
+    <TouchableOpacity style={styles.itemDishes} onPress={()=>{goDetail()}}>
       <ImageBackground style={styles.image} resizeMode='cover'
         imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
         source={{ uri: recipe.image }} >

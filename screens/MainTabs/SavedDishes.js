@@ -16,27 +16,19 @@ const SavedDishes = (props) => {
   const [stateList, setStateList] = useState(0);
   const [refreshControl, setRefreshControl] = useState(false);
   const { infoUser, idUser } = useContext(AppContext);
-
   const getSavedRecipe = async () => {
     try { 
       const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser="+idUser);
       console.log("SAVED===========>",response.favorite)
       if (response.result) {
-        setRecipe(response.favorite)
-
-
-        
+        setRecipe(response.favorite)     
         response.favorite.forEach(recipe => {
           // console.log(recipe._id);
-          console.log(recipe.idUser);
-          console.log(recipe.idRecipe.image);
-          console.log(recipe.idRecipe.title);
-          console.log(recipe.idRecipe.description);
-          console.log(recipe.idRecipe.author);
-
-
-          
-
+          // console.log(recipe.idUser);
+          // console.log(recipe.idRecipe.image);
+          // console.log(recipe.idRecipe.title);
+          // console.log(recipe.idRecipe.description);
+          // console.log(recipe.idRecipe.author);
         });
         setIsLoading(true)
       } else {

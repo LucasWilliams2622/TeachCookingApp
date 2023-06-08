@@ -35,7 +35,9 @@ const Home = (props) => {
       if (response.result) {
         setDataRecipe(response.recipe);
         response.recipe.forEach(recipe => {
-          // console.log(recipe._id);
+          console.log(recipe._id);
+          console.log(recipe.title);
+          console.log(recipe.image);
 
         });
       } else {
@@ -49,9 +51,6 @@ const Home = (props) => {
 
     getAllRecipe();
     getAllCategory();
-    return () => {
-
-    }
   }, [])
 
   const goDetail = () => {
@@ -123,9 +122,7 @@ const Home = (props) => {
                     renderItem={({ item }) => (<ItemDishes
                       recipe={item}
                       key={item.id}
-                      onPress={() => {
-                        goDetail()
-                      }}
+                      navigation={navigation}
                     />)}
                     keyExtractor={eachDishes => eachDishes.name}
                   />

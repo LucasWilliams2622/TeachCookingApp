@@ -23,24 +23,6 @@ import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/u
 import messaging from '@react-native-firebase/messaging';
 import { AppContext, AppContextProvider } from './utils/AppContext'
 
-const Stack = createNativeStackNavigator();
-const StackBegin = () => {
-  return (
-    <AppContextProvider>
-
-      <Stack.Navigator initialRouteName="LoginGoogle" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
-
-        <Stack.Screen name="Guide1" component={Guide1} />
-        <Stack.Screen name="Guide2" component={Guide2} />
-        <Stack.Screen name="Guide3" component={Guide3} />
-
-      </Stack.Navigator>
-    </AppContextProvider>
-
-  )
-}
 const App = () => {
   useEffect(() => {
     getDeviceToken();
