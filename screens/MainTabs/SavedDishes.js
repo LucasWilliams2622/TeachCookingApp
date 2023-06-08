@@ -1,11 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, Image, Dimensions, View, FlatList, RefreshControl } from 'react-native'
-import React, { useState, useEffect ,useContext} from 'react';
+import { StyleSheet, Text, TouchableOpacity, Image, Dimensions, View, FlatList, RefreshControl, TextInput } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ICON, IMAGES, COLOR } from '../../constants/Themes';
 import ItemSearch from '../../component/ItemSearch';
 import ItemSavedRecipe from '../../component/ItemSavedRecipe';
 import AxiosInstance from '../../constants/AxiosInstance';
 import { AppContext } from '../../utils/AppContext';
+import { ScrollView } from 'react-native-virtualized-view';
 
 const windowWIdth = Dimensions.get('window').width;
 
@@ -16,19 +17,52 @@ const SavedDishes = (props) => {
   const [stateList, setStateList] = useState(0);
   const [refreshControl, setRefreshControl] = useState(false);
   const { infoUser, idUser } = useContext(AppContext);
-  const getSavedRecipe = async () => {
-    try { 
-      const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser="+idUser);
-      console.log("SAVED===========>",response.favorite)
+  const countdownSearch = (searchText) => {
+
+    if (timeOut) {
+      clearTimeout(timeOut);
+    }
+    timeOut = setTimeout(() => {
+      console.log("======>", searchText);
+      // if(searchText.length===0){
+      // console.log("AAAAAAAAAA");
+      // }
+      search(searchText);
+    }, 1500);
+  }
+  const search = async (searchText) => {
+    try {
+      console.log("searchText", searchText);
+      const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
+      console.log(response);
       if (response.result) {
-        setRecipe(response.favorite)     
+        // console.log(response.recipe);
+        setRecipe(response.recipe);
+        setIsLoading(false);
+      } else {
+        ToastAndroid.show("Không tìm thấy món ăn", ToastAndroid.SHORT);
+        getAllRecipe();
+      }
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
+
+
+  const getSavedRecipe = async () => {
+    try {
+      const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" + "647dc518dded9d94be4b27cc");
+      console.log("SAVED===========>", response.favorite)
+      if (response.result) {
+        setRecipe(response.favorite)
         response.favorite.forEach(recipe => {
           // console.log(recipe._id);
-          // console.log(recipe.idUser);
-          // console.log(recipe.idRecipe.image);
-          // console.log(recipe.idRecipe.title);
-          // console.log(recipe.idRecipe.description);
-          // console.log(recipe.idRecipe.author);
+          console.log(recipe.idUser);
+          console.log(recipe.idRecipe.image);
+          console.log(recipe.idRecipe.title);
+          console.log(recipe.idRecipe.description);
+          console.log(recipe.idRecipe.author);
+
         });
         setIsLoading(true)
       } else {
@@ -46,13 +80,20 @@ const SavedDishes = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.buttonChose} >
             <Image style={styles.save} source={ICON.Saved}></Image>
             <Text style={styles.textButton}>Món đã lưu</Text>
           </TouchableOpacity>
-          <ItemSearch />
+          <View style={styles.inputSearch}>
+            <TouchableOpacity >
+              <Image source={ICON.Search} style={styles.imageSearch}></Image>
+            </TouchableOpacity>
+            <TextInput placeholder='Tìm kiếm' onChangeText={(text) => countdownSearch(text)}
+              placeholderTextColor={COLOR.WHITE}
+              style={styles.input}></TextInput>
+          </View>
         </View>
         {isLoading ?
           (
@@ -67,14 +108,12 @@ const SavedDishes = (props) => {
                 data={recipe}
                 renderItem={({ item }) => <ItemSavedRecipe recipe={item} />}
                 keyExtractor={eachCategory => eachCategory.name}
-
                 refreshControl={
                   <RefreshControl refreshing={refreshControl} onRefresh={() => {
                     setRefreshControl(true)
                     console.log("Refresh")
                     setStateList(stateList + 1)
                     console.log(stateList)
-
                     setRefreshControl(false)
                   }} colors={['green']} />
                 }
@@ -93,7 +132,7 @@ const SavedDishes = (props) => {
 
         }
 
-      </View>
+      </ScrollView>
     </SafeAreaView >
   )
 }
@@ -164,5 +203,40 @@ const styles = StyleSheet.create({
   boxList: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom:60
+  },
+  input: {
+    placeholderTextColor: COLOR.WHITE,
+    backgroundColor: COLOR.BLACK,
+    height: 38,
+    width: '60%',
+    borderRadius: 6,
+    marginTop: 10,
+    paddingLeft: 10
+  },
+  imageSearch: {
+    tintColor: COLOR.WHITE,
+    placeholderTextColor: COLOR.WHITE,
+    marginTop: 1,
+    marginLeft: 10,
+    marginTop: 10,
+    height: 30,
+    width: 30,
+  },
+  textinInput: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: '400',
+    fontStyle: 'normal',
+    marginRight: 10,
+    
+  },
+  inputSearch: {
+    height: 50,
+    borderColor: COLOR.WHITE,
+    borderWidth: 1,
+    backgroundColor: COLOR.BLACK,
+    borderRadius: 30,
+    flexDirection: 'row'
   }
 })
