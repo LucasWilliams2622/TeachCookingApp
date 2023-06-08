@@ -84,9 +84,14 @@ const ItemSavedRecipe = (props) => {
                     <View style={styles.boxTime}>
                         {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
                         <Text style={styles.textTime}>{recipe.time} giờ</Text>
+                        <View style={styles.boxIcon}>
                         <TouchableOpacity style={styles.boxEmotion} onPress={()=>{dialogConfirm()}}>
                             <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
                         </TouchableOpacity>
+                        <TouchableOpacity style={[styles.boxEmotion,{marginLeft:10, width:34}]} onPress={()=>{dialogConfirm()}}>
+                            <Image style={[styles.icon2,{tintColor:COLOR.BLACK}]} source={require('../asset/icon/icon_note.png')} />
+                        </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -172,7 +177,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         marginTop: 10,
-
         borderRadius: 20,
         height: 25,
     },
@@ -194,6 +198,8 @@ const styles = StyleSheet.create({
         width: 15,
         height: 15,
         tintColor:COLOR.WHITE
-
     },
+    boxIcon:{
+        flexDirection:'row',
+    }
 })

@@ -1,24 +1,33 @@
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions, Image, ImageBackground } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions,ToastAndroid, Image, ImageBackground } from 'react-native'
+import React, { useState, useEffect,useContext } from 'react'
 import { ICON, COLOR } from '../constants/Themes'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ItemUser from '../component/ItemUser'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import AxiosInstance from '../constants/AxiosInstance'
+import { AppContext } from '../utils/AppContext'
 
 const ItemCategories = (props) => {
     const { recipe, navigation } = props;
     const { onPress } = props
     const [isSaved, setIsSaved] = useState(false)
+    const { idUser, infoUser } = useContext(AppContext);
 
-    const addToFavorite = async (idUser,idRecipe) => {
+    const goDetail = () => {
+        console.log("ID", recipe);
+        navigation.navigate("DetailFood", { recipe })
+    }
+    const addToFavorite = async (idRecipe) => {
         try {
-            const response = await AxiosInstance().post("favorite/api/new-to-favorite", { idUser:idUser, idRecipe: idRecipe });
+        console.log("idUser", idUser);
+
+            const response = await AxiosInstance()
+            .post("favorite/api/new-to-favorite", { idUser: idUser, idRecipe: idRecipe });
             // console.log(response.recipe)
             if (response.result) {
                 // console.log(response.result);
-                ToastAndroid.show("Đã thêm vào món đã lưu  !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+                ToastAndroid.show("Lưu món thành công !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
 
                 // console.log("data recipe:  ", dataRecipe);
                 response.recipe.forEach(recipe => {
@@ -37,18 +46,15 @@ const ItemCategories = (props) => {
         // console.log(isSaved);
 
         if (isSaved) {
-            const idRecipe =recipe._id;
-            const idUser = "647dc518dded9d94be4b27cc"
-            addToFavorite(idUser,idRecipe)
-
+            const idRecipe = recipe._id;
+            addToFavorite( idRecipe)
         }
-
     }, [isSaved])
 
     return (
         <TouchableOpacity
             key={recipe.id}
-            onPress={onPress}
+            onPress={() => { goDetail() }}
             style={styles.boxItem}>
             <ImageBackground style={styles.image} resizeMode='cover'
                 source={{ uri: recipe.image }} >

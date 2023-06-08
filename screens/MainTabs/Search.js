@@ -39,7 +39,6 @@ const Search = () => {
         }
     }
     useEffect(() => {
-
         getAllRecipe();
         return () => {
         }
@@ -113,7 +112,7 @@ const Search = () => {
                             renderItem={({ item }) => (
                                 <ItemDishesVertical
                                     recipe={item}
-                                    onPress={() => { }}
+                                    
                                 />
                             )} />
                     </View>)}

@@ -1,27 +1,26 @@
-import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, Alert, ToastAndroid, ImageBackground, TouchableOpacity } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
 import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AxiosInstance from '../constants/AxiosInstance'
 const windowWIdth = Dimensions.get('window').width;
+import { AppContext } from '../utils/AppContext'
 
 const ItemSavedRecipe = (props) => {
-  const {recipe, navigation } = props;
-  const [idRecipe, setIdRecipe] = useState('')
+  const { recipe, navigation } = props;
   const [isSaved, setIsSaved] = useState(true)
+  const { idUser, infoUser } = useContext(AppContext);
+
   const goDetail = () => {
-    navigation.navigate("DetailFood")
+    navigation.navigate("DetailFood", { recipe })
   }
   const deleteSaved = async () => {
     try {
-      const response = await AxiosInstance().get("/delete-by-id", { id: idRecipe });
+      const response = await AxiosInstance()
+        .delete(`/favorite/api/delete-by-id?idUser=${idUser}&idRecipe=${recipe._id}`);
       console.log(response.recipe)
       if (response.result) {
-        response.recipe.forEach(recipe => {
-          console.log(recipe.ingredients.quantity);
-          console.log(recipe.title);
-          console.log(recipe);
-        });
+        ToastAndroid.show("Đã xóa ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
       } else {
         console.log("Failed to delete RECIPE");
       }
@@ -52,7 +51,7 @@ const ItemSavedRecipe = (props) => {
       <TouchableOpacity onPress={() => { goDetail() }}>
         <ImageBackground style={styles.image} resizeMode='cover'
           imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
-          source={{uri:recipe.idRecipe.image}} >
+          source={{ uri: recipe.idRecipe.image }} >
           <View style={styles.boxSave}>
             {!isSaved
               ?
@@ -67,9 +66,9 @@ const ItemSavedRecipe = (props) => {
         </ImageBackground>
         <View style={styles.content}>
           <View style={styles.boxInfo}>
-            <Image style={styles.avatar} 
+            <Image style={styles.avatar}
             // source={{uri:recipe.author.avatar}}
-             />
+            />
             {/* <Text style={styles.nameUser}>{recipe.author.name}</Text> */}
           </View>
           <Text style={styles.nameDishes}>{recipe.idRecipe.title}</Text>
