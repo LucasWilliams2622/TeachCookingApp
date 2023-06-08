@@ -12,22 +12,22 @@ const EditProfile = (props) => {
   const { navigation } = props;
   const [userName, setuserName] = useState('');
   const [dataUser, setDataUser] = useState([])
-  const { idUser } = useContext(AppContext);
+  const { idUser,infoUser,setInfoUser } = useContext(AppContext);
 
   const [checkUserName, setcheckUserName] = useState(false);
   const [id, setId] = useState('');
   const [checkId, setcheckId] = useState(false);
   const [email, setEmail] = useState('');
   const [checkEmail, setcheckEmail] = useState(false);
-
+  const [description, setDescription] = useState('')
   const [number, setNumber] = useState('');
   const [checkNumber, setcheckNumber] = useState(false);
-  const [avatar, setAvatar] = useState(null)
+  const [avatar, setAvatar] = useState('');
   const getInfoUser = async () => {
     try {
       const response = await AxiosInstance().get("user/api/get-by-id?id=" + idUser);
       if (response.result) {
-        setDataUser(response.user)
+        setDataUser(response.user);
       } else {
         console.log("Failed to get info User");
       }
@@ -35,6 +35,21 @@ const EditProfile = (props) => {
       console.log("=========>", error);
     }
   }
+  const updateProfile= async ()=>
+    {
+
+        const response=await AxiosInstance().put("user/api/update",{email:infoUser.user.email,password:infoUser.user.password,name:infoUser.user.name,description:description});
+        if(response.result)
+        {
+          setInfoUser({...infoUser,description:description});
+            ToastAndroid.show("Cập nhật thành công",ToastAndroid.SHORT);
+        }
+        else
+        {
+            ToastAndroid.show("Cập nhật không thành công",ToastAndroid.SHORT);
+
+        }
+    }
   useEffect(() => {
     getInfoUser()
   }, [])
@@ -79,41 +94,41 @@ const EditProfile = (props) => {
   const capture = async () => {
     const result = await launchCamera();
     console.log(result.assets[0].uri);
-    // const formdata = new FormData();
-    // formdata.append('image', {
-    //   uri: result.assets[0].uri,
-    //   type: 'icon/icon_jpeg',
-    //   name: 'image.jpg',
-    // });
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'icon/icon_jpeg',
+      name: 'image.jpg',
+    });
 
-    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-    // console.log(response.link);
-    // if (response.result == true) {
-    //   setAvatar(response.link);
-    //   ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
-    // }
-    // else {
-    //   ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
-    // }
+    const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
+    console.log(response.link);
+    if (response.result) {
+      setAvatar(response.link);
+      ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
+    }
   }
   const getImageLibrary = async () => {
     const result = await launchImageLibrary();
     console.log(result.assets[0].uri);
-    // const formdata = new FormData();
-    // formdata.append('image', {
-    //   uri: result.assets[0].uri,
-    //   type: 'icon/icon_jpeg',
-    //   name: 'image.jpg',
-    // });
-    // const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
-    // console.log(response.link);
-    // if (response.result == true) {
-    //   setAvatar(response.link);
-    //   ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
-    // }
-    // else {
-    //   ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
-    // }
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'icon/icon_jpeg',
+      name: 'image.jpg',
+    });
+    const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
+    console.log(response.link);
+    if (response.result) {
+      setAvatar(response.link);
+      ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -123,7 +138,7 @@ const EditProfile = (props) => {
           <TouchableOpacity onPress={() => { goBack() }}>
             <Image style={styles.icon} source={require('../../../asset/icon/icon_back.png')} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonAdd} onPress={check}>
+          <TouchableOpacity style={styles.buttonAdd} onPress={updateProfile}>
             <Text style={styles.textButton}>cập nhật</Text>
           </TouchableOpacity>
         </View>
@@ -133,10 +148,10 @@ const EditProfile = (props) => {
           <View style={styles.head}>
             <TouchableOpacity onPress={() => { dialogImageChoose() }}>
               {
-                dataUser.avatar ?
+                !avatar ?
                   (<Image style={styles.avatar} source={{ uri: dataUser.avatar }} />)
                   :
-                  (<Image style={styles.avatar} source={IMAGES.Avatar} />)}
+                  (<Image style={styles.avatar} source={{uri:avatar}} />)}
             </TouchableOpacity>
             <View style={styles.info}>
               <Text style={styles.name}>{dataUser.name}</Text>
@@ -153,24 +168,23 @@ const EditProfile = (props) => {
               returnKeyType='next'
               placeholder="Martias Duarte"
               placeholderTextColor="gray"
-              value={dataUser.name}
-              onChangeText={text => {
-                setuserName(text)
-                // setValidatePass2(text);
-                if (isValidEmpty(text) === false) {
-                  setcheckUserName(false);
-                  console.log('loi name ');
-                } else {
-                  setcheckUserName(true);
-                  console.log("dung r");
-                }
+              value={infoUser.user.name}
+              onChangeText={(text) => {
+                setInfoUser({...infoUser,name: text})
+                // // setValidatePass2(text);
+                // if (isValidEmpty(text) === false) {
+                //   setcheckUserName(false);
+                //   console.log('loi name ');
+                // } else {
+                //   setcheckUserName(true);
+                //   console.log("dung r");
+                // }
               }}
             ></TextInput>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
             </View>
           </View>
-
           <View style={styles.line}>
             <Text style={styles.textField}>Email</Text>
             <TextInput
@@ -179,17 +193,17 @@ const EditProfile = (props) => {
               placeholder="paulwalker@gmail.com"
               placeholderTextColor="gray"
               editable={false}
-              value={dataUser.email}
-              onChangeText={text => {
-                setEmail(text)
+              value={infoUser.user.email}
+              onChangeText={(text) => {
+                setInfoUser({...infoUser,email: text})
                 // setValidatePass2(text);
-                if (isValidEmpty(text) === false) {
-                  setcheckEmail(false);
-                  console.log('loi email ');
-                } else {
-                  setcheckEmail(true);
-                  console.log("dung r");
-                }
+                // if (isValidEmpty(text) === false) {
+                //   setcheckEmail(false);
+                //   console.log('loi email ');
+                // } else {
+                //   setcheckEmail(true);
+                //   console.log("dung r");
+                // }
               }}
             ></TextInput>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -206,18 +220,19 @@ const EditProfile = (props) => {
               placeholderTextColor="gray"
               returnKeyType='next'
               keyboardType="default"
-              value={number}
-              onChangeText={text => {
-                setNumber(text)
-                // setValidatePass2(text);
-                if (isValidEmpty(text) === false) {
-                  setcheckNumber(false);
-                  console.log('loi number');
-                } else {
-                  setcheckNumber(true);
-                  console.log("dung r");
+              value={infoUser.user.description}
+              onChangeText={(text) => {
+                setDescription(text)
+                // setNumber(text)
+                // // setValidatePass2(text);
+                // if (isValidEmpty(text) === false) {
+                //   setcheckNumber(false);
+                //   console.log('loi number');
+                // } else {
+                //   setcheckNumber(true);
+                //   console.log("dung r");
                 }
-              }}
+              }
             />
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
@@ -226,10 +241,10 @@ const EditProfile = (props) => {
           <View style={styles.linebox2}>
             <TextInput
               style={styles.input}
-              placeholder="Vài dòng về đam mê nấu nướng "
+              placeholder=""
               placeholderTextColor="gray"
               returnKeyType='done'
-              keyboardType="numeric" />
+              />
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 1, height: 1, backgroundColor: 'white' }} />
             </View>
@@ -373,5 +388,6 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 17,
     paddingBottom: 0,
+    color:COLOR.WHITE
   },
 })
