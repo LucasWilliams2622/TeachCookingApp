@@ -1,18 +1,41 @@
-import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions,ToastAndroid, ImageBackground, TouchableOpacity } from 'react-native'
+import React, { useState, useContext,useEffect } from 'react'
 import { COLOR } from '../constants/Themes';
-
+import { AppContext } from '../utils/AppContext'
+import AxiosInstance from '../constants/AxiosInstance'
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const ItemDishesVertical = (props) => {
   const { recipe, navigation } = props;
   const [isSaved, setIsSaved] = useState(false)
+  const { idUser, infoUser } = useContext(AppContext);
   const goDetail = () => {
     navigation.navigate("DetailFood", { recipe })
   }
+  const addToFavorite = async (idRecipe) => {
+    try {
+      // console.log("idUser", idUser);
+      const response = await AxiosInstance()
+        .post("favorite/api/new-to-favorite", { idUser: idUser, idRecipe: idRecipe });
+      if (response.result) {
+        ToastAndroid.show("Lưu món thành công !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      } else {
+        console.log("Failed to get all RECIPE");
+      }
+    } catch (error) {
+      console.log("=========>", error);
+    }
+  }
+  useEffect(() => {
+    // console.log(isSaved);
+    if (isSaved) {
+        const idRecipe = recipe._id;
+        addToFavorite( idRecipe)
+    }
+}, [isSaved])
   return (
-    <TouchableOpacity style={styles.itemDishes} onPress={()=>{goDetail()}}>
+    <TouchableOpacity style={styles.itemDishes} onPress={() => { goDetail() }}>
       <ImageBackground style={styles.image} resizeMode='cover'
         imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
         source={{ uri: recipe.image }} >

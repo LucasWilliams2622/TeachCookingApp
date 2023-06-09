@@ -99,13 +99,13 @@ const SavedDishes = (props) => {
           (
             <View style={styles.boxList}>
               <FlatList
-                style={{ marginVertical: 15, width: '100%' }}
+                style={{ marginVertical: 15,marginBottom:260, width: '100%' }}
                 showsHorizontalScrollIndicator={false}
                 vertical
                 numColumns={2}
                 horizontal={false}
                 data={recipe}
-                renderItem={({ item }) => <ItemSavedRecipe recipe={item} SavedDishes={SavedDishes}/>}
+                renderItem={({ item }) => <ItemSavedRecipe recipe={item} SavedDishes={SavedDishes} navigation={navigation}/>}
                 keyExtractor={eachCategory => eachCategory.name}
                 refreshControl={
                   <RefreshControl refreshing={refreshControl} onRefresh={() => {

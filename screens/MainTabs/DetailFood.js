@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground, ToastAndroid  } from 'react-native'
-import React, { useState, useCallback,useContext, useEffect  } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native'
+import React, { useState, useCallback, useContext, useEffect } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { ICON, COLOR } from '../../constants/Themes'
@@ -19,13 +19,14 @@ const DetailFood = (props) => {
     const [playing, setPlaying] = useState(false);
     const { setInfoUser, infoUser } = useContext(AppContext);
     const [content, setContent] = useState('');
-    const [comment, setcomMent] = useState([]);
-    const getAllCommnet = async () => {
+    const [comment, setComment] = useState([]);
+    const [recipeOfAuthor, setRecipeOfAuthor] = useState([])
+    const getAllComment = async () => {
         try {
             const response = await AxiosInstance().get("/comment/api/get-all");
             // console.log(response)
             if (response.result) {
-                setcomMent(response.comment);
+                setComment(response.comment);
                 console.log(comment);
                 console.log("Get all comment");
             } else {
@@ -40,11 +41,10 @@ const DetailFood = (props) => {
         if (response.result) {
             ToastAndroid.show("Cập nhật thành công", ToastAndroid.SHORT);
             setContent('');
-            getAllCommnet();
+            getAllComment();
         }
         else {
             ToastAndroid.show("Cập nhật không thành công", ToastAndroid.SHORT);
-
         }
     }
     const onStateChange = useCallback((state) => {
@@ -56,17 +56,28 @@ const DetailFood = (props) => {
     const togglePlaying = useCallback(() => {
         setPlaying((prev) => !prev);
     }, []);
-
-    const [step, setStep] = useState([
-        {
-            content: "Tom",
-        },
-        {
-            content: "Toma",
+    const goBack = () => {
+        navigation.goBack()
+    }
+    const getRecipeByAuthor = async () => {
+        try {
+            console.log("======>", recipe.author._id);
+            console.log("======>", recipe.author.avatar);
+            const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + recipe.author._id);
+            console.log(response)
+            if (response.result) {
+                console.log(response.recipe)
+                setRecipeOfAuthor(response.recipe)
+            } else {
+                console.log("Failed to get all category");
+            }
+        } catch (error) {
+            console.log("Failed to get all category !!!");
         }
-    ])
+    }
     useEffect(() => {
-        getAllCommnet();
+        getRecipeByAuthor()
+        getAllComment();
         return () => {
 
         }
@@ -83,7 +94,9 @@ const DetailFood = (props) => {
                 <Text style={styles.bapxaotep}>{recipe.title}</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row', }}>
                     <Image style={styles.logo}
-                        source={!recipe.author.avatar ? { uri: recipe.author.avatar } : require('../../asset/icon/icon_people.png')} />
+                        // source={require('../../asset/icon/icon_people.png')}
+                        source={recipe.author.avatar == null ? require('../../asset/icon/icon_people.png') : { uri: recipe.author.avatar }}
+                    />
                     <View>
                         <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{recipe.author.name}</Text>
                         <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{recipe.author.email}</Text>
@@ -104,7 +117,7 @@ const DetailFood = (props) => {
                 </View>
                 {/* Nguyen lieu */}
                 <Text style={styles.title} >Nguyên liệu</Text>
-               
+
                 <FlatList
                     data={recipe.ingredients}
                     renderItem={({ item }) => <ItemMaterial data={item} />}
@@ -112,7 +125,6 @@ const DetailFood = (props) => {
                     showsVerticalScrollIndicator={false}
                 />
                 <View style={styles.line}></View>
-
 
                 {/* Cach lam` */}
                 <Text style={styles.title}>Cách làm</Text>
@@ -126,13 +138,20 @@ const DetailFood = (props) => {
                     />
                 </View>
                 <View style={styles.videoYoutube}>
-                    <YoutubeIframe
-                        height={350}
-                        play={playing}
-                        videoId={recipe.idVideo}
-                        onChangeState={onStateChange}
-                    />
-                    {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+
+                    <>{
+                        recipe.idVideo == null ?
+                            <View>
+
+                            </View>
+                            :
+                            <YoutubeIframe
+                                height={350}
+                                play={playing}
+                                videoId={recipe.idVideo}
+                                onChangeState={onStateChange}
+                            />
+                    }</>
                 </View>
                 <View style={styles.line}></View>
 
@@ -166,8 +185,8 @@ const DetailFood = (props) => {
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
-                        data={anotherFood}
-                        renderItem={({ item }) => <ItemAnotherFood data={item} />}
+                        data={recipeOfAuthor}
+                        renderItem={({ item }) => <ItemAnotherFood recipe={item} />}
                         keyExtractor={(subItem) => subItem.id}
                         listKey={(subItem) => 'subList-' + subItem.id}
                         showsVerticalScrollIndicator={false}
@@ -260,7 +279,14 @@ const styles = StyleSheet.create({
         height: 20,
         width: 20
 
-    }
+    },
+    icon: {
+        marginHorizontal: 10,
+        marginVertical: 23,
+        height: 25,
+        width: 25,
+        tintColor: COLOR.WHITE,
+    },
 
 })
 
@@ -281,72 +307,4 @@ const dataNe = [
 
 
 ]
-const dataNguyenLieu = [
-    {
-        "_id": "1",
-        "content": "200 gram tép biển",
-    },
-    {
-        "_id": "2",
-        "content": "500 gram bắp",
 
-    },
-    {
-        "_id": "3",
-        "content": "200 gram tép biển",
-    }
-    ,
-    {
-        "_id": "4",
-        "content": "100 gram đậu cove",
-    }
-    ,
-    {
-        "_id": "5",
-        "content": "2 quả cà chua",
-    }
-    ,
-    {
-        "_id": "6",
-        "content": "Hành tím",
-    }
-    ,
-    {
-        "_id": "7",
-        "content": "Hành ngò",
-    }
-
-]
-const dataComent = [
-    {
-        "_id": "1",
-        "name": "Tom",
-        "content": "Thật tuyệt",
-    },
-    {
-        "_id": "2",
-        "name": "Tom",
-        "content": "OiShiiiiii",
-    },
-    {
-        "_id": "3",
-        "name": "Marry",
-        "content": "Ngon vậy sao",
-    }
-
-
-]
-const anotherFood = [
-    {
-        "_id": "1",
-        "content": "Pikachu nướng muối tỏi",
-    },
-    {
-        "_id": "2",
-        "content": "Pikachu nướng sốt Thái",
-    },
-    {
-        "_id": "3",
-        "content": "Pikachu nướng muối ớt",
-    }
-]

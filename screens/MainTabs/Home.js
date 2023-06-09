@@ -61,16 +61,16 @@ const Home = (props) => {
   const search = async (searchText) => {
     try {
       setisLoading(true);
-    const response = await AxiosInstance().get("recipe/api/search-by-title?title=" + searchText);
-    if (response.result) {
-      setDataRecipe(response.recipe);
-      setisLoading(false);
-    } else {
-      ToastAndroid.show('lay du lieu that bai', ToastAndroid.SHORT);
-      getAllRecipe();
-    }
+      const response = await AxiosInstance().get("recipe/api/search-by-title?title=" + searchText);
+      if (response.result) {
+        setDataRecipe(response.recipe);
+        setisLoading(false);
+      } else {
+        ToastAndroid.show('lay du lieu that bai', ToastAndroid.SHORT);
+        getAllRecipe();
+      }
     } catch (error) {
-        console.log(error,"Error")
+      console.log(error, "Error")
     }
   }
 
@@ -121,51 +121,40 @@ const Home = (props) => {
                 </Swiper>
               </View>
 
-              <View style={{ marginTop: 10, }}>
-                <ScrollView>
-                  <FlatList
-                    style={{ marginBottom: 10, }}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    data={category}
-                    renderItem={({ item }) => <ItemCategories category={item}
-                    />}
-                    keyExtractor={eachCategory => eachCategory.name}
-                  />
-                </ScrollView>
 
-                {/* <View >
-            {
-              category.map((item) => <ItemCategories  horizontal category={item} />)
-            }
-          </View> */}
-                <View style={{ height: 270, }}>
+              <FlatList
+                style={{ marginBottom: 10, marginTop: 10, }}
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={category}
+                renderItem={({ item }) => <ItemCategories
+                  category={item} key={item._id} />}
+                keyExtractor={eachCategory => eachCategory.name}
+              />
 
-                  <FlatList
-                    style={{ marginBottom: 10, }}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    data={dataRecipe}
-                    renderItem={({ item }) => (<ItemDishes
-                      recipe={item}
-                      key={item.id}
-                      navigation={navigation}
-                    />)}
-                    keyExtractor={eachDishes => eachDishes.name}
-                  />
-                </View>
-                <TouchableOpacity style={styles.buttonSuggest} onPress={() => { }}>
-                  <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
-                  <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
-                </TouchableOpacity>
-              </View>
+              <FlatList
+                style={{ marginBottom: 10, height: 270, }}
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={dataRecipe}
+                renderItem={({ item }) => (<ItemDishes
+                  recipe={item}
+                  key={item._id}
+                  navigation={navigation}
+                />)}
+                keyExtractor={eachDishes => eachDishes.name}
+              />
+              <TouchableOpacity style={styles.buttonSuggest} onPress={() => { }}>
+                <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
+                <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
+              </TouchableOpacity>
 
-              <View style={styles.spaceLine}>
-              </View>
+
+              <View style={styles.spaceLine} />
               <View style={styles.newDishes}>
                 <Text style={styles.title}>Món mới nhất</Text>
                 {
-                  isLoading == true ?
+                  isLoading != true ?
                     (
                       <View >
                         <ActivityIndicator size='large' color='#f0fff' />
@@ -182,6 +171,7 @@ const Home = (props) => {
 
                         renderItem={({ item }) => (
                           <ItemDishesVertical
+                            key={item._id}
                             recipe={item}
                             navigation={navigation}
                           />
@@ -191,10 +181,8 @@ const Home = (props) => {
                       // ItemSeparatorComponent={() => <View style={{ height: 20 }} />
                       // }
                       />
-
                     )
                 }
-
               </View>
             </>
           }

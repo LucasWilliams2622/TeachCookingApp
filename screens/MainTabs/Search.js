@@ -6,7 +6,8 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import ItemDishesVertical from '../../component/ItemDishesVertical'
 import AxiosInstance from '../../constants/AxiosInstance';
-const Search = () => {
+const Search = (props) => {
+    const { navigation } = props;
     let timeOut = null;
     const [searchRecipe, setSearchRecipe] = useState({});
     const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,7 @@ const Search = () => {
             // console.log("AAAAAAAAAA");
             // }
             search(searchText);
-        }, 1500);
+        }, 1000);
     }
 
     const getAllRecipe = async () => {
@@ -43,7 +44,7 @@ const Search = () => {
         return () => {
         }
     }, [])
-    const onClickSear = async () => {
+    const onClickSearch = async () => {
         try {
             console.log(searchText);
 
@@ -63,7 +64,7 @@ const Search = () => {
     const search = async (searchText) => {
         try {
             console.log("searchText", searchText);
-            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" +searchText);
+            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
             console.log(response);
             if (response.result) {
                 // console.log(response.recipe);
@@ -81,7 +82,7 @@ const Search = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => { onClickSear() }} >
+                <TouchableOpacity onPress={() => { onClickSearch() }} >
                     <Image source={ICON.Search} style={styles.imageSearch}></Image>
                 </TouchableOpacity>
                 <TextInput
@@ -92,17 +93,16 @@ const Search = () => {
             </View>
 
             <View style={styles.listRecipe}>
-
                 {isLoading ?
                     (<View>
                         <ActivityIndicator size={'large'} color='#fff00' />
                         <Text >Loading...</Text>
                     </View>)
                     :
-                    (<View style={{marginTop:20}}>
-                       
+                    (<View style={{ marginTop: 20 }}>
+
                         <FlatList
-                            style={{ marginBottom: 50, }}
+                            style={{ marginBottom: 150, }}
                             showsHorizontalScrollIndicator={false}
                             numColumns={2}
                             vertical
@@ -110,14 +110,13 @@ const Search = () => {
                             renderItem={({ item }) => (
                                 <ItemDishesVertical
                                     recipe={item}
-                                    
+                                    key={item.id}
+                                    navigation={navigation}
                                 />
                             )} />
                     </View>)}
             </View>
-
             <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND3} />
-
         </SafeAreaView>
     )
 }

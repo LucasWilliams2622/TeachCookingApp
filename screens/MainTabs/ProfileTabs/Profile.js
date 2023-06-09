@@ -89,7 +89,6 @@ const Profile = (props) => {
         <Tab.Screen name="Món của tôi" component={MyDishes} />
       </Tab.Navigator>
       <StatusBar barStyle="light-content" backgroundColor={COLOR.HEADER} />
-
     </SafeAreaView>
   );
 };

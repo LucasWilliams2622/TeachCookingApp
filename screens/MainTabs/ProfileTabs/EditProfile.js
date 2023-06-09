@@ -272,8 +272,6 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     tintColor: COLOR.WHITE,
-
-
   },
   buttonAdd: {
     alignItems: 'center',

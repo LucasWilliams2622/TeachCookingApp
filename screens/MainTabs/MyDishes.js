@@ -46,13 +46,13 @@ const MyDishes = (props) => {
           (<View style={styles.boxList}>
 
             <FlatList
-              style={{ marginVertical: 15, width: '100%' }}
+              style={{ marginVertical: 15, marginBottom: 210, width: '100%' }}
               showsHorizontalScrollIndicator={false}
               vertical
               numColumns={2}
               horizontal={false}
               data={recipe}
-              renderItem={({ item }) => <ItemMyDish recipe={item} />}
+              renderItem={({ item }) => <ItemMyDish recipe={item} navigation={navigation} />}
               keyExtractor={eachCategory => eachCategory.name}
 
               refreshControl={

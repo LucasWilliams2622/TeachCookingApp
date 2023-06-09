@@ -12,9 +12,9 @@ const ItemSavedRecipe = (props) => {
   const { idUser, infoUser } = useContext(AppContext);
 
   const goDetail = () => {
+    console.log("ID", recipe);
     navigation.navigate("DetailFood", { recipe })
-  }
-
+}
   const handleDeleteSavedItem = async () => {
     try {
       const response = await AxiosInstance()
@@ -50,7 +50,8 @@ const ItemSavedRecipe = (props) => {
   };
   return (
     <SafeAreaView style={styles.itemDishes}>
-      <TouchableOpacity onPress={() => { goDetail() }}>
+      <TouchableOpacity  key={recipe.id}
+      onPress={() => { goDetail() }}>
         <ImageBackground style={styles.image} resizeMode='cover'
           imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
           source={{ uri: recipe.idRecipe.image }} >
