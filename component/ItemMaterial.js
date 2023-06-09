@@ -8,7 +8,7 @@ const ItemMaterial = (props) => {
         <TouchableOpacity
             style={{ backgroundColor: COLOR.BACKGROUND }}>
             <View>
-                <Text style={styles.makeStep} >{data.content}</Text>
+                <Text style={styles.makeStep} >{data}</Text>
                 <Text style={styles.makeStep} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  </Text>
             </View>
 

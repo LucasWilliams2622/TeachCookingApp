@@ -73,7 +73,7 @@ const AddNew = () => {
 
       const response = await AxiosInstance().post("/recipe/api/new", {
         title: title, description: description,
-        ingredients: [[name,quantity,unit],[name2,quantity2,unit2],[name3,quantity3,unit3]], time: time,
+        ingredients: [quantity,quantity2,quantity3], time: time,
         steps: [step,step2,step3], image: image,
         mealType: mealType,
         author: idUser, idVideo: idVideo,
@@ -346,7 +346,7 @@ const AddNew = () => {
                   value={quantity}
                   onChangeText={handleQuantityChange}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -359,7 +359,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name}
                   onChangeText={handleNameChange}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -374,7 +374,7 @@ const AddNew = () => {
                   value={quantity2}
                   onChangeText={handleQuantityChange2}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -387,7 +387,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name2}
                   onChangeText={handleNameChange2}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -402,7 +402,7 @@ const AddNew = () => {
                   value={quantity3}
                   onChangeText={handleQuantityChange3}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -415,7 +415,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name3}
                   onChangeText={handleNameChange3}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -658,8 +658,8 @@ const styles = StyleSheet.create({
 
   },
   textinput: {
-    width: '26%',
-    height: 40,
+    width: '80%',
+    height: 50,
     backgroundColor: COLOR.BACKGROUND6,
     marginTop: 10,
     borderRadius: 7,

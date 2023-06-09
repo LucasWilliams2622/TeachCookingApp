@@ -82,7 +82,7 @@ const StackAddNew = () => {
 }
 const StackSearch = () => {
   return (
-    <Stack.Navigator initialRouteName="Search" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="DetailFood" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="AddNew" component={AddNew} />
@@ -173,7 +173,7 @@ const BottomTabs = () => {
   return (
     <>
       {
-        isLogin == false ? <StackBegin /> : <Main />
+        isLogin == false ? <StackSearch /> : <Main />
       }
     </>)
 }

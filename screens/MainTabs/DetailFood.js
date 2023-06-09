@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground  } from 'react-native'
-import React, { useState, useCallback,useContext, useEffect  } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
+import React, { useState, useCallback, useContext, useEffect } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { ICON, COLOR } from '../../constants/Themes'
@@ -15,19 +15,39 @@ import AxiosInstance from '../../constants/AxiosInstance';
 const DetailFood = (props) => {
     const { route, navigation } = props;
     const { params } = route;
-    const { recipe } = params;
+    const { id } = '64822ba7915f63e79514a05f';
+    const [recipe, setrecipe] = useState('');
     const [playing, setPlaying] = useState(false);
     const { setInfoUser, infoUser } = useContext(AppContext);
     const [content, setContent] = useState('');
     const [comment, setcomMent] = useState([]);
+    const [name, setname] = useState('')
+    const [avatar, setavatar] = useState('')
+    const [email, setemail] = useState('')
+    const getRecipeByID = async () => {
+        try {
+            const response = await AxiosInstance().get("recipe/api/get-by-id?id=" + '64834914d44195a4c17e4b7b');
+            console.log(response.recipe);
+            console.log(response.recipe.author.name);
+            console.log(response.recipe.author.avatar);
+            setname(response.recipe.author.name);
+            setavatar(response.recipe.author.avatar);
+            setemail(response.recipe.author.email);
+            setrecipe(response.recipe);
+            console.log(recipe);
+        } catch (error) {
+
+        }
+    }
+
     const getAllCommnet = async () => {
         try {
             const response = await AxiosInstance().get("/comment/api/get-all");
             // console.log(response)
             if (response.result) {
                 setcomMent(response.comment);
-                console.log(comment);
-                console.log("Get all comment");
+                //console.log(comment);
+                //console.log("Get all comment");
             } else {
                 console.log("Failed to get all comment");
             }
@@ -66,6 +86,7 @@ const DetailFood = (props) => {
         }
     ])
     useEffect(() => {
+        getRecipeByID();
         getAllCommnet();
         return () => {
 
@@ -83,10 +104,10 @@ const DetailFood = (props) => {
                 <Text style={styles.bapxaotep}>{recipe.title}</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row', }}>
                     <Image style={styles.logo}
-                        source={!recipe.author.avatar ? { uri: recipe.author.avatar } : require('../../asset/icon/icon_people.png')} />
+                        source={!avatar ? { uri: avatar } : require('../../asset/icon/icon_people.png')} />
                     <View>
-                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{recipe.author.name}</Text>
-                        <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{recipe.author.email}</Text>
+                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{name}</Text>
+                         <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{email}</Text>
                     </View>
 
                 </View>
@@ -104,7 +125,7 @@ const DetailFood = (props) => {
                 </View>
                 {/* Nguyen lieu */}
                 <Text style={styles.title} >Nguyên liệu</Text>
-               
+
                 <FlatList
                     data={recipe.ingredients}
                     renderItem={({ item }) => <ItemMaterial data={item} />}
@@ -118,7 +139,7 @@ const DetailFood = (props) => {
                 <Text style={styles.title}>Cách làm</Text>
                 <View style={{ padding: 10 }}>
                     <FlatList
-                        data={dataNe}
+                        data={recipe.steps}
                         renderItem={({ item }) => <ItemSteps data={item} />}
                         keyExtractor={(subItem) => subItem.id}
                         listKey={(subItem) => 'subList-' + subItem.id}
@@ -150,7 +171,7 @@ const DetailFood = (props) => {
                     showsVerticalScrollIndicator={false}
                 />
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                    <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} />
+                    {/* <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} /> */}
                     <TextInput value={content} onChangeText={text => setContent(text)} style={styles.addComent}></TextInput>
                     <TouchableOpacity onPress={addComment}>
                         <Image style={styles.imagePost} source={require('../../asset/icon/icon_post.png')}></Image>
@@ -162,7 +183,7 @@ const DetailFood = (props) => {
                 {/* Mon moi cua Quynh */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
-                    <Text style={styles.newFoodof} >Món mới của {recipe.author.name}</Text>
+                    <Text style={styles.newFoodof} >Món mới của {name}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
                     <FlatList horizontal
