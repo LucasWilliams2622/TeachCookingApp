@@ -47,14 +47,15 @@ const AddNew = () => {
   const [message, setMessage] = useState([])
   const checkStepsAndIngredients = async () => {
     await handleAddIngredient()
-    await handleAddStep()
-    if ((ingredients != null) && (steps != null)) {
-      console.log("AAAAAA");
-      addNewRecipe()
+    console.log(ingredients);
+    // await handleAddStep()
+    // if ((ingredients != null) && (steps != null)) {
+    //   console.log("AAAAAA");
+    //   addNewRecipe()
 
-    } else {
-      console.log("NO DATA");
-    }
+    // } else {
+    //   console.log("NO DATA");
+    // }
   }
   const addNewRecipe = async () => {
     try {
@@ -72,8 +73,8 @@ const AddNew = () => {
 
       const response = await AxiosInstance().post("/recipe/api/new", {
         title: title, description: description,
-        ingredients: ingredients, time: time,
-        steps: steps, image: image,
+        ingredients: [quantity,quantity2,quantity3], time: time,
+        steps: [step,step2,step3], image: image,
         mealType: mealType,
         author: idUser, idVideo: idVideo,
       });
@@ -272,7 +273,7 @@ const AddNew = () => {
           <TouchableOpacity style={styles.btnLuu}>
             <Text style={[styles.textButton, { color: COLOR.PRIMARY, width: 50 }]} onPress={handleCheckInput}>Lưu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={checkStepsAndIngredients}>
+          <TouchableOpacity style={[styles.buttonAdd, { backgroundColor: COLOR.GRAY1 }]} onPress={addNewRecipe}>
             <Text style={[styles.textButton]}>Đăng món</Text>
           </TouchableOpacity>
         </View>
@@ -356,7 +357,7 @@ const AddNew = () => {
                   value={quantity}
                   onChangeText={handleQuantityChange}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -369,7 +370,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name}
                   onChangeText={handleNameChange}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -384,7 +385,7 @@ const AddNew = () => {
                   value={quantity2}
                   onChangeText={handleQuantityChange2}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -397,7 +398,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name2}
                   onChangeText={handleNameChange2}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -412,7 +413,7 @@ const AddNew = () => {
                   value={quantity3}
                   onChangeText={handleQuantityChange3}
                 />
-                <TextInput
+                {/* <TextInput
                   placeholderTextColor={COLOR.GRAY1}
                   placeholder='kg'
                   style={[styles.textinput]}
@@ -425,7 +426,7 @@ const AddNew = () => {
                   style={[styles.textinput]}
                   value={name3}
                   onChangeText={handleNameChange3}
-                />
+                /> */}
                 <TouchableOpacity onPress={{}}>
                   <Text style={{ color: 'white' }}>X</Text>
                 </TouchableOpacity>
@@ -668,8 +669,8 @@ const styles = StyleSheet.create({
 
   },
   textinput: {
-    width: '26%',
-    height: 40,
+    width: '80%',
+    height: 50,
     backgroundColor: COLOR.BACKGROUND6,
     marginTop: 10,
     borderRadius: 7,
