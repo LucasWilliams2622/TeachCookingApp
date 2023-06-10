@@ -24,7 +24,7 @@ const MyDishes = (props) => {
     try {
       const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idUser);
       if (response.result) {
-        console.log("========>",response.recipe);
+        console.log("========>", response.recipe);
         setRecipe(response.recipe)
         setIsLoading(true)
       } else {
@@ -53,7 +53,7 @@ const MyDishes = (props) => {
               numColumns={2}
               horizontal={false}
               data={recipe}
-              renderItem={({ item }) => <ItemMyDish recipe={item} />}
+              renderItem={({ item }) => <ItemMyDish recipe={item} navigation={navigation} />}
               keyExtractor={eachCategory => eachCategory.name}
 
               refreshControl={
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   main: {
   },
   header: {
-    marginTop: 20,marginHorizontal:20,
+    marginTop: 20, marginHorizontal: 20,
   },
   content: {
     justifyContent: 'center',

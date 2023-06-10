@@ -12,7 +12,8 @@ const ItemSavedRecipe = (props) => {
   const { idUser, infoUser } = useContext(AppContext);
 
   const goDetail = () => {
-    navigation.navigate("DetailFood", { recipe })
+    console.log(recipe.idRecipe._id);
+    navigation.navigate("DetailFood", { id: recipe.idRecipe._id })
   }
   const deleteSaved = async () => {
     try {

@@ -16,7 +16,7 @@ const ItemCategories = (props) => {
 
     const goDetail = () => {
         console.log("ID", recipe);
-        navigation.navigate("DetailFood", { recipe })
+        navigation.navigate("DetailFood", { id: recipe._id })
     }
     const addToFavorite = async (idRecipe) => {
         try {
@@ -53,7 +53,7 @@ const ItemCategories = (props) => {
 
     return (
         <TouchableOpacity
-            key={recipe.id}
+            key={recipe._id}
             onPress={() => { goDetail() }}
             style={styles.boxItem}>
             <ImageBackground style={styles.image} resizeMode='cover'

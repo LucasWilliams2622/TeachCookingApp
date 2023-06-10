@@ -6,8 +6,10 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import ItemDishesVertical from '../../component/ItemDishesVertical'
 import AxiosInstance from '../../constants/AxiosInstance';
-const Search = () => {
+const Search = (props) => {
     let timeOut = null;
+    const { navigation } = props;
+
     const [searchRecipe, setSearchRecipe] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const countdownSearch = (searchText) => {
@@ -63,7 +65,7 @@ const Search = () => {
     const search = async (searchText) => {
         try {
             console.log("searchText", searchText);
-            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" +searchText);
+            const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
             console.log(response);
             if (response.result) {
                 // console.log(response.recipe);
@@ -99,8 +101,8 @@ const Search = () => {
                         <Text >Loading...</Text>
                     </View>)
                     :
-                    (<View style={{marginTop:20}}>
-                       
+                    (<View style={{ marginTop: 20 }}>
+
                         <FlatList
                             style={{ marginBottom: 50, }}
                             showsHorizontalScrollIndicator={false}
@@ -110,7 +112,7 @@ const Search = () => {
                             renderItem={({ item }) => (
                                 <ItemDishesVertical
                                     recipe={item}
-                                    
+                                    navigation={navigation}
                                 />
                             )} />
                     </View>)}

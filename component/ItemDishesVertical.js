@@ -5,14 +5,16 @@ import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const ItemDishesVertical = (props) => {
+const 
+ItemDishesVertical = (props) => {
   const { recipe, navigation } = props;
   const [isSaved, setIsSaved] = useState(false)
   const goDetail = () => {
-    navigation.navigate("DetailFood", { recipe })
+    console.log(recipe);
+    navigation.navigate("DetailFood", { id: recipe._id })
   }
   return (
-    <TouchableOpacity style={styles.itemDishes} onPress={()=>{goDetail()}}>
+    <TouchableOpacity style={styles.itemDishes} onPress={() => { goDetail() }}>
       <ImageBackground style={styles.image} resizeMode='cover'
         imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
         source={{ uri: recipe.image }} >

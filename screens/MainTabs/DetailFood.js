@@ -26,7 +26,7 @@ const DetailFood = (props) => {
     const [email, setemail] = useState('')
     const getRecipeByID = async () => {
         try {
-            const response = await AxiosInstance().get("recipe/api/get-by-id?id=" + '64834914d44195a4c17e4b7b');
+            const response = await AxiosInstance().get("recipe/api/get-by-id?id=" + params.id);
             console.log(response.recipe);
             console.log(response.recipe.author.name);
             console.log(response.recipe.author.avatar);
@@ -147,18 +147,20 @@ const DetailFood = (props) => {
                     />
                 </View>
                 <View style={styles.videoYoutube}>
-                    <YoutubeIframe
+
+                    {/* //co bug */}
+                    {/* <YoutubeIframe
                         height={350}
                         play={playing}
                         videoId={recipe.idVideo}
-                        onChangeState={onStateChange}
-                    />
+                       onChangeState={onStateChange}
+                    /> */}
                     {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
                 </View>
                 <View style={styles.line}></View>
 
                 {/* Binh` luan */}
-                <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                {/* <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />
                     <Text style={[styles.title, { marginTop: -5 }]} >Bình luận</Text>
                 </View>
@@ -171,13 +173,13 @@ const DetailFood = (props) => {
                     showsVerticalScrollIndicator={false}
                 />
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                    {/* <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} /> */}
+                    <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} />
                     <TextInput value={content} onChangeText={text => setContent(text)} style={styles.addComent}></TextInput>
                     <TouchableOpacity onPress={addComment}>
                         <Image style={styles.imagePost} source={require('../../asset/icon/icon_post.png')}></Image>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.line}></View>
+                <View style={styles.line}></View> */}
 
 
                 {/* Mon moi cua Quynh */}
