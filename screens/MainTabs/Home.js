@@ -164,7 +164,7 @@ const Home = (props) => {
               <View style={styles.newDishes}>
                 <Text style={styles.title}>Món mới nhất</Text>
                 {
-                  isLoading != true ?
+                  isLoading == true ?
                     (
                       <View >
                         <ActivityIndicator size='large' color='#f0fff' />

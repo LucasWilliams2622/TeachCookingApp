@@ -12,6 +12,8 @@ import LoginGoogle from '../BeginTabs/LoginGoogle'
 import Profile from '../MainTabs/ProfileTabs/Profile';
 import EditProfile from '../MainTabs/ProfileTabs/EditProfile';
 import SavedDishes from './SavedDishes';
+import InfoApp from './InfoApp';
+
 import MyDishes from './MyDishes';
 import Guide1 from '../Guide/Guide1';
 import Guide2 from '../Guide/Guide2';
@@ -61,6 +63,8 @@ const StackProfile = () => {
       <Stack.Screen name="MyDishes" component={MyDishes} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="InfoApp" component={InfoApp} />
+
 
     </Stack.Navigator>
   )
@@ -82,7 +86,7 @@ const StackAddNew = () => {
 }
 const StackSearch = () => {
   return (
-    <Stack.Navigator initialRouteName="DetailFood" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Search" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="AddNew" component={AddNew} />
@@ -173,7 +177,7 @@ const BottomTabs = () => {
   return (
     <>
       {
-        isLogin == false ? <StackSearch /> : <Main />
+        isLogin == false ? <StackBegin/> : <Main />
       }
     </>)
 }

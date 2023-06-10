@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Image, Dimensions,ToastAndroid, ImageBackground, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions,ToastAndroid,
+   ImageBackground, TouchableOpacity } from 'react-native'
 import React, { useState, useContext,useEffect } from 'react'
 import { COLOR } from '../constants/Themes';
 import { AppContext } from '../utils/AppContext'

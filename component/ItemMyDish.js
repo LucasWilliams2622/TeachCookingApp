@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground, ToastAndroid, TouchableOpacity } from 'react-native'
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AxiosInstance from '../constants/AxiosInstance'
@@ -11,7 +11,27 @@ const ItemSavedRecipe = (props) => {
     const { recipe, navigation } = props;
     const [isSaved, setIsSaved] = useState(false)
     const { idUser, infoUser } = useContext(AppContext);
-
+    const addToFavorite = async (idRecipe) => {
+        try {
+          // console.log("idUser", idUser);
+          const response = await AxiosInstance()
+            .post("favorite/api/new-to-favorite", { idUser: idUser, idRecipe: idRecipe });
+          if (response.result) {
+            ToastAndroid.show("Lưu món thành công !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+          } else {
+            console.log("Failed to get all RECIPE");
+          }
+        } catch (error) {
+          console.log("=========>", error);
+        }
+      }
+      useEffect(() => {
+        // console.log(isSaved);
+        if (isSaved) {
+            const idRecipe = recipe._id;
+            addToFavorite( idRecipe)
+        }
+    }, [isSaved])
     const goDetail = () => {
         navigation.navigate("DetailFood",{recipe})
     }
@@ -65,7 +85,7 @@ const ItemSavedRecipe = (props) => {
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_save.png')} />
                             </TouchableOpacity>)
                             :
-                            (<TouchableOpacity onPress={() => { goEditRecipe()}}>
+                            (<TouchableOpacity onPress={() => { setIsSaved(true) }}>
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_saved.png')} />
                             </TouchableOpacity>)}
                     </View>
@@ -86,7 +106,7 @@ const ItemSavedRecipe = (props) => {
                             <TouchableOpacity style={styles.boxEmotion} onPress={() => { dialogConfirm() }}>
                                 <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.boxEmotion, { marginLeft: 10, width: 34 }]} onPress={() => { dialogConfirm() }}>
+                            <TouchableOpacity style={[styles.boxEmotion, { marginLeft: 10, width: 34 }]} onPress={() => { goEditRecipe() }}>
                                 <Image style={[styles.icon2, { tintColor: COLOR.BLACK }]} source={require('../asset/icon/icon_note.png')} />
                             </TouchableOpacity>
                         </View>

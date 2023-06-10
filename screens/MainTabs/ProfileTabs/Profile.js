@@ -43,7 +43,9 @@ const Profile = (props) => {
   useEffect(() => {
     getInfoUser()
   }, [])
-
+  const goSetting = () => {
+    navigation.navigate('InfoApp')
+  }
   const goEditProfile = () => {
     console.log("=========>", dataUser);
     navigation.navigate('EditProfile')
@@ -62,7 +64,7 @@ const Profile = (props) => {
             <Text style={styles.keyname}>{dataUser.email}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.buttonAdd}>
+        <TouchableOpacity style={styles.buttonAdd} onPress={goSetting}>
           <Image style={styles.icon} source={ICON.Setting} />
         </TouchableOpacity>
       </View>

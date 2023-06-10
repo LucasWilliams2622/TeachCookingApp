@@ -9,6 +9,8 @@ import EditProfile from './screens/MainTabs/ProfileTabs/EditProfile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
 import Home from './screens/MainTabs/Home';
+import InfoApp from './screens/MainTabs/InfoApp';
+
 import Search from './screens/MainTabs/Search';
 import SavedDishes from './screens/MainTabs/SavedDishes';
 import MyDishes from './screens/MainTabs/MyDishes';
@@ -38,7 +40,6 @@ const App = () => {
          <BottomTabs/>
       </NavigationContainer>
     </AppContextProvider>
-
   )
 }
 export default App

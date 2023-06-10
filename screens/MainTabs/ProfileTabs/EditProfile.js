@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ToastAndroid,ScrollView, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ToastAndroid, ScrollView, Alert } from 'react-native'
 import React, { useState, useContext, useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ICON, IMAGES, COLOR } from '../../../constants/Themes'
@@ -12,7 +12,7 @@ const EditProfile = (props) => {
   const { navigation } = props;
   const [userName, setuserName] = useState('');
   const [dataUser, setDataUser] = useState([])
-  const { idUser, infoUser, setInfoUser } = useContext(AppContext);
+  const { idUser, infoUser, setInfoUser, setIsLogin } = useContext(AppContext);
 
   const [checkUserName, setcheckUserName] = useState(false);
   const [id, setId] = useState('');
@@ -63,6 +63,16 @@ const EditProfile = (props) => {
       Alert.alert('Error', 'Vui lòng nhập số điện thoại');
     }
   }
+  const signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+      setIsLogin(false)
+
+      console.log("Logout");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const goBack = () => {
     navigation.goBack()
   }
@@ -151,8 +161,8 @@ const EditProfile = (props) => {
             <View style={styles.info}>
               <Text style={styles.name}>{dataUser.name}</Text>
               <Text style={styles.keyname}>@LearnCook</Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.textButton2}>Xem trang bếp</Text>
+              <TouchableOpacity style={styles.button} onPress={signOut}>
+                <Text style={styles.textButton2}>Đăng xuất</Text>
               </TouchableOpacity>
             </View>
           </View>

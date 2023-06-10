@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground  ,ToastAndroid} from 'react-native'
-import React, { useState, useCallback,useContext, useEffect  } from 'react'
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, FlatList, TouchableOpacity, ImageBackground, ToastAndroid } from 'react-native'
+import React, { useState, useCallback, useContext, useEffect } from 'react'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { ICON, COLOR } from '../../constants/Themes'
@@ -98,9 +98,7 @@ const DetailFood = (props) => {
         getAllCommnet();
         getRecipeByAuthor()
         getRecipeByID();
-        return () => {
 
-        }
     }, [])
 
     return (
@@ -114,11 +112,14 @@ const DetailFood = (props) => {
                 <Text style={styles.bapxaotep}>{recipe.title}</Text>
                 <View style={{ marginTop: 20, flexDirection: 'row', }}>
                     <Image style={styles.logo}
-                       source={recipe.author.avatar == null ? require('../../asset/icon/icon_people.png') : { uri: recipe.author.avatar }}></Image>
-                    <View>
-                        <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{name}</Text>
-                         <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{email}</Text>
-                    </View>
+                        require={require('../../asset/icon/icon_people.png')}
+
+                    // source={recipe.author.avatar == null ? require('../../asset/icon/icon_people.png') : { uri: recipe.author.avatar }}></Image
+                    />
+                        <View>
+                            <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{name}</Text>
+                            <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{email}</Text>
+                        </View>
 
                 </View>
                 <Text style={[styles.text, { color: COLOR.WHITE }]}>
@@ -296,7 +297,7 @@ const styles = StyleSheet.create({
         marginLeft: 7,
         height: 20,
         width: 20
-
+    },
     icon: {
         marginHorizontal: 10,
         marginVertical: 23,
@@ -307,21 +308,4 @@ const styles = StyleSheet.create({
 
 })
 
-const dataNe = [
-    {
-        "_id": "1",
-        "content": "Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra",
-    },
-    {
-        "_id": "2",
-        "content": "Cho chảo lên bếp, phi hành với dầu sôi,  cho tép vào xào",
-
-    },
-    {
-        "_id": "3",
-        "content": "Sơ chế :Rửa sạch bắp, đậu code, cà, hành tím, rồi cắt ra",
-    }
-
-
-]
 
