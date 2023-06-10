@@ -63,9 +63,9 @@ const Search = (props) => {
     }
     const search = async (searchText) => {
         try {
-            console.log("searchText", searchText);
+            // console.log("searchText", searchText);
             const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
-            console.log(response);
+            // console.log(response);
             if (response.result) {
                 // console.log(response.recipe);
                 setSearchRecipe(response.recipe);

@@ -14,7 +14,7 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   const { navigation } = props;
-  const [dataRecipe, setDataRecipe] = useState([]);
+  const [recipe, setRecipe] = useState([]);
   const [category, setCategory] = useState("");
   const [isLoading, setisLoading] = useState(true);
   let timeOut = null;
@@ -37,13 +37,7 @@ const Home = (props) => {
     try {
       const response = await AxiosInstance().get("recipe/api/get-all");
       if (response.result) {
-        setDataRecipe(response.recipe);
-        response.recipe.forEach(recipe => {
-          console.log(recipe._id);
-          console.log(recipe.title);
-          console.log(recipe.image);
-
-        });
+        setRecipe(response.recipe);
       } else {
         console.log("Failed to get all RECIPE");
       }
@@ -57,14 +51,14 @@ const Home = (props) => {
     }
     timeOut = setTimeout(() => {
       search(searchText);
-    }, 3000);
+    }, 1000);
   }
   const search = async (searchText) => {
     try {
       setisLoading(true);
       const response = await AxiosInstance().get("recipe/api/search-by-title?title=" + searchText);
       if (response.result) {
-        setDataRecipe(response.recipe);
+        setRecipe(response.recipe);
         setisLoading(false);
       } else {
         ToastAndroid.show('lay du lieu that bai', ToastAndroid.SHORT);
@@ -76,7 +70,6 @@ const Home = (props) => {
   }
 
   useEffect(() => {
-
     getAllRecipe();
     getAllCategory();
   }, [])
@@ -146,7 +139,7 @@ const Home = (props) => {
                       style={{ marginBottom: 10, }}
                       showsHorizontalScrollIndicator={false}
                       horizontal
-                      data={dataRecipe}
+                      data={recipe}
                       renderItem={({ item }) => (<ItemDishes
                         recipe={item}
                         key={item.id}
@@ -177,7 +170,7 @@ const Home = (props) => {
                         showsHorizontalScrollIndicator={false}
                         numColumns={2}
                         vertical
-                        data={dataRecipe}
+                        data={recipe}
 
                         renderItem={({ item }) => (
                           <ItemDishesVertical

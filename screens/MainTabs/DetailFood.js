@@ -7,7 +7,9 @@ import ItemSteps from '../../component/ItemSteps';
 import { ScrollView } from 'react-native-virtualized-view'
 import ItemMaterial from '../../component/ItemMaterial';
 import ItemComent from '../../component/ItemComent';
+import ItemDishesVertical from '../../component/ItemDishesVertical';
 import ItemAnotherFood from '../../component/ItemAnotherFood';
+
 import YoutubeIframe from "react-native-youtube-iframe";
 import { AppContext } from '../../utils/AppContext';
 import AxiosInstance from '../../constants/AxiosInstance';
@@ -15,32 +17,40 @@ import AxiosInstance from '../../constants/AxiosInstance';
 const DetailFood = (props) => {
     const { route, navigation } = props;
     const { params } = route;
-    const { id } = '64822ba7915f63e79514a05f';
-    const [recipe, setrecipe] = useState('');
+    const [isSaved, setIsSaved] = useState(false)
+    const [recipe, setRecipe] = useState('');
     const [playing, setPlaying] = useState(false);
-    const { setInfoUser, infoUser } = useContext(AppContext);
+    const { setInfoUser, infoUser, idUser } = useContext(AppContext);
     const [content, setContent] = useState('');
     const [comment, setcomMent] = useState([]);
     const [recipeOfAuthor, setRecipeOfAuthor] = useState([])
-    const [name, setname] = useState('')
-    const [avatar, setavatar] = useState('')
-    const [email, setemail] = useState('')
+    const [name, setName] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [email, setEmail] = useState('')
+    const [idAuthor, setIdAuthor] = useState('')
     const getRecipeByID = async () => {
         try {
             const response = await AxiosInstance().get("recipe/api/get-by-id?id=" + params.id);
-            console.log(response.recipe);
-            console.log(response.recipe.author.name);
-            console.log(response.recipe.author.avatar);
-            setname(response.recipe.author.name);
-            setavatar(response.recipe.author.avatar);
-            setemail(response.recipe.author.email);
-            setrecipe(response.recipe);
-            console.log(recipe);
-        } catch (error) {
+            // console.log(response.recipe);
+            // console.log(response.recipe.author.name);
+            setIdAuthor(response.recipe.author._id)
+            setName(response.recipe.author.name);
+            setAvatar(response.recipe.author.avatar);
+            setEmail(response.recipe.author.email);
+            setRecipe(response.recipe);
 
+            const response2 = await AxiosInstance().get("recipe/api/search-by-author?author=" + response.recipe.author._id);
+            console.log("=======>", response2)
+            if (response2.result) {
+                setRecipeOfAuthor(response2.recipe)
+            } else {
+                console.log("Failed to get all category");
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
-    const getAllCommnet = async () => {
+    const getAllComment = async () => {
         try {
             const response = await AxiosInstance().get("/comment/api/get-all");
             // console.log(response)
@@ -80,10 +90,9 @@ const DetailFood = (props) => {
     }
     const getRecipeByAuthor = async () => {
         try {
-            console.log("======>", recipe.author._id);
-            console.log("======>", recipe.author.avatar);
-            const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + recipe.author._id);
-            console.log(response)
+            console.log("idAuthor", idAuthor);
+            const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idAuthor);
+            console.log("=======>", response)
             if (response.result) {
                 console.log(response.recipe)
                 setRecipeOfAuthor(response.recipe)
@@ -94,12 +103,29 @@ const DetailFood = (props) => {
             console.log("Failed to get all category !!!");
         }
     }
+    const addToFavorite = async (idRecipe) => {
+        try {
+            // console.log("idUser", idUser);
+            const response = await AxiosInstance()
+                .post("favorite/api/new-to-favorite", { idUser: idUser, idRecipe: idRecipe });
+            if (response.result) {
+                ToastAndroid.show("Lưu món thành công !!! ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+            } else {
+                console.log("Failed to favorite RECIPE");
+            }
+        } catch (error) {
+            console.log("=========>", error);
+        }
+    }
     useEffect(() => {
-        getAllCommnet();
-        getRecipeByAuthor()
         getRecipeByID();
+        getAllComment();
+        if (isSaved) {
+            const idRecipe = recipe._id;
+            addToFavorite(idRecipe)
+        }
 
-    }, [])
+    }, [isSaved])
 
     return (
         <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
@@ -108,56 +134,65 @@ const DetailFood = (props) => {
                 <TouchableOpacity onPress={() => { goBack() }}>
                     <Image style={styles.icon} source={require('../../asset/icon/icon_back.png')} />
                 </TouchableOpacity></ImageBackground>
-            <View style={{ padding: 16 }}>
-                <Text style={styles.bapxaotep}>{recipe.title}</Text>
-                <View style={{ marginTop: 20, flexDirection: 'row', }}>
-                    <Image style={styles.logo}
-                        require={require('../../asset/icon/icon_people.png')}
-
-                    // source={recipe.author.avatar == null ? require('../../asset/icon/icon_people.png') : { uri: recipe.author.avatar }}></Image
-                    />
+            <View style={{}}>
+                <View style={styles.boxInfo}>
+                    <Text style={styles.bapxaotep}>{recipe.title}</Text>
+                    <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 10, }}>
+                        <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
                         <View>
                             <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} >{name}</Text>
                             <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} >{email}</Text>
                         </View>
-
+                    </View>
+                    <Text style={[styles.text, { color: COLOR.WHITE }]}>
+                        Mô tả: {recipe.description}
+                    </Text>
+                    {!isSaved ?
+                        (<TouchableOpacity style={styles.buttonSave} onPress={() => setIsSaved(true)}>
+                            <Image style={styles.iconSave} source={require('../../asset/icon/icon_save.png')} />
+                            <Text style={styles.textButton}> Lưu món</Text>
+                        </TouchableOpacity>)
+                        :
+                        (<TouchableOpacity style={styles.buttonSave} onPress={() => setIsSaved(false)}>
+                            <Image style={styles.iconSave} source={require('../../asset/icon/icon_saved.png')} />
+                            <Text style={styles.textButton}> Món đã lưu</Text>
+                        </TouchableOpacity>)
+                    }
+                    <View style={styles.line}></View>
+                    <View style={styles.boxTime}>
+                        <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
+                        <Text style={styles.time} >{recipe.time} giờ</Text>
+                    </View>
+                    <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
+                        <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
+                        <Text style={styles.people}>{recipe.mealType}</Text>
+                    </View>
                 </View>
-                <Text style={[styles.text, { color: COLOR.WHITE }]}>
-                    {recipe.description}
-                </Text>
-                <View style={styles.line}></View>
-                <View style={styles.boxTime}>
-                    <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
-                    <Text style={styles.time} >{recipe.time} giờ</Text>
-                </View>
-                <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
-                    <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
-                    <Text style={styles.people}>{recipe.mealType}</Text>
-                </View>
-                {/* Nguyen lieu */}
-                <Text style={styles.title} >Nguyên liệu</Text>
 
-                <FlatList
-                    data={recipe.ingredients}
-                    renderItem={({ item }) => <ItemMaterial data={item} />}
-                    keyExtractor={item => item._id}
-                    showsVerticalScrollIndicator={false}
-                />
-                <View style={styles.line}></View>
-
-                {/* Cach lam` */}
-                <Text style={styles.title}>Cách làm</Text>
-                <View style={{ padding: 10 }}>
+                <View style={styles.boxIngredients}>
+                    <Text style={styles.title} >Nguyên liệu</Text>
                     <FlatList
-                        data={recipe.steps}
-                        renderItem={({ item }) => <ItemSteps data={item} />}
-                        keyExtractor={(subItem) => subItem.id}
-                        listKey={(subItem) => 'subList-' + subItem.id}
+                        data={recipe.ingredients}
+                        renderItem={({ item }) => <ItemMaterial data={item} />}
+                        keyExtractor={item => item._id}
                         showsVerticalScrollIndicator={false}
                     />
+                    <View style={styles.line}></View>
                 </View>
-                <View style={styles.videoYoutube}>
-                {/* <>{
+
+                <View style={styles.boxSteps}>
+                    <Text style={styles.title}>Cách làm</Text>
+                    <View style={{}}>
+                        <FlatList
+                            data={recipe.steps}
+                            renderItem={({ item }) => <ItemSteps data={item} />}
+                            keyExtractor={(subItem) => subItem.id}
+                            listKey={(subItem) => 'subList-' + subItem.id}
+                            showsVerticalScrollIndicator={false}
+                        />
+                    </View>
+                    <View style={styles.videoYoutube}>
+                        {/* <>{
                         recipe.idVideo == null ?
                             <View>
 
@@ -170,42 +205,44 @@ const DetailFood = (props) => {
                                 onChangeState={onStateChange}
                             />
                     }</> */}
-                    {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+                        {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+                    </View>
+                    <View style={styles.line}></View>
                 </View>
-                <View style={styles.line}></View>
 
-                {/* Binh` luan */}
-                {/* <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                    <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />
-                    <Text style={[styles.title, { marginTop: -5 }]} >Bình luận</Text>
+                <View style={styles.boxComment}>
+                    <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                        <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />
+                        <Text style={[styles.title, { marginTop: -5, marginLeft: 10, }]} >Bình luận</Text>
+                    </View>
+                    <Text style={styles.allComent} >Xem tất cả bình luận</Text>
+                    <FlatList
+                        data={comment}
+                        renderItem={({ item }) => <ItemComent data={item} />}
+                        keyExtractor={(subItem) => subItem.id}
+                        listKey={(subItem) => 'subList-' + subItem.id}
+                        showsVerticalScrollIndicator={false}
+                    />
+                    <View style={{ marginTop: 20, flexDirection: 'row' }}>
+                        <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} />
+                        <TextInput value={content} onChangeText={text => setContent(text)} style={styles.addComent}></TextInput>
+                        <TouchableOpacity onPress={addComment}>
+                            <Image style={styles.imagePost} source={require('../../asset/icon/icon_post.png')}></Image>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.line}></View>
                 </View>
-                <Text style={styles.allComent} >Xem tất cả bình luận</Text>
-                <FlatList
-                    data={comment}
-                    renderItem={({ item }) => <ItemComent data={item} />}
-                    keyExtractor={(subItem) => subItem.id}
-                    listKey={(subItem) => 'subList-' + subItem.id}
-                    showsVerticalScrollIndicator={false}
-                />
-                <View style={{ marginTop: 20, flexDirection: 'row' }}>
-                    <Image style={{ width: 30, height: 30 }} source={{ uri: infoUser.user.avatar }} />
-                    <TextInput value={content} onChangeText={text => setContent(text)} style={styles.addComent}></TextInput>
-                    <TouchableOpacity onPress={addComment}>
-                        <Image style={styles.imagePost} source={require('../../asset/icon/icon_post.png')}></Image>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.line}></View> */}
 
-
-                {/* Mon moi cua Quynh */}
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <Image style={{ tintColor: 'white' }} source={require('../../asset/icon/icon_dishes.png')} />
                     <Text style={styles.newFoodof} >Món mới của {name}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 70, justifyContent: 'space-between' }}>
-                    <FlatList horizontal
+                    <FlatList
                         data={recipeOfAuthor}
-                        renderItem={({ item }) => <ItemAnotherFood recipe={item} />}
+                        numColumns={2}
+                        vertical
+                        renderItem={({ item }) => <ItemDishesVertical recipe={item} />}
                         keyExtractor={(subItem) => subItem.id}
                         listKey={(subItem) => 'subList-' + subItem.id}
                         showsVerticalScrollIndicator={false}
@@ -222,14 +259,12 @@ const styles = StyleSheet.create({
     line: {
         backgroundColor: 'white',
         height: 1,
-        marginLeft: 10,
         marginTop: 15
     }
     ,
     title: {
         color: COLOR.WHITE,
         fontSize: 20,
-        marginLeft: 10,
         marginTop: 10,
         fontWeight: 'bold'
     },
@@ -248,7 +283,6 @@ const styles = StyleSheet.create({
     ,
     text: {
         fontSize: 15,
-        marginLeft: 10,
         marginTop: 10
     },
     time: {
@@ -305,6 +339,40 @@ const styles = StyleSheet.create({
         width: 25,
         tintColor: COLOR.WHITE,
     },
+    boxComment: {
+        padding: 15
+    },
+    boxSteps: {
+        padding: 15
+    },
+    boxIngredients: {
+        padding: 15
+
+    },
+    boxInfo: {
+        padding: 15
+
+    },
+    buttonSave: {
+        backgroundColor: COLOR.PRIMARY,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        height: 40,
+        marginTop: 20,
+    },
+    iconSave: { tintColor: COLOR.BLACK, height: 25, width: 25 },
+    textButton: {
+        color: COLOR.BLACK,
+        fontSize: 16,
+        fontWeight: '500',
+        marginLeft: 10,
+    },
+    logo: {
+        height: 34, width: 34, marginRight: 16, top: 7
+    }
+
 
 })
 

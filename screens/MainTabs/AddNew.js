@@ -47,7 +47,7 @@ const AddNew = () => {
   const [message, setMessage] = useState([])
   const checkStepsAndIngredients = async () => {
     await handleAddIngredient()
-    console.log(ingredients);
+    // console.log(ingredients);
     // await handleAddStep()
     // if ((ingredients != null) && (steps != null)) {
     //   console.log("AAAAAA");
@@ -61,15 +61,15 @@ const AddNew = () => {
     try {
       await handleAddIngredient()
       await handleAddStep()
-      console.log("title", title);
-      console.log("description", description);
-      console.log("image", image);
-      console.log("mealType", mealType);
+      // console.log("title", title);
+      // console.log("description", description);
+      // console.log("image", image);
+      // console.log("mealType", mealType);
 
-      console.log("time", time);
-      console.log("idVideo", idVideo);
-      console.log("ingredients====>", ingredients);
-      console.log("steps=======>", steps);
+      // console.log("time", time);
+      // console.log("idVideo", idVideo);
+      // console.log("ingredients====>", ingredients);
+      // console.log("steps=======>", steps);
 
       const response = await AxiosInstance().post("/recipe/api/new", {
         title: title, description: description,
@@ -78,7 +78,7 @@ const AddNew = () => {
         mealType: mealType,
         author: idUser, idVideo: idVideo,
       });
-      console.log(response);
+      // console.log(response);
       if (response.result) {
         ToastAndroid.show("Đăng món thành công", ToastAndroid.SHORT);
         clearInput()
@@ -301,6 +301,9 @@ const AddNew = () => {
           <View>
             <TextInput
               style={[styles.textInput, { marginTop: 20, fontSize: 20, fontWeight: 'bold', height: 70 }]}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
               value={title} onChangeText={setTitle} placeholder='Tiêu đề: Món ăn ngon nhất nhà mình' placeholderTextColor={COLOR.TextAdd} />
           </View>
           <View>

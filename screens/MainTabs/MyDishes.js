@@ -22,7 +22,7 @@ const MyDishes = (props) => {
     try {
       const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idUser);
       if (response.result) {
-        console.log("========>",response.recipe);
+        // console.log("========>",response.recipe);
         setRecipe(response.recipe)
         setIsLoading(true)
       } else {
@@ -35,7 +35,7 @@ const MyDishes = (props) => {
 
   useEffect(() => {
     getRecipeOfUser();
-  }, [stateList]);
+  }, [stateList,]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.main}>
@@ -44,7 +44,7 @@ const MyDishes = (props) => {
         </View>
         {isLoading ?
           (<View style={styles.boxList}>
-
+          
             <FlatList
               style={{ marginVertical: 15, marginBottom: 210, width: '100%' }}
               showsHorizontalScrollIndicator={false}

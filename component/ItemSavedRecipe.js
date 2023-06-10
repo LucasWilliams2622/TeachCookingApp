@@ -12,14 +12,14 @@ const ItemSavedRecipe = (props) => {
   const { idUser, infoUser } = useContext(AppContext);
 
   const goDetail = () => {
-    console.log(recipe.idRecipe._id);
+    // console.log(recipe.idRecipe._id);
     navigation.navigate("DetailFood", { id: recipe.idRecipe._id })
   }
-  const deleteSaved = async () => {
+  const handleDeleteSavedItem = async () => {
     try {
       const response = await AxiosInstance()
         .delete(`/favorite/api/delete-by-id?idUser=${idUser}&idRecipe=${recipe._id}`);
-      console.log(response.recipe)
+      // console.log(response.recipe)
       if (response.result) {
         ToastAndroid.show("Đã xóa ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
         props.SavedDishes();

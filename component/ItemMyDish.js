@@ -94,16 +94,16 @@ const ItemSavedRecipe = (props) => {
                 </ImageBackground>
                 <View style={styles.content}>
                     <View style={styles.boxInfo}>
-                        <Image style={styles.avatar}
+                        <Image style={styles.avatar}  key={recipe.id}
                             source={recipe.author.avatar == "" ?
                                 (require('../asset/image/logo.png')) :
                                 ({ uri: recipe.author.avatar })} />
-                        <Text style={styles.nameUser}>{recipe.author.name}</Text>
+                        <Text style={styles.nameUser} key={recipe.id}>{recipe.author.name}</Text>
                     </View>
-                    <Text style={styles.nameDishes}>{recipe.title}</Text>
+                    <Text style={styles.nameDishes}  key={recipe.id}>{recipe.title}</Text>
                     <View style={styles.boxTime}>
                         {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-                        <Text style={styles.textTime}>{recipe.time} giờ</Text>
+                        <Text style={styles.textTime}  key={recipe.id}>{recipe.time} giờ</Text>
                         <View style={styles.boxIcon}>
                         <TouchableOpacity style={styles.boxEmotion} onPress={()=>{dialogConfirm()}}>
                             <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />

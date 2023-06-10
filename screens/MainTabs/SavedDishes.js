@@ -18,7 +18,6 @@ const SavedDishes = (props) => {
   const [refreshControl, setRefreshControl] = useState(false);
   const { infoUser, idUser } = useContext(AppContext);
   const countdownSearch = (searchText) => {
-
     if (timeOut) {
       clearTimeout(timeOut);
     }
@@ -32,9 +31,9 @@ const SavedDishes = (props) => {
   }
   const search = async (searchText) => {
     try {
-      console.log("searchText", searchText);
+      // console.log("searchText", searchText);
       const response = await AxiosInstance().get("/recipe/api/search-by-title?title=" + searchText);
-      console.log(response);
+      // console.log(response);
       if (response.result) {
         // console.log(response.recipe);
         setRecipe(response.recipe);
@@ -47,8 +46,6 @@ const SavedDishes = (props) => {
       console.log("ERROR", error);
     }
   }
-
-
   const getSavedRecipe = async () => {
     try {
       const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" + "647dc518dded9d94be4b27cc");
@@ -76,7 +73,7 @@ const SavedDishes = (props) => {
     getSavedRecipe();
     return () => {
     }
-  }, [stateList])
+  }, [stateList,])
 
   return (
     <SafeAreaView style={styles.container}>

@@ -6,7 +6,7 @@ const ItemMaterial = (props) => {
     const { data } = props;
     return (
         <TouchableOpacity
-            style={{ backgroundColor: COLOR.BACKGROUND }}>
+            style={{ backgroundColor: COLOR.BACKGROUND , marginTop:15 }}>
             <View>
                 <Text style={styles.makeStep} >{data}</Text>
                 <Text style={styles.makeStep} >_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  </Text>
@@ -20,7 +20,7 @@ export default ItemMaterial
 
 const styles = StyleSheet.create({
     makeStep: {
-        color: COLOR.WHITE, fontSize: 15, marginLeft: 10, marginTop: 15
+        color: COLOR.WHITE, fontSize: 15,  
     }
     ,
 })

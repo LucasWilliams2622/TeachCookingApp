@@ -177,7 +177,7 @@ const BottomTabs = () => {
   return (
     <>
       {
-        isLogin == false ? <StackSearch /> : <Main />
+        isLogin == false ? <StackBegin /> : <Main />
       }
     </>)
 }
