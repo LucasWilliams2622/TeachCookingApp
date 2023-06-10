@@ -105,7 +105,7 @@ const SavedDishes = (props) => {
                 numColumns={2}
                 horizontal={false}
                 data={recipe}
-                renderItem={({ item }) => <ItemSavedRecipe recipe={item} SavedDishes={SavedDishes} navigation={navigation}/>}
+                renderItem={({ item }) => <ItemSavedRecipe recipe={item} navigation={navigation}  />}
                 keyExtractor={eachCategory => eachCategory.name}
                 refreshControl={
                   <RefreshControl refreshing={refreshControl} onRefresh={() => {
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   boxList: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:60
+    marginBottom: 60
   },
   input: {
     placeholderTextColor: COLOR.WHITE,
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontStyle: 'normal',
     marginRight: 10,
-    
+
   },
   inputSearch: {
     height: 50,

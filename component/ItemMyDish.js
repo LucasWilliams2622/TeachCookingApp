@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground, ToastAndroid, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, Alert, ImageBackground,ToastAndroid, TouchableOpacity } from 'react-native'
 import React, { useState,useContext,useEffect } from 'react'
 import { COLOR } from '../constants/Themes';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -33,15 +33,17 @@ const ItemSavedRecipe = (props) => {
         }
     }, [isSaved])
     const goDetail = () => {
-        navigation.navigate("DetailFood",{recipe})
+        navigation.navigate("DetailFood",{ id: recipe._id })
     }
     const goEditRecipe = async () => {
         navigation.navigate("AddNew",{recipe})
           }
     const deleteMyRecipe = async () => {
         try {
+
+            console.log("AAAAAAAAAAAA",recipe._id);
             const response = await AxiosInstance().delete(`/recipe/api/delete-by-id?_id=${recipe._id}&idUser=${idUser}`);
-            // console.log(response.recipe)
+            console.log(response.recipe)
             if (response.result) {
                 ToastAndroid.show("Xoá thành công!", ToastAndroid.SHORT);
             } else {
@@ -85,7 +87,7 @@ const ItemSavedRecipe = (props) => {
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_save.png')} />
                             </TouchableOpacity>)
                             :
-                            (<TouchableOpacity onPress={() => { setIsSaved(true) }}>
+                            (<TouchableOpacity onPress={() =>{setIsSaved(true) }}>
                                 <Image style={[styles.icon, { tintColor: COLOR.WHITE }]} source={require('../asset/icon/icon_saved.png')} />
                             </TouchableOpacity>)}
                     </View>
@@ -103,12 +105,12 @@ const ItemSavedRecipe = (props) => {
                         {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
                         <Text style={styles.textTime}>{recipe.time} giờ</Text>
                         <View style={styles.boxIcon}>
-                            <TouchableOpacity style={styles.boxEmotion} onPress={() => { dialogConfirm() }}>
-                                <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.boxEmotion, { marginLeft: 10, width: 34 }]} onPress={() => { goEditRecipe() }}>
-                                <Image style={[styles.icon2, { tintColor: COLOR.BLACK }]} source={require('../asset/icon/icon_note.png')} />
-                            </TouchableOpacity>
+                        <TouchableOpacity style={styles.boxEmotion} onPress={()=>{dialogConfirm()}}>
+                            <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.boxEmotion,{marginLeft:10, width:34}]} onPress={()=>{ goEditRecipe()}}>
+                            <Image style={[styles.icon2,{tintColor:COLOR.BLACK}]} source={require('../asset/icon/icon_note.png')} />
+                        </TouchableOpacity>
                         </View>
                     </View>
                 </View>

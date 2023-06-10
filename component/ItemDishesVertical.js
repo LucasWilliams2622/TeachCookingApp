@@ -7,12 +7,14 @@ import AxiosInstance from '../constants/AxiosInstance'
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const ItemDishesVertical = (props) => {
+const 
+ItemDishesVertical = (props) => {
   const { recipe, navigation } = props;
   const [isSaved, setIsSaved] = useState(false)
   const { idUser, infoUser } = useContext(AppContext);
   const goDetail = () => {
-    navigation.navigate("DetailFood", { recipe })
+    console.log(recipe);
+    navigation.navigate("DetailFood", { id: recipe._id })
   }
   const addToFavorite = async (idRecipe) => {
     try {
