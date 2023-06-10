@@ -23,7 +23,8 @@ const Home = (props) => {
       const response = await AxiosInstance().get("category/api/get-all");
       // console.log(response)
       if (response.result) {
-        setCategory(response.category)
+        setCategory(response.category);
+        setisLoading(false);
       } else {
         console.log("Failed to get all category");
       }
@@ -121,34 +122,43 @@ const Home = (props) => {
                 </Swiper>
               </View>
 
+              <ScrollView>
+                <FlatList
+                  style={{ marginBottom: 10, marginTop: 10, }}
+                  showsHorizontalScrollIndicator={false}
+                  horizontal
+                  data={category}
+                  renderItem={({ item }) => <ItemCategories category={item}
+                  />}
+                  keyExtractor={eachCategory => eachCategory.name}
+                />
+              </ScrollView>
 
-              <FlatList
-                style={{ marginBottom: 10, marginTop: 10, }}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={category}
-                renderItem={({ item }) => <ItemCategories
-                  category={item} key={item._id} />}
-                keyExtractor={eachCategory => eachCategory.name}
-              />
 
-              <FlatList
-                style={{ marginBottom: 10, height: 270, }}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={dataRecipe}
-                renderItem={({ item }) => (<ItemDishes
-                  recipe={item}
-                  key={item._id}
-                  navigation={navigation}
-                />)}
-                keyExtractor={eachDishes => eachDishes.name}
-              />
+              <View style={{ height: 270, }}>
+                {
+                  isLoading == true ?
+                    (<View >
+                      <ActivityIndicator size='large' color='#f0fff' />
+                      <Text>Loading...</Text>
+                    </View>)
+                    : (<FlatList
+                      style={{ marginBottom: 10, }}
+                      showsHorizontalScrollIndicator={false}
+                      horizontal
+                      data={dataRecipe}
+                      renderItem={({ item }) => (<ItemDishes
+                        recipe={item}
+                        key={item.id}
+                        navigation={navigation}
+                      />)}
+                      keyExtractor={eachDishes => eachDishes.name}
+                    />)}
+              </View>
               <TouchableOpacity style={styles.buttonSuggest} onPress={() => { }}>
                 <Image style={[styles.iconSearch2,]} source={require('../../asset/icon/icon_search.png')} />
                 <Text style={[styles.text, { marginLeft: 10 }]}>Gợi ý khác</Text>
               </TouchableOpacity>
-
 
               <View style={styles.spaceLine} />
               <View style={styles.newDishes}>
