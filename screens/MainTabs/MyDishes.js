@@ -21,7 +21,7 @@ const MyDishes = (props) => {
   }
   const getRecipeOfUser = async () => {
     try {
-      const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + '647dc518dded9d94be4b27cc');
+      const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idUser);
       if (response.result) {
         console.log("========>", response.recipe);
         setRecipe(response.recipe)
