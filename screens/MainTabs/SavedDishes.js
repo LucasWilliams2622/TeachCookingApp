@@ -12,7 +12,7 @@ const windowWIdth = Dimensions.get('window').width;
 
 const SavedDishes = (props) => {
   const { navigation } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [recipe, setRecipe] = useState([]);
   const [stateList, setStateList] = useState(0);
   const [refreshControl, setRefreshControl] = useState(false);
@@ -48,22 +48,22 @@ const SavedDishes = (props) => {
   }
   const getSavedRecipe = async () => {
     try {
-      const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" + "647dc518dded9d94be4b27cc");
-      // console.log("SAVED===========>", response.favorite)
+      const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" +idUser);
+      console.log("SAVED===========>", response)
       if (response.result) {
+        setIsLoading(false)
         setRecipe(response.favorite)
-        response.favorite.forEach(recipe => {
-          // console.log(recipe._id);
-          // console.log(recipe.idUser);
-          // console.log(recipe.idRecipe.image);
-          // console.log(recipe.idRecipe.title);
-          // console.log(recipe.idRecipe.description);
-          // console.log(recipe.idRecipe.author);
-
-        });
-        setIsLoading(true)
+        // if (response.favorite) {
+        //   console.log(isLoading);
+        //   setIsLoading(true)
+         
+        // } else {
+        //   console.log("aaaaaaaaa",isLoading);
+        //   setIsLoading(false)
+        //   setRecipe(response.favorite)
+        // }
       } else {
-        console.log("Failed");
+        setIsLoading(true)
       }
     } catch (error) {
       console.log("Failed  !!!");
@@ -73,7 +73,7 @@ const SavedDishes = (props) => {
     getSavedRecipe();
     return () => {
     }
-  }, [stateList,])
+  }, [stateList])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,15 +94,24 @@ const SavedDishes = (props) => {
         </View>
         {isLoading ?
           (
-            <View style={styles.boxList}>
+            <View style={styles.content}>
+              <Image style={styles.image} source={require('../../asset/image/mtSaved.jpg')}></Image>
+              <Text style={styles.title}>Chưa có món mới nào được lưu</Text>
+              <Text style={styles.text}>Bạn vẫn chưa lưu món nào. Hãy tìm món bạn yêu </Text>
+              <Text style={styles.text}>thích và lưu món đó để nấu và tìm thầy những món đó ở đây </Text>
+              <Text style={styles.text}> nhé!</Text>
+            </View>
+          )
+          :
+          ( <View style={styles.boxList}>
               <FlatList
-                style={{ marginVertical: 15,marginBottom:260, width: '100%' }}
+                style={{ marginVertical: 15, marginBottom: 260, width: '100%' }}
                 showsHorizontalScrollIndicator={false}
                 vertical
                 numColumns={2}
                 horizontal={false}
                 data={recipe}
-                renderItem={({ item }) => <ItemSavedRecipe recipe={item} navigation={navigation}  />}
+                renderItem={({ item }) => <ItemSavedRecipe recipe={item} navigation={navigation} />}
                 keyExtractor={eachCategory => eachCategory.name}
                 refreshControl={
                   <RefreshControl refreshing={refreshControl} onRefresh={() => {
@@ -114,16 +123,7 @@ const SavedDishes = (props) => {
                   }} colors={['green']} />
                 }
               />
-            </View>
-          )
-          :
-          (<View style={styles.content}>
-            <Image style={styles.image} source={require('../../asset/image/mtSaved.jpg')}></Image>
-            <Text style={styles.title}>Chưa có món mới nào được lưu</Text>
-            <Text style={styles.text}>Bạn vẫn chưa lưu món nào. Hãy tìm món bạn yêu </Text>
-            <Text style={styles.text}>thích và lưu món đó để nấu và tìm thầy những món đó ở đây </Text>
-            <Text style={styles.text}> nhé!</Text>
-          </View>)
+            </View>)
         }
       </View>
     </SafeAreaView >

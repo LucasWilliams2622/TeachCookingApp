@@ -64,12 +64,12 @@ ItemDishesVertical = (props) => {
           <Image style={styles.avatar} source={recipe.author.avatar == "" ?
             (require('../asset/image/logo.png')) :
             ({ uri: recipe.author.avatar })} />
-          <Text style={styles.nameUser}>{recipe.author.name}</Text>
+          <Text style={styles.nameUser}numberOfLines={1} >{recipe.author.name}</Text>
         </View>
-        <Text style={styles.nameDishes}>{recipe.title}</Text>
+        <Text style={styles.nameDishes}numberOfLines={1} >{recipe.title}</Text>
         <View style={styles.boxTime}>
           {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-          <Text style={styles.textTime}>Thời gian: {recipe.time} giờ</Text>
+          <Text style={styles.textTime} numberOfLines={1} >Thời gian: {recipe.time} giờ</Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <TouchableOpacity style={styles.boxEmotion}>

@@ -66,8 +66,8 @@ const ItemCategories = (props) => {
                             (require('../asset/image/logo.png')) :
                             ({ uri: recipe.author.avatar })} />
                     <View style={styles.boxContent}>
-                        <Text style={styles.nameUser}>{recipe.author.name}</Text>
-                        <Text style={styles.title}>{recipe.title}</Text>
+                        <Text style={styles.nameUser} numberOfLines={1} >{recipe.author.name}</Text>
+                        <Text style={styles.title} numberOfLines={1} >{recipe.title}</Text>
                     </View>
                 </View>
             </View>
@@ -196,5 +196,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: COLOR.WHITE,
         fontWeight: 'bold',
+        width:250,
     }
 })

@@ -98,12 +98,12 @@ const ItemSavedRecipe = (props) => {
                             source={recipe.author.avatar == "" ?
                                 (require('../asset/image/logo.png')) :
                                 ({ uri: recipe.author.avatar })} />
-                        <Text style={styles.nameUser} key={recipe.id}>{recipe.author.name}</Text>
+                        <Text style={styles.nameUser} key={recipe.id}numberOfLines={1} >{recipe.author.name}</Text>
                     </View>
-                    <Text style={styles.nameDishes}  key={recipe.id}>{recipe.title}</Text>
+                    <Text style={styles.nameDishes}  key={recipe.id} numberOfLines={1} >{recipe.title}</Text>
                     <View style={styles.boxTime}>
                         {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
-                        <Text style={styles.textTime}  key={recipe.id}>{recipe.time} giờ</Text>
+                        <Text style={styles.textTime}  key={recipe.id}numberOfLines={1} >{recipe.time} giờ</Text>
                         <View style={styles.boxIcon}>
                         <TouchableOpacity style={styles.boxEmotion} onPress={()=>{dialogConfirm()}}>
                             <Image style={styles.icon2} source={require('../asset/icon/icon_trash_bin.png')} />

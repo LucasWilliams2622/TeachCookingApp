@@ -50,8 +50,8 @@ const ItemSavedRecipe = (props) => {
   };
   return (
     <SafeAreaView style={styles.itemDishes}>
-      <TouchableOpacity  key={recipe.id}
-      onPress={() => { goDetail() }}>
+      <TouchableOpacity key={recipe.id}
+        onPress={() => { goDetail() }}>
         <ImageBackground style={styles.image} resizeMode='cover'
           imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
           source={{ uri: recipe.idRecipe.image }} >
@@ -69,12 +69,12 @@ const ItemSavedRecipe = (props) => {
         </ImageBackground>
         <View style={styles.content}>
           <View style={styles.boxInfo}>
-            <Image style={styles.avatar}
-            // source={{uri:recipe.author.avatar}}
-            />
-            {/* <Text style={styles.nameUser}>{recipe.author.name}</Text> */}
+            {/* <Image style={styles.avatar}
+              source={{ uri: recipe.idUser.avatar }}
+            /> */}
+            <Text style={styles.nameUser}numberOfLines={1} >{recipe.idUser.name}</Text>
           </View>
-          <Text style={styles.nameDishes}>{recipe.idRecipe.title}</Text>
+          <Text style={styles.nameDishes}numberOfLines={1} >{recipe.idRecipe.title}</Text>
           <View style={styles.boxTime}>
             {/* <Image style={styles.icon} source={require('../asset/icon/icon_clock.png')} /> */}
             <Text style={styles.textTime}>{recipe.idRecipe.time} giờ</Text>
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     color: COLOR.BACKGROUND4,
     marginLeft: 5,
+    fontWeight: '500',
 
   },
   nameDishes: {
