@@ -85,7 +85,7 @@ const Home = (props) => {
   useEffect(() => {
     getAllRecipe();
     getAllCategory();
-  }, [])
+  }, [recipe])
 
   const goDetail = () => {
     navigation.navigate('DetailFood')

@@ -58,7 +58,7 @@ const MyDishes = (props) => {
   }
   useEffect(() => {
     getRecipeOfUser();
-  }, [stateList,]);
+  }, [stateList,recipe]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.main}>

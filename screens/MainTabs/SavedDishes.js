@@ -73,7 +73,7 @@ const SavedDishes = (props) => {
     getSavedRecipe();
     return () => {
     }
-  }, [stateList])
+  }, [stateList,recipe])
 
   return (
     <SafeAreaView style={styles.container}>
