@@ -39,6 +39,18 @@ const Search = (props) => {
             console.log("=========>", error);
         }
     }
+    const changeLimit = async () => {
+        try {
+            const response = await AxiosInstance().get("recipe/api/changeLimit");
+            if (response.result) {
+                setSearchRecipe(response.recipe);
+            } else {
+                console.log("Failed to get all RECIPE");
+            }
+        } catch (error) {
+            console.log("=========>", error);
+        }
+    }
     useEffect(() => {
         getAllRecipe();
         return () => {
@@ -61,6 +73,7 @@ const Search = (props) => {
             console.log("ERROR", error);
         }
     }
+
     const search = async (searchText) => {
         try {
             // console.log("searchText", searchText);
@@ -91,7 +104,11 @@ const Search = (props) => {
                     placeholderTextColor={COLOR.WHITE}
                     style={styles.input}></TextInput>
             </View>
-
+            <View>
+                <TouchableOpacity style={styles.buttonSuggest} onPress={changeLimit}>
+                    <Text style={[styles.text, { marginLeft: 10,color:COLOR.WHITE }]}>Xem thêm</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.listRecipe}>
                 {isLoading ?
                     (<View>
@@ -115,8 +132,11 @@ const Search = (props) => {
                                 />
                             )} />
                     </View>)}
+
             </View>
+
             <StatusBar barStyle="light-content" backgroundColor={COLOR.BACKGROUND3} />
+
         </SafeAreaView>
     )
 }
@@ -173,9 +193,14 @@ const styles = StyleSheet.create({
 
     },
     listRecipe: {
-        height: '100%', marginBottom: 80,
-
-
-    }
+        height: '100%', marginBottom: 200,
+    },
+    buttonSuggest: {
+        backgroundColor: COLOR.BACKGROUND,
+        borderRadius: 10,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
 })

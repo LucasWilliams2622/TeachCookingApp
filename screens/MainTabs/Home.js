@@ -45,6 +45,19 @@ const Home = (props) => {
       console.log("=========>", error);
     }
   }
+  const changeLimit = async () => {
+    try {
+      const response = await AxiosInstance().get("recipe/api/changeLimit");
+      if (response.result) {
+        setRecipe(response.recipe);
+      } else {
+        console.log("Failed to get all RECIPE");
+      }
+    } catch (error) {
+      console.log("=========>", error);
+    }
+  }
+  
   const countDownSearch = (searchText) => {
     if (timeOut) {
       clearTimeout(timeOut);
@@ -186,6 +199,9 @@ const Home = (props) => {
                       />
                     )
                 }
+                <TouchableOpacity style={styles.buttonSuggest} onPress={changeLimit}>
+                  <Text style={[styles.text, { marginLeft: 10 }]}>Xem thêm</Text>
+                </TouchableOpacity>
               </View>
             </>
           }
