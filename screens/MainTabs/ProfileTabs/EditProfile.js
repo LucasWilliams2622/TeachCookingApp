@@ -7,7 +7,11 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { isValidEmpty } from '../../../constants/Validate'
 import { AppContext } from '../../../utils/AppContext'
 import AxiosInstance from '../../../constants/AxiosInstance'
-
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 const EditProfile = (props) => {
   const { navigation } = props;
   const [userName, setuserName] = useState('');
