@@ -40,7 +40,7 @@ const DetailFood = (props) => {
             setRecipe(response.recipe);
 
             const response2 = await AxiosInstance().get("recipe/api/search-by-author?author=" + response.recipe.author._id);
-            console.log("=======>", response2)
+            // console.log("=======>", response2)
             if (response2.result) {
                 setRecipeOfAuthor(response2.recipe)
             } else {
@@ -136,11 +136,11 @@ const DetailFood = (props) => {
                 </TouchableOpacity></ImageBackground>
             <View style={{}}>
                 <View style={styles.boxInfo}>
-                    <Text style={styles.bapxaotep}numberOfLines={2} >{recipe.title}</Text>
+                    <Text style={styles.bapxaotep} numberOfLines={2} >{recipe.title}</Text>
                     <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 10, }}>
                         <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
                         <View>
-                            <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]}numberOfLines={1}  >{name}</Text>
+                            <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} numberOfLines={1}  >{name}</Text>
                             <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} numberOfLines={1} >{email}</Text>
                         </View>
                     </View>
@@ -160,12 +160,12 @@ const DetailFood = (props) => {
                     }
                     <View style={styles.line}></View>
                     <View style={styles.boxTime}>
-                        <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
-                        <Text style={styles.time}numberOfLines={1}  >{recipe.time} giờ</Text>
+                        <Image style={{ width: 20, height: 20, tintColor: 'white' }} source={require('../../asset/icon/icon_clock.png')} />
+                        <Text style={styles.time} numberOfLines={1}  >{recipe.time} giờ</Text>
                     </View>
                     <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
                         <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
-                        <Text style={styles.people}numberOfLines={1} >{recipe.mealType}</Text>
+                        <Text style={styles.people} numberOfLines={1} >{recipe.mealType}</Text>
                     </View>
                 </View>
 
@@ -242,7 +242,7 @@ const DetailFood = (props) => {
                         data={recipeOfAuthor}
                         numColumns={2}
                         vertical
-                        renderItem={({ item }) => <ItemDishesVertical recipe={item} />}
+                        renderItem={({ item }) => <ItemDishesVertical recipe={item} navigation={navigation}/>}
                         keyExtractor={(subItem) => subItem.id}
                         listKey={(subItem) => 'subList-' + subItem.id}
                         showsVerticalScrollIndicator={false}
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.BACKGROUND2,
         marginLeft: 10,
         height: 40,
-        width: 310,
+        width: '60%',
         borderRadius: 20,
         paddingLeft: 20,
         borderWidth: 1,
@@ -336,8 +336,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginVertical: 23,
         height: 25,
-        width: 25,
-        tintColor: COLOR.WHITE,
+        width: 25, tintColor: 'black',
+        // tintColor: COLOR.WHITE,
     },
     boxComment: {
         padding: 15

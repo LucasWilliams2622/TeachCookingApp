@@ -23,7 +23,7 @@ const MyDishes = (props) => {
     try {
       const response = await AxiosInstance().get("recipe/api/search-by-author?author=" + idUser);
       if (response.result) {
-        console.log("========>", response.recipe);
+        // console.log("========>", response.recipe);
         setRecipe(response.recipe)
         setIsLoading(true)
       } else {
@@ -58,7 +58,7 @@ const MyDishes = (props) => {
   }
   useEffect(() => {
     getRecipeOfUser();
-  }, [stateList,]);
+  }, [stateList,recipe]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.main}>

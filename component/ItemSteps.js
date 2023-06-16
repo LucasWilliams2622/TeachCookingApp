@@ -13,7 +13,7 @@ const ItemSteps = (props) => {
       style={{ backgroundColor: COLOR.BACKGROUND }}>
       <View style={{ marginTop: 20, flexDirection: 'row' }}>
         <View style={styles.circle}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>1</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold',color:'black' }}>1</Text>
         </View>
         <Text style={{ color: COLOR.WHITE, fontSize: 15, marginLeft: 10, paddingRight: 20 }} numberOfLines={1} >{data}</Text>
       </View>

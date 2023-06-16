@@ -12,6 +12,7 @@ const windowWIdth = Dimensions.get('window').width;
 
 const SavedDishes = (props) => {
   const { navigation } = props;
+  let timeOut = null;
   const [isLoading, setIsLoading] = useState(true);
   const [recipe, setRecipe] = useState([]);
   const [stateList, setStateList] = useState(0);
@@ -49,7 +50,7 @@ const SavedDishes = (props) => {
   const getSavedRecipe = async () => {
     try {
       const response = await AxiosInstance().get("favorite/api/get-by-idUser?idUser=" +idUser);
-      console.log("SAVED===========>", response)
+      // console.log("SAVED===========>", response)
       if (response.result) {
         setIsLoading(false)
         setRecipe(response.favorite)
@@ -73,7 +74,7 @@ const SavedDishes = (props) => {
     getSavedRecipe();
     return () => {
     }
-  }, [stateList])
+  }, [stateList,recipe])
 
   return (
     <SafeAreaView style={styles.container}>
