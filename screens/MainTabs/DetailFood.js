@@ -136,11 +136,11 @@ const DetailFood = (props) => {
                 </TouchableOpacity></ImageBackground>
             <View style={{}}>
                 <View style={styles.boxInfo}>
-                    <Text style={styles.bapxaotep}numberOfLines={2} >{recipe.title}</Text>
+                    <Text style={styles.bapxaotep} numberOfLines={2} >{recipe.title}</Text>
                     <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 10, }}>
                         <Image style={styles.logo} source={require('../../asset/image/logo.png')} />
                         <View>
-                            <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]}numberOfLines={1}  >{name}</Text>
+                            <Text style={[styles.text, { color: COLOR.WHITE2, fontWeight: 'bold' }]} numberOfLines={1}  >{name}</Text>
                             <Text style={[styles.text, { color: COLOR.WHITE2, marginTop: 2 }]} numberOfLines={1} >{email}</Text>
                         </View>
                     </View>
@@ -161,11 +161,11 @@ const DetailFood = (props) => {
                     <View style={styles.line}></View>
                     <View style={styles.boxTime}>
                         <Image style={{ width: 20, height: 20, tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_clock.png')} />
-                        <Text style={styles.time}numberOfLines={1}  >{recipe.time} giờ</Text>
+                        <Text style={styles.time} numberOfLines={1}  >{recipe.time} giờ</Text>
                     </View>
                     <View style={{ marginTop: 20, marginLeft: 8, flexDirection: 'row' }}>
                         <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_human.png')} />
-                        <Text style={styles.people}numberOfLines={1} >{recipe.mealType}</Text>
+                        <Text style={styles.people} numberOfLines={1} >{recipe.mealType}</Text>
                     </View>
                 </View>
 
@@ -209,7 +209,14 @@ const DetailFood = (props) => {
                     </View>
                     <View style={styles.line}></View>
                 </View>
-
+                {/* <View>
+                    <YoutubeIframe
+                        height={300}
+                        play={playing}
+                        videoId={"JXp4eZ8XRFg"}
+                        onChangeState={onStateChange}
+                    />
+                </View> */}
                 <View style={styles.boxComment}>
                     <View style={{ marginTop: 20, flexDirection: 'row' }}>
                         <Image style={{ tintColor: COLOR.WHITE }} source={require('../../asset/icon/icon_coment.png')} />

@@ -91,7 +91,12 @@ const Search = (props) => {
             console.log("ERROR", error);
         }
     }
-
+    // return (
+    //     <View style={{ alignSelf: 'center' }}>
+    //         <ActivityIndicator size='large' color='white' />
+    //         <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', marginTop: 20, }} >Loading...</Text>
+    //     </View>
+    // )
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -106,14 +111,14 @@ const Search = (props) => {
             </View>
             <View>
                 <TouchableOpacity style={styles.buttonSuggest} onPress={changeLimit}>
-                    <Text style={[styles.text, { marginLeft: 10,color:COLOR.WHITE }]}>Xem thêm</Text>
+                    <Text style={[styles.text, { marginLeft: 10, color: COLOR.WHITE }]}>Xem thêm</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.listRecipe}>
                 {isLoading ?
-                    (<View>
-                        <ActivityIndicator size={'large'} color='#fff00' />
-                        <Text >Loading...</Text>
+                    (<View style={{ alignSelf: 'center',marginTop:200 }}>
+                        <ActivityIndicator size='large' color='white' />
+                        <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', marginTop: 20, }} >Loading...</Text>
                     </View>)
                     :
                     (<View style={{ marginTop: 20 }}>

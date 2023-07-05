@@ -97,7 +97,7 @@ const MyDishes = (props) => {
           :
           (<View style={styles.content}>
             <Image style={styles.image} source={require('../../asset/image/mtMydish.jpg')}></Image>
-            <Text style={styles.title}>Chưa có món nafo</Text>
+            <Text style={styles.title}>Chưa có món nào</Text>
             <Text style={styles.text}>Bạn vẫn chưa đăng món nào. Hãy chia sẻ món bạn </Text>
             <Text style={styles.text}>yêu thích và bạn sẽ thầy những món ấy ở đây </Text>
             <TouchableOpacity

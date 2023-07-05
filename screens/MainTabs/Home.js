@@ -57,7 +57,7 @@ const Home = (props) => {
       console.log("=========>", error);
     }
   }
-  
+
   const countDownSearch = (searchText) => {
     if (timeOut) {
       clearTimeout(timeOut);
@@ -144,9 +144,9 @@ const Home = (props) => {
               <View style={{ height: 270, }}>
                 {
                   isLoading == true ?
-                    (<View >
-                      <ActivityIndicator size='large' color='#f0fff' />
-                      <Text>Loading...</Text>
+                    (<View style={{ alignSelf: 'center', marginTop: 200 }}>
+                      <ActivityIndicator size='large' color='white' />
+                      <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', marginTop: 20, }} >Loading...</Text>
                     </View>)
                     : (<FlatList
                       style={{ marginBottom: 10, }}
@@ -172,9 +172,9 @@ const Home = (props) => {
                 {
                   isLoading == true ?
                     (
-                      <View >
-                        <ActivityIndicator size='large' color='#f0fff' />
-                        <Text>Loading...</Text>
+                      <View style={{ alignSelf: 'center', marginTop: 200 }}>
+                        <ActivityIndicator size='large' color='white' />
+                        <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', marginTop: 20, }} >Loading...</Text>
                       </View>
                     )
                     : (
