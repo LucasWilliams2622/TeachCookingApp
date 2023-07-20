@@ -8,7 +8,6 @@ import Profile from './screens/MainTabs/ProfileTabs/Profile';
 import EditProfile from './screens/MainTabs/ProfileTabs/EditProfile';
 import BottomTabs from './screens/MainTabs/BottomTabs';
 import AddNew from './screens/MainTabs/AddNew';
-import Home from './screens/MainTabs/Home';
 import InfoApp from './screens/MainTabs/InfoApp';
 
 import Search from './screens/MainTabs/Search';
@@ -23,8 +22,12 @@ import Test from './screens/TestTabs/Test'
 import TestGGSignIn from './screens/TestTabs/TestGGSignIn'
 import { requestUserPermission, NotoficationListener, GetFCMToke } from './src/utils/pushnotification_helper'
 import messaging from '@react-native-firebase/messaging';
-import { AppContext, AppContextProvider } from './utils/AppContext'
-
+import { AppContext, AppContextProvider } from './test/administration/AppContext'
+import SearchUser from "./test/administration/screens/SearchUser"
+import Home from './test/administration/screens/Home'
+import ProfileUser from './test/administration/screens/ProfileUser';
+import ListService from './test/administration/screens/ListService'
+import AddService from './test/administration/screens/AddService';
 const App = () => {
   useEffect(() => {
     getDeviceToken();
@@ -33,18 +36,26 @@ const App = () => {
     let token = await messaging().getToken();
     console.log(token);
   };
+  return (
+    <AppContextProvider>
+      <NavigationContainer>
+        <SearchUser />
+      </NavigationContainer>
+    </AppContextProvider>
+
+  )
   //https://testfcm.com/
   return (
     <AppContextProvider>
       <NavigationContainer>
-         <BottomTabs/>
+        <BottomTabs />
       </NavigationContainer>
     </AppContextProvider>
   )
 }
 export default App
 //
-//                          0  
+//                          0
 //                        oo0oo
 //                      o8888888o
 //                      88" . "88

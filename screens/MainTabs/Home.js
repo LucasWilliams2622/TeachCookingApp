@@ -134,8 +134,7 @@ const Home = (props) => {
                   showsHorizontalScrollIndicator={false}
                   horizontal
                   data={category}
-                  renderItem={({ item }) => <ItemCategories category={item}
-                  />}
+                  renderItem={({ item }) => <ItemCategories category={item}/>}
                   keyExtractor={eachCategory => eachCategory.name}
                 />
               </ScrollView>
