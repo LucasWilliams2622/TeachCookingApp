@@ -86,14 +86,14 @@ const KYCUser = () => {
               <Text style={[appStyle.normalText, { marginTop: 12 }]}>Front side of ID Nation</Text>
               <Image style={[appStyle.icon, { marginLeft: 13, top: 6 }]} source={require('../assets/icons/Ok.png')} />
             </View>
-            <Image style={[styles.image, { marginLeft: 13, top: 6, left: -10 }]} source={require('../assets/images/frontSide.png')} />
+            <Image style={[appStyle.licenseImage, { marginLeft: 13, top: 6, left: -10 }]} source={require('../assets/images/frontSide.png')} />
           </View>
           <View style={[appStyle.column, { alignItems: "flex-start", marginLeft: 150 }]}>
             <View style={[appStyle.row, { alignItems: 'center', justifyContent: 'center', marginTop: 25 }]}>
               <Text style={[appStyle.normalText, { marginTop: 12 }]}>Back side of ID Nation</Text>
               <Image style={[appStyle.icon, { marginLeft: 13, top: 6 }]} source={require('../assets/icons/Ok.png')} />
             </View>
-            <Image style={[styles.image, { marginLeft: 13, top: 6, left: -10 }]} source={require('../assets/images/backSide.png')} />
+            <Image style={[appStyle.licenseImage, { marginLeft: 13, top: 6, left: -10 }]} source={require('../assets/images/backSide.png')} />
           </View>
         </View>
         <View style={[appStyle.column, { marginBottom: 100, alignItems: 'flex-start' }]}>
@@ -104,7 +104,7 @@ const KYCUser = () => {
             </TouchableOpacity>
           </View>
           <Text style={[appStyle.normalText, { marginTop: 12, fontSize: 14, }]}>(Internet/Electricity/Gas/Driver license ... with your real Full Name and address like your ID Nation/Passport)</Text>
-          <Image style={[styles.image, { marginLeft: 13, top: 6, marginTop: 16, left: -10 }]} source={require('../assets/images/license.png')} />
+          <Image style={[appStyle.licenseImage, { marginLeft: 13, top: 6, marginTop: 16, left: -10 }]} source={require('../assets/images/license.png')} />
 
         </View>
 
@@ -121,8 +121,5 @@ const styles = StyleSheet.create({
     paddingLeft: 88,
 
   },
-  image: {
-width:300,
-height:212,
-  }
+
 })

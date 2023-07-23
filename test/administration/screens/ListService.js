@@ -7,6 +7,7 @@ import ItemDrawer from "../components/ItemDrawer";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { COLOR } from '../theme/color'
 import AddButton from '../components/AddButton'
+import { useNavigation } from '@react-navigation/native';
 
 const ListService = (props) => {
   const navigation = useNavigation();
@@ -79,35 +80,17 @@ const ListService = (props) => {
     "width": ""
   }]
   let array = asset.map(obj => [obj.id, "03847363", "Dịch vụ 1", "Dịch vụ 1 là dịch vụ vui chơi giải trí...", "01/06/2023 09:20 am", "12/06/2023 09:20 am"]);
-  const element1 = (data, index) => (
+  const createElement = (data, index, color) => (
     <View style={{ alignItems: 'flex-start', paddingVertical: 22 }}>
-      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.titleBreadCrumb }}>{data}</Text>
+      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color }}>{data}</Text>
     </View>
   );
 
-  const element2 = (data, index) => (
-    <View style={{ alignItems: 'flex-start', paddingVertical: 22 }}>
-      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.title }}>{data}</Text>
-    </View>
-  );
-
-  const element3 = (data, index) => (
-    <View style={{ alignItems: 'flex-start', paddingVertical: 22 }}>
-      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.title }}>{data}</Text>
-    </View>
-  );
-
-  const element4 = (data, index) => (
-    <View style={{ alignItems: 'flex-start', paddingVertical: 22 }}>
-      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.title }}>{data}</Text>
-    </View>
-  );
-
-  const element5 = (data, index) => (
-    <View style={{ alignItems: 'flex-start', paddingVertical: 22 }}>
-      <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.textError }}>{data}</Text>
-    </View>
-  );
+  const element1 = (data, index) => createElement(data, index, COLOR.titleBreadCrumb);
+  const element2 = (data, index) => createElement(data, index, COLOR.title);
+  const element3 = (data, index) => createElement(data, index, COLOR.title);
+  const element4 = (data, index) => createElement(data, index, COLOR.title);
+  const element5 = (data, index) => createElement(data, index, COLOR.textError);
 
   return (
     <SafeAreaView style={appStyle.container}>
@@ -125,14 +108,15 @@ const ListService = (props) => {
             </TouchableOpacity>
             <Text style={appStyle.text}>List</Text>
           </View>
-          <AddButton />
+          <AddButton onPress={()=>{}}/>
+
 
           <ScrollView horizontal style={{ marginTop: 26, }}>
             <Table borderStyle={{}}>
               <Row
                 data={tableHead}
                 widthArr={widthArr}
-                style={styles.tableHead}
+                style={appStyle.tableHead}
                 textStyle={{ fontSize: 13, fontWeight: 'bold', marginLeft: 10 }}
               />
               {
@@ -171,5 +155,6 @@ const styles = StyleSheet.create({
     height: 58,
     width: '100%',
     backgroundColor: COLOR.secondary,
+
   },
 })

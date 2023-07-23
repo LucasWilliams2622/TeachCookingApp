@@ -128,10 +128,12 @@ const Home = (props) => {
                 </Swiper>
               </View>
 
-              <ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                 <FlatList
                   style={{ marginBottom: 10, marginTop: 10, }}
                   showsHorizontalScrollIndicator={false}
+                  showsVerticalScrollIndicator={false}
+
                   horizontal
                   data={category}
                   renderItem={({ item }) => <ItemCategories category={item}/>}

@@ -3,8 +3,7 @@ import React, { useState, useContext } from 'react'
 import { appStyle } from '../theme/appStyle'
 import Header from '../components/Header'
 import { COLOR } from '../theme/color'
-import { ScrollView } from 'react-native-virtualized-view'
-import { Dropdown } from 'react-native-element-dropdown';
+
 import InformationUser from './InformationUser'
 import KYCUser from './KYCUser'
 import Membership from './MembershipUser'
@@ -16,14 +15,16 @@ import LinkJoined from './Joined/LinkJoined';
 import MosJoined from './Joined/MosJoined';
 import MoveJoined from './Joined/MoveJoined';
 import PayJoined from './Joined/PayJoined';
+import { useNavigation } from '@react-navigation/native';
 
 
 const ProfileUser = (props) => {
   const { showDrawer, setShowDrawer } = useContext(AppContext);
+  const navigation = useNavigation();
 
-  const { navigation } = props;
   const [isSelect, setIsSelect] = useState(6);
-  const [selectJoined, setSelectJoined] = useState(1)
+  const [selectJoined, setSelectJoined] = useState(3)
+
   const handleSelect = (id) => {
     setIsSelect(id);
   };
@@ -39,9 +40,8 @@ const ProfileUser = (props) => {
           {
             showDrawer ? (<ItemDrawer />) : (<></>)
           }
-
         </View>
-        <View style={styles.main}>
+        <View style={[styles.main, { top: showDrawer ? -30 : 0 }]}>
           <View style={styles.breadCrumb}>
             <View style={appStyle.row}>
               <TouchableOpacity onPress={() => { navigation.goBack(); }}>
@@ -82,7 +82,7 @@ const ProfileUser = (props) => {
                 <Text style={[appStyle.text, { color: isSelect === 6 ? COLOR.titleLabel : COLOR.text }]}>Joined</Text>
               </TouchableOpacity>
 
-              <View style={[appStyle.column, { marginLeft: 5 ,marginTop:10}]}>
+              <View style={[appStyle.column, { marginLeft: 5, marginTop: 10 }]}>
                 <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 1 ? COLOR.bgJoined : COLOR.bg, width: '100%', alignItems: 'center' }]} onPress={() => { handleSelectJoined(1, 6) }}>
                   <Text style={[appStyle.text, { color: isSelect === 6 && selectJoined === 1 ? COLOR.bgSelectJoined : COLOR.text }]}>MOS</Text>
                 </TouchableOpacity>
@@ -122,12 +122,11 @@ const styles = StyleSheet.create({
   main: {
     marginVertical: 30,
     marginHorizontal: 36,
-    borderWidth: 2, borderColor: 'red',
-    height:700,
-    
+    height: 700,
+
   },
   mainContent: {
-    marginTop: 52,
+    marginTop: 40,
     flexDirection: 'row',
   },
   barOption: {

@@ -18,11 +18,11 @@ export const COLOR = {
     titleHeader: "#FFFFFF",
     titleBreadCrumbManagement: "#333333",
     text: "#333333",
+    textBlue: "#00A3FF",
     textError: "#DD0D05",
     normalText: "#787878",
     active: "#028F5C",
     notActive: "#DC5F5A",
-
     deleteText: "#DC5F5A",
     border: "#787878",
     icon: "#ffff",

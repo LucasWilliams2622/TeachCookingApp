@@ -128,7 +128,7 @@ const DetailFood = (props) => {
     }, [isSaved])
 
     return (
-        <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} >
+        <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
             <ImageBackground style={{ width: "100%", height: 400 }}
                 source={{ uri: recipe.image }}>
                 <TouchableOpacity onPress={() => { goBack() }}>

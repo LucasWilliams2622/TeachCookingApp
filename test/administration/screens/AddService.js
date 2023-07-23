@@ -6,7 +6,6 @@ import Header from '../components/Header'
 import ItemDrawer from "../components/ItemDrawer";
 import { COLOR } from '../theme/color'
 import { useNavigation } from '@react-navigation/native';
-import AddButton from '../components/AddButton'
 import { TextInput } from 'react-native-paper'
 import ButtonPrimary from '../components/ButtonPrimary'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';

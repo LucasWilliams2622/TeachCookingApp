@@ -266,7 +266,7 @@ const AddNew = () => {
     console.log(message)
   }
   return (
-    <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }}>
+    <ScrollView style={{ backgroundColor: COLOR.BACKGROUND }} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Image style={[styles.icon, {}]} source={require('../../asset/icon/icon_back.png')} />

@@ -23,6 +23,16 @@ export const appStyle = StyleSheet.create({
         height: 50,
         width: 50,
     },
+    bigAvatar: {
+        borderRadius: 1000,
+        height: 100,
+        width: 100,
+    },
+    imageVehicle: {
+        width: 90,
+        height: 90,
+        borderRadius: 8,
+    },
     title: {
         fontFamily: "Josefin Sans",
         fontStyle: 'normal',
@@ -129,8 +139,8 @@ export const appStyle = StyleSheet.create({
         paddingHorizontal: 18,
         paddingVertical: 28,
         alignItems: 'flex-start',
-
         backgroundColor: 'white',
+
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.29,
@@ -158,9 +168,21 @@ export const appStyle = StyleSheet.create({
         paddingLeft: 88,
 
     },
+    TabView: {
+        backgroundColor: COLOR.bg,
+        width: '72%',
+    },
 
+    tableHead: {
+        height: 58,
+        width: '100%',
+        backgroundColor: COLOR.secondary,
 
-
+    },
+    licenseImage: {
+        width: 300,
+        height: 212,
+    },
 
 
 

@@ -7,6 +7,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import ButtonPrimary from '../components/ButtonPrimary'
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import FastImage from "react-native-fast-image";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const dataCountry = [
   { labelCountry: 'Viet Nam', valueCountry: '1' },
@@ -46,7 +47,9 @@ const SearchUser = (props) => {
   const [isFocusDistrict, setIsFocusDistrict] = useState(false)
   const [valueInactive, setValueInactive] = useState(null)
   const [isFocusInactive, setIsFocusInactive] = useState(false)
-
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [selectedDateFrom, setSelectedDateFrom] = useState('');
+  const [selectedDateTo, setSelectedDateTo] = useState('')
   const [visible, setVisible] = useState(true)
   const tableHead = ["STT", "Barcode", "Refer User", "Fullname", "Account", "Phone", "Activated", "Address", "Country", "Date login"];
   const widthArr = [70, 120, 120, 100, 200, 100, 100, 200, 100, 100];
@@ -150,6 +153,23 @@ const SearchUser = (props) => {
   }]
   let array = asset.map(obj => [obj.id, "1122QM", "12654 Mr A", "Van An", "abc @gmail", "0987654321", "true", "abc, Son Ky Ward, Tan Phú District, Ho Chi Minh City", "Viet Nam", "30 days ago"]);
 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    const formattedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    setSelectedDateFrom(formattedDate);
+    hideDatePicker();
+  };
   const onShowFilter = () => {
     console.log(array);
     if (visible) {
@@ -279,7 +299,7 @@ const SearchUser = (props) => {
                           setValueCountry(item.valueCountry);
                           setIsFocusCountry(false);
                         }}
-                    
+
                       />
                     </View>
                   </View>
@@ -349,15 +369,29 @@ const SearchUser = (props) => {
                 <View style={[appStyle.row, { marginTop: 50, marginBottom: 11 }]}>
                   <View style={styles.boxSort}>
                     <Text style={appStyle.text}>From</Text>
-                    <View style={styles.boxPickDate}>
-                      <Image style={[appStyle.icon, { marginRight: 17, }]} source={require('../assets/icons/Calender.png')} />
-                    </View>
+                    <TouchableOpacity style={styles.boxPickDate} onPress={showDatePicker}>
+                      <Text style={{ backgroundColor: COLOR.black, paddingLeft: 10 }} >{selectedDateFrom == "" ? "Pick a date" : selectedDateFrom}</Text>
+                      <Image style={[appStyle.icon, {}]} source={require('../assets/icons/Calender.png')} />
+                      <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                      />
+                    </TouchableOpacity>
                   </View>
                   <View style={[styles.boxSort, { marginLeft: 42 }]}>
                     <Text style={appStyle.text}>to</Text>
-                    <View style={styles.boxPickDate}>
-                      <Image style={[appStyle.icon, { marginRight: 17, }]} source={require('../assets/icons/Calender.png')} />
-                    </View>
+                    <TouchableOpacity style={styles.boxPickDate} onPress={showDatePicker}>
+                      <Text style={{ backgroundColor: COLOR.black, paddingLeft: 10 }} >{selectedDateTo == "" ? "Pick a date" : selectedDateTo}</Text>
+                      <Image style={[appStyle.icon, {}]} source={require('../assets/icons/Calender.png')} />
+                      <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                      />
+                    </TouchableOpacity>
                   </View>
                 </View>
 
@@ -365,7 +399,7 @@ const SearchUser = (props) => {
                   <View style={[styles.container, { left: -20 }]}>
                     {renderLabel()}
                     <Dropdown
-                      style={[styles.dropdown, isFocusInactive && { borderColor: COLOR.primary }]}
+                      style={[appStyle.dropdown, isFocusInactive && { borderColor: COLOR.primary }]}
                       placeholderStyle={styles.placeholderStyle}
                       selectedTextStyle={styles.selectedTextStyle}
                       inputSearchStyle={styles.inputSearchStyle}
@@ -512,12 +546,15 @@ const styles = StyleSheet.create({
     width: 262,
     borderRadius: 32,
     marginLeft: 85,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 10
 
   },
   boxSearch: {
     width: "100%",
+
   },
   buttonSearch: {
     borderTopRightRadius: 32,

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { COLOR } from '../../theme/color'
 import { appStyle } from '../../theme/appStyle'
-import ItemBranch from '../../components/ItemBranch'
+import ItemBranch from '../../components/MOS/ItemBranch'
 
 const ItemStore = (props) => {
     return (

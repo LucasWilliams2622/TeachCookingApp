@@ -137,7 +137,7 @@ const EditProfile = (props) => {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         {/** Header*/}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => { goBack() }}>

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@ant-design/react-native": "^5.0.4",
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-community/datetimepicker": "^7.4.0",
     "@react-native-community/netinfo": "^9.3.10",
@@ -39,6 +40,7 @@
     "react-native-screens": "^3.20.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-swiper": "^1.6.0",
+    "react-native-tab-view": "^3.5.2",
     "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^9.2.0",
     "react-native-viewpager": "^0.2.13",

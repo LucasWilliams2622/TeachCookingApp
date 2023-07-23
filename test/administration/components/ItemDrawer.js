@@ -5,7 +5,7 @@ import { COLOR } from '../theme/color'
 
 const ItemDrawer = () => {
   return (
-    <SafeAreaView style={[appStyle.column, { backgroundColor: COLOR.bgDrawer, height: '100%', width: 350,  paddingHorizontal: 20, alignItems: 'flex-start' }]}>
+    <SafeAreaView style={[appStyle.column, { backgroundColor: COLOR.bgDrawer, height: '100%', width: 320,  paddingHorizontal: 20, alignItems: 'flex-start' }]}>
       <View style={[appStyle.row, { justifyContent: 'space-between', alignItems: 'center', marginTop: 30,  }]}>
         <Image style={appStyle.avatar} source={require('../assets/icons/defaultAvatar.png')} />
         <View style={[appStyle.column, { justifyContent: 'flex-start', alignItems: 'flex-start', marginHorizontal: 20 }]}>

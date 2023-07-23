@@ -28,6 +28,9 @@ import Home from './test/administration/screens/Home'
 import ProfileUser from './test/administration/screens/ProfileUser';
 import ListService from './test/administration/screens/ListService'
 import AddService from './test/administration/screens/AddService';
+import ListContent from './test/administration/screens/ContentManagement/ListContent';
+import AddContent from './test/administration/screens/ContentManagement/AddContent';
+import DetailContent from './test/administration/screens/ContentManagement/DetailContent';
 const App = () => {
   useEffect(() => {
     getDeviceToken();
@@ -39,7 +42,7 @@ const App = () => {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <SearchUser />
+        <ProfileUser />
       </NavigationContainer>
     </AppContextProvider>
 

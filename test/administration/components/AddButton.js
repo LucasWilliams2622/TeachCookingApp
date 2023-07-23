@@ -3,10 +3,11 @@ import React from 'react'
 import { appStyle } from '../theme/appStyle'
 import { useNavigation } from '@react-navigation/native';
 
-const AddButton = () => {
-    const navigation = useNavigation();
+const AddButton = (props) => {
+  const {onPress,disable}= props;
+
   return (
-    <TouchableOpacity style={styles.buttonPlus} onPress={()=>{navigation.navigate("AddService")}} >
+    <TouchableOpacity style={styles.buttonPlus} onPress={onPress} disable={disable} >
         <Image style={appStyle.buttonPlus} source={require('../assets/icons/ButtonPlus.png')}/>
     </TouchableOpacity>
   )
