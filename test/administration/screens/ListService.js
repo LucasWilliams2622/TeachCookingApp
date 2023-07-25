@@ -101,7 +101,7 @@ const ListService = (props) => {
             showDrawer ? (<ItemDrawer />) : (<></>)
           }
         </View>
-        <View style={[appStyle.column, { borderWidth: 2, borderColor: 'red', flex: 1, alignItems: 'flex-start', marginVertical: 32, marginHorizontal: 20, }]}>
+        <View style={[appStyle.column, {flex: 1, alignItems: 'flex-start', marginVertical: 32, marginHorizontal: 20, }]}>
           <View style={[appStyle.row, { alignItems: 'center', marginBottom: 30 }]}>
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
               <Image style={appStyle.bigIcon} source={require('../assets/icons/Left.png')} />

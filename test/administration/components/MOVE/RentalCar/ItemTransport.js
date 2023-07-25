@@ -2,17 +2,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { appStyle } from '../../../theme/appStyle'
 import { COLOR } from '../../../theme/color'
-
 const ItemTransport = (props) => {
-    const { data } = props;
+    const { data, navigation } = props;
     const { carName, licensePlate, dateTime, approval } = data;
-
     const [isApproval, setIsApproval] = useState(false)
     const onApproval = () => {
         setIsApproval(!isApproval)
     }
     return (
-        <View style={[appStyle.boxShadow, appStyle.row, { paddingVertical: 22, marginBottom: 25, paddingHorizontal: 27, justifyContent: 'space-between' }]}>
+        <TouchableOpacity onPress={() => { navigation.navigate('DetailCar') }}
+            style={[appStyle.boxShadow, appStyle.row, { paddingVertical: 22, marginBottom: 25, paddingHorizontal: 27, justifyContent: 'space-between' }]}>
             <View style={appStyle.row}>
                 <Image style={[appStyle.imageVehicle, { borderRadius: 8, }]} source={require('../../../assets/images/imageMercedesMayBach.png')} />
                 <View style={[appStyle.column, { justifyContent: 'flex-start', alignItems: 'flex-start', marginLeft: 27 }]}>
@@ -28,7 +27,7 @@ const ItemTransport = (props) => {
                     </TouchableOpacity>)}
                 <Text style={[appStyle.normalText, {}]}>{dateTime}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

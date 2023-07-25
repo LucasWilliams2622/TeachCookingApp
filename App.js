@@ -31,6 +31,8 @@ import AddService from './test/administration/screens/AddService';
 import ListContent from './test/administration/screens/ContentManagement/ListContent';
 import AddContent from './test/administration/screens/ContentManagement/AddContent';
 import DetailContent from './test/administration/screens/ContentManagement/DetailContent';
+import KitchenTools from './test/myFolder/src/screens/KitchenTools3'
+import SystemFeature from './test/administration/screens/SystemFeatureManagement/SystemFeature';
 const App = () => {
   useEffect(() => {
     getDeviceToken();
@@ -39,10 +41,13 @@ const App = () => {
     let token = await messaging().getToken();
     console.log(token);
   };
+  // return(
+  //   <KitchenTools/>
+  // )
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <ProfileUser />
+        <SystemFeature />
       </NavigationContainer>
     </AppContextProvider>
 

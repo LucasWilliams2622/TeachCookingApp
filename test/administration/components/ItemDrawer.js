@@ -5,14 +5,17 @@ import { COLOR } from '../theme/color'
 
 const ItemDrawer = () => {
   return (
-    <SafeAreaView style={[appStyle.column, { backgroundColor: COLOR.bgDrawer, height: '100%', width: 320,  paddingHorizontal: 20, alignItems: 'flex-start' }]}>
-      <View style={[appStyle.row, { justifyContent: 'space-between', alignItems: 'center', marginTop: 30,  }]}>
+    <SafeAreaView style={[appStyle.column, { backgroundColor: COLOR.bgDrawer, height: '100%', width: 320, paddingHorizontal: 20, alignItems: 'flex-start' }]}>
+      <View style={[appStyle.row, { justifyContent: 'space-between', alignItems: 'center', marginTop: 30, }]}>
         <Image style={appStyle.avatar} source={require('../assets/icons/defaultAvatar.png')} />
         <View style={[appStyle.column, { justifyContent: 'flex-start', alignItems: 'flex-start', marginHorizontal: 20 }]}>
           <Text style={appStyle.text}>Welcome</Text>
           <Text style={[appStyle.text, { color: COLOR.titleLabel, marginTop: 10 }]}>Administration</Text>
         </View>
-        <Image style={{ width: 40, height: 40, alignSelf: 'flex-start', right: -30 }} source={require('../assets/icons/Bell.png')} />
+        <TouchableOpacity style={appStyle.row}>
+          <Image style={{ width: 20, height: 20, alignSelf: 'flex-start', position: 'absolute', zIndex: 900, right: -30 }} source={require('../assets/icons/RedCircle.png')} />
+          <Image style={{ width: 40, height: 40, alignSelf: 'flex-start', right: -30 }} source={require('../assets/icons/Bell.png')} />
+        </TouchableOpacity>
       </View>
 
       <View style={[appStyle.column, { alignItems: 'flex-start' }]}>
@@ -51,7 +54,7 @@ const ItemDrawer = () => {
           </View>
         </View>
       </View>
-      
+
       <Text style={[appStyle.text, { marginTop: 30 }]}>Grant access</Text>
       <Text style={[appStyle.text, { marginTop: 30 }]}>New feature</Text>
       <TouchableOpacity>

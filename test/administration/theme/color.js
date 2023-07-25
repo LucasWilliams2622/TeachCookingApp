@@ -20,6 +20,9 @@ export const COLOR = {
     text: "#333333",
     textBlue: "#00A3FF",
     textError: "#DD0D05",
+    textMoney:"#028F5C",
+    textSuccess:"#028F5C",
+
     normalText: "#787878",
     active: "#028F5C",
     notActive: "#DC5F5A",

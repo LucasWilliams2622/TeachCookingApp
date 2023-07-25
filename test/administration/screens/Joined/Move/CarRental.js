@@ -7,6 +7,7 @@ import CarRentalHistory from '../Move/CarRental/CarRentalHistory';
 import ItemDriverRegisInfo from '../../../components/MOVE/CallDriver/ItemDriverRegisInfo';
 import { COLOR } from '../../../theme/color';
 import ItemRegisRentalCar from '../../../components/MOVE/RentalCar/ItemRegisRentalCar';
+import DetailCar from './CarRental/DetailCar';
 
 const DATA = [
   {
@@ -29,7 +30,11 @@ const CarRental = () => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const [transportList, setTransportList] = useState(true);
   const [carRentalHistory, setCarRentalHistory] = useState(true)
-  const [isDriver, setIsDriver] = useState(false)
+  const [isDriver, setIsDriver] = useState(true)
+  return (
+    <DetailCar />
+  )
+
   return (
     <>
       {
@@ -55,18 +60,16 @@ const CarRental = () => {
                 </TouchableOpacity>
               </View>
               {transportList ?
-                (
-                  <FlatList
-                    showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
-                    data={DATA}
-                    renderItem={({ item }) => <ItemTransport data={item} />}
-                    keyExtractor={item => item.id}
-                  />
-                )
+                (<FlatList
+                  showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
+                  data={DATA}
+                  renderItem={({ item }) => <ItemTransport data={item} />}
+                  keyExtractor={item => item.id}
+                />)
                 :
                 (<Text style={[appStyle.normalText, { alignSelf: 'center', marginVertical: 25 }]}>No data</Text>)}
             </View>
-            <View style={{ marginTop: 68, borderWidth: 2, borderColor: 'red' }}>
+            <View style={{ marginTop: 68, }}>
               <Text style={[appStyle.text, { marginBottom: 27 }]}>Car rental history</Text>
               {
                 carRentalHistory ? (<CarRentalHistory />) : (
@@ -89,7 +92,7 @@ const CarRental = () => {
             </View>
             <ItemCustomerInfo />
 
-            <View style={{ marginTop: 68, borderWidth: 2, borderColor: 'red' }}>
+            <View style={{ marginTop: 68, }}>
               <Text style={[appStyle.text, { marginBottom: 27 }]}>Car rental history</Text>
               {
                 carRentalHistory ? (<CarRentalHistory />) : (

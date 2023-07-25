@@ -39,7 +39,7 @@ const Booking = () => {
               </View>
               {transportList ? (<ItemTransportDriver />) : (<Text style={[appStyle.normalText, { alignSelf: 'center', marginVertical: 25 }]}>No data</Text>)}
             </View>
-            <View style={{ marginTop: 68, borderWidth: 2, borderColor: 'red' }}>
+            <View style={{ marginTop: 68,  }}>
               <Text style={[appStyle.text, { marginBottom: 27 }]}>Order list</Text>
               {
                 orderList ? (<OrderList />) : (
@@ -62,7 +62,7 @@ const Booking = () => {
             </View>
             <ItemCustomerInfo />
             
-            <View style={{ marginTop: 68, borderWidth: 2, borderColor: 'red' }}>
+            <View style={{ marginTop: 68, }}>
               <Text style={[appStyle.text, { marginBottom: 27 }]}>Order list</Text>
               {
                 orderList ? (<OrderList />) : (

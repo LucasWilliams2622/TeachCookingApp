@@ -3,7 +3,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
     const { children } = props;
-    const [showDrawer, setShowDrawer] = useState(false)
+    const [showDrawer, setShowDrawer] = useState(true)
     const contextValue = useMemo(() => {
         return { showDrawer, setShowDrawer };
     }, [showDrawer, setShowDrawer]);

@@ -23,7 +23,7 @@ const ProfileUser = (props) => {
   const navigation = useNavigation();
 
   const [isSelect, setIsSelect] = useState(6);
-  const [selectJoined, setSelectJoined] = useState(3)
+  const [selectJoined, setSelectJoined] = useState(4)
 
   const handleSelect = (id) => {
     setIsSelect(id);

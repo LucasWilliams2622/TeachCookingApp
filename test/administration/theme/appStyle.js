@@ -33,6 +33,11 @@ export const appStyle = StyleSheet.create({
         height: 90,
         borderRadius: 8,
     },
+    imageCar: {
+        width: 300,
+        height: 180,
+        borderRadius: 8
+    },
     title: {
         fontFamily: "Josefin Sans",
         fontStyle: 'normal',
@@ -64,6 +69,28 @@ export const appStyle = StyleSheet.create({
         fontFamily: "Josefin Sans",
         fontStyle: 'normal',
         color: COLOR.title,
+    },
+    textMoney: {
+        fontSize: 32,
+        fontStyle: 'normal',
+        color: COLOR.textMoney,
+        fontWeight:'600',
+        letterSpacing:1,
+        fontFamily:'Josefin Sans',
+
+
+    },
+    titleDetail: {
+        color: COLOR.titleLabel,
+        fontSize: 16,
+        fontWeight: "400",
+        fontStyle: 'normal',
+    },
+    textSmall: {
+        fontSize: 14,
+        fontWeight: '400',
+        fontStyle: 'normal',
+        color: COLOR.textBlue,
     },
     row: {
         flexDirection: 'row',

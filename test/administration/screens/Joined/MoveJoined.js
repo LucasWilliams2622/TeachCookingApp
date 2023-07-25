@@ -9,6 +9,8 @@ import CarRental from './Move/CarRental';
 import Booking from './Move/Booking';
 import Matching from './Move/Matching';
 import SOS from './Move/SOS';
+import DetailCar from './Move/CarRental/DetailCar';
+
 
 
 const renderScene = SceneMap({
@@ -19,10 +21,11 @@ const renderScene = SceneMap({
   matching: Matching,
   sos: SOS,
 
+
 });
 const MoveJoined = () => {
   const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = React.useState(4);
   const [routes] = React.useState([
     { key: 'mission', title: 'Mission' },
     { key: 'callDriver', title: 'Call Driver' },
