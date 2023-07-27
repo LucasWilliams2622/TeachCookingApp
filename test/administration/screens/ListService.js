@@ -110,7 +110,6 @@ const ListService = (props) => {
           </View>
           <AddButton onPress={()=>{}}/>
 
-
           <ScrollView horizontal style={{ marginTop: 26, }}>
             <Table borderStyle={{}}>
               <Row

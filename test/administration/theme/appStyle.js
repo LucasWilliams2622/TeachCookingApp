@@ -1,9 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { COLOR } from '../theme/color';
+export const windowWidth = Dimensions.get('window').width;
+export const windowHeight = Dimensions.get('window').height;
 export const appStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.bg,
+    },
+    smallIcon: {
+        height: 16,
+        width: 16,
+
     },
     icon: {
         height: 24,
@@ -74,9 +81,9 @@ export const appStyle = StyleSheet.create({
         fontSize: 32,
         fontStyle: 'normal',
         color: COLOR.textMoney,
-        fontWeight:'600',
-        letterSpacing:1,
-        fontFamily:'Josefin Sans',
+        fontWeight: '600',
+        letterSpacing: 1,
+        fontFamily: 'Josefin Sans',
 
 
     },
@@ -182,6 +189,13 @@ export const appStyle = StyleSheet.create({
         backgroundColor: COLOR.bg,
         width: '100%'
     },
+    textInput2: {
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#E2E2E2',
+        backgroundColor: COLOR.bg,
+        padding: 13
+    },
     dotStatus: {
         width: 24,
         height: 24,
@@ -210,8 +224,28 @@ export const appStyle = StyleSheet.create({
         width: 300,
         height: 212,
     },
+    boxSysFeature: {
+        marginLeft: 200,
+        width: 800,
 
+    },
+    button2: {
+        backgroundColor: COLOR.bgOption,
+        borderRadius: 5,
+        paddingVertical:10,
+        paddingHorizontal:27,
+        width:120,
+        marginRight:10,
+        alignItems:'center',
 
+    },
+    titleButton2: {
+        fontWeight: '400',
+        fontSize: 18,
+        fontFamily: 'Markazi Text',
+        color: COLOR.titleLabel,
+
+    },
 
 
 

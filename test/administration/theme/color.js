@@ -3,6 +3,7 @@ export const COLOR = {
     secondary: "#F5F5F5",
 
     bg: "#FFFFFF",
+    bgItem:"#EFEFEF",
     bgHeader: "#E07900",
     bgLabel: "#FFEEDA",
     bgDrawer: "#EBEBEB",
@@ -17,11 +18,12 @@ export const COLOR = {
     title: "#333333",
     titleHeader: "#FFFFFF",
     titleBreadCrumbManagement: "#333333",
-    text: "#333333",
+    normalTexttext: "#333333",
     textBlue: "#00A3FF",
     textError: "#DD0D05",
     textMoney:"#028F5C",
     textSuccess:"#028F5C",
+    text:"#333333",
 
     normalText: "#787878",
     active: "#028F5C",

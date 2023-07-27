@@ -41,6 +41,7 @@ const ProfileUser = (props) => {
             showDrawer ? (<ItemDrawer />) : (<></>)
           }
         </View>
+        
         <View style={[styles.main, { top: showDrawer ? -30 : 0 }]}>
           <View style={styles.breadCrumb}>
             <View style={appStyle.row}>
@@ -61,6 +62,7 @@ const ProfileUser = (props) => {
               </TouchableOpacity>
             </View>
           </View>
+
           <View style={styles.mainContent}>
             <View style={styles.barOption}>
               <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 1 ? COLOR.bgOption : COLOR.bg, }]} onPress={() => { handleSelect(1) }}>
@@ -82,20 +84,20 @@ const ProfileUser = (props) => {
                 <Text style={[appStyle.text, { color: isSelect === 6 ? COLOR.titleLabel : COLOR.text }]}>Joined</Text>
               </TouchableOpacity>
 
-              <View style={[appStyle.column, { marginLeft: 5, marginTop: 10 }]}>
-                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 1 ? COLOR.bgJoined : COLOR.bg, width: '100%', alignItems: 'center' }]} onPress={() => { handleSelectJoined(1, 6) }}>
+              {isSelect === 6 ? (<View style={[appStyle.column, { marginLeft: 80, marginTop: 10 }]}>
+                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 1 ? COLOR.bgJoined : COLOR.bg, alignItems: 'flex-start' }]} onPress={() => { handleSelectJoined(1, 6) }}>
                   <Text style={[appStyle.text, { color: isSelect === 6 && selectJoined === 1 ? COLOR.bgSelectJoined : COLOR.text }]}>MOS</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 2 ? COLOR.bgJoined : COLOR.bg, width: '100%', alignItems: 'center' }]} onPress={() => { handleSelectJoined(2, 6) }}>
+                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 2 ? COLOR.bgJoined : COLOR.bg, alignItems: 'flex-start' }]} onPress={() => { handleSelectJoined(2, 6) }}>
                   <Text style={[appStyle.text, { color: isSelect === 6 && selectJoined === 2 ? COLOR.bgSelectJoined : COLOR.text }]}>LINK</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 3 ? COLOR.bgJoined : COLOR.bg, width: '100%', alignItems: 'center' }]} onPress={() => { handleSelectJoined(3, 6) }}>
+                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 3 ? COLOR.bgJoined : COLOR.bg, alignItems: 'flex-start' }]} onPress={() => { handleSelectJoined(3, 6) }}>
                   <Text style={[appStyle.text, { color: isSelect === 6 && selectJoined === 3 ? COLOR.bgSelectJoined : COLOR.text }]}>MOVE</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 4 ? COLOR.bgJoined : COLOR.bg, width: '100%', alignItems: 'center' }]} onPress={() => { handleSelectJoined(4, 6) }}>
+                <TouchableOpacity style={[styles.itemOption, { backgroundColor: isSelect === 6 && selectJoined === 4 ? COLOR.bgJoined : COLOR.bg, alignItems: 'flex-start' }]} onPress={() => { handleSelectJoined(4, 6) }}>
                   <Text style={[appStyle.text, { color: isSelect === 6 && selectJoined === 4 ? COLOR.bgSelectJoined : COLOR.text }]}>PAY</Text>
                 </TouchableOpacity>
-              </View>
+              </View>) : (<></>)}
             </View>
             {
               isSelect == 1 ? (<InformationUser />)
@@ -141,6 +143,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.bg,
     paddingVertical: 14,
     paddingHorizontal: 16,
+    width: 300
+
   },
 
 })

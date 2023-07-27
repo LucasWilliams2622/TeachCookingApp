@@ -118,7 +118,7 @@ export default KYCUser
 const styles = StyleSheet.create({
   boxInfo: {
     width: '75%',
-    paddingLeft: 88,
+    paddingLeft: 125,
 
   },
 
