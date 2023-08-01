@@ -20,18 +20,17 @@ const UpgradeAgent = () => {
         </View>
       </View>
       <View style={[appStyle.column,{marginTop:100}]}>
-
         <TouchableOpacity style={[appStyle.row,{ width: windowWidth - 500,justifyContent:'space-between',borderBottomWidth:1,borderBottomColor:"#EBEBEB",paddingVertical:26,paddingHorizontal:13,}]}>
-          <Text style={[appStyle.text, { fontSize: 24, }]}>Upgraded</Text>
+          <Text style={[appStyle.text, { fontSize: 20, }]}>Upgraded</Text>
           <View style={appStyle.row}>
-            <Text style={[appStyle.text, { fontSize: 24, }]}>120 Store</Text>
+            <Text style={[appStyle.text, { fontSize: 20, }]}>120 Store</Text>
             <Image style={appStyle.bigIcon} source={require('../../../assets/icons/Right.png')} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={[appStyle.row,{ width: windowWidth - 500,justifyContent:'space-between',borderBottomWidth:1,borderBottomColor:"#EBEBEB",paddingVertical:26,paddingHorizontal:13,}]}>
-          <Text style={[appStyle.text, { fontSize: 24, }]}>Decentralization</Text>
+          <Text style={[appStyle.text, { fontSize: 20, }]}>Decentralization</Text>
           <View style={appStyle.row}>
-            <Text style={[appStyle.text, { fontSize: 24, }]}>20 Agent</Text>
+            <Text style={[appStyle.text, { fontSize: 20, }]}>20 Agent</Text>
             <Image style={appStyle.bigIcon} source={require('../../../assets/icons/Right.png')} />
           </View>
         </TouchableOpacity>

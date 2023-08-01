@@ -4,7 +4,7 @@ import { appStyle, windowWidth } from '../../../theme/appStyle'
 import { COLOR } from '../../../theme/color'
 import ButtonPrimary from '../../../components/ButtonPrimary'
 
-const EditCommission = () => {
+const AddCommission = () => {
     return (
         <SafeAreaView style={[appStyle.boxSysFeature, { marginLeft: 1, marginTop: 26 }]}>
             <Text style={[appStyle.text, { color: COLOR.titleLabel }]}>Level</Text>
@@ -17,6 +17,6 @@ const EditCommission = () => {
     )
 }
 
-export default EditCommission
+export default AddCommission
 
 const styles = StyleSheet.create({})

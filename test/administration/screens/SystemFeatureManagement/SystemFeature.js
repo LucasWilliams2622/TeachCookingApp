@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, Switch } from 'react-native'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { appStyle } from '../../theme/appStyle'
 import Header from '../../components/Header'
 import { COLOR } from '../../theme/color'
@@ -13,13 +13,21 @@ import AccessPermissions from './ISMOS/AccessPermissions'
 import StoreSync from './ISMOS/StoreSync'
 import UpgradeAgent from './ISMOS/UpgradeAgent/ListDecentralization'
 import StoreList from './ISMOS/StoreList'
+import P2P from './PAY/P2P/P2P'
+import Point from './PAY/Point/History'
+import Wallet from './PAY/Wallet/Wallet'
+import PostpaidWallet from './PAY/PostpaidWallet/PostpaidWallet'
+import USDT from './PAY/USDT/USDT'
+import ISGroupToken from './PAY/ISGroupToken/ISGroupToken'
+import Stake from './PAY/Stake/Stake'
+import Dividend from './PAY/Dividend/Dividend'
 
 const SystemFeature = () => {
   const { showDrawer, setShowDrawer } = useContext(AppContext);
   const navigation = useNavigation();
-  const [isSelect, setIsSelect] = useState(2);
+  const [isSelect, setIsSelect] = useState(3);
   const [selectISMos, setSelectISMos] = useState(4)
-  const [selectPay, setSelectPay] = useState(1)
+  const [selectPay, setSelectPay] = useState(3)
   const handleSelect = (id) => {
     setIsSelect(id);
   };
@@ -31,6 +39,12 @@ const SystemFeature = () => {
     setSelectPay(id);
     setIsSelect(idPay);
   };
+  useEffect(() => {
+
+    return () => {
+
+    }
+  }, [])
   return (
     <SafeAreaView style={appStyle.container}>
       <Header />
@@ -172,7 +186,16 @@ const SystemFeature = () => {
                       : selectISMos == 4 ? (<UpgradeAgent />)
                         : (<StoreSync />))
                 : isSelect == 2 ? (<ISLink />)
-                  : (<Pay />)
+                  : (
+                    selectPay == 1 ? (<P2P />)
+                      : selectPay == 2 ? (<Point />)
+                        : selectPay == 3 ? (<Wallet />)
+                          : selectPay == 4 ? (<PostpaidWallet />)
+                            : selectPay == 5 ? (<USDT />)
+                              : selectPay == 6 ? (<ISGroupToken />)
+                                : selectPay == 7 ? (<Stake />)
+                                  : (<Dividend />)
+                  )
             }
           </View>
         </View>

@@ -20,6 +20,10 @@ export const appStyle = StyleSheet.create({
         height: 32,
         width: 32,
     },
+    homeIcon:{
+        height: 64,
+        width: 64,
+    },
     avatar: {
         borderRadius: 1000,
         height: 72,
@@ -109,14 +113,16 @@ export const appStyle = StyleSheet.create({
     },
 
     itemAdmin: {
-        height: "100%",
-        width: '25%',
+        height: 230,
+        width: 230,
         backgroundColor: COLOR.bgLabel,
-        borderRadius: 8,
+        borderRadius: 32,
+        borderWidth:1,
+        borderColor:COLOR.primary,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        marginHorizontal: 68,
+        marginHorizontal: 50,
         marginVertical: 0,
 
         shadowColor: "#000000",
@@ -126,7 +132,7 @@ export const appStyle = StyleSheet.create({
         },
         shadowOpacity: 0.18,
         shadowRadius: 4.59,
-        elevation: 5
+        elevation: 6
     },
     titleLabel: {
         fontSize: 24,
@@ -207,6 +213,7 @@ export const appStyle = StyleSheet.create({
     boxInfo: {
         width: '90%',
         paddingLeft: 88,
+        backgroundColor:COLOR.backgroundColor
 
     },
     TabView: {
@@ -232,11 +239,11 @@ export const appStyle = StyleSheet.create({
     button2: {
         backgroundColor: COLOR.bgOption,
         borderRadius: 5,
-        paddingVertical:10,
-        paddingHorizontal:27,
-        width:120,
-        marginRight:10,
-        alignItems:'center',
+        paddingVertical: 10,
+        paddingHorizontal: 27,
+        width: 120,
+        marginRight: 10,
+        alignItems: 'center',
 
     },
     titleButton2: {
@@ -259,12 +266,12 @@ export const appStyle = StyleSheet.create({
 
     dropdown: {
         height: 41,
-        width: 240,
+        width: 180,
         borderColor: 'gray',
         backgroundColor: COLOR.bg,
         borderWidth: 0.5,
         borderRadius: 32,
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
         paddingVertical: 11,
         marginLeft: 11,
     },
@@ -289,6 +296,13 @@ export const appStyle = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
+    buttonSearch: {
+        backgroundColor: COLOR.bgButton,
+        borderTopRightRadius: 32,
+        borderBottomRightRadius: 32,
+        paddingVertical:14,
+        paddingHorizontal:50
 
+    },
 
 });

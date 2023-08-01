@@ -3,7 +3,8 @@ export const COLOR = {
     secondary: "#F5F5F5",
 
     bg: "#FFFFFF",
-    bgItem:"#EFEFEF",
+    bgItem: "#EFEFEF",
+    bgTableFilter: "#F5F5F5",
     bgHeader: "#E07900",
     bgLabel: "#FFEEDA",
     bgDrawer: "#EBEBEB",
@@ -11,6 +12,10 @@ export const COLOR = {
     bgOption: "#FFE0BC",
     bgSelectJoined: "#36A539",
     bgJoined: "#E4FFE5",
+    bgItemTotal: '#FFF0E5',
+    borderItemTotal: '#E27D39',
+    bgOptionSetting:"#F8F8F8",
+
 
     titleLabel: "#E07900",
     drawerTitle: "#DD0D05",
@@ -21,9 +26,9 @@ export const COLOR = {
     normalTexttext: "#333333",
     textBlue: "#00A3FF",
     textError: "#DD0D05",
-    textMoney:"#028F5C",
-    textSuccess:"#028F5C",
-    text:"#333333",
+    textMoney: "#028F5C",
+    textSuccess: "#028F5C",
+    text: "#333333",
 
     normalText: "#787878",
     active: "#028F5C",

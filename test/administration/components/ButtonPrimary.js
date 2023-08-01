@@ -5,7 +5,7 @@ import { appStyle } from '../theme/appStyle';
 const ButtonPrimary = (props) => {
   const {title,onPress,disable,style}= props;
   return (
-    <TouchableOpacity style={[appStyle.button,style]} onPress={onPress} disabled={disable}>
+    <TouchableOpacity style={[appStyle.button,{paddingVertical:14}]} onPress={onPress} disabled={disable}>
       <Text style={appStyle.titleButton}>{title}</Text>
     </TouchableOpacity>
   )

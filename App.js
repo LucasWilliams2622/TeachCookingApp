@@ -33,6 +33,21 @@ import AddContent from './test/administration/screens/ContentManagement/AddConte
 import DetailContent from './test/administration/screens/ContentManagement/DetailContent';
 import KitchenTools from './test/myFolder/src/screens/KitchenTools3'
 import SystemFeature from './test/administration/screens/SystemFeatureManagement/SystemFeature';
+import Support from './test/administration/screens/Support/Support';
+import ItemMultiCheckBox from './test/administration/components/ItemMultiCheckBox'
+import InformationUser from './test/administration/screens/InformationUser';
+import { TransitionPresets } from '@react-navigation/stack';
+// const Stack =createNativeStackNavigator() 
+// const pages={};
+// const load = (items)=>{
+//     for(var i in items){
+//         pages[i] = items[i];
+//     }
+// }
+
+// import administration  from './test/administration/nav';
+
+// load(administration);
 const App = () => {
   useEffect(() => {
     getDeviceToken();
@@ -41,25 +56,36 @@ const App = () => {
     let token = await messaging().getToken();
     console.log(token);
   };
-  // return(
-  //   <KitchenTools/>
-  // )
   return (
     <AppContextProvider>
       <NavigationContainer>
         <SystemFeature />
       </NavigationContainer>
     </AppContextProvider>
+  )
+  // return (
+  //   <AppContextProvider>
+  //     <NavigationContainer initialRouteName="AdminHome"
+      
+  //     {...Object.entries(pages).map(([name, component]) => (
+  //       <Stack.Screen options={{
+  //         ...TransitionPresets.ModalSlideFromBottomIOS,
+  //         headerShown: false,
+  //       }} name={name} key={name} component={component} />
+  //     ))}>
+      
+  //     </NavigationContainer>
+  //   </AppContextProvider>
 
-  )
+  // )
   //https://testfcm.com/
-  return (
-    <AppContextProvider>
-      <NavigationContainer>
-        <BottomTabs />
-      </NavigationContainer>
-    </AppContextProvider>
-  )
+  // return (
+  //   <AppContextProvider>
+  //     <NavigationContainer>
+  //       <BottomTabs />
+  //     </NavigationContainer>
+  //   </AppContextProvider>
+  // )
 }
 export default App
 //

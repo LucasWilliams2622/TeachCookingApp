@@ -31,9 +31,9 @@ const CarRental = () => {
   const [transportList, setTransportList] = useState(true);
   const [carRentalHistory, setCarRentalHistory] = useState(true)
   const [isDriver, setIsDriver] = useState(true)
-  return (
-    <DetailCar />
-  )
+  // return (
+  //   <DetailCar />
+  // )
 
   return (
     <>
