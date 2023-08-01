@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { appStyle } from '../../../theme/appStyle';
 import ItemCustomerInfo from '../../../components/ItemCustomerInfo';
 import ItemTransportDriver from '../../../components/MOVE/CallDriver/ItemTransportDriver';
-import OrderList from '../Move/CarDriver/OrderList';
+import OrderList from '../Move/Booking/OrderList';
 import ItemDriverRegisInfo from '../../../components/MOVE/CallDriver/ItemDriverRegisInfo';
 import { COLOR } from '../../../theme/color';
 const Booking = () => {

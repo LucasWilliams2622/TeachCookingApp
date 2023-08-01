@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React, { useState } from 'react'
-import { appStyle } from '../../theme/appStyle'
+import { appStyle, windowHeight, windowWidth } from '../../theme/appStyle'
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { COLOR } from '../../theme/color';
 import Point from '../../screens/Joined/Pay/Point'
@@ -32,7 +32,7 @@ const PayJoined = () => {
 
   ]);
   return (
-    <View style={[appStyle.boxInfo, { flexDirection: 'row', width: '82%', height: 635, }]}>
+    <View style={[appStyle.boxInfo, { flexDirection: 'row', width: windowWidth - 300, height: windowHeight - 210, }]}>
       <TabView
         lazy={true}
         navigationState={{ index, routes }}
@@ -53,14 +53,14 @@ const PayJoined = () => {
                   {route.title}
                 </Text>
               )}
-              // tabStyle={{ width: "auto" }}
+              tabStyle={{ width: 140, alignItems: 'flex-start', left: -10 }}
               scrollEnabled={false}
               indicatorStyle={{
                 backgroundColor: COLOR.titleLabel,
-                width: 50,
-                height: 3,
+                width: 40,
+                height: 4,
               }}
-              indicatorContainerStyle={{ marginLeft: 50 }}
+              indicatorContainerStyle={{ marginLeft: 0 }}
               style={{ backgroundColor: COLOR.bg, elevation: 0, }}
             />
         }

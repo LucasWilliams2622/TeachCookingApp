@@ -1,11 +1,12 @@
 import { SafeAreaView, StyleSheet, Text, ScrollView, View, Switch } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { appStyle, windowWidth } from '../../../theme/appStyle'
 import { COLOR } from '../../../theme/color'
 import { useNavigation } from '@react-navigation/native';
 
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AddButton from '../../../components/AddButton';
+import { Alert } from 'react-native';
 
 const Setting = () => {
   const navigation = useNavigation();
@@ -88,9 +89,26 @@ const Setting = () => {
 
   const element1 = (data, index) => createElement(data, index, COLOR.titleBreadCrumb);
   const element2 = (data, index) => createElement(data, index, COLOR.title);
+  const handleButtonPress = (title) => {
+    Alert.alert(
+      'Thông báo',
+      "" + title,
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  useEffect(() => {
+
+    return () => {
+
+    }
+  }, [])
 
   return (
-    <SafeAreaView style={[appStyle.boxSysFeature,{width:windowWidth-580,}]}>
+    <SafeAreaView style={[appStyle.boxSysFeature, { width: windowWidth - 580, alignSelf: 'center', marginLeft: 100 }]}>
       <View style={{ marginLeft: 12 }}>
         <Text style={appStyle.text}>Commission</Text>
         <View style={[appStyle.row, { marginTop: 18 }]}>
@@ -106,7 +124,7 @@ const Setting = () => {
         </View>
       </View>
 
-      <AddButton onPress={() => { navigation.navigate("AddSetting") }} />
+      <AddButton onPress={() => { handleButtonPress('AddSetting  ./AddSetting') }} />
       <ScrollView horizontal style={{ marginTop: 26, }}>
         <Table style={{ borderRadius: 12, overflow: 'hidden', marginRight: 30 }}>
           <Row

@@ -55,7 +55,7 @@ const SearchUser = (props) => {
   const [showFilterDate, setShowFilterDate] = useState(true)
 
   const tableHead = ["STT", "Barcode", "Refer User", "Fullname", "Account", "Phone", "Activated", "Address", "Country", "Date login"];
-  const widthArr = [70, 100, 100, 100, 100, 100, 100, 200, 100, 100];
+  const widthArr = [70, 100,windowWidth/10, windowWidth/10, 130, 130, 100, 200, 100, 130];
   let array = myData.UMListUser.map(obj => ["1", "1122QM", "12654 Mr A", "Van An", "abc @gmail", "0987654321", true, "abc, Son Ky Ward, Tan Phú District, Ho Chi Minh City", "Viet Nam", "30 days ago"]);
 
   const showDateFromPicker = () => {
@@ -122,7 +122,7 @@ const SearchUser = (props) => {
       {isImage ? (
         <Image source={require('../assets/icons/greenCircle.png')} />
       ) : (
-        <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.title }}>{data}</Text>
+        <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: '400', color: COLOR.title,lineHeight:20 }}>{data}</Text>
       )}
     </View>
   );
@@ -301,8 +301,6 @@ const SearchUser = (props) => {
                     </TouchableOpacity>
                   </View>
                   <View>
-
-
                     <View style={[appStyle.row, { marginTop: 50, marginBottom: 11 }]}>
                       <View style={styles.boxSort}>
                         <Text style={appStyle.text}>From</Text>
@@ -355,7 +353,7 @@ const SearchUser = (props) => {
                   </View>
                 </View>)
             }
-            <View style={[styles.boxSearch, { justifyContent: 'flex-start', flexDirection: 'row', width: windowWidth - 360 }]}>
+            <View style={[styles.boxSearch, { justifyContent: 'flex-start', flexDirection: 'row', width: showDrawer ? windowWidth - 360 : windowWidth - 40 }]}>
               <View style={styles.textInput}>
                 <TextInput style={styles.searchInput} placeholder='Search by member...' />
               </View>
@@ -363,38 +361,41 @@ const SearchUser = (props) => {
                 <Text style={[appStyle.titleButton, { fontSize: 14, width: 100, left: 30 }]}>Search</Text>
               </TouchableOpacity>
             </View>
-            <ScrollView style={{ width: windowWidth - 360 }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ width: showDrawer ? windowWidth - 360 : windowWidth }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
               <ScrollView horizontal style={{ marginTop: 26, }} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                 <Table borderStyle={{}}>
                   <Row
                     data={tableHead}
                     widthArr={widthArr}
-                    style={styles.tableHead}
+                    style={[appStyle.tableHead, { borderWidth: 1, paddingHorizontal: 12, borderTopRightRadius: 12, borderTopLeftRadius: 12, paddingLeft: 12, borderColor: "#00000033" }]}
+
                     textStyle={{ fontSize: 13, fontWeight: 'bold', marginLeft: 10 }}
                   />
                   {
-                    array.map((rowData, index) => (
-                      <TableWrapper key={index.id} style={{ flexDirection: "row", backgroundColor: COLOR.bg }}>
-                        {rowData.map((cellData, cellIndex) => (
-                          <Cell
-                            key={cellIndex}
-                            width={widthArr[cellIndex]}
-                            data={cellIndex === 1 ? element1(cellData, index)
-                              : cellIndex === 2 ? element2(cellData, index)
-                                : cellIndex === 3 ? element3(cellData, index)
-                                  : cellIndex === 4 ? element4(cellData, index)
-                                    : cellIndex === 5 ? element5(cellData, index)
-                                      : cellIndex === 6 ? element6(cellData, index)
-                                        : cellIndex === 7 ? element7(cellData, index)
-                                          : cellIndex === 8 ? element8(cellData, index)
-                                            : cellIndex === 9 ? element9(cellData, index)
-
-                                              : cellData}
-                          // textStyle={{fontSize:13, padding:10, paddingTop:15, paddingBottom:15}}
-                          />
-                        ))}
-                      </TableWrapper>
-                    ))
+                    array.map((rowData, index) => {
+                      const isLastItem = index === array.length - 1;
+                      return (
+                        <TableWrapper key={index.id} style={{ flexDirection: "row", borderBottomLeftRadius: isLastItem ? 12 : 0, borderBottomRightRadius: isLastItem ? 12 : 0, borderWidth: 1, borderColor: "#00000033", }}>
+                          {rowData.map((cellData, cellIndex) => (
+                            <Cell
+                              style={{ borderWidth: 1, borderColor: "#00000019", paddingHorizontal: 12 }}
+                              key={cellIndex}
+                              width={widthArr[cellIndex]}
+                              data={cellIndex === 1 ? element1(cellData, index)
+                                : cellIndex === 2 ? element2(cellData, index)
+                                  : cellIndex === 3 ? element3(cellData, index)
+                                    : cellIndex === 4 ? element4(cellData, index)
+                                      : cellIndex === 5 ? element5(cellData, index)
+                                        : cellIndex === 6 ? element6(cellData, index)
+                                          : cellIndex === 7 ? element7(cellData, index)
+                                            : cellIndex === 8 ? element8(cellData, index)
+                                              : cellIndex === 9 ? element9(cellData, index)
+                                                : cellData}
+                            />
+                          ))}
+                        </TableWrapper>
+                      );
+                    })
                   }
                 </Table>
               </ScrollView>

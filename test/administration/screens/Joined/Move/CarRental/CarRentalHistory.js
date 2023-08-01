@@ -34,40 +34,40 @@ const CarRentalHistory = () => {
     ]);
 
     return (
-        <View style={[appStyle.boxInfo, { flexDirection: 'row', width: '100%', height: 600, }]}>
-            <TabView
-                lazy={true}
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                style={appStyle.TabView}
-                initialLayout={{ width: layout.width }}
-                tabBarStyle={styles.tabBar}
-                renderTabBar={
-                    props =>
-                        <TabBar {...props}
-                            renderLabel={({ route, color, focused }) => (
-                                <Text style={{
-                                    fontSize: 16, fontWeight: '400',
-                                    color: focused ? COLOR.titleLabel : COLOR.text,
-                                    backgroundColor: focused ? COLOR.bg : COLOR.bg,
-                                }}>
-                                    {route.title}
-                                </Text>
-                            )}
-                            // tabStyle={{ width: "auto" }}
-                            scrollEnabled={false}
-                            indicatorStyle={{
-                                backgroundColor: COLOR.titleLabel,
-                                width: 50,
-                                height: 4,
-                            }}
-                            indicatorContainerStyle={{ marginLeft: 40 }}
-                            style={{ backgroundColor: COLOR.bg, elevation: 0, }}
-                        />
-                }
-            />
-        </View>
+        <View style={[appStyle.boxInfo, {left:-90, flexDirection: 'row', width: '110%', height: 400,marginBottom:100}]}>
+        <TabView
+          lazy={true}
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          style={[appStyle.TabView,{width:'100%',}]}
+          initialLayout={{ width: layout.width }}
+          tabBarStyle={styles.tabBar}
+          renderTabBar={
+            props =>
+              <TabBar {...props}
+                renderLabel={({ route, color, focused }) => (
+                  <Text style={{
+                    fontSize: 16, fontWeight: '400',
+                    color: focused ? COLOR.titleLabel : COLOR.text,alignSelf:'flex-start',
+                    backgroundColor: focused ? COLOR.bg : COLOR.bg,
+                  }}>
+                    {route.title}
+                  </Text>
+                )}
+                tabStyle={{ width: 120 ,alignItems:'flex-start',left:-10}}
+                scrollEnabled={false}
+                indicatorStyle={{
+                  backgroundColor: COLOR.titleLabel,
+                  width: 50,
+                  height: 4,
+                }}
+                indicatorContainerStyle={{ marginLeft:1 }}
+                style={{ backgroundColor: COLOR.bg, elevation: 0, }}
+              />
+          }
+        />
+      </View>
     )
 }
 

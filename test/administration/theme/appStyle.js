@@ -233,7 +233,7 @@ export const appStyle = StyleSheet.create({
     },
     boxSysFeature: {
         marginLeft: 200,
-        width: 800,
+        width: windowWidth-300,
 
     },
     button2: {

@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React,{useContext} from 'react'
 import { appStyle } from '../../../theme/appStyle'
 import ISGroupTokenHistory from './ISGroupToken/DividendHistory'
+import {AppContext} from '../../../AppContext'
 
 const ISGroupToken = () => {
+  const {currentDay } = useContext(AppContext);
+
   return (
     <View style={{  width: '95%', }}>
-      <Text style={[appStyle.text, { marginTop: 32 }]}>Today - 24/07/2023</Text>
+         <Text style={[appStyle.text, { marginTop: 32 }]}>Today - {currentDay}</Text>
       <View style={[appStyle.row, { justifyContent: 'space-between', alignItems: 'center' }]}>
         <View style={[appStyle.column, { marginTop: 26, alignItems: 'flex-start' }]}>
           <Text style={appStyle.normalText}>Total deposit</Text>

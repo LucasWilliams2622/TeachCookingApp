@@ -21,7 +21,7 @@ const StoreList = () => {
   return (
     <SafeAreaView style={[appStyle.boxSysFeature, { marginLeft: 80,height:600,width:'100%'}]}>
       <Text style={[appStyle.text,{fontWeight:'600'}]}>Today 20/07/2023</Text>
-      <View style={[appStyle.row, { marginLeft: 70, marginTop: 26, marginBottom: 80 }]}>
+      <View style={[appStyle.row, { marginLeft: 70, marginTop: 26, marginBottom: 40 }]}>
         <View style={[appStyle.column, { alignItems: 'flex-start' }]}>
           <Text style={appStyle.normalText}>New registration</Text>
           <Text style={appStyle.textMoney}>1</Text>

@@ -59,7 +59,7 @@ const App = () => {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <SystemFeature />
+        <ProfileUser />
       </NavigationContainer>
     </AppContextProvider>
   )

@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, Switch } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, Switch, Alert } from 'react-native'
 import React, { useState, useContext, useEffect } from 'react'
 import { appStyle } from '../../theme/appStyle'
 import Header from '../../components/Header'
@@ -21,13 +21,12 @@ import USDT from './PAY/USDT/USDT'
 import ISGroupToken from './PAY/ISGroupToken/ISGroupToken'
 import Stake from './PAY/Stake/Stake'
 import Dividend from './PAY/Dividend/Dividend'
-
 const SystemFeature = () => {
   const { showDrawer, setShowDrawer } = useContext(AppContext);
   const navigation = useNavigation();
-  const [isSelect, setIsSelect] = useState(3);
-  const [selectISMos, setSelectISMos] = useState(4)
-  const [selectPay, setSelectPay] = useState(3)
+  const [isSelect, setIsSelect] = useState(1);
+  const [selectISMos, setSelectISMos] = useState(1)
+  const [selectPay, setSelectPay] = useState(1)
   const handleSelect = (id) => {
     setIsSelect(id);
   };
@@ -39,12 +38,46 @@ const SystemFeature = () => {
     setSelectPay(id);
     setIsSelect(idPay);
   };
+  const handleButtonPress = (title) => {
+    Alert.alert(
+      'Thông báo',
+      "" + title,
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') }
+      ],
+      { cancelable: false }
+    );
+  }
   useEffect(() => {
 
     return () => {
 
     }
   }, [])
+  const breadcrumbOptions = [
+    [
+      { selectISMos: 1, text: "/ Setting" },
+      { selectISMos: 2, text: "/ Access permissions" },
+      { selectISMos: 3, text: "/ Store list" },
+      { selectISMos: 4, text: "/ Upgrade agent" },
+      { selectISMos: 5, text: "/ Store sync" },
+    ],
+    [],
+    [
+      { selectPay: 1, text: "/ P2P" },
+      { selectPay: 2, text: "/ Point" },
+      { selectPay: 3, text: "/ Wallet" },
+      { selectPay: 4, text: "/ Postpaid Wallet" },
+      { selectPay: 5, text: "/ USDT" },
+      { selectPay: 6, text: "/ ISGroup Token" },
+      { selectPay: 7, text: "/ Stake" },
+    ],
+    [{ text: "/ Dividend" }],
+  ];
+
+  const breadcrumbText = breadcrumbOptions[isSelect - 1]
+    .find((option) => option.selectISMos === selectISMos || option.selectPay === selectPay)
+    ?.text;
   return (
     <SafeAreaView style={appStyle.container}>
       <Header />
@@ -57,10 +90,8 @@ const SystemFeature = () => {
         <View style={[styles.main, { top: showDrawer ? -30 : 0 }]}>
           <View style={styles.breadCrumb}>
             <View style={appStyle.row}>
-              <TouchableOpacity onPress={() => { navigation.goBack(); }}>
+              <TouchableOpacity style={appStyle.row} onPress={() => { handleButtonPress('Home  ../Home') }}>
                 <Image style={appStyle.icon} source={require('../../assets/icons/Left.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity>
                 <Text style={[appStyle.titleBreadCrumb, { color: COLOR.titleBreadCrumbManagement }]}> System feature management</Text>
               </TouchableOpacity>
               {
@@ -73,39 +104,12 @@ const SystemFeature = () => {
                       <Text style={[appStyle.titleBreadCrumb, {}]}>/ ISLINK </Text>
                     </TouchableOpacity>)
                     : (<TouchableOpacity>
-                      <Text style={[appStyle.titleBreadCrumb, {}]}>/ PAY </Text>
+                      <Text style={[appStyle.titleBreadCrumb, { color: COLOR.titleBreadCrumbManagement }]}>/ PAY </Text>
                     </TouchableOpacity>)
               }
-              {
-                isSelect === 1 && selectISMos === 1 ?
-                  (<TouchableOpacity>
-                    <Text style={[appStyle.titleBreadCrumb, {}]}>/ Setting </Text>
-                  </TouchableOpacity>) :
-                  isSelect === 1 && selectISMos === 2 ?
-                    (<TouchableOpacity>
-                      <Text style={[appStyle.titleBreadCrumb, {}]}>/ Access permissions </Text>
-                    </TouchableOpacity>) :
-                    isSelect === 1 && selectISMos === 3 ?
-                      (<TouchableOpacity>
-                        <Text style={[appStyle.titleBreadCrumb, {}]}>/ Store list</Text>
-                      </TouchableOpacity>) :
-                      isSelect === 1 && selectISMos === 4 ?
-                        (<TouchableOpacity>
-                          <Text style={[appStyle.titleBreadCrumb, {}]}>/ Upgrade agent</Text>
-                        </TouchableOpacity>) :
-                        isSelect === 1 && selectISMos === 5 ?
-                          (<TouchableOpacity>
-                            <Text style={[appStyle.titleBreadCrumb, {}]}>/ Store sync</Text>
-                          </TouchableOpacity>) :
-                          isSelect === 2 ?
-                            (<TouchableOpacity>
-                              <Text style={[appStyle.titleBreadCrumb, {}]}></Text>
-                            </TouchableOpacity>) :
-
-                            (<TouchableOpacity>
-                              <Text style={[appStyle.titleBreadCrumb, {}]}></Text>
-                            </TouchableOpacity>)
-              }
+              <TouchableOpacity>
+                <Text style={[appStyle.titleBreadCrumb, {}]}>{breadcrumbText}</Text>
+              </TouchableOpacity>
             </View>
           </View>
 

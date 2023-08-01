@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { ScrollView } from 'react-native-virtualized-view'
-import { appStyle } from '../theme/appStyle'
+import { appStyle, windowHeight, windowWidth } from '../theme/appStyle'
 import ItemMembership from '../components/ItemMembership';
 const DATA = [
   {
@@ -24,7 +24,7 @@ const DATA = [
 ];
 const MembershipUser = () => {
   return (
-    <ScrollView style={appStyle.boxInfo} >
+    <ScrollView style={[appStyle.boxInfo,{height:windowHeight-300,width:windowWidth-400,marginLeft:50}]} >
       <Text style={appStyle.text}>Membership System</Text>
       <FlatList
         data={DATA}

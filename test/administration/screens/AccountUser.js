@@ -8,7 +8,7 @@ const AccountUser = () => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <ScrollView style={appStyle.boxInfo} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+    <ScrollView style={[appStyle.boxInfo,{}]} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
       <View style={[appStyle.row, { alignItems: 'flex-start', marginBottom: 41, }]}>
         <View style={[appStyle.boxShadow, { width: '40%' }]}>
           <Text style={[appStyle.text, { marginBottom: 16 }]}>Change password</Text>

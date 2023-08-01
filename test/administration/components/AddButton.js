@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     buttonPlus:{
         position:'absolute',
         zIndex:999,
-        top:550,
+        top:300,
         right:0
     }
 })

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import ItemCompleted from '../../../../components/MOVE/Mission/ItemCompleted'
+import { windowWidth } from '../../../../theme/appStyle';
 const CompletedList = () => {
   const DATA = [
     {
@@ -25,7 +26,7 @@ const CompletedList = () => {
 
   ];
   return (
-    <View style={{ marginTop: 30, width: '100%' }}>
+    <View style={{ marginTop: 30, width: windowWidth-530,}}>
     <FlatList
       data={DATA}
       vertical

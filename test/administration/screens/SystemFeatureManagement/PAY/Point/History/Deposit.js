@@ -62,7 +62,6 @@ const Deposit = () => {
                                   : cellIndex === 6 ? element6(cellData, index)
                                     : cellIndex === 7 ? element7(cellData, index)
 
-
                                       : cellData}
                       />
                     ))}

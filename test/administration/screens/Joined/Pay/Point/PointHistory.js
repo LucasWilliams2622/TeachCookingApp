@@ -25,7 +25,7 @@ const PointHistory = () => {
 
   ]);
   return (
-    <View style={[appStyle.boxInfo, { flexDirection: 'row', width: '110%', height: 390, }]}>
+    <View style={[appStyle.boxInfo, { flexDirection: 'row', width: '110%', height: 390,}]}>
       <TabView
         lazy={true}
         navigationState={{ index, routes }}

@@ -25,9 +25,12 @@ const InformationUser = (props) => {
   const { navigation } = props;
   const [valueRole, setValueRole] = useState(null);
   const [isFocusRole, setIsFocusRole] = useState(true)
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isBanned, setIsBanned] = useState(true);
+  const [isActivated, setIsActivated] = useState(true)
   const [rateUser, setRateUser] = useState(false)
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const switchBanned = () => setIsBanned(previousState => !previousState);
+  const switchActivated = () => setIsActivated(previousState => !previousState);
+
   const renderLabel = () => {
     if (valueRole || isFocusRole) {
       return (
@@ -49,21 +52,22 @@ const InformationUser = (props) => {
   return (
     <View>
       <View style={[appStyle.boxInfo, { width: windowWidth - 100, }]}>
-        <View style={styles.headerInfo}>
-          <View style={[appStyle.row, { justifyContent: 'space-between', width: windowWidth - 450 }]}>
-            <View style={appStyle.row}>
-              <Image style={[appStyle.avatar, { width: 100, height: 100 }]} source={require('../assets/icons/defaultAvatar.png')} />
-              <View style={[appStyle.column, { marginLeft: 26, alignItems: 'flex-start' }]}>
-                <Text style={[appStyle.text, { fontSize: 16 }]}>Văn An</Text>
-                <Text style={[appStyle.text, { fontSize: 16, color: COLOR.titleLabel }]}>User</Text>
-                <Text style={[appStyle.text, { fontSize: 16 }]}>1122QM</Text>
-              </View>
-            </View>
-            <Text style={[appStyle.text, { color: COLOR.active, alignSelf: 'flex-start' }]}>Active</Text>
-          </View>
-        </View>
+
 
         <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+          <View style={styles.headerInfo}>
+            <View style={[appStyle.row, { justifyContent: 'space-between', width: windowWidth - 450 }]}>
+              <View style={appStyle.row}>
+                <Image style={[appStyle.avatar, { width: 100, height: 100 }]} source={require('../assets/icons/defaultAvatar.png')} />
+                <View style={[appStyle.column, { marginLeft: 26, alignItems: 'flex-start' }]}>
+                  <Text style={[appStyle.text, { fontSize: 16 }]}>Văn An</Text>
+                  <Text style={[appStyle.text, { fontSize: 16, color: COLOR.titleLabel }]}>User</Text>
+                  <Text style={[appStyle.text, { fontSize: 16 }]}>1122QM</Text>
+                </View>
+              </View>
+              <Text style={[appStyle.text, { color: COLOR.active, alignSelf: 'flex-start' }]}>Active</Text>
+            </View>
+          </View>
           {
             rateUser ?
               (<View style={{ marginTop: 48, width: windowWidth - 450, }}>
@@ -126,10 +130,10 @@ const InformationUser = (props) => {
                 <Switch
                   style={{ marginTop: 5, left: -10 }}
                   trackColor={{ false: '#767577', true: '#059669' }}
-                  thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
+                  thumbColor={isBanned ? '#f4f3f4' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  onValueChange={switchBanned}
+                  value={isBanned}
                 />
               </View>
               <View style={[appStyle.column, { alignItems: 'flex-start', marginTop: 35 }]}>
@@ -137,10 +141,10 @@ const InformationUser = (props) => {
                 <Switch
                   style={{ marginTop: 5, left: -10 }}
                   trackColor={{ false: '#767577', true: '#059669' }}
-                  thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
+                  thumbColor={isActivated ? '#f4f3f4' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  onValueChange={switchActivated}
+                  value={isActivated}
                 />
               </View>
               {

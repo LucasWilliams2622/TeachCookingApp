@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React, { useState } from 'react'
-import { appStyle, windowWidth } from '../../../../theme/appStyle'
+import { appStyle } from '../../../../theme/appStyle'
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { COLOR } from '../../../../theme/color';
-import PendingList from '../CarDriver/PendingList'
-import CompletedList from '../CarDriver/CompletedList'
-import CanceledList from '../CarDriver/CanceledList'
+import PendingList from '../Booking/PendingList'
+import CompletedList from '../Booking/CompletedList'
+import CanceledList from '../Booking/CanceledList'
 const renderScene = SceneMap({
     pendingList: PendingList,
     completedList: CompletedList,
@@ -22,7 +22,8 @@ const OrderList = () => {
     ]);
   
     return (
-      <View style={[appStyle.boxInfo, { flexDirection: 'row',marginLeft:0, height: 600,left:-90,width:windowWidth-360}]}>
+      <View style={[appStyle.boxInfo, { left:-90,flexDirection: 'row', width: '110%', height: 390, }]}>
+
         <TabView
         lazy={true}
         navigationState={{ index, routes }}

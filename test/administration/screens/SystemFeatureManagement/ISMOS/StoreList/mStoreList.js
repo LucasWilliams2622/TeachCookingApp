@@ -29,11 +29,11 @@ const mStoreList = () => {
 
 
   return (
-    <View style={{ marginTop: 36, width: windowWidth - 460 }}>
+    <View style={{ marginTop: 26, width: windowWidth - 460 ,borderWidth:3}}>
 
       <ItemSearchAndButton />
       <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ marginBottom: 0 }}>
-        <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ marginTop: 40, marginBottom: 500 }}>
+        <ScrollView horizontal={true} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ marginTop: 40, marginBottom: 100 }}>
           <Table style={{}}>
             <Row
               data={tableHead}

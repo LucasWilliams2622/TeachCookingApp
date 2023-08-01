@@ -6,7 +6,7 @@ const ItemDeposit = (props) => {
     const { data } = props
     const { status } = data;
     return (
-        <View style={[appStyle.boxShadow, { marginHorizontal: 4, width: '75%', marginVertical: 26 }]}>
+        <View style={[appStyle.boxShadow, { marginHorizontal: 4, width: '73%', marginVertical: 26 }]}>
             <View style={[appStyle.row, { justifyContent: 'space-between', width: '100%', }]}>
                 <Text style={[appStyle.textSmall, { color: COLOR.textBlue }]}>DEPOSIT-2323083773</Text>
                 <Text style={[appStyle.textSmall, { color: COLOR.normalText }]}></Text>
